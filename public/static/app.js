@@ -566,18 +566,28 @@
 
     const maLine = (arr, color, name) => ({ name, type: 'line', data: arr, smooth: false, symbol: 'none', lineStyle: { width: 1, color }, xAxisIndex: 0, yAxisIndex: 0, emphasis: { disabled: true } });
     const macdBars = k.map((x, i) => ({ value: ind.macd[i] == null ? 0 : +ind.macd[i].toFixed(4), itemStyle: { color: ind.macd[i] >= 0 ? RED : GREEN } }));
+    // 均线值标签：悬停到哪根K就显示哪根的均线值（右上角）
+    const maVal = (arr, i) => (arr && arr[i] != null ? (+arr[i]).toFixed(3) : '--');
+    const maText = (i) => 'MA5: ' + maVal(ind.ma5, i) + '  MA10: ' + maVal(ind.ma10, i) + '  MA20: ' + maVal(ind.ma20, i) + '  MA60: ' + maVal(ind.ma60, i);
+    const lastIdx = k.length - 1;
 
     const option = {
       backgroundColor: 'transparent',
       animation: false,
+      graphic: [{
+        id: 'maText', type: 'text', right: 14, top: 2, z: 100,
+        style: { text: maText(lastIdx), fill: '#8b98a9', fontSize: 11, fontWeight: 'bold' },
+      }],
       tooltip: {
         trigger: 'axis', axisPointer: { type: 'cross', crossStyle: { color: MUTED } },
         backgroundColor: '#202a38', borderColor: '#2a3646', textStyle: { color: '#e6edf3', fontSize: 12 },
         formatter: function (params) {
           const idx = params[0].dataIndex; const kk = k[idx]; if (!kk) return '';
-          let s = '<b>' + kk.date + '</b><br/>开 ' + fmtPrice(kk.open) + ' 高 ' + fmtPrice(kk.high) + '<br/>低 ' + fmtPrice(kk.low) + ' 收 ' + fmtPrice(kk.close) + '<br/>量 ' + fmt(kk.volume / 10000, 1) + ' 万手';
-          const v = App.analysis.indicators;
-          return s;
+          const pct = kk.open ? (kk.close - kk.open) / kk.open * 100 : 0;
+          return '<b>' + kk.date + '</b><br/>开 ' + fmtPrice(kk.open) + ' 高 ' + fmtPrice(kk.high) + '<br/>低 ' + fmtPrice(kk.low) + ' 收 ' + fmtPrice(kk.close) +
+            '<br/>涨跌 ' + (pct >= 0 ? '+' : '') + pct.toFixed(2) + '%' +
+            '<br/>MA5 ' + maVal(ind.ma5, idx) + ' · MA10 ' + maVal(ind.ma10, idx) + ' · MA20 ' + maVal(ind.ma20, idx) + ' · MA60 ' + maVal(ind.ma60, idx) +
+            '<br/>量 ' + fmt(kk.volume / 10000, 1) + ' 万手';
         },
       },
       axisPointer: { link: [{ xAxisIndex: 'all' }], label: { backgroundColor: '#333' } },
@@ -593,7 +603,8 @@
         axisTick: { show: false }, splitLine: { show: false },
       })),
       yAxis: [
-        { scale: true, gridIndex: 0, position: 'left', axisLabel: { color: MUTED, fontSize: 10 }, splitLine: { lineStyle: { color: '#223' } } },
+        // 主图价格轴：十字光标随动，轴上显示当前价
+        { scale: true, gridIndex: 0, position: 'left', axisLabel: { color: MUTED, fontSize: 10 }, splitLine: { lineStyle: { color: '#223' } }, axisPointer: { label: { show: true, backgroundColor: '#333', color: '#fff', formatter: (p) => fmtPrice(p.value) } } },
         { scale: true, gridIndex: 1, position: 'left', axisLabel: { show: false }, splitLine: { show: false } },
         { scale: true, gridIndex: 2, position: 'left', axisLabel: { color: MUTED, fontSize: 10 }, splitLine: { lineStyle: { color: '#223' } } },
         { scale: true, gridIndex: 3, position: 'left', min: 0, max: 100, axisLabel: { color: MUTED, fontSize: 10 }, splitLine: { lineStyle: { color: '#223' } } },
@@ -619,6 +630,18 @@
       ],
     };
     chart.setOption(option, true);
+
+    // 悬停/移出时更新右上角均线标签（十字光标跟随）
+    chart.off('showTip');
+    chart.on('showTip', function (p) {
+      if (p && p.dataIndex != null && k[p.dataIndex]) {
+        chart.setOption({ graphic: [{ id: 'maText', style: { text: maText(p.dataIndex) } }] });
+      }
+    });
+    chart.off('hideTip');
+    chart.on('hideTip', function () {
+      chart.setOption({ graphic: [{ id: 'maText', style: { text: maText(lastIdx) } }] });
+    });
   }
 
   function renderMinuteChart(chart) {
@@ -636,17 +659,22 @@
     let yMin = Math.min.apply(null, vals), yMax = Math.max.apply(null, vals);
     const pad = (yMax - yMin) * 0.1 || (prevClose * 0.004 || 0.01);
     yMin -= pad; yMax += pad;
+    // 涨跌幅刻度（券商分时风格：右侧 +%/-%）
+    const pctOf = (price) => (prevClose ? (price - prevClose) / prevClose * 100 : 0);
+    const yMinPct = pctOf(yMin), yMaxPct = pctOf(yMax);
 
     const option = {
       backgroundColor: 'transparent', animation: false,
-      tooltip: { trigger: 'axis', backgroundColor: '#202a38', borderColor: '#2a3646', textStyle: { color: '#e6edf3' }, formatter: function (ps) { const i = ps[0].dataIndex; return '<b>' + times[i] + '</b><br/>价 ' + fmtPrice(prices[i]) + '<br/>均价 ' + fmtPrice(avg[i]) + '<br/>昨收 ' + fmtPrice(prevClose); } },
-      grid: [{ left: 62, right: 18, top: 24, height: '68%' }, { left: 62, right: 18, top: '80%', height: '12%' }],
+      tooltip: { trigger: 'axis', backgroundColor: '#202a38', borderColor: '#2a3646', textStyle: { color: '#e6edf3' }, formatter: function (ps) { const i = ps[0].dataIndex; const pct = pctOf(prices[i]); return '<b>' + times[i] + '</b><br/>价 ' + fmtPrice(prices[i]) + '（' + (pct >= 0 ? '+' : '') + pct.toFixed(2) + '%）<br/>均价 ' + fmtPrice(avg[i]) + '<br/>昨收 ' + fmtPrice(prevClose); } },
+      grid: [{ left: 62, right: 56, top: 24, height: '68%' }, { left: 62, right: 18, top: '80%', height: '12%' }],
       xAxis: [
         { type: 'category', data: times, gridIndex: 0, axisLine: { lineStyle: { color: '#2a3646' } }, axisLabel: { color: MUTED, fontSize: 10 }, boundaryGap: false },
         { type: 'category', data: times, gridIndex: 1, axisLine: { lineStyle: { color: '#2a3646' } }, axisLabel: { show: false }, boundaryGap: false },
       ],
       yAxis: [
         { gridIndex: 0, position: 'left', min: yMin, max: yMax, axisLabel: { color: MUTED, fontSize: 10 }, splitLine: { lineStyle: { color: '#223' } } },
+        // 右侧涨跌幅刻度
+        { gridIndex: 0, position: 'right', min: yMinPct, max: yMaxPct, axisLabel: { color: MUTED, fontSize: 10, formatter: (v) => (v > 0 ? '+' : '') + v.toFixed(2) + '%' }, splitLine: { show: false }, axisLine: { lineStyle: { color: '#2a3646' } } },
         { gridIndex: 1, position: 'left', axisLabel: { show: false }, splitLine: { show: false } },
       ],
       series: [
