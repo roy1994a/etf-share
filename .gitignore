@@ -1,0 +1,10 @@
+# 依赖
+node_modules/
+
+# 密钥与运行时状态（勿提交）
+notify.config.json
+data/
+!data/.gitkeep
+
+# 日志
+*.log

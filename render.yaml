@@ -1,0 +1,14 @@
+# Render Blueprint：免费公网部署（只读展示版）
+# 用法：在 render.com 用 GitHub 仓库「Blueprint」一键部署；或拖入本文件
+services:
+  - type: web
+    name: etf-share
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: READ_ONLY
+        value: "true"
+      - key: HOST
+        value: 0.0.0.0
+      # PORT 由 Render 自动注入

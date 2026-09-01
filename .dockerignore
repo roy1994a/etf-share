@@ -1,0 +1,8 @@
+# 部署镜像时排除：密钥、本地数据、依赖、日志、git
+node_modules/
+.git/
+data/
+notify.config.json
+notify.config.example.json
+*.log
+data/reports/

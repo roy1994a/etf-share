@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>半导体设备ETF(159516) 智能交易模拟系统</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">📈</span>
+      <div>
+        <h1 id="etfName">半导体设备ETF国泰 <span class="code">159516</span></h1>
+        <p class="subtitle">每日综合分析 · 具体持仓策略 · 盘尾复盘 · 模拟交易</p>
+      </div>
+    </div>
+    <div class="quote-mini" id="quoteMini">
+      <div class="price" id="qPrice">--</div>
+      <div class="chg" id="qChg">--</div>
+      <div class="meta" id="qMeta">加载中…</div>
+    </div>
+    <div class="clock" id="clock">--</div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="dashboard">总览</button>
+    <button class="tab" data-tab="analysis">行情与指标</button>
+    <button class="tab" data-tab="strategy">今日策略</button>
+    <button class="tab" data-tab="trade">交易台</button>
+    <button class="tab" data-tab="review">盘尾复盘</button>
+    <button class="tab" data-tab="settings">设置</button>
+  </nav>
+
+  <main>
+    <!-- ============ 总览 ============ -->
+    <section id="tab-dashboard" class="tab-panel active">
+      <div class="card">
+        <h3>轮动池实时行情 <span style="font-weight:400;color:#8b98a9;font-size:12px">每 15 秒刷新</span>
+          <button class="btn ghost" id="poolMgrBtn" style="float:right;padding:3px 10px;font-size:12px">管理标的</button>
+        </h3>
+        <div id="etfQuoteStrip" class="etf-quote-strip">加载中…</div>
+        <div id="poolManager" class="pool-manager" style="display:none;margin-top:12px">
+          <div class="pool-add">
+            <input id="poolAdd" type="text" placeholder="添加标的：输入代码或名称（回车/点击搜索结果）" autocomplete="off">
+            <div id="poolAddResults" class="etf-search-results" style="position:static;display:none;margin-top:6px"></div>
+          </div>
+          <div id="poolList" class="pool-list"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>宏观利率与科技板块 <span style="font-weight:400;color:#8b98a9;font-size:12px">每 5 分钟刷新</span></h3>
+        <div id="macroPanel" class="macro-panel">加载中…</div>
+      </div>
+      <div class="card">
+        <h3>当前标的技术指标 <span style="font-weight:400;color:#8b98a9;font-size:12px">随搜索/切换实时更新</span></h3>
+        <div id="techPanel" class="indicator-grid">加载中…</div>
+      </div>
+      <div class="grid-cards">
+        <div class="card">
+          <h3>账户总资产</h3>
+          <div class="big-num" id="dTotalAsset">--</div>
+          <div class="sub" id="dTotalPnl">--</div>
+        </div>
+        <div class="card">
+          <h3>可用现金</h3>
+          <div class="big-num" id="dCash">--</div>
+          <div class="sub">本金 <span id="dCapital">--</span> 元</div>
+        </div>
+        <div class="card">
+          <h3>持仓市值</h3>
+          <div class="big-num" id="dMarketValue">--</div>
+          <div class="sub">持仓 <span id="dShares">--</span> 份 @ <span id="dCost">--</span></div>
+        </div>
+        <div class="card score-card">
+          <h3>今日综合评分</h3>
+          <div class="big-num" id="dScore">--</div>
+          <div class="sub" id="dStatus">--</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>今日策略摘要</h3>
+          <div id="dStrategySummary" class="strategy-summary">加载中…</div>
+        </div>
+        <div class="card">
+          <h3>实时行情</h3>
+          <div id="dQuoteDetail" class="quote-detail">加载中…</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>走势预览（近 60 日）</h3>
+        <div id="miniChart" class="mini-chart"></div>
+      </div>
+    </section>
+
+    <!-- ============ 行情与指标 ============ -->
+    <section id="tab-analysis" class="tab-panel">
+      <div class="toolbar">
+        <div class="etf-search">
+          <input id="etfSearch" type="text" placeholder="搜索/切换 ETF：代码或名称（回车/点击切换）" autocomplete="off">
+          <div id="etfSearchResults" class="etf-search-results"></div>
+        </div>
+        <div class="seg" id="periodSeg">
+          <button data-period="day" class="active">日K</button>
+          <button data-period="week">周K</button>
+          <button data-period="minute">分时</button>
+        </div>
+        <div class="legend-hint">双击/滚轮缩放 · 拖拽平移</div>
+      </div>
+      <div class="card">
+        <div id="mainChart" class="main-chart"></div>
+      </div>
+      <div class="card">
+        <h3>技术指标速览</h3>
+        <div id="indicatorGrid" class="indicator-grid">加载中…</div>
+      </div>
+    </section>
+
+    <!-- ============ 今日策略 ============ -->
+    <section id="tab-strategy" class="tab-panel">
+      <div class="grid-2">
+        <div class="card">
+          <h3>综合评分与状态</h3>
+          <div id="sScorePanel" class="score-panel">加载中…</div>
+        </div>
+        <div class="card">
+          <h3>目标仓位</h3>
+          <div id="sPositionPanel" class="position-panel">加载中…</div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>📋 今日可执行指令</h3>
+        <div id="sInstruction" class="instruction">加载中…</div>
+      </div>
+      <div class="card">
+        <h3>🔍 信号明细（多空依据）</h3>
+        <div id="sSignals" class="signals">加载中…</div>
+      </div>
+    </section>
+
+    <!-- ============ 交易台 ============ -->
+    <section id="tab-trade" class="tab-panel">
+      <div class="grid-2">
+        <div class="card">
+          <h3>下单（模拟）</h3>
+          <div id="readOnlyHint" style="display:none;padding:12px;border:1px solid #f59e0b;border-radius:8px;color:#f59e0b;margin-bottom:10px">🔒 当前为只读模式，仅可查看行情与策略，不可交易。</div>
+          <div class="trade-form">
+            <div class="field">
+              <label>标的</label>
+              <select id="tradeCode">
+                <option value="159516">半导体设备ETF (159516)</option>
+                <option value="512010">医药ETF (512010)</option>
+                <option value="512400">有色ETF (512400)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>方向</label>
+              <div class="seg" id="sideSeg">
+                <button data-side="buy" class="active">买入</button>
+                <button data-side="sell">卖出</button>
+              </div>
+            </div>
+            <div class="field">
+              <label>成交价（元，留空按最新价）</label>
+              <input type="number" id="tradePrice" step="0.001" placeholder="如 0.705">
+            </div>
+            <div class="field">
+              <label>数量（份，100 的整数倍）</label>
+              <input type="number" id="tradeShares" step="100" placeholder="如 10000">
+            </div>
+            <div class="field">
+              <label>或 买入金额（元）</label>
+              <input type="number" id="tradeAmount" step="100" placeholder="如 50000">
+            </div>
+            <div class="field hint-line">
+              <span id="tradeHint">买 1 份≈5 万元（10 份制）</span>
+              <span id="tradeEstimate"></span>
+            </div>
+            <button class="btn primary" id="tradeBtn">提交订单</button>
+          </div>
+        </div>
+        <div class="card">
+          <h3>当前持仓</h3>
+          <div id="tPosition" class="position-detail">加载中…</div>
+          <div class="quick-btns">
+            <button class="btn ghost" id="quickAllIn">一键全仓（按目标）</button>
+            <button class="btn ghost" id="quickAllOut">一键清仓</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>交易记录</h3>
+        <div class="table-wrap">
+          <table id="tradesTable">
+            <thead><tr><th>时间</th><th>方向</th><th>价格</th><th>份额</th><th>金额</th><th>费用</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 盘尾复盘 ============ -->
+    <section id="tab-review" class="tab-panel">
+      <div class="card">
+        <h3>生成今日复盘</h3>
+        <p class="muted">盘尾（收盘后）点击生成：系统会自动汇总当日行情、账户盈亏、仓位偏差、关键信号，并给出明日预案。</p>
+        <div class="review-actions">
+          <button class="btn primary" id="genReviewBtn">生成今日复盘</button>
+          <button class="btn ghost" id="refreshReviewBtn">刷新列表</button>
+        </div>
+        <div class="card inner">
+          <h3>复盘内容</h3>
+          <textarea id="reviewContent" placeholder="点击“生成今日复盘”自动填充，可在此补充你的操作心得…"></textarea>
+          <button class="btn" id="saveReviewBtn">保存复盘</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3>复盘历史</h3>
+        <div id="reviewList" class="review-list">暂无记录</div>
+      </div>
+    </section>
+
+    <!-- ============ 设置 ============ -->
+    <section id="tab-settings" class="tab-panel">
+      <div class="card">
+        <h3>账户与资金</h3>
+        <div class="field">
+          <label>总资金（元）</label>
+          <input type="number" id="setCapital" step="10000" value="500000">
+        </div>
+        <button class="btn" id="resetBtn">重置账户（清空持仓与记录，按新本金开始）</button>
+        <p class="muted">重置会清空当前模拟持仓与交易/复盘记录，请确认后再操作。</p>
+      </div>
+      <div class="card">
+        <h3>策略参数</h3>
+        <div class="field">
+          <label>风险偏好</label>
+          <div class="seg" id="riskSeg">
+            <button data-risk="0">保守</button>
+            <button data-risk="1" class="active">平衡</button>
+            <button data-risk="2">激进</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>止损（%）</label>
+          <input type="number" id="setStop" step="0.5" value="5">
+        </div>
+        <div class="field">
+          <label>止盈（%）</label>
+          <input type="number" id="setTake" step="0.5" value="8">
+        </div>
+        <div class="field">
+          <label>资金分份数</label>
+          <input type="number" id="setLots" step="1" value="10">
+        </div>
+        <div class="field">
+          <label>最大仓位（%）</label>
+          <input type="number" id="setMaxPos" step="5" value="100">
+        </div>
+        <button class="btn primary" id="saveSettingsBtn">保存策略参数</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footbar">
+    <span id="footStatus">数据源：腾讯行情 · 系统仅作学习研究，不构成投资建议</span>
+  </footer>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="/static/vendor/echarts.min.js"></script>
+  <script src="/static/indicators.js"></script>
+  <script src="/static/engine.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>
