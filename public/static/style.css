@@ -1,16 +1,16 @@
 :root {
-  --bg: #0f141a;
-  --bg2: #161d26;
-  --card: #1a222d;
-  --card2: #202a38;
-  --border: #2a3646;
-  --text: #e6edf3;
-  --muted: #8b98a9;
-  --accent: #3b82f6;
-  --red: #ef4444;
-  --green: #22c55e;
-  --amber: #f59e0b;
-  --purple: #a855f7;
+  --bg: #f2f5f9;           /* 页面背景 浅灰蓝 */
+  --bg2: #ffffff;          /* 卡片/输入框 白 */
+  --card: #ffffff;         /* 卡片 */
+  --card2: #f7f9fc;        /* 次级区块 */
+  --border: #e2e8f0;       /* 边框 浅灰 */
+  --text: #1e293b;         /* 主文字 深灰蓝 */
+  --muted: #64748b;        /* 次要文字 */
+  --accent: #2563eb;       /* 主蓝 */
+  --red: #dc2626;          /* 涨红 */
+  --green: #16a34a;        /* 跌绿 */
+  --amber: #d97706;        /* 橙 */
+  --purple: #7c3aed;       /* 紫 */
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; }
@@ -26,7 +26,7 @@ a { color: var(--accent); }
 /* 顶栏 */
 .topbar {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 20px; background: linear-gradient(180deg, #16202c, #121a24);
+  padding: 12px 20px; background: linear-gradient(180deg, #ffffff, #f1f5f9);
   border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50;
 }
 .brand { display: flex; align-items: center; gap: 12px; }
@@ -182,9 +182,9 @@ td.sell { color: var(--green); font-weight: 600; }
   padding: 12px 20px; border-radius: 10px; font-size: 14px; z-index: 999;
   opacity: 0; pointer-events: none; transition: opacity .25s; max-width: 80vw;
 }
-.toast.show { opacity: 1; }
-.toast.err { border-color: var(--red); color: #fca5a5; }
-.toast.ok { border-color: var(--green); color: #86efac; }
+.toast.show { opacity: 1; box-shadow: 0 8px 24px rgba(0,0,0,.1); }
+.toast.err { border-color: var(--red); color: var(--red); }
+.toast.ok { border-color: var(--green); color: var(--green); }
 
 @media (max-width: 900px) {
   .grid-cards { grid-template-columns: repeat(2, 1fr); }
@@ -226,12 +226,12 @@ td.sell { color: var(--green); font-weight: 600; }
 .m-card { flex: 1; min-width: 130px; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
 .m-card .n { font-size: 12px; color: var(--muted); }
 .m-card .v { font-size: 18px; font-weight: 700; margin: 3px 0; font-variant-numeric: tabular-nums; }
-.m-card .v.up, .etf-quote-card .chg.up { color: var(--red, #ef4444); }
-.m-card .v.down, .etf-quote-card .chg.down { color: var(--green, #22c55e); }
-.m-card .v.bear { color: #f59e0b; }
-.m-card .v.bull { color: var(--green, #22c55e); }
+.m-card .v.up, .etf-quote-card .chg.up { color: var(--red, #dc2626); }
+.m-card .v.down, .etf-quote-card .chg.down { color: var(--green, #16a34a); }
+.m-card .v.bear { color: #d97706; }
+.m-card .v.bull { color: var(--green, #16a34a); }
 .m-card .s { font-size: 11px; color: var(--muted); }
-.m-note { flex-basis: 100%; font-size: 12px; color: #f59e0b; padding: 4px 2px; }
+.m-note { flex-basis: 100%; font-size: 12px; color: #d97706; padding: 4px 2px; }
 
 /* 轮动池管理 */
 .pool-manager { border-top: 1px solid var(--border); }
@@ -240,22 +240,22 @@ td.sell { color: var(--green); font-weight: 600; }
 .pool-item { display: flex; align-items: center; gap: 8px; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 5px 8px 5px 12px; font-size: 13px; }
 .pool-item .c { color: var(--muted); font-size: 11px; }
 .pool-del { background: none; border: none; color: var(--muted); font-size: 16px; cursor: pointer; padding: 0 4px; line-height: 1; }
-.pool-del:hover { color: #ef4444; }
+.pool-del:hover { color: #dc2626; }
 
 /* 前瞻预测面板 */
 .predict-panel { display: flex; gap: 10px; flex-wrap: wrap; align-items: stretch; }
 .pr-card { flex: 1; min-width: 120px; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; }
 .pr-card .n { font-size: 12px; color: var(--muted); }
 .pr-card .v { font-size: 17px; font-weight: 700; margin: 3px 0; }
-.pr-card .v.bull { color: var(--red, #ef4444); }
-.pr-card .v.bear { color: var(--green, #22c55e); }
+.pr-card .v.bull { color: var(--red, #dc2626); }
+.pr-card .v.bear { color: var(--green, #16a34a); }
 .pr-card .v.flat { color: var(--muted); }
 .pr-card .s { font-size: 11px; color: var(--muted); }
-.pr-summary { flex-basis: 100%; font-size: 12px; color: #e6edf3; padding: 6px 2px 0; }
+.pr-summary { flex-basis: 100%; font-size: 12px; color: var(--text); padding: 6px 2px 0; }
 .pr-summary .muted { color: var(--muted); }
 
 /* 预测联动 */
 .pl-row { padding: 8px 12px; border-radius: 8px; margin-bottom: 8px; font-size: 13px; line-height: 1.6; background: var(--bg2); border: 1px solid var(--border); }
-.pl-row.warn { border-color: #f59e0b; color: #f59e0b; }
-.pl-row.good { border-color: #22c55e; color: #22c55e; }
+.pl-row.warn { border-color: #d97706; color: #d97706; }
+.pl-row.good { border-color: #16a34a; color: #16a34a; }
 .predict-strategy-link { font-size: 13px; }

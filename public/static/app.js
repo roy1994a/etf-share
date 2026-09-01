@@ -4,7 +4,7 @@
 (function () {
   'use strict';
 
-  const RED = '#ef4444', GREEN = '#22c55e', MUTED = '#8b98a9', ACCENT = '#3b82f6', PURPLE = '#a855f7', AMBER = '#f59e0b';
+  const RED = '#dc2626', GREEN = '#16a34a', MUTED = '#64748b', ACCENT = '#2563eb', PURPLE = '#7c3aed', AMBER = '#d97706';
   const CODE = '159516';
 
   const App = {
@@ -336,20 +336,20 @@
     const upper = prices.map((pr, i) => +(pr * (1 + bandPct[i] / 100)).toFixed(3));
     chart.setOption({
       backgroundColor: 'transparent', animation: false,
-      tooltip: { trigger: 'axis', backgroundColor: '#202a38', borderColor: '#2a3646', textStyle: { color: '#e6edf3' }, formatter: function (ps) { const i = ps[0].dataIndex; return '<b>' + labels[i] + '</b><br/>预期价 ' + fmtPrice(prices[i]) + '（' + (path[i].chg >= 0 ? '+' : '') + path[i].chg + '%）<br/>置信区间 ' + fmtPrice(lower[i]) + ' ~ ' + fmtPrice(upper[i]) + '（±' + (+bandPct[i].toFixed(1)) + '%）'; } },
+      tooltip: { trigger: 'axis', backgroundColor: '#ffffff', borderColor: '#e2e8f0', textStyle: { color: '#1e293b' }, formatter: function (ps) { const i = ps[0].dataIndex; return '<b>' + labels[i] + '</b><br/>预期价 ' + fmtPrice(prices[i]) + '（' + (path[i].chg >= 0 ? '+' : '') + path[i].chg + '%）<br/>置信区间 ' + fmtPrice(lower[i]) + ' ~ ' + fmtPrice(upper[i]) + '（±' + (+bandPct[i].toFixed(1)) + '%）'; } },
       grid: { left: 60, right: 20, top: 30, bottom: 30 },
-      xAxis: { type: 'category', data: labels, axisLine: { lineStyle: { color: '#2a3646' } }, axisLabel: { color: '#8b98a9', fontSize: 10, interval: 2 } },
-      yAxis: { scale: true, axisLabel: { color: '#8b98a9', fontSize: 10 }, splitLine: { lineStyle: { color: '#223' } } },
-      graphic: [{ type: 'text', right: 12, top: 4, style: { text: '当前 ' + fmtPrice(cur) + ' · 阴影=置信区间', fill: '#8b98a9', fontSize: 11 } }],
-      legend: { top: 0, left: 8, textStyle: { color: '#8b98a9', fontSize: 11 }, itemWidth: 14, itemHeight: 8 },
+      xAxis: { type: 'category', data: labels, axisLine: { lineStyle: { color: '#e2e8f0' } }, axisLabel: { color: '#64748b', fontSize: 10, interval: 2 } },
+      yAxis: { scale: true, axisLabel: { color: '#64748b', fontSize: 10 }, splitLine: { lineStyle: { color: '#eef2f7' } } },
+      graphic: [{ type: 'text', right: 12, top: 4, style: { text: '当前 ' + fmtPrice(cur) + ' · 阴影=置信区间', fill: '#64748b', fontSize: 11 } }],
+      legend: { top: 0, left: 8, textStyle: { color: '#64748b', fontSize: 11 }, itemWidth: 14, itemHeight: 8 },
       series: [
         // 置信区间带：填充 + 上下沿虚线边界（更清晰）
         { name: '置信区间', type: 'line', data: lower, stack: 'band', symbol: 'none', lineStyle: { opacity: 0 }, areaStyle: { color: 'rgba(59,130,246,.20)' }, silent: true, tooltip: { show: false } },
         { name: '', type: 'line', data: upper.map((u, i) => +(u - lower[i]).toFixed(3)), stack: 'band', symbol: 'none', lineStyle: { opacity: 0 }, areaStyle: { color: 'rgba(59,130,246,.20)' }, silent: true, tooltip: { show: false } },
         { name: '区间上沿', type: 'line', data: upper, symbol: 'none', lineStyle: { width: 1, color: 'rgba(96,165,250,.7)', type: 'dashed' }, silent: true, tooltip: { show: false } },
         { name: '区间下沿', type: 'line', data: lower, symbol: 'none', lineStyle: { width: 1, color: 'rgba(96,165,250,.7)', type: 'dashed' }, silent: true, tooltip: { show: false } },
-        { name: '预期走势', type: 'line', data: prices, symbol: 'circle', symbolSize: 4, lineStyle: { width: 2.5, color: '#3b82f6' }, markPoint: { data: horizonMark, label: { fontSize: 10, color: '#e6edf3' }, symbol: 'circle', symbolSize: 8 } },
-        { name: '当前价', type: 'line', data: labels.map(() => cur), symbol: 'none', lineStyle: { width: 1, color: '#8b98a9', type: 'dashed' } },
+        { name: '预期走势', type: 'line', data: prices, symbol: 'circle', symbolSize: 4, lineStyle: { width: 2.5, color: '#3b82f6' }, markPoint: { data: horizonMark, label: { fontSize: 10, color: '#1e293b' }, symbol: 'circle', symbolSize: 8 } },
+        { name: '当前价', type: 'line', data: labels.map(() => cur), symbol: 'none', lineStyle: { width: 1, color: '#64748b', type: 'dashed' } },
       ],
     }, true);
   }
@@ -695,11 +695,11 @@
       animation: false,
       graphic: [{
         id: 'maText', type: 'text', right: 14, top: 2, z: 100,
-        style: { text: maText(lastIdx), fill: '#8b98a9', fontSize: 11, fontWeight: 'bold' },
+        style: { text: maText(lastIdx), fill: '#64748b', fontSize: 11, fontWeight: 'bold' },
       }],
       tooltip: {
         trigger: 'axis', axisPointer: { type: 'cross', crossStyle: { color: MUTED } },
-        backgroundColor: '#202a38', borderColor: '#2a3646', textStyle: { color: '#e6edf3', fontSize: 12 },
+        backgroundColor: '#ffffff', borderColor: '#e2e8f0', textStyle: { color: '#1e293b', fontSize: 12 },
         formatter: function (params) {
           const idx = params[0].dataIndex; const kk = k[idx]; if (!kk) return '';
           const pct = kk.open ? (kk.close - kk.open) / kk.open * 100 : 0;
@@ -709,7 +709,7 @@
             '<br/>量 ' + fmt(kk.volume / 10000, 1) + ' 万手';
         },
       },
-      axisPointer: { link: [{ xAxisIndex: 'all' }], label: { backgroundColor: '#333' } },
+      axisPointer: { link: [{ xAxisIndex: 'all' }], label: { backgroundColor: '#1e293b' } },
       grid: [
         { left: 62, right: 18, top: 24, height: '36%' },
         { left: 62, right: 18, top: '47%', height: '11%' },
@@ -718,20 +718,20 @@
       ],
       xAxis: [0, 1, 2, 3].map((i) => ({
         type: 'category', data: dates, gridIndex: i, boundaryGap: true,
-        axisLine: { lineStyle: { color: '#2a3646' } }, axisLabel: { show: i === 3, color: MUTED, fontSize: 10 },
+        axisLine: { lineStyle: { color: '#e2e8f0' } }, axisLabel: { show: i === 3, color: MUTED, fontSize: 10 },
         axisTick: { show: false }, splitLine: { show: false },
       })),
       yAxis: [
         // 主图价格轴：十字光标随动，轴上显示当前价
-        { scale: true, gridIndex: 0, position: 'left', axisLabel: { color: MUTED, fontSize: 10 }, splitLine: { lineStyle: { color: '#223' } }, axisPointer: { label: { show: true, backgroundColor: '#333', color: '#fff', formatter: (p) => fmtPrice(p.value) } } },
+        { scale: true, gridIndex: 0, position: 'left', axisLabel: { color: MUTED, fontSize: 10 }, splitLine: { lineStyle: { color: '#eef2f7' } }, axisPointer: { label: { show: true, backgroundColor: '#1e293b', color: '#fff', formatter: (p) => fmtPrice(p.value) } } },
         { scale: true, gridIndex: 1, position: 'left', axisLabel: { show: false }, splitLine: { show: false } },
-        { scale: true, gridIndex: 2, position: 'left', axisLabel: { color: MUTED, fontSize: 10 }, splitLine: { lineStyle: { color: '#223' } } },
-        { scale: true, gridIndex: 3, position: 'left', min: 0, max: 100, axisLabel: { color: MUTED, fontSize: 10 }, splitLine: { lineStyle: { color: '#223' } } },
+        { scale: true, gridIndex: 2, position: 'left', axisLabel: { color: MUTED, fontSize: 10 }, splitLine: { lineStyle: { color: '#eef2f7' } } },
+        { scale: true, gridIndex: 3, position: 'left', min: 0, max: 100, axisLabel: { color: MUTED, fontSize: 10 }, splitLine: { lineStyle: { color: '#eef2f7' } } },
       ],
       dataZoom: [
         // 默认显示最近 120 根（券商日K习惯），蜡烛更粗、波动更明显
         { type: 'inside', xAxisIndex: [0, 1, 2, 3], start: Math.max(0, 100 - (App.period === 'week' ? 100 : 120) * 100 / dates.length), end: 100 },
-        { type: 'slider', xAxisIndex: [0, 1, 2, 3], top: '93%', height: 16, borderColor: '#2a3646', backgroundColor: '#1a222d', fillerColor: 'rgba(59,130,246,.15)', textStyle: { color: MUTED, fontSize: 10 } },
+        { type: 'slider', xAxisIndex: [0, 1, 2, 3], top: '93%', height: 16, borderColor: '#e2e8f0', backgroundColor: '#ffffff', fillerColor: 'rgba(59,130,246,.15)', textStyle: { color: MUTED, fontSize: 10 } },
       ],
       series: [
         { name: CODE, type: 'candlestick', data: ohlc, xAxisIndex: 0, yAxisIndex: 0, itemStyle: { color: RED, color0: GREEN, borderColor: RED, borderColor0: GREEN } },
@@ -784,22 +784,22 @@
 
     const option = {
       backgroundColor: 'transparent', animation: false,
-      tooltip: { trigger: 'axis', backgroundColor: '#202a38', borderColor: '#2a3646', textStyle: { color: '#e6edf3' }, formatter: function (ps) { const i = ps[0].dataIndex; const pct = pctOf(prices[i]); return '<b>' + times[i] + '</b><br/>价 ' + fmtPrice(prices[i]) + '（' + (pct >= 0 ? '+' : '') + pct.toFixed(2) + '%）<br/>均价 ' + fmtPrice(avg[i]) + '<br/>昨收 ' + fmtPrice(prevClose); } },
+      tooltip: { trigger: 'axis', backgroundColor: '#ffffff', borderColor: '#e2e8f0', textStyle: { color: '#1e293b' }, formatter: function (ps) { const i = ps[0].dataIndex; const pct = pctOf(prices[i]); return '<b>' + times[i] + '</b><br/>价 ' + fmtPrice(prices[i]) + '（' + (pct >= 0 ? '+' : '') + pct.toFixed(2) + '%）<br/>均价 ' + fmtPrice(avg[i]) + '<br/>昨收 ' + fmtPrice(prevClose); } },
       grid: [{ left: 62, right: 56, top: 24, height: '68%' }, { left: 62, right: 18, top: '80%', height: '12%' }],
       xAxis: [
-        { type: 'category', data: times, gridIndex: 0, axisLine: { lineStyle: { color: '#2a3646' } }, axisLabel: { color: MUTED, fontSize: 10 }, boundaryGap: false },
-        { type: 'category', data: times, gridIndex: 1, axisLine: { lineStyle: { color: '#2a3646' } }, axisLabel: { show: false }, boundaryGap: false },
+        { type: 'category', data: times, gridIndex: 0, axisLine: { lineStyle: { color: '#e2e8f0' } }, axisLabel: { color: MUTED, fontSize: 10 }, boundaryGap: false },
+        { type: 'category', data: times, gridIndex: 1, axisLine: { lineStyle: { color: '#e2e8f0' } }, axisLabel: { show: false }, boundaryGap: false },
       ],
       yAxis: [
-        { gridIndex: 0, position: 'left', min: yMin, max: yMax, axisLabel: { color: MUTED, fontSize: 10 }, splitLine: { lineStyle: { color: '#223' } } },
+        { gridIndex: 0, position: 'left', min: yMin, max: yMax, axisLabel: { color: MUTED, fontSize: 10 }, splitLine: { lineStyle: { color: '#eef2f7' } } },
         // 右侧涨跌幅刻度
-        { gridIndex: 0, position: 'right', min: yMinPct, max: yMaxPct, axisLabel: { color: MUTED, fontSize: 10, formatter: (v) => (v > 0 ? '+' : '') + v.toFixed(2) + '%' }, splitLine: { show: false }, axisLine: { lineStyle: { color: '#2a3646' } } },
+        { gridIndex: 0, position: 'right', min: yMinPct, max: yMaxPct, axisLabel: { color: MUTED, fontSize: 10, formatter: (v) => (v > 0 ? '+' : '') + v.toFixed(2) + '%' }, splitLine: { show: false }, axisLine: { lineStyle: { color: '#e2e8f0' } } },
         { gridIndex: 1, position: 'left', axisLabel: { show: false }, splitLine: { show: false } },
       ],
       series: [
         { name: '价格', type: 'line', data: priceData, xAxisIndex: 0, yAxisIndex: 0, symbol: 'none', lineStyle: { width: 1.4 }, areaStyle: { color: 'rgba(59,130,246,.08)' } },
         { name: '均价', type: 'line', data: avg, xAxisIndex: 0, yAxisIndex: 0, symbol: 'none', lineStyle: { width: 1, color: '#f59e0b' } },
-        { name: '昨收', type: 'line', data: pts.map(() => prevClose), xAxisIndex: 0, yAxisIndex: 0, symbol: 'none', lineStyle: { width: 1, color: '#8b98a9', type: 'dashed' } },
+        { name: '昨收', type: 'line', data: pts.map(() => prevClose), xAxisIndex: 0, yAxisIndex: 0, symbol: 'none', lineStyle: { width: 1, color: '#64748b', type: 'dashed' } },
         { name: '量', type: 'bar', data: volBars, xAxisIndex: 1, yAxisIndex: 1, barWidth: '60%' },
       ],
     };
@@ -817,10 +817,10 @@
     const ma5 = Indicators.MA(closes, 5);
     chart.setOption({
       backgroundColor: 'transparent', animation: false,
-      tooltip: { trigger: 'axis', backgroundColor: '#202a38', borderColor: '#2a3646', textStyle: { color: '#e6edf3' } },
+      tooltip: { trigger: 'axis', backgroundColor: '#ffffff', borderColor: '#e2e8f0', textStyle: { color: '#1e293b' } },
       grid: { left: 40, right: 10, top: 10, bottom: 22 },
-      xAxis: { type: 'category', data: dates, axisLine: { lineStyle: { color: '#2a3646' } }, axisLabel: { color: MUTED, fontSize: 10 } },
-      yAxis: { scale: true, axisLabel: { color: MUTED, fontSize: 10 }, splitLine: { lineStyle: { color: '#223' } } },
+      xAxis: { type: 'category', data: dates, axisLine: { lineStyle: { color: '#e2e8f0' } }, axisLabel: { color: MUTED, fontSize: 10 } },
+      yAxis: { scale: true, axisLabel: { color: MUTED, fontSize: 10 }, splitLine: { lineStyle: { color: '#eef2f7' } } },
       series: [
         { name: '收盘', type: 'line', data: closes, symbol: 'none', lineStyle: { width: 1.5, color: ACCENT }, areaStyle: { color: 'rgba(59,130,246,.12)' } },
         { name: 'MA5', type: 'line', data: ma5, symbol: 'none', lineStyle: { width: 1, color: AMBER } },
