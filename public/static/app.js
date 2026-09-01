@@ -418,7 +418,11 @@
   }
 
   function computeAndRender() {
-    if (!App.klines.length) { renderEmpty(); return; }
+    // 分时模式：即使日K缺失，也渲染分时图
+    if (!App.klines.length) {
+      if (App.period === 'minute' && (App.minute || []).length) { renderChart(); return; }
+      renderEmpty(); return;
+    }
     // 用实时价校准当日最后一根K（仅当日K分析时）
     const lastK = App.klines[App.klines.length - 1];
     if (App.quote && App.quote.price != null && App.klinePeriod === 'day') {
@@ -886,7 +890,10 @@
       $('#tab-' + b.dataset.tab).classList.add('active');
       if (b.dataset.tab === 'review') loadReviews();
       if (b.dataset.tab === 'predict') { if (predictData) renderPredictChart(); }
-      if (b.dataset.tab === 'analysis' || b.dataset.tab === 'strategy' || b.dataset.tab === 'trade') {
+      if (b.dataset.tab === 'analysis') {
+        // 重新渲染图表：修复标签页隐藏时初始化为 0 尺寸导致分时/K线不显示
+        setTimeout(() => { renderChart(); if (App.charts.mini) App.charts.mini.resize(); }, 60);
+      } else if (b.dataset.tab === 'strategy' || b.dataset.tab === 'trade') {
         setTimeout(() => { if (App.charts.main) App.charts.main.resize(); if (App.charts.mini) App.charts.mini.resize(); }, 50);
       }
       if (b.dataset.tab === 'predict') {

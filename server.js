@@ -191,6 +191,7 @@ async function fetchEastmoneyDaily(limit) {
 // ---------- 简单内存缓存 ----------
 const cache = new Map();
 const predictCache = new Map(); // 前瞻预测结果缓存（5分钟）
+const searchCache = new Map(); // 搜索缓存（5分钟，加速重复搜索）
 let globalExtrasCache = { t: 0, v: null }; // 预测用全局数据缓存（10分钟）
 async function getGlobalExtras() {
   if (globalExtrasCache.v && Date.now() - globalExtrasCache.t < 600000) return globalExtrasCache.v;
@@ -419,6 +420,9 @@ const server = http.createServer(async (req, res) => {
     if (p === '/api/search') {
       const kw = (q.q || '').trim();
       if (!kw) return sendJSON(res, 200, { ok: true, results: [] });
+      const sk = 's_' + kw;
+      const sh = searchCache.get(sk);
+      if (sh && Date.now() - sh.t < 300000) return sendJSON(res, 200, sh.v);
       try {
         const searchOne = async (word) => {
           const r = await httpGet(`https://searchapi.eastmoney.com/api/suggest/get?input=${encodeURIComponent(word)}&type=14&token=D43BF722C8E33BDC906FB84D85E326E8&count=12`, { headers: { Referer: 'https://quote.eastmoney.com/' } });
@@ -432,7 +436,9 @@ const server = http.createServer(async (req, res) => {
         for (const w of words) { try { results = results.concat(await searchOne(w)); } catch (e) {} }
         const seen = new Set();
         results = results.filter((x) => { if (seen.has(x.code)) return false; seen.add(x.code); return true; }).slice(0, 12);
-        return sendJSON(res, 200, { ok: true, results });
+        const out = { ok: true, results };
+        searchCache.set(sk, { t: Date.now(), v: out });
+        return sendJSON(res, 200, out);
       } catch (e) {
         return sendJSON(res, 200, { ok: true, results: [], error: e.message });
       }
