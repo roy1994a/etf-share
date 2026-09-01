@@ -336,16 +336,19 @@
     const upper = prices.map((pr, i) => +(pr * (1 + bandPct[i] / 100)).toFixed(3));
     chart.setOption({
       backgroundColor: 'transparent', animation: false,
-      tooltip: { trigger: 'axis', backgroundColor: '#202a38', borderColor: '#2a3646', textStyle: { color: '#e6edf3' }, formatter: function (ps) { const i = ps[0].dataIndex; return '<b>' + labels[i] + '</b><br/>预期价 ' + fmtPrice(prices[i]) + '（' + (path[i].chg >= 0 ? '+' : '') + path[i].chg + '%）<br/>区间 ' + fmtPrice(lower[i]) + ' ~ ' + fmtPrice(upper[i]) + '（±' + (+bandPct[i].toFixed(1)) + '%）'; } },
+      tooltip: { trigger: 'axis', backgroundColor: '#202a38', borderColor: '#2a3646', textStyle: { color: '#e6edf3' }, formatter: function (ps) { const i = ps[0].dataIndex; return '<b>' + labels[i] + '</b><br/>预期价 ' + fmtPrice(prices[i]) + '（' + (path[i].chg >= 0 ? '+' : '') + path[i].chg + '%）<br/>置信区间 ' + fmtPrice(lower[i]) + ' ~ ' + fmtPrice(upper[i]) + '（±' + (+bandPct[i].toFixed(1)) + '%）'; } },
       grid: { left: 60, right: 20, top: 30, bottom: 30 },
       xAxis: { type: 'category', data: labels, axisLine: { lineStyle: { color: '#2a3646' } }, axisLabel: { color: '#8b98a9', fontSize: 10, interval: 2 } },
       yAxis: { scale: true, axisLabel: { color: '#8b98a9', fontSize: 10 }, splitLine: { lineStyle: { color: '#223' } } },
       graphic: [{ type: 'text', right: 12, top: 4, style: { text: '当前 ' + fmtPrice(cur) + ' · 阴影=置信区间', fill: '#8b98a9', fontSize: 11 } }],
       legend: { top: 0, left: 8, textStyle: { color: '#8b98a9', fontSize: 11 }, itemWidth: 14, itemHeight: 8 },
       series: [
-        { name: '置信区间', type: 'line', data: lower, stack: 'band', symbol: 'none', lineStyle: { opacity: 0 }, areaStyle: { color: 'rgba(59,130,246,.16)' }, silent: true, tooltip: { show: false } },
-        { name: '', type: 'line', data: upper.map((u, i) => +(u - lower[i]).toFixed(3)), stack: 'band', symbol: 'none', lineStyle: { opacity: 0 }, areaStyle: { color: 'rgba(59,130,246,.16)' }, silent: true, tooltip: { show: false } },
-        { name: '预期走势', type: 'line', data: prices, symbol: 'circle', symbolSize: 4, lineStyle: { width: 2, color: '#3b82f6' }, markPoint: { data: horizonMark, label: { fontSize: 10, color: '#e6edf3' }, symbol: 'circle', symbolSize: 8 } },
+        // 置信区间带：填充 + 上下沿虚线边界（更清晰）
+        { name: '置信区间', type: 'line', data: lower, stack: 'band', symbol: 'none', lineStyle: { opacity: 0 }, areaStyle: { color: 'rgba(59,130,246,.20)' }, silent: true, tooltip: { show: false } },
+        { name: '', type: 'line', data: upper.map((u, i) => +(u - lower[i]).toFixed(3)), stack: 'band', symbol: 'none', lineStyle: { opacity: 0 }, areaStyle: { color: 'rgba(59,130,246,.20)' }, silent: true, tooltip: { show: false } },
+        { name: '区间上沿', type: 'line', data: upper, symbol: 'none', lineStyle: { width: 1, color: 'rgba(96,165,250,.7)', type: 'dashed' }, silent: true, tooltip: { show: false } },
+        { name: '区间下沿', type: 'line', data: lower, symbol: 'none', lineStyle: { width: 1, color: 'rgba(96,165,250,.7)', type: 'dashed' }, silent: true, tooltip: { show: false } },
+        { name: '预期走势', type: 'line', data: prices, symbol: 'circle', symbolSize: 4, lineStyle: { width: 2.5, color: '#3b82f6' }, markPoint: { data: horizonMark, label: { fontSize: 10, color: '#e6edf3' }, symbol: 'circle', symbolSize: 8 } },
         { name: '当前价', type: 'line', data: labels.map(() => cur), symbol: 'none', lineStyle: { width: 1, color: '#8b98a9', type: 'dashed' } },
       ],
     }, true);
