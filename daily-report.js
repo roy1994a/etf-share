@@ -45,7 +45,7 @@ function loadState() {
 }
 
 // ---------- 报告生成 ----------
-function renderReport(analysis, instruction, state, quote, klines, period, rotation) {
+function renderReport(analysis, instruction, state, quote, klines, period, rotation, prediction) {
   const L = [];
   const line = (s) => L.push(s || '');
   const hr = (c) => line(c.repeat(58));
@@ -94,6 +94,22 @@ function renderReport(analysis, instruction, state, quote, klines, period, rotat
   const v = analysis.indicators;
   line(`   ATR 波动率    ${fmt(v.atrPct, 2)}%${v.atrPct > 3.5 ? '（高波动，注意风险）' : v.atrPct > 2.5 ? '（波动偏大）' : v.atrPct > 2 ? '（波动适中）' : '（波动较小）'}`);
   line('');
+
+  // 二点五、前瞻预测
+  if (prediction && prediction.summary) {
+    const p = prediction;
+    const name = { d1: '未来1天', d3: '未来3天', w1: '未来1周', m1: '未来1月' };
+    const arrow = (dir) => (dir === '看涨' ? '↑' : dir === '看跌' ? '↓' : '→');
+    line('【前瞻预测】');
+    line('  ──────────────────────────────────────────');
+    for (const k of ['d1', 'd3', 'w1', 'm1']) {
+      const x = p[k];
+      line(`   ${name[k]}      ${arrow(x.dir)}${x.dir}  上涨概率 ${x.upProb}% / 下跌 ${x.downProb}%  预期区间 ±${x.rangePct}%（${fmtPrice(x.priceLow)} ~ ${fmtPrice(x.priceHigh)}）`);
+    }
+    line(`   综合判断    未来1周${p.summary.dir}（上涨概率 ${p.summary.upProb}%）`);
+    line(`   关键依据    ${p.summary.keySignals.join('、')}`);
+    line('');
+  }
 
   // 三、技术指标速览
   line('三、技术指标速览');
@@ -271,7 +287,10 @@ function renderReport(analysis, instruction, state, quote, klines, period, rotat
     const bearMarket = !!(extras.index && extras.index.ma60 && extras.index.price < extras.index.ma60);
     const rotation = Engine.pickRotation(poolResults, { bearMarket, sentimentIndex: extras.hhxg ? extras.hhxg.sentimentIndex : null });
 
-    const report = renderReport(analysis, instruction, state, quote, klines, PERIOD, rotation);
+    // 前瞻预测（1天/3天/1周/1月）
+    const prediction = Engine.predict(klines, analysis, extras);
+
+    const report = renderReport(analysis, instruction, state, quote, klines, PERIOD, rotation, prediction);
     console.log(report);
 
     if (!PRINT_ONLY) {

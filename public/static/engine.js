@@ -431,7 +431,117 @@
     return { top, pick, eligible, sorted, action, reason, targetPct: Math.round(targetPct), bearMarket: !!m.bearMarket };
   }
 
-  const api = { DEFAULT_SETTINGS, analyze, generateInstruction, generateReview, computeRotation, pickRotation, clamp, last, lastVal, r2 };
+  // ---------- 前瞻预测：1天 / 3天 / 1周 / 1月 ----------
+  // 规则型可解释预测：短周期重动量/反转/量价/费半，长周期重趋势/宏观/资金/相对强度
+  function predict(klines, analysis, extras) {
+    extras = extras || {};
+    const v = analysis.indicators || {};
+    const price = analysis.price;
+    const mkt = analysis.market || {};
+    const atrPct = v.atrPct != null ? v.atrPct : (v.atr && price ? v.atr / price * 100 : 2);
+
+    // ---- 归一化信号（-1..1）----
+    let trend = 0, tn = 0;
+    if (v.ma20 != null) { trend += price > v.ma20 ? 1 : -1; tn++; }
+    if (v.ma60 != null) { trend += price > v.ma60 ? 1 : -1; tn++; }
+    if (v.ma5 != null && v.ma20 != null) { trend += v.ma5 > v.ma20 ? 1 : -1; tn++; }
+    trend = tn ? trend / tn : 0;
+
+    const mom20 = mkt.mom20 != null ? mkt.mom20 : 0;
+    const mom = Math.max(-1, Math.min(1, mom20 / 15));
+
+    const r6 = v.rsi6;
+    const rsiRev = r6 != null ? (r6 < 30 ? 1 : r6 > 70 ? -1 : (r6 < 40 ? 0.3 : r6 > 60 ? -0.3 : 0)) : 0;
+
+    const macdDir = (v.dif != null && v.dea != null) ? (v.dif > v.dea ? 1 : -1) : 0;
+
+    const f = extras.fundFlow || [];
+    let fund = 0;
+    if (f.length) {
+      const lp = f[f.length - 1];
+      if (lp.mainNetInflowPct > 5) fund = 1;
+      else if (lp.mainNetInflowPct < -5) fund = -1;
+      else if (lp.mainNetInflowPct > 0) fund = 0.5;
+      else fund = -0.5;
+    }
+
+    const macro = extras.macro || {};
+    const us = macro.us10y || {};
+    let macroS = 0;
+    if (us.price != null) {
+      if (us.price > 4.5) macroS -= 2; else if (us.price > 4.2) macroS -= 1; else if (us.price < 4.0) macroS += 1;
+      if (us.chg20bp != null && us.chg20bp > 30) macroS -= 1; else if (us.chg20bp != null && us.chg20bp < -30) macroS += 1;
+    }
+    const cn = macro.cn10y || {};
+    if (cn.chg20bp != null) { if (cn.chg20bp > 20) macroS -= 1; else if (cn.chg20bp < -20) macroS += 1; }
+    macroS = Math.max(-1, Math.min(1, macroS / 4));
+
+    const hx = extras.hhxg || {};
+    let senti = 0;
+    if (hx.sentimentIndex != null) {
+      if (hx.sentimentIndex >= 85) senti = -0.5;
+      else if (hx.sentimentIndex >= 65) senti = 0.5;
+      else if (hx.sentimentIndex >= 25) senti = -0.3;
+      else senti = 0.5;
+    }
+
+    const sox = extras.sox || {};
+    const soxS = sox.chgPct != null ? (sox.chgPct > 2 ? 1 : sox.chgPct < -2 ? -1 : 0) : 0;
+
+    const idx = extras.index || {};
+    const indexS = idx.ma60 != null ? (idx.price >= idx.ma60 ? 1 : -1) : 0;
+
+    const rel = extras.relStrength != null ? (extras.relStrength > 3 ? 1 : extras.relStrength < -3 ? -1 : 0) : 0;
+
+    const dayChg = analysis.pct != null ? analysis.pct : 0;
+    const vRatio = v.vRatio != null ? v.vRatio : 1;
+    let volS = 0;
+    if (vRatio > 1.3) volS = dayChg > 0 ? 1 : -1;
+    else if (vRatio < 0.7) volS = dayChg > 0 ? 0.3 : -0.3;
+
+    // 各周期加权：短周期重动量/反转/量价/费半，长周期重趋势/宏观/资金/相对强度
+    const w = {
+      d1: 0.30 * mom + 0.25 * rsiRev + 0.15 * volS + 0.10 * soxS + 0.10 * senti + 0.10 * indexS,
+      d3: 0.25 * mom + 0.20 * trend + 0.15 * macdDir + 0.15 * volS + 0.10 * soxS + 0.10 * indexS + 0.05 * rel,
+      w1: 0.25 * trend + 0.20 * mom + 0.15 * fund + 0.15 * macroS + 0.10 * indexS + 0.10 * rel + 0.05 * senti,
+      m1: 0.25 * trend + 0.20 * macroS + 0.20 * fund + 0.15 * indexS + 0.10 * rel + 0.10 * mom,
+    };
+    const toProb = (s) => Math.max(5, Math.min(95, Math.round(50 + s * 50)));
+    const range = { d1: atrPct, d3: atrPct * 1.7, w1: atrPct * 2.6, m1: atrPct * 4.6 };
+    const label = (s) => (s > 0.2 ? '看涨' : s < -0.2 ? '看跌' : '震荡');
+    const key = (s) => (s > 0.6 ? '强' : s > 0.2 ? '偏' : s > -0.2 ? '中' : s > -0.6 ? '偏' : '强');
+
+    const out = {};
+    for (const k of ['d1', 'd3', 'w1', 'm1']) {
+      const s = w[k];
+      const upProb = toProb(s);
+      out[k] = {
+        dir: label(s),
+        upProb,
+        downProb: 100 - upProb,
+        rangePct: +range[k].toFixed(1),
+        score: Math.round(s * 100),
+        priceLow: +(price * (1 - range[k] / 100)).toFixed(3),
+        priceHigh: +(price * (1 + range[k] / 100)).toFixed(3),
+      };
+    }
+    out.summary = {
+      dir: label(w.w1),
+      upProb: toProb(w.w1),
+      keySignals: [
+        (trend > 0 ? '多头' : trend < 0 ? '空头' : '震荡') + '趋势',
+        mom20 > 0 ? '正动量' : mom20 < 0 ? '负动量' : '动量平',
+        fund > 0 ? '主力流入' : fund < 0 ? '主力流出' : '资金中性',
+        macroS > 0 ? '宏观宽松' : macroS < 0 ? '宏观偏紧' : '宏观中性',
+        senti > 0 ? '情绪暖' : senti < 0 ? '情绪冷' : '情绪中性',
+        soxS > 0 ? '费半强' : soxS < 0 ? '费半弱' : '费半平',
+        indexS > 0 ? '大盘多头' : '大盘熊市',
+      ],
+    };
+    return out;
+  }
+
+  const api = { DEFAULT_SETTINGS, analyze, generateInstruction, generateReview, computeRotation, pickRotation, predict, clamp, last, lastVal, r2 };
   global.Engine = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
 })(typeof window !== 'undefined' ? window : globalThis);

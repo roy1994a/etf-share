@@ -519,18 +519,25 @@ async function evaluateRotation(cfg) {
       const { klines: raw, quote } = await fetchTencentKline('day', 260, e.code);
       const klines = calibrateKlines(raw, quote, 'day');
       const rotation = Engine.computeRotation(klines);
-      let analyzeScore = null;
+      let analysis = null;
       try {
-        analyzeScore = Engine.analyze(klines, Indicators.computeAll(klines), quote, settings, sharedExtras).score;
+        analysis = Engine.analyze(klines, Indicators.computeAll(klines), quote, settings, sharedExtras);
       } catch (err) { /* 综合分失败则仅用动量分 */ }
-      return { code: e.code, name: e.name, klines, quote, rotation, analyzeScore };
+      const analyzeScore = analysis ? analysis.score : null;
+      return { code: e.code, name: e.name, klines, quote, rotation, analyzeScore, analysis };
     } catch (err) {
       return { code: e.code, name: e.name, klines: [], quote: null, rotation: null, error: err.message };
     }
   }));
 
   const rotation = Engine.pickRotation(results, market);
-  return { pool: results, market, rotation, index, hhxg, us10y, cn10y, sox, relStrength };
+  // 前瞻预测：对当前最优标的（pick）计算 1天/3天/1周/1月
+  let prediction = null;
+  const pickItem = rotation.pick ? results.find((x) => x.code === rotation.pick.code) : null;
+  if (pickItem && pickItem.analysis) {
+    prediction = Engine.predict(pickItem.klines, pickItem.analysis, sharedExtras);
+  }
+  return { pool: results, market, rotation, index, hhxg, us10y, cn10y, sox, relStrength, prediction };
 }
 
 function buildRotationMessage(rotation, market, cfg, kind, time, extra) {
@@ -540,17 +547,25 @@ function buildRotationMessage(rotation, market, cfg, kind, time, extra) {
   const gate = `大盘:${market.bearMarket ? '熊市' : '多头'} · 情绪:${market.sentimentIndex != null ? market.sentimentIndex : '--'} · 美债10Y:${market.us10y != null ? fmtPrice(market.us10y) + '%' : '--'}${market.soxChg != null ? ' · 费半:' + signed(market.soxChg, 1) + '%' : ''}${market.relStrength != null ? ' · 科技超额:' + signed(market.relStrength, 1) + '%' : ''}`;
   const stopTake = r.pick ? `\n止损 ${fmtPrice(r.pick.rotation.price * (1 - stopPct / 100))} · 止盈 ${fmtPrice(r.pick.rotation.price * (1 + takePct / 100))}` : '';
   const tradeLine = (extra && extra.tradeSummary) ? `\n成交: ${extra.tradeSummary}` : '';
+  const pred = extra && extra.prediction;
+  const predLine = pred && pred.summary
+    ? ('\n预测: ' + (['d1', 'd3', 'w1', 'm1']).map((k) => {
+        const n = { d1: '1天', d3: '3天', w1: '1周', m1: '1月' }[k];
+        const a = pred[k].dir === '看涨' ? '↑' : pred[k].dir === '看跌' ? '↓' : '→';
+        return n + a + pred[k].upProb + '%';
+      }).join(' '))
+    : '';
   if (kind === 'close') {
     return {
       title: `ETF轮动收盘 ${r.action}${r.pick ? ' ' + r.pick.name : ''}`,
-      text: `【收盘轮动复盘】\n${r.action}${r.pick ? ' ' + r.pick.name + 'ETF' : ''}（${r.reason}）\n排行: ${rank}\n目标仓位 ${r.targetPct}% · ${gate}`,
+      text: `【收盘轮动复盘】\n${r.action}${r.pick ? ' ' + r.pick.name + 'ETF' : ''}（${r.reason}）\n排行: ${rank}\n目标仓位 ${r.targetPct}% · ${gate}${predLine}`,
     };
   }
   if (kind === 'rotate') {
     const prevName = extra && extra.prevName ? extra.prevName : '现金';
     return {
       title: `ETF轮动切换 ${r.pick ? r.pick.name : '空仓'}`,
-      text: `【ETF轮动】切换: ${prevName} → ${r.pick ? r.pick.name : '空仓'}\n${r.action}${r.pick ? ' ' + r.pick.name + 'ETF' : ''}（${r.reason}）\n目标仓位 ${r.targetPct}%\n排行: ${rank}${stopTake}${tradeLine}\n${gate}`,
+      text: `【ETF轮动】切换: ${prevName} → ${r.pick ? r.pick.name : '空仓'}\n${r.action}${r.pick ? ' ' + r.pick.name + 'ETF' : ''}（${r.reason}）\n目标仓位 ${r.targetPct}%\n排行: ${rank}${stopTake}${tradeLine}${predLine}\n${gate}`,
     };
   }
   const head = r.pick
@@ -558,7 +573,7 @@ function buildRotationMessage(rotation, market, cfg, kind, time, extra) {
     : `【ETF轮动】${r.action}（${r.reason}）`;
   return {
     title: r.pick ? `${r.pick.name}ETF ${r.pick.rotation.score}分 目标${r.targetPct}%` : `ETF空仓 目标0%`,
-    text: `${head}\n排行: ${rank}${stopTake}${tradeLine}\n${gate}`,
+    text: `${head}\n排行: ${rank}${stopTake}${tradeLine}${predLine}\n${gate}`,
   };
 }
 
@@ -607,7 +622,7 @@ async function main() {
       if (x.rotation) console.log(`  ${x.name}(${x.code}): 轮动分 ${x.rotation.score} · 20日 ${signed(x.rotation.mom20, 2)}% · 60日 ${signed(x.rotation.mom60, 2)}%`);
       else console.log(`  ${x.name}(${x.code}): 数据获取失败 ${x.error || ''}`);
     }
-    const m = buildRotationMessage(r.rotation, r.market, cfg, 'regular', hhmm(now));
+    const m = buildRotationMessage(r.rotation, r.market, cfg, 'regular', hhmm(now), { prediction: r.prediction });
     console.log('\n' + m.title + '\n' + m.text);
     return;
   }
@@ -639,7 +654,7 @@ async function main() {
 
       for (const e of events) {
         const prevName = e.prevCode === 'CASH' ? '现金' : ((r.pool.find((p) => p.code === e.prevCode) || {}).name || e.prevCode);
-        const m = buildRotationMessage(r.rotation, r.market, cfg, e.kind, hhmm(now), { prevName, tradeSummary });
+        const m = buildRotationMessage(r.rotation, r.market, cfg, e.kind, hhmm(now), { prevName, tradeSummary, prediction: r.prediction });
         try { await sendVia(cfg, m.title, m.text); } catch (err) { log('❌ 推送失败: ' + err.message); }
       }
       if (isInSession(now) && !events.length) {

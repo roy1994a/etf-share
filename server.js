@@ -13,7 +13,9 @@ const path = require('path');
 const url = require('url');
 const zlib = require('zlib');
 const { spawn } = require('child_process');
-const { fetchUs10y, fetchCn10y, fetchSox } = require('./lib/market.js'); // 宏观/科技板块数据
+const { fetchUs10y, fetchCn10y, fetchSox, fetchFundFlow, fetchMarketBreadth, fetchHhxgSnapshot, fetchIndexKline, calibrateKlines } = require('./lib/market.js'); // 宏观/科技/资金/情绪数据
+const Indicators = require('./public/static/indicators.js');
+const Engine = require('./public/static/engine.js');
 
 const PORT = process.env.PORT || 8899;
 const HOST = process.env.HOST || '0.0.0.0'; // 公共部署监听所有网卡；本地可用 HOST=127.0.0.1
@@ -188,6 +190,32 @@ async function fetchEastmoneyDaily(limit) {
 
 // ---------- 简单内存缓存 ----------
 const cache = new Map();
+const predictCache = new Map(); // 前瞻预测结果缓存（5分钟）
+let globalExtrasCache = { t: 0, v: null }; // 预测用全局数据缓存（10分钟）
+async function getGlobalExtras() {
+  if (globalExtrasCache.v && Date.now() - globalExtrasCache.t < 600000) return globalExtrasCache.v;
+  const [fundR, brR, hxgR, idxR, usR, cnR, soxR, relR] = await Promise.allSettled([
+    fetchFundFlow(10), fetchMarketBreadth(), fetchHhxgSnapshot(), fetchIndexKline('1.000300', 80),
+    fetchUs10y(), fetchCn10y(), fetchSox(),
+    Promise.all([fetchIndexKline('1.000688', 30), fetchIndexKline('1.000300', 30)]).then(([kc, hs]) => {
+      const kc0 = kc[kc.length - 1].close, kc20 = kc[kc.length - 21].close;
+      const hs0 = hs[hs.length - 1].close, hs20 = hs[hs.length - 21].close;
+      return ((kc0 / kc20 - 1) - (hs0 / hs20 - 1)) * 100;
+    }),
+  ]);
+  const idx = idxR.status === 'fulfilled' ? idxR.value : null;
+  const v = {
+    fundFlow: fundR.status === 'fulfilled' ? fundR.value : null,
+    breadth: brR.status === 'fulfilled' ? brR.value : null,
+    hhxg: hxgR.status === 'fulfilled' ? hxgR.value : null,
+    index: idx,
+    macro: { us10y: usR.status === 'fulfilled' ? usR.value : null, cn10y: cnR.status === 'fulfilled' ? cnR.value : null },
+    sox: soxR.status === 'fulfilled' ? soxR.value : null,
+    relStrength: relR.status === 'fulfilled' ? relR.value : null,
+  };
+  globalExtrasCache = { t: Date.now(), v };
+  return v;
+}
 function cached(key, ttlMs, fn) {
   const hit = cache.get(key);
   if (hit && Date.now() - hit.t < ttlMs) return hit.v;
@@ -419,6 +447,26 @@ const server = http.createServer(async (req, res) => {
         cn10y: cn.status === 'fulfilled' ? cn.value : null,
         sox: sox.status === 'fulfilled' ? sox.value : null,
       });
+    }
+
+    // 前瞻预测：1天/3天/1周/1月（综合技术+资金+情绪+消息+宏观+科技板块）
+    if (p === '/api/predict') {
+      const code = q.code || CODE;
+      const ck = 'predict_' + code;
+      const hit = predictCache.get(ck);
+      if (hit && Date.now() - hit.t < 300000) return sendJSON(res, 200, hit.v);
+      try {
+        const { klines: raw, quote } = await fetchTencentKline('day', 260, code);
+        const klines = calibrateKlines(raw, quote, 'day');
+        const extras = await getGlobalExtras(); // 全局数据走 10 分钟缓存
+        const analysis = Engine.analyze(klines, Indicators.computeAll(klines), quote, Engine.DEFAULT_SETTINGS, extras);
+        const prediction = Engine.predict(klines, analysis, extras);
+        const out = { ok: true, code, name: quote ? quote.name : code, price: analysis.price, score: analysis.score, status: analysis.status, prediction };
+        predictCache.set(ck, { t: Date.now(), v: out });
+        return sendJSON(res, 200, out);
+      } catch (e) {
+        return sendJSON(res, 500, { ok: false, error: e.message });
+      }
     }
 
     // 轮动池管理：GET 获取；POST 增删（写回 notify.config.json）

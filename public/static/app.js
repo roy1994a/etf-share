@@ -110,6 +110,7 @@
       computeAndRender();
       refreshEtfQuotes();
       refreshMacro();
+      refreshPredict(); // 不阻塞：首次约 20 秒，之后命中 5 分钟缓存
     } catch (e) {
       App.lastError = e.message || '加载失败';
       $('#footStatus').textContent = '⚠ 数据加载失败：' + App.lastError + '（请确认后端已启动）';
@@ -257,6 +258,31 @@
         '<div class="m-note">' + note + '</div>';
     } catch (e) {
       el.innerHTML = '<div style="color:#8b98a9">宏观数据加载失败</div>';
+    }
+  }
+
+  // 前瞻预测面板（1天/3天/1周/1月）
+  async function refreshPredict() {
+    const el = $('#predictPanel');
+    if (!el) return;
+    try {
+      const r = await api('/api/predict?code=' + App.code);
+      const p = r.prediction;
+      if (!p || !p.summary) { el.innerHTML = '<div style="color:#8b98a9">暂无预测数据</div>'; return; }
+      const nm = { d1: '1天', d3: '3天', w1: '1周', m1: '1月' };
+      const arrow = (d) => (d === '看涨' ? '↑' : d === '看跌' ? '↓' : '→');
+      const cards = ['d1', 'd3', 'w1', 'm1'].map((k) => {
+        const x = p[k];
+        const cls = x.dir === '看涨' ? 'bull' : (x.dir === '看跌' ? 'bear' : 'flat');
+        return '<div class="pr-card"><div class="n">' + nm[k] + '</div>' +
+          '<div class="v ' + cls + '">' + arrow(x.dir) + ' ' + x.dir + '</div>' +
+          '<div class="s">涨 ' + x.upProb + '% / 跌 ' + x.downProb + '%</div>' +
+          '<div class="s">±' + x.rangePct + '%（' + fmtPrice(x.priceLow) + ' ~ ' + fmtPrice(x.priceHigh) + '）</div></div>';
+      }).join('');
+      el.innerHTML = cards +
+        '<div class="pr-summary">综合（未来1周）：' + arrow(p.summary.dir) + p.summary.dir + '，上涨概率 ' + p.summary.upProb + '%<br/><span class="muted">' + p.summary.keySignals.join(' · ') + '</span></div>';
+    } catch (e) {
+      el.innerHTML = '<div style="color:#8b98a9">预测加载失败（首次约需 20 秒，稍后自动重试）</div>';
     }
   }
 
