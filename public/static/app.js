@@ -262,28 +262,86 @@
   }
 
   // 前瞻预测面板（1天/3天/1周/1月）
+  let predictData = null;
   async function refreshPredict() {
-    const el = $('#predictPanel');
-    if (!el) return;
     try {
       const r = await api('/api/predict?code=' + App.code);
-      const p = r.prediction;
-      if (!p || !p.summary) { el.innerHTML = '<div style="color:#8b98a9">暂无预测数据</div>'; return; }
-      const nm = { d1: '1天', d3: '3天', w1: '1周', m1: '1月' };
-      const arrow = (d) => (d === '看涨' ? '↑' : d === '看跌' ? '↓' : '→');
-      const cards = ['d1', 'd3', 'w1', 'm1'].map((k) => {
-        const x = p[k];
-        const cls = x.dir === '看涨' ? 'bull' : (x.dir === '看跌' ? 'bear' : 'flat');
-        return '<div class="pr-card"><div class="n">' + nm[k] + '</div>' +
-          '<div class="v ' + cls + '">' + arrow(x.dir) + ' ' + x.dir + '</div>' +
-          '<div class="s">涨 ' + x.upProb + '% / 跌 ' + x.downProb + '%</div>' +
-          '<div class="s">±' + x.rangePct + '%（' + fmtPrice(x.priceLow) + ' ~ ' + fmtPrice(x.priceHigh) + '）</div></div>';
-      }).join('');
-      el.innerHTML = cards +
-        '<div class="pr-summary">综合（未来1周）：' + arrow(p.summary.dir) + p.summary.dir + '，上涨概率 ' + p.summary.upProb + '%<br/><span class="muted">' + p.summary.keySignals.join(' · ') + '</span></div>';
+      predictData = r;
+      renderPredictTab();
+      renderStrategy(); // 预测联动：刷新今日策略
     } catch (e) {
-      el.innerHTML = '<div style="color:#8b98a9">预测加载失败（首次约需 20 秒，稍后自动重试）</div>';
+      const el = $('#predictPanel');
+      if (el) el.innerHTML = '<div style="color:#8b98a9">预测加载失败（首次约需 20 秒，稍后自动重试）</div>';
     }
+  }
+
+  function renderPredictTab() {
+    const r = predictData;
+    if (!r || !r.prediction) return;
+    const p = r.prediction, el = $('#predictPanel'), elCards = $('#predictCards');
+    const nm = { d1: '1天', d3: '3天', w1: '1周', m1: '1月' };
+    const arrow = (d) => (d === '看涨' ? '↑' : d === '看跌' ? '↓' : '→');
+    const cardsHtml = ['d1', 'd3', 'w1', 'm1'].map((k) => {
+      const x = p[k];
+      const cls = x.dir === '看涨' ? 'bull' : (x.dir === '看跌' ? 'bear' : 'flat');
+      return '<div class="pr-card"><div class="n">' + nm[k] + '</div>' +
+        '<div class="v ' + cls + '">' + arrow(x.dir) + ' ' + x.dir + '</div>' +
+        '<div class="s">预期 ' + (x.expectedChg >= 0 ? '+' : '') + x.expectedChg + '% → ' + fmtPrice(x.expectedPrice) + '</div>' +
+        '<div class="s">涨 ' + x.upProb + '% / 跌 ' + x.downProb + '%</div>' +
+        '<div class="s">高点 ' + fmtPrice(x.priceHigh) + ' / 低点 ' + fmtPrice(x.priceLow) + '</div></div>';
+    }).join('');
+    const summaryHtml = '<div class="pr-summary">综合（未来1周）：' + arrow(p.summary.dir) + p.summary.dir + '，上涨概率 ' + p.summary.upProb + '%<br/><span class="muted">' + p.summary.keySignals.join(' · ') + '</span></div>';
+    if (el) el.innerHTML = cardsHtml + summaryHtml;
+    if (elCards) elCards.innerHTML = cardsHtml + summaryHtml;
+    const pn = $('#predictName');
+    if (pn) pn.textContent = r.name + ' (' + r.code + ')';
+    renderPredictChart();
+    renderPredictLink();
+  }
+
+  function renderPredictChart() {
+    const dom = $('#predictChart');
+    if (!window.echarts || !predictData || !predictData.prediction || !predictData.prediction.path) return;
+    const p = predictData.prediction;
+    const path = p.path, labels = path.map((x) => x.label), prices = path.map((x) => x.price);
+    const cur = predictData.price;
+    const old = window.echarts.getInstanceByDom(dom);
+    if (old) old.dispose();
+    const chart = echarts.init(dom);
+    App.charts.predict = chart;
+    const horizonMark = [
+      { coord: ['T+1', p.d1.expectedPrice], value: 'T+1 ' + (p.d1.expectedChg >= 0 ? '+' : '') + p.d1.expectedChg + '%', itemStyle: { color: '#f59e0b' } },
+      { coord: ['T+3', p.d3.expectedPrice], value: 'T+3 ' + (p.d3.expectedChg >= 0 ? '+' : '') + p.d3.expectedChg + '%', itemStyle: { color: '#f59e0b' } },
+      { coord: ['T+5', p.w1.expectedPrice], value: 'T+5 ' + (p.w1.expectedChg >= 0 ? '+' : '') + p.w1.expectedChg + '%', itemStyle: { color: '#a855f7' } },
+      { coord: ['T+22', p.m1.expectedPrice], value: 'T+22 ' + (p.m1.expectedChg >= 0 ? '+' : '') + p.m1.expectedChg + '%', itemStyle: { color: '#22d3ee' } },
+    ];
+    chart.setOption({
+      backgroundColor: 'transparent', animation: false,
+      tooltip: { trigger: 'axis', backgroundColor: '#202a38', borderColor: '#2a3646', textStyle: { color: '#e6edf3' }, formatter: function (ps) { const i = ps[0].dataIndex; return '<b>' + labels[i] + '</b><br/>预期价 ' + fmtPrice(prices[i]) + '（' + (path[i].chg >= 0 ? '+' : '') + path[i].chg + '%）'; } },
+      grid: { left: 60, right: 20, top: 30, bottom: 30 },
+      xAxis: { type: 'category', data: labels, axisLine: { lineStyle: { color: '#2a3646' } }, axisLabel: { color: '#8b98a9', fontSize: 10, interval: 2 } },
+      yAxis: { scale: true, axisLabel: { color: '#8b98a9', fontSize: 10 }, splitLine: { lineStyle: { color: '#223' } } },
+      graphic: [{ type: 'text', right: 12, top: 4, style: { text: '当前 ' + fmtPrice(cur), fill: '#8b98a9', fontSize: 11 } }],
+      series: [
+        { name: '预期走势', type: 'line', data: prices, symbol: 'circle', symbolSize: 4, lineStyle: { width: 2, color: '#3b82f6' }, markPoint: { data: horizonMark, label: { fontSize: 10, color: '#e6edf3' }, symbol: 'circle', symbolSize: 8 } },
+        { name: '当前价', type: 'line', data: labels.map(() => cur), symbol: 'none', lineStyle: { width: 1, color: '#8b98a9', type: 'dashed' } },
+      ],
+    }, true);
+  }
+
+  function renderPredictLink() {
+    if (!predictData || !predictData.prediction) return;
+    const w1 = predictData.prediction.w1;
+    const arrow = (d) => (d === '看涨' ? '↑' : d === '看跌' ? '↓' : '→');
+    const linkHtml = '<div class="pl-row">未来1周预测：<b>' + arrow(w1.dir) + ' ' + w1.dir + '</b>（上涨概率 ' + w1.upProb + '% / 下跌概率 ' + (100 - w1.upProb) + '%）</div>' +
+      (w1.dir === '看跌'
+        ? '<div class="pl-row warn">⚠ 预测看跌：建议下调仓位、今日买入暂缓、逢高减仓（操作建议已按预测下调）</div>'
+        : w1.dir === '看涨'
+          ? '<div class="pl-row good">✅ 预测看涨：可逢低布局，按目标仓位执行</div>'
+          : '<div class="pl-row">预测震荡：按技术面信号执行</div>');
+    const el1 = $('#predictStrategyLink'), el2 = $('#sPredictLink');
+    if (el1) el1.innerHTML = linkHtml;
+    if (el2) el2.innerHTML = linkHtml;
   }
 
   // ---------- 只读模式 UI ----------
@@ -465,8 +523,14 @@
       '<div style="display:flex;justify-content:space-between;margin-top:8px;color:#8b98a9;font-size:12px"><span>0 强空</span><span>50 中性</span><span>100 强多</span></div>' +
       '<div style="margin-top:10px;font-size:13px">波动率 ATR ' + fmt(v.atrPct, 2) + '% ' + (v.atrPct > 3 ? '（波动较大，注意风险）' : v.atrPct > 2 ? '（波动适中）' : '（波动较小）') + '</div>';
 
-    if (App.instruction) {
-      const ins = App.instruction;
+    // 预测联动：用未来1周预测调整操作建议
+    let ins = App.instruction;
+    if (ins && predictData && predictData.prediction) {
+      ins = Engine.applyPrediction(ins, predictData.prediction);
+    }
+    renderPredictLink();
+
+    if (ins) {
       $('#sPositionPanel').innerHTML =
         '<div class="pos-bar"><div class="fill" style="width:' + ins.targetPct + '%"></div></div>' +
         '<div class="pos-row"><span class="lbl">当前仓位</span><span class="val">' + ins.currentPct + '%</span></div>' +
@@ -476,13 +540,13 @@
         '<div class="pos-row"><span class="lbl">资金份数</span><span class="val">' + ins.lots + ' 份</span></div>';
     }
 
-    if (App.instruction) {
-      const ins = App.instruction;
-      let html = '<div class="action-badge ' + ins.side + '">' + ins.action + (ins.side === 'buy' ? '（做多）' : ins.side === 'sell' ? '（减仓/做空）' : '（观望）') + '</div>';
+    if (ins) {
+      let html = (ins.predictionNote ? '<div class="pl-row ' + (ins.prediction && ins.prediction.dir === '看跌' ? 'warn' : 'good') + '">' + ins.predictionNote + '</div>' : '') +
+        '<div class="action-badge ' + ins.side + '">' + ins.action + (ins.side === 'buy' ? '（做多）' : ins.side === 'sell' ? '（减仓/做空）' : '（观望）') + '</div>';
 
       if (ins.side === 'buy') {
         html += '<div style="margin:8px 0">目标仓位 <b>' + ins.targetPct + '%</b>，需加仓 <b>' + fmt(ins.deltaShares, 0) + ' 份</b>（约 ' + fmt(ins.deltaValue, 0) + ' 元）。建议分 3 批执行：</div>';
-        html += '<ol class="steps">' + ins.tranches.map((t) => '<li>第 ' + t.step + ' 批：' + fmt(t.shares, 0) + ' 份（约 ' + fmt(t.amount, 0) + ' 元）—— ' + t.note + '</li>').join('') + '</ol>';
+        html += '<ol class="steps">' + (ins.tranches || []).map((t) => '<li>第 ' + t.step + ' 批：' + fmt(t.shares, 0) + ' 份（约 ' + fmt(t.amount, 0) + ' 元）—— ' + t.note + '</li>').join('') + '</ol>';
         html += '<div class="zone">' + ins.buyZone + '</div>';
       } else if (ins.side === 'sell') {
         html += '<div style="margin:8px 0">目标仓位 <b>' + ins.targetPct + '%</b>，需减仓 <b>' + fmt(Math.abs(ins.deltaShares), 0) + ' 份</b>（约 ' + fmt(Math.abs(ins.deltaValue), 0) + ' 元）。</div>';
@@ -799,8 +863,12 @@
       b.classList.add('active');
       $('#tab-' + b.dataset.tab).classList.add('active');
       if (b.dataset.tab === 'review') loadReviews();
+      if (b.dataset.tab === 'predict') { if (predictData) renderPredictChart(); }
       if (b.dataset.tab === 'analysis' || b.dataset.tab === 'strategy' || b.dataset.tab === 'trade') {
         setTimeout(() => { if (App.charts.main) App.charts.main.resize(); if (App.charts.mini) App.charts.mini.resize(); }, 50);
+      }
+      if (b.dataset.tab === 'predict') {
+        setTimeout(() => { if (App.charts.predict) App.charts.predict.resize(); }, 50);
       }
     }));
 

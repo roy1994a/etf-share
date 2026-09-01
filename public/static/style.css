@@ -253,3 +253,9 @@ td.sell { color: var(--green); font-weight: 600; }
 .pr-card .s { font-size: 11px; color: var(--muted); }
 .pr-summary { flex-basis: 100%; font-size: 12px; color: #e6edf3; padding: 6px 2px 0; }
 .pr-summary .muted { color: var(--muted); }
+
+/* 预测联动 */
+.pl-row { padding: 8px 12px; border-radius: 8px; margin-bottom: 8px; font-size: 13px; line-height: 1.6; background: var(--bg2); border: 1px solid var(--border); }
+.pl-row.warn { border-color: #f59e0b; color: #f59e0b; }
+.pl-row.good { border-color: #22c55e; color: #22c55e; }
+.predict-strategy-link { font-size: 13px; }

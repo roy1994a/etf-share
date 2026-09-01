@@ -515,11 +515,14 @@
     for (const k of ['d1', 'd3', 'w1', 'm1']) {
       const s = w[k];
       const upProb = toProb(s);
+      const expectedChg = +(s * range[k]).toFixed(2); // 预期涨跌幅 %
       out[k] = {
         dir: label(s),
         upProb,
         downProb: 100 - upProb,
         rangePct: +range[k].toFixed(1),
+        expectedChg,
+        expectedPrice: +(price * (1 + expectedChg / 100)).toFixed(3),
         score: Math.round(s * 100),
         priceLow: +(price * (1 - range[k] / 100)).toFixed(3),
         priceHigh: +(price * (1 + range[k] / 100)).toFixed(3),
@@ -538,10 +541,61 @@
         indexS > 0 ? '大盘多头' : '大盘熊市',
       ],
     };
+    // 预测路径：未来约22个交易日，锚定各周期预期变化后线性插值（走势可视化用）
+    const anchors = [
+      { d: 0, chg: 0 },
+      { d: 1, chg: (w.d1 * range.d1) },
+      { d: 3, chg: (w.d3 * range.d3) },
+      { d: 5, chg: (w.w1 * range.w1) },
+      { d: 22, chg: (w.m1 * range.m1) },
+    ];
+    const path = [];
+    for (let day = 1; day <= 22; day++) {
+      let lo = anchors[0], hi = anchors[anchors.length - 1];
+      for (let i = 0; i < anchors.length - 1; i++) {
+        if (day >= anchors[i].d && day <= anchors[i + 1].d) { lo = anchors[i]; hi = anchors[i + 1]; break; }
+      }
+      const t = (day - lo.d) / Math.max(1, hi.d - lo.d);
+      const chg = lo.chg + (hi.chg - lo.chg) * t;
+      path.push({ label: 'T+' + day, chg: +chg.toFixed(2), price: +(price * (1 + chg / 100)).toFixed(3) });
+    }
+    out.path = path;
+    out.price = price;
     return out;
   }
 
-  const api = { DEFAULT_SETTINGS, analyze, generateInstruction, generateReview, computeRotation, pickRotation, predict, clamp, last, lastVal, r2 };
+  // 策略与预测联动：用未来1周预测调整目标仓位与操作建议
+  function applyPrediction(instruction, prediction) {
+    if (!instruction || !prediction || !prediction.w1) return instruction;
+    const w1 = prediction.w1;
+    const out = Object.assign({}, instruction, { prediction: w1, predictionNote: '' });
+    const totalCapital = (instruction.lotValue || 50000) * (instruction.lots || 10);
+    const price = instruction.price;
+    let factor = 1;
+    if (w1.dir === '看跌') factor = 0.5;
+    else if (w1.dir === '看涨') factor = 1.0;
+    const newTarget = Math.max(0, Math.min(100, Math.round(instruction.targetPct * factor)));
+    if (newTarget !== instruction.targetPct) {
+      const currentValue = instruction.currentPct / 100 * totalCapital;
+      const targetValue = newTarget / 100 * totalCapital;
+      const newDelta = Math.floor((targetValue - currentValue) / price / 100) * 100;
+      out.targetPct = newTarget;
+      out.deltaShares = newDelta;
+      out.deltaValue = +(newDelta * price).toFixed(0);
+      out.deltaLots = +(newDelta * price / instruction.lotValue).toFixed(1);
+      if (newDelta >= 100) { out.action = '买入'; out.side = 'buy'; }
+      else if (newDelta <= -100) { out.action = '卖出'; out.side = 'sell'; }
+      else { out.action = '持有'; out.side = 'hold'; }
+    }
+    out.predictionNote = w1.dir === '看跌'
+      ? `预测未来1周看跌（下跌概率 ${100 - w1.upProb}%），目标仓位由 ${instruction.targetPct}% 下调至 ${out.targetPct}%，建议减仓/观望`
+      : w1.dir === '看涨'
+        ? `预测未来1周看涨（上涨概率 ${w1.upProb}%），按目标仓位执行，可逢低布局`
+        : '预测未来1周震荡，按技术面信号执行';
+    return out;
+  }
+
+  const api = { DEFAULT_SETTINGS, analyze, generateInstruction, generateReview, computeRotation, pickRotation, predict, applyPrediction, clamp, last, lastVal, r2 };
   global.Engine = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
 })(typeof window !== 'undefined' ? window : globalThis);

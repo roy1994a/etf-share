@@ -26,6 +26,7 @@
   <nav class="tabs">
     <button class="tab active" data-tab="dashboard">总览</button>
     <button class="tab" data-tab="analysis">行情与指标</button>
+    <button class="tab" data-tab="predict">预测</button>
     <button class="tab" data-tab="strategy">今日策略</button>
     <button class="tab" data-tab="trade">交易台</button>
     <button class="tab" data-tab="review">盘尾复盘</button>
@@ -123,8 +124,28 @@
       </div>
     </section>
 
+    <!-- ============ 预测 ============ -->
+    <section id="tab-predict" class="tab-panel">
+      <div class="card">
+        <h3>前瞻预测 <span style="font-weight:400;color:#8b98a9;font-size:12px">当前标的：<span id="predictName">--</span> · 基于技术+资金+情绪+消息+宏观+科技板块</span></h3>
+        <div id="predictCards" class="predict-panel">加载中…</div>
+      </div>
+      <div class="card">
+        <h3>预测走势图 <span style="font-weight:400;color:#8b98a9;font-size:12px">未来约 22 个交易日的预期路径（含区间）</span></h3>
+        <div id="predictChart" class="main-chart" style="height:340px">加载中…</div>
+      </div>
+      <div class="card">
+        <h3>预测与今日策略联动</h3>
+        <div id="predictStrategyLink" class="predict-strategy-link">加载中…</div>
+      </div>
+    </section>
+
     <!-- ============ 今日策略 ============ -->
     <section id="tab-strategy" class="tab-panel">
+      <div class="card">
+        <h3>预测联动</h3>
+        <div id="sPredictLink" class="predict-strategy-link">加载中…</div>
+      </div>
       <div class="grid-2">
         <div class="card">
           <h3>综合评分与状态</h3>
