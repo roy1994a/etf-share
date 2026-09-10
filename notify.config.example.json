@@ -14,6 +14,7 @@
     { "code": "159516", "name": "半导体设备", "type": "etf" },
     { "code": "512010", "name": "医药", "type": "etf" },
     { "code": "512400", "name": "有色", "type": "etf" },
+    { "code": "512660", "name": "军工", "type": "etf" },
     { "code": "688981", "name": "中芯国际", "type": "stock" },
     { "code": "688012", "name": "中微公司", "type": "stock" },
     { "code": "002371", "name": "北方华创", "type": "stock" },

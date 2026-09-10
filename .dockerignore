@@ -5,4 +5,4 @@ data/
 notify.config.json
 notify.config.example.json
 *.log
-data/reports/
+reports/

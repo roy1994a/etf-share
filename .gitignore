@@ -8,3 +8,6 @@ data/
 
 # 日志
 *.log
+
+# macOS
+.DS_Store

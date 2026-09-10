@@ -166,8 +166,12 @@ async function fetchMinute(code) {
     };
   });
   let prevClose = null;
-  if (node && node.qt && Array.isArray(node.qt[tc])) prevClose = node.qt[tc][4] ? parseFloat(node.qt[tc][4]) : null;
-  return { points, prevClose };
+  let name = null;
+  if (node && node.qt && Array.isArray(node.qt[tc])) {
+    prevClose = node.qt[tc][4] ? parseFloat(node.qt[tc][4]) : null;
+    name = node.qt[tc][1] || null;
+  }
+  return { points, prevClose, name };
 }
 
 // ---------- 行情：东方财富日K（备用，含涨跌幅/成交额/换手） ----------
@@ -349,6 +353,7 @@ function loadPool() {
     { code: '159516', name: '半导体设备', type: 'etf' },
     { code: '512010', name: '医药', type: 'etf' },
     { code: '512400', name: '有色', type: 'etf' },
+    { code: '512660', name: '军工', type: 'etf' },
     { code: '688981', name: '中芯国际', type: 'stock' },
     { code: '688012', name: '中微公司', type: 'stock' },
     { code: '002371', name: '北方华创', type: 'stock' },
@@ -400,7 +405,8 @@ const server = http.createServer(async (req, res) => {
       const limit = Math.min(parseInt(q.limit || '250', 10), 1000);
       try {
         const r = await cached('kline_' + code + '_' + period + '_' + limit, 60000, () => fetchTencentKline(period, limit, code));
-        return sendJSON(res, 200, { ok: true, code, name: NAME, period, klines: r.klines, quote: r.quote });
+        const kname = (r.quote && r.quote.name) || (code === CODE ? NAME : code);
+        return sendJSON(res, 200, { ok: true, code, name: kname, period, klines: r.klines, quote: r.quote });
       } catch (e) {
         if (period === 'day' && code === CODE) {
           const r = await cached('em_daily_' + limit, 60000, () => fetchEastmoneyDaily(limit));
@@ -413,7 +419,7 @@ const server = http.createServer(async (req, res) => {
     if (p === '/api/minute') {
       const code = q.code || CODE;
       const r = await cached('minute_' + code, 15000, () => fetchMinute(code));
-      return sendJSON(res, 200, { ok: true, code, name: NAME, ...r });
+      return sendJSON(res, 200, { ok: true, code, ...r, name: r.name || (code === CODE ? NAME : code) });
     }
 
     // 搜索接口（东财建议，过滤基金/ETF）
