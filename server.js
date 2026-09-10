@@ -357,11 +357,12 @@ function loadPool() {
     { code: '688981', name: '中芯国际', type: 'stock' },
     { code: '688012', name: '中微公司', type: 'stock' },
     { code: '002371', name: '北方华创', type: 'stock' },
-    { code: '603501', name: '韦尔股份', type: 'stock' },
     { code: '688256', name: '寒武纪', type: 'stock' },
     { code: '688041', name: '海光信息', type: 'stock' },
     { code: '603986', name: '兆易创新', type: 'stock' },
     { code: '688008', name: '澜起科技', type: 'stock' },
+    { code: '688783', name: '西安奕材-U', type: 'stock' },
+    { code: '300475', name: '香农芯创', type: 'stock' },
   ];
 }
 
