@@ -26,7 +26,7 @@ const path = require('path');
 
 const Indicators = require('./public/static/indicators.js');
 const Engine = require('./public/static/engine.js');
-const { fetchTencentKline, calibrateKlines, httpGet, httpPostJson, httpPostForm, fetchFundFlow, fetchMarketBreadth, fetchNewsSentiment, fetchIndexKline, fetchHhxgSnapshot, fetchUs10y, fetchCn10y, fetchSox, NAME, CODE } = require('./lib/market.js');
+const { fetchTencentKline, calibrateKlines, httpGet, httpPostJson, httpPostForm, fetchFundFlow, fetchMarketBreadth, fetchNewsSentiment, fetchIndexKline, fetchHhxgSnapshot, fetchUs10y, fetchCn10y, fetchSox, fetchFundNav, fetchChemFutures, estimatePremium, NAME, CODE } = require('./lib/market.js');
 const { loadAccount: loadRotationAccount, saveAccount: saveRotationAccount, syncRotation, totalValue } = require('./lib/rotation-account.js');
 
 // ---------- 常量 ----------
@@ -69,6 +69,13 @@ function defaultConfig() {
     thresholds: [36, 48, 60, 72],
     crossCooldownMin: 15,      // 评分异动提醒的最小间隔（分钟），防止在阈值附近反复触发
     holidays: [],              // 非交易日（YYYY-MM-DD），如 "2026-10-01"
+    // 建仓条件监控：价格与折溢价双条件同时满足才推送（每个交易日每条规则最多推一次）
+    // maxPrice：价格上限；maxPremiumPct：折溢价率上限（%），正数=溢价。折溢价为估算值（T-1净值 × 期货篮子）
+    // futuresBasket: 'chem' 表示用郑商所能源化工期货篮子估算净值（商品期货ETF专用）
+    entryWatch: [
+      // { code: '159981', name: '能源化工ETF', maxPrice: 1.790, maxPremiumPct: 0.3, futuresBasket: 'chem',
+      //   plan: '首仓2成（约10万）· 止损1.700 · 目标1.88' },
+    ],
     etfPool: [                 // 轮动池（ETF + 科技板块股票）
       { code: '159516', name: '半导体设备', type: 'etf' },
       { code: '512010', name: '医药', type: 'etf' },
@@ -597,6 +604,66 @@ function detectRotationEvents(rotation, ms, now, cfg) {
 }
 
 // ---------- 主流程 ----------
+// ---------- 建仓条件监控：价格 + 折溢价 双条件同时满足才推送 ----------
+async function checkEntryWatch(cfg, ms, now) {
+  const rules = cfg.entryWatch || [];
+  if (!rules.length) return [];
+  const st = (ms.entryWatch = ms.entryWatch || {});
+  const day = now.toISOString().slice(0, 10);
+  const alerts = [];
+  for (const r of rules) {
+    const key = r.code + '@' + day;
+    if (st[key]) continue;                     // 每个交易日每条规则只推一次
+    try {
+      const k = await fetchTencentKline('day', 5, r.code);
+      const q = k && k.quote;
+      if (!q || !q.price) continue;            // 非交易时段／无行情
+      const price = q.price;
+      const condPrice = r.maxPrice == null || price <= r.maxPrice;
+      let prem = null, estNav = null, navInfo = null, chem = null, condPrem = true;
+      if (r.maxPremiumPct != null) {
+        navInfo = await fetchFundNav(r.code);
+        chem = await fetchChemFutures();
+        const e = estimatePremium(price, navInfo.nav, chem.avgChgPct);
+        prem = e.premiumPct; estNav = e.estNav;
+        condPrem = prem <= r.maxPremiumPct;
+      }
+      if (!condPrice || !condPrem) continue;
+      st[key] = true;
+      alerts.push({ rule: r, quote: q, price, prem, estNav, navInfo, chem });
+    } catch (e) {
+      log('⚠ 建仓监控出错 ' + r.code + ': ' + e.message);
+    }
+  }
+  return alerts;
+}
+
+function buildEntryMessage(a) {
+  const { rule, quote, price, prem, estNav, navInfo, chem } = a;
+  const nm = rule.name || quote.name || rule.code;
+  const lines = [];
+  lines.push('🎯【建仓条件触发】' + nm + '(' + rule.code + ')');
+  lines.push('');
+  lines.push('现价 ' + price.toFixed(3) + '（' + signed(quote.pctChange, 2) + '%）');
+  if (prem != null) {
+    lines.push('折溢价 ' + signed(prem, 2) + '%（估算）');
+    lines.push('估算净值 ' + estNav.toFixed(4) + ' ＝ T-1净值 ' + navInfo.nav.toFixed(4) + '(' + navInfo.navDate + ') × 期货篮子 ' + signed(chem.avgChgPct, 2) + '%');
+  }
+  lines.push('');
+  lines.push('✅ 条件核对');
+  lines.push('   价格 ≤ ' + (rule.maxPrice != null ? rule.maxPrice : '—') + '：' + price.toFixed(3) + (rule.maxPrice == null ? ' (未设)' : ' ✅'));
+  if (rule.maxPremiumPct != null) lines.push('   折溢价 ≤ ' + rule.maxPremiumPct + '%：' + signed(prem, 2) + '% ✅');
+  if (chem) {
+    lines.push('');
+    lines.push('📊 化工品期货篮子');
+    for (const it of chem.items) lines.push('   ' + it.name + ' ' + signed(it.chgPct, 2) + '%');
+  }
+  if (rule.plan) { lines.push(''); lines.push('📌 计划：' + rule.plan); }
+  lines.push('');
+  lines.push('⚠️ 折溢价为估算值（T-1净值 × 期货篮子），下单前请以券商APP实时IOPV为准；溢价>2%一律不买。');
+  return { title: '🎯 建仓条件触发 ' + nm + ' ' + price.toFixed(3), text: lines.join('\n') };
+}
+
 async function main() {
   if (!ONCE) {
     writePidFile();
@@ -640,6 +707,19 @@ async function main() {
       const events = detectRotationEvents(r.rotation, ms, now, cfg);
       saveMonitorState(ms);
 
+      // 建仓条件监控（价格 ≤ 上限 且 折溢价 ≤ 上限，每交易日每规则推一次）
+      if (isInSession(now)) {
+        const entryAlerts = await checkEntryWatch(cfg, ms, now);
+        if (entryAlerts.length) {
+          saveMonitorState(ms);
+          for (const a of entryAlerts) {
+            const em = buildEntryMessage(a);
+            log('🎯 建仓条件触发: ' + a.rule.code + ' @ ' + a.price.toFixed(3));
+            try { await sendVia(cfg, em.title, em.text); } catch (err) { log('❌ 推送失败: ' + err.message); }
+          }
+        }
+      }
+
       // 自动交易：开盘/轮动切换/盘中快照时，把账户同步到轮动目标（卖旧买新）
       let tradeSummary = '';
       if (events.some((e) => e.kind === 'open' || e.kind === 'rotate' || e.kind === 'regular')) {
@@ -676,5 +756,5 @@ if (require.main === module) {
   main().catch((e) => { console.error('启动失败:', e.message); process.exit(1); });
 } else {
   // 供测试/复用
-  module.exports = { detectEvents, buildMessage, evaluateRotation, buildRotationMessage, detectRotationEvents, bandOf, isInSession, sessionPhase, isTradingDay, isWeekend, isHoliday, loadConfig, loadAccount, loadMonitorState, defaultMonitorState, engineSettings, fmt, fmtPrice, signed };
+  module.exports = { detectEvents, buildMessage, evaluateRotation, buildRotationMessage, detectRotationEvents, checkEntryWatch, buildEntryMessage, bandOf, isInSession, sessionPhase, isTradingDay, isWeekend, isHoliday, loadConfig, loadAccount, loadMonitorState, defaultMonitorState, engineSettings, fmt, fmtPrice, signed };
 }

@@ -24,6 +24,12 @@
     { "code": "603986", "name": "兆易创新", "type": "stock" },
     { "code": "688008", "name": "澜起科技", "type": "stock" }
   ],
+
+  "_entryWatch说明": "建仓条件监控：价格 ≤ maxPrice 且 折溢价 ≤ maxPremiumPct 时微信推送（每交易日每规则最多一次）。折溢价为估算值＝T-1净值×(1+期货篮子涨跌)，商品期货ETF无免费实时IOPV。maxPremiumPct 可省略表示只按价格触发。",
+  "entryWatch": [
+    { "code": "159981", "name": "能源化工ETF", "maxPrice": 1.79, "maxPremiumPct": 0.3, "futuresBasket": "chem", "plan": "首仓2成 · 止损1.700 · 目标1.88" }
+  ],
+
   "notify": {
     "serverchan": { "sendkey": "SCT 开头的 SendKey，在 https://sct.ftqq.com 获取" },
     "pushplus": { "token": "PushPlus token，在 https://www.pushplus.plus 获取" },
