@@ -25,9 +25,9 @@
     { "code": "688008", "name": "澜起科技", "type": "stock" }
   ],
 
-  "_entryWatch说明": "建仓条件监控：价格 ≤ maxPrice 且 折溢价 ≤ maxPremiumPct 时微信推送（每交易日每规则最多一次）。折溢价为估算值＝T-1净值×(1+期货篮子涨跌)，商品期货ETF无免费实时IOPV。maxPremiumPct 可省略表示只按价格触发。",
+  "_entryWatch说明": "建仓条件监控（双档）。A档建仓：价格 ≤ maxPrice 且 折溢价 ≤ maxPremiumPct；B档危险：折溢价 ≥ dangerPremiumPct（禁买/减仓警告）。maxAlertsPerDay 为每日每规则推送上限（A/B 各最多一次），默认 2。折溢价为估算值＝T-1净值×(1+期货篮子涨跌)，商品期货ETF无免费实时IOPV。",
   "entryWatch": [
-    { "code": "159981", "name": "能源化工ETF", "maxPrice": 1.79, "maxPremiumPct": 0.3, "futuresBasket": "chem", "plan": "首仓2成 · 止损1.700 · 目标1.88" }
+    { "code": "159981", "name": "能源化工ETF", "maxPrice": 1.797, "maxPremiumPct": 0.5, "dangerPremiumPct": 2.0, "maxAlertsPerDay": 2, "futuresBasket": "chem", "plan": "首仓2成 · 止损1.700 · 目标1.88" }
   ],
 
   "notify": {

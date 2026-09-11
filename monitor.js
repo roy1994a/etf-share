@@ -69,12 +69,14 @@ function defaultConfig() {
     thresholds: [36, 48, 60, 72],
     crossCooldownMin: 15,      // 评分异动提醒的最小间隔（分钟），防止在阈值附近反复触发
     holidays: [],              // 非交易日（YYYY-MM-DD），如 "2026-10-01"
-    // 建仓条件监控：价格与折溢价双条件同时满足才推送（每个交易日每条规则最多推一次）
-    // maxPrice：价格上限；maxPremiumPct：折溢价率上限（%），正数=溢价。折溢价为估算值（T-1净值 × 期货篮子）
-    // futuresBasket: 'chem' 表示用郑商所能源化工期货篮子估算净值（商品期货ETF专用）
+    // 建仓条件监控（双档，每日最多 maxAlertsPerDay 次，A/B 各最多一次）
+    //   A档 建仓：价格 ≤ maxPrice 且 折溢价 ≤ maxPremiumPct
+    //   B档 危险：折溢价 ≥ dangerPremiumPct（禁买／减仓警告）
+    // 折溢价为估算值（T-1净值 × 期货篮子，商品期货ETF无免费实时IOPV）；正数=溢价
     entryWatch: [
-      // { code: '159981', name: '能源化工ETF', maxPrice: 1.790, maxPremiumPct: 0.3, futuresBasket: 'chem',
-      //   plan: '首仓2成（约10万）· 止损1.700 · 目标1.88' },
+      // { code: '159981', name: '能源化工ETF', maxPrice: 1.797, maxPremiumPct: 0.5,
+      //   dangerPremiumPct: 2.0, maxAlertsPerDay: 2, futuresBasket: 'chem',
+      //   plan: '首仓2成（约10万）· 止损1.700 · 目标1.88/1.95' },
     ],
     etfPool: [                 // 轮动池（ETF + 科技板块股票）
       { code: '159516', name: '半导体设备', type: 'etf' },
@@ -613,7 +615,17 @@ function detectRotationEvents(rotation, ms, now, cfg) {
 }
 
 // ---------- 主流程 ----------
-// ---------- 建仓条件监控：价格 + 折溢价 双条件同时满足才推送 ----------
+// ---------- 建仓条件监控：A档（建仓）/ B档（危险）双档，每日可多次触发 ----------
+// A档：价格 ≤ maxPrice 且 折溢价 ≤ maxPremiumPct   → 建仓提示
+// B档：折溢价 ≥ dangerPremiumPct                   → 禁买／减仓警告
+// maxAlertsPerDay：每日每规则推送上限（A/B 合计），默认 2；每种档位每日最多出现一次
+function entryState(st, key) {
+  const v = st[key];
+  if (v === true) return { count: 1, kinds: ['legacy'], lastKind: null }; // 兼容旧格式：占一次额度，但不占用 A/B 名额
+  if (v && typeof v === 'object') return v;
+  return { count: 0, kinds: [] };
+}
+
 async function checkEntryWatch(cfg, ms, now) {
   const rules = cfg.entryWatch || [];
   if (!rules.length) return [];
@@ -622,24 +634,37 @@ async function checkEntryWatch(cfg, ms, now) {
   const alerts = [];
   for (const r of rules) {
     const key = r.code + '@' + day;
-    if (st[key]) continue;                     // 每个交易日每条规则只推一次
+    const rec = entryState(st, key);
+    const maxPerDay = r.maxAlertsPerDay == null ? 2 : r.maxAlertsPerDay;
+    if (rec.count >= maxPerDay) continue;
     try {
       const k = await fetchTencentKline('day', 5, r.code);
       const q = k && k.quote;
-      if (!q || !q.price) continue;            // 非交易时段／无行情
+      if (!q || !q.price) continue;             // 非交易时段／无行情
       const price = q.price;
-      const condPrice = r.maxPrice == null || price <= r.maxPrice;
-      let prem = null, estNav = null, navInfo = null, chem = null, condPrem = true;
-      if (r.maxPremiumPct != null) {
+
+      let prem = null, estNav = null, navInfo = null, chem = null;
+      if (r.maxPremiumPct != null || r.dangerPremiumPct != null) {
         navInfo = await fetchFundNav(r.code);
         chem = await fetchChemFutures();
         const e = estimatePremium(price, navInfo.nav, chem.avgChgPct);
         prem = e.premiumPct; estNav = e.estNav;
-        condPrem = prem <= r.maxPremiumPct;
       }
-      if (!condPrice || !condPrem) continue;
-      st[key] = true;
-      alerts.push({ rule: r, quote: q, price, prem, estNav, navInfo, chem });
+
+      let kind = null;
+      const aOk = (r.maxPrice == null || price <= r.maxPrice) &&
+                  (r.maxPremiumPct == null || (prem != null && prem <= r.maxPremiumPct));
+      if (aOk && !rec.kinds.includes('A')) kind = 'A';
+      else if (r.dangerPremiumPct != null && prem != null && prem >= r.dangerPremiumPct && !rec.kinds.includes('B')) kind = 'B';
+      if (!kind) continue;
+
+      rec.count += 1;
+      rec.kinds.push(kind);
+      rec.lastKind = kind;
+      rec.lastPrice = price;
+      rec.lastAt = now.toISOString();
+      st[key] = rec;
+      alerts.push({ rule: r, quote: q, price, prem, estNav, navInfo, chem, kind });
     } catch (e) {
       log('⚠ 建仓监控出错 ' + r.code + ': ' + e.message);
     }
@@ -648,29 +673,42 @@ async function checkEntryWatch(cfg, ms, now) {
 }
 
 function buildEntryMessage(a) {
-  const { rule, quote, price, prem, estNav, navInfo, chem } = a;
+  const { rule, quote, price, prem, estNav, navInfo, chem, kind } = a;
   const nm = rule.name || quote.name || rule.code;
-  const lines = [];
-  lines.push('🎯【建仓条件触发】' + nm + '(' + rule.code + ')');
-  lines.push('');
-  lines.push('现价 ' + price.toFixed(3) + '（' + signed(quote.pctChange, 2) + '%）');
-  if (prem != null) {
-    lines.push('折溢价 ' + signed(prem, 2) + '%（估算）');
-    lines.push('估算净值 ' + estNav.toFixed(4) + ' ＝ T-1净值 ' + navInfo.nav.toFixed(4) + '(' + navInfo.navDate + ') × 期货篮子 ' + signed(chem.avgChgPct, 2) + '%');
+  const L = [];
+  if (kind === 'B') {
+    L.push('🚨【溢价危险警告】' + nm + '(' + rule.code + ')');
+    L.push('');
+    L.push('现价 ' + price.toFixed(3) + '（' + signed(quote.pctChange, 2) + '%）');
+    L.push('折溢价 ' + signed(prem, 2) + '%（估算）≥ 警戒线 ' + rule.dangerPremiumPct + '%');
+    if (estNav != null) L.push('估算净值 ' + estNav.toFixed(4) + ' ＝ T-1净值 ' + navInfo.nav.toFixed(4) + '(' + navInfo.navDate + ') × 期货篮子 ' + signed(chem.avgChgPct, 2) + '%');
+    L.push('');
+    L.push('⛔ 高溢价买入＝为情绪额外付费。溢价一旦回归，指数不跌你也会亏。');
+    L.push('   · 未持仓：禁止买入（该价格已不是有效买点）');
+    L.push('   · 已持仓：考虑减仓，或至少不再加仓');
+  } else {
+    L.push('🎯【建仓条件触发】' + nm + '(' + rule.code + ')');
+    L.push('');
+    L.push('现价 ' + price.toFixed(3) + '（' + signed(quote.pctChange, 2) + '%）');
+    if (prem != null) {
+      L.push('折溢价 ' + signed(prem, 2) + '%（估算）');
+      L.push('估算净值 ' + estNav.toFixed(4) + ' ＝ T-1净值 ' + navInfo.nav.toFixed(4) + '(' + navInfo.navDate + ') × 期货篮子 ' + signed(chem.avgChgPct, 2) + '%');
+    }
+    L.push('');
+    L.push('✅ 条件核对');
+    L.push('   价格 ≤ ' + (rule.maxPrice != null ? rule.maxPrice : '—') + '：' + price.toFixed(3) + (rule.maxPrice == null ? ' (未设)' : ' ✅'));
+    if (rule.maxPremiumPct != null) L.push('   折溢价 ≤ ' + rule.maxPremiumPct + '%：' + signed(prem, 2) + '% ✅');
   }
-  lines.push('');
-  lines.push('✅ 条件核对');
-  lines.push('   价格 ≤ ' + (rule.maxPrice != null ? rule.maxPrice : '—') + '：' + price.toFixed(3) + (rule.maxPrice == null ? ' (未设)' : ' ✅'));
-  if (rule.maxPremiumPct != null) lines.push('   折溢价 ≤ ' + rule.maxPremiumPct + '%：' + signed(prem, 2) + '% ✅');
   if (chem) {
-    lines.push('');
-    lines.push('📊 化工品期货篮子');
-    for (const it of chem.items) lines.push('   ' + it.name + ' ' + signed(it.chgPct, 2) + '%');
+    L.push('');
+    L.push('📊 化工品期货篮子（均值 ' + signed(chem.avgChgPct, 2) + '%）');
+    for (const it of chem.items) L.push('   ' + it.name + ' ' + signed(it.chgPct, 2) + '%');
   }
-  if (rule.plan) { lines.push(''); lines.push('📌 计划：' + rule.plan); }
-  lines.push('');
-  lines.push('⚠️ 折溢价为估算值（T-1净值 × 期货篮子），下单前请以券商APP实时IOPV为准；溢价>2%一律不买。');
-  return { title: '🎯 建仓条件触发 ' + nm + ' ' + price.toFixed(3), text: lines.join('\n') };
+  if (kind !== 'B' && rule.plan) { L.push(''); L.push('📌 计划：' + rule.plan); }
+  L.push('');
+  L.push('⚠️ 折溢价为估算值（T-1净值 × 期货篮子），下单前请以券商APP实时IOPV为准。');
+  const title = (kind === 'B' ? '🚨 溢价危险 ' : '🎯 建仓条件触发 ') + nm + ' ' + price.toFixed(3) + (prem != null ? ' 溢价' + signed(prem, 2) + '%' : '');
+  return { title, text: L.join('\n') };
 }
 
 async function main() {
