@@ -147,6 +147,15 @@ function isTradingDay(d, holidays) { return !isWeekend(d) && !isHoliday(d.toISOS
 function minuteOf(d) { return d.getHours() * 60 + d.getMinutes(); }
 // 9:30-11:30, 13:00-15:00（含收盘竞价）
 function isInSession(d) { const m = minuteOf(d); return (m >= 570 && m <= 690) || (m >= 780 && m <= 900); }
+// 轮询间隔：交易时段内用 pollIntervalSec；开盘前 15 分钟（9:15-9:30 / 12:45-13:00）
+// 也切到高频，确保「开盘」事件与建仓条件监控能在 9:30 准点触发，而不是延后 5 分钟
+function nextDelayMs(d, cfg) {
+  const poll = (cfg.pollIntervalSec || 60) * 1000;
+  if (isInSession(d)) return poll;
+  const m = minuteOf(d);
+  if ((m >= 555 && m < 570) || (m >= 765 && m < 780)) return poll;
+  return 300000;
+}
 function sessionPhase(d) {
   const m = minuteOf(d);
   if (m < 570) return 'pre';
@@ -745,7 +754,7 @@ async function main() {
       log('⚠ 轮询出错: ' + e.message);
     }
     // 交易时段内高频轮询；时段外低频（5 分钟），以便在 9:30 / 15:00 附近及时触发
-    scheduleNext(isInSession(now) ? cfg.pollIntervalSec * 1000 : 300000);
+    scheduleNext(nextDelayMs(now, cfg));
   };
   const scheduleNext = (delay) => setTimeout(run, delay);
 
