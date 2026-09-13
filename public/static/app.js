@@ -828,6 +828,119 @@
     }, true);
   }
 
+  // ---------- 研究台账 ----------
+  var ledgerData = null, rlData = null;
+
+  function pct(v, d) { return v == null ? '--' : (v * 100).toFixed(d === undefined ? 1 : d) + '%'; }
+
+  async function loadLedger() {
+    $('#ledgerSummary').innerHTML = '加载中…';
+    try {
+      const [lg, rl] = await Promise.all([api('/api/ledger'), api('/api/rl')]);
+      ledgerData = lg; rlData = rl;
+      renderLedger();
+    } catch (e) {
+      $('#ledgerSummary').innerHTML = '<span style="color:#c0392b">台账加载失败：' + e.message + '</span>';
+    }
+  }
+
+  function renderLedger() {
+    if (!ledgerData) return;
+    const st = ledgerData.stats || {};
+    const gradeName = { A: 'A级·硬数据', B: 'B级·量化衍生', C: 'C级·二手转述', D: 'D级·模型推断', E: 'E级·主观叙事' };
+    const gradeColor = { A: '#1a7f37', B: '#2f81f7', C: '#bf8700', D: '#c2410c', E: '#b91c1c' };
+
+    // 总览
+    const rows = [
+      ['条目总数', st.totalEntries + ' 条'],
+      ['已结算 / 部分 / 待结算', st.resolvedEntries + ' / ' + st.partialEntries + ' / ' + st.openEntries],
+      ['可判定预测', st.scoredOutcomes + ' 个'],
+      ['方向命中率', st.scoredOutcomes ? pct(st.hitRate) : '尚无到期样本'],
+      ['Brier 分数', st.scoredOutcomes ? String(st.brier) + '（0.25 = 与"永远猜50%"持平）' : '--'],
+      ['平均奖励', st.scoredOutcomes ? String(st.reward) : '--'],
+      ['区间命中率', st.scoredOutcomes ? pct(st.rangeHitRate) : '--'],
+    ];
+    let html = '<table class="kv-table">' + rows.map((r) =>
+      '<tr><th>' + r[0] + '</th><td>' + r[1] + '</td></tr>').join('') + '</table>';
+    if (st.overconfidenceCount) {
+      html += '<div class="warn-box">⚠️ 有 ' + st.overconfidenceCount + ' 条结论的<b>置信度超过了证据能支撑的上限</b>（台账中已自动标注），这是"防止言之凿凿却不靠谱"的机制。</div>';
+    }
+    if (!st.scoredOutcomes) {
+      html += '<div class="warn-box">⚠️ 目前<b>还没有到期可判定的预测</b>。这正是台账存在的意义：在真实结果出来之前，任何"准确率"说法都是空话。周/月周期的预测需要时间兑现。</div>';
+    }
+    html += '<div class="muted">' + (st.baselineNote || '') + '</div>';
+    $('#ledgerSummary').innerHTML = html;
+
+    // 证据分层
+    const bg = st.byGrade || {};
+    const keys = ['A', 'B', 'C', 'D', 'E'].filter((g) => bg[g]);
+    $('#ledgerGrades').innerHTML = keys.length ? '<table class="data-table"><thead><tr><th>主要依据等级</th><th>条目</th><th>样本</th><th>方向命中率</th><th>Brier</th></tr></thead><tbody>' +
+      keys.map((g) => '<tr><td><span class="grade-badge" style="background:' + gradeColor[g] + '">' + gradeName[g] + '</span></td><td>' + bg[g].entries + '</td><td>' + bg[g].n + '</td><td>' + pct(bg[g].hitRate) + '</td><td>' + (bg[g].brier == null ? '--' : bg[g].brier) + '</td></tr>').join('') +
+      '</tbody></table><div class="muted">这张表回答：<b>靠新闻(C级)得出的结论，是不是比靠数据(A/B级)得出的结论更不准？</b>样本积累后会用真实结果说话。</div>'
+      : '<div class="muted">样本不足</div>';
+
+    // RL 权重
+    if (rlData && rlData.horizons) {
+      const meta = rlData.meta || {};
+      const rep = rlData.report || {};
+      let h = '<div class="muted">Hedge 在线学习 · 学习率 η=' + meta.eta + ' · 遗忘因子 γ=' + meta.discount + ' · 权重下限=' + meta.floor + ' · 已学习 ' + (meta.rounds || 0) + ' 轮</div>';
+      if (rep.learnedTest) {
+        h += '<table class="data-table"><thead><tr><th>周期</th><th>朴素基准</th><th>手工权重</th><th>学习后(样本外)</th><th>学习后 Brier</th><th>技巧分</th></tr></thead><tbody>';
+        ['d1', 'd3', 'w1', 'm1'].forEach((k) => {
+          const lab = (rlData.horizons[k] || {}).label || k;
+          const nv = (rep.naiveTest || {})[k] || {}, pr = (rep.priorTest || {})[k] || {}, le = rep.learnedTest[k] || {};
+          h += '<tr><td>' + lab + '</td><td>' + pct(nv.hitRate) + '</td><td>' + pct(pr.hitRate) + '</td><td><b>' + pct(le.hitRate) + '</b></td><td>' + le.brier + '</td><td>' + (rep.summary && rep.summary.horizons && rep.summary.horizons[k] ? rep.summary.horizons[k].skillScore : '--') + '</td></tr>';
+        });
+        h += '</tbody></table>';
+        h += '<div class="warn-box">⚠️ 上表 Brier 约 0.25、技巧分≤0，意味着<b>模型的概率输出目前没有超过"直接猜基础上涨率"</b>。方向上有约 52~53% 的微弱优势，但<b>概率幅度是过度自信的</b>——所以系统会按标定把"70%"压回约 55~58%。这是如实报告的能力边界，不是失败。</div>';
+      }
+      ['d1', 'd3', 'w1', 'm1'].forEach((k) => {
+        const hz = rlData.horizons[k]; if (!hz) return;
+        const cal = hz.calibration || {};
+        h += '<div class="rl-block"><div class="rl-title">' + hz.label + '<span class="muted">　概率标定 a=' + cal.a + '（b 锁 0）' + (cal.a < 0.85 ? ' → 原始概率过度自信，需向 50% 收缩' : cal.a > 1.15 ? ' → 原始概率偏保守' : ' → 已基本标定') + '</span></div>';
+        h += '<table class="data-table compact"><thead><tr><th>专家</th><th>手工先验</th><th>学到的权重</th><th>命中率</th><th>弃权率</th><th>Brier</th></tr></thead><tbody>';
+        (hz.leaderboard || []).forEach((r) => {
+          if (!r.trained && r.priorWeight < 0.02) return;
+          const d = r.weight - r.priorWeight;
+          const arrow = d > 0.02 ? '⬆️' : d < -0.02 ? '⬇️' : '';
+          h += '<tr><td>' + r.label + (r.trained ? '' : ' <span class="muted">(保留先验)</span>') + '</td><td>' + pct(r.priorWeight) + '</td><td><b>' + pct(r.weight) + '</b> ' + arrow + '</td><td>' + pct(r.hitRate) + '</td><td>' + pct(r.abstainRate, 0) + '</td><td>' + (r.brier == null ? '--' : r.brier) + '</td></tr>';
+        });
+        h += '</tbody></table></div>';
+      });
+      $('#rlPanel').innerHTML = h;
+    } else {
+      $('#rlPanel').innerHTML = '<div class="muted">学习器尚未训练。请执行 <code>node train-rl.js</code></div>';
+    }
+
+    // 明细
+    const list = (ledgerData.entries || []).slice().reverse();
+    $('#ledgerList').innerHTML = list.map((e) => {
+      const mix = e.evidenceMix || { counts: {} };
+      const badges = ['A', 'B', 'C', 'D', 'E'].filter((g) => (mix.counts || {})[g]).map((g) =>
+        '<span class="grade-badge" style="background:' + gradeColor[g] + '">' + g + '×' + mix.counts[g] + '</span>').join(' ');
+      const sc = e.scores && e.scores.n ? '<b>' + e.scores.hits + '/' + e.scores.n + '</b>（' + pct(e.scores.hitRate, 0) + '）· Brier ' + e.scores.brier : '<span class="muted">待到期</span>';
+      let out = '<div class="ledger-item">';
+      out += '<div class="ledger-head"><span class="ledger-name">' + e.name + (e.code ? ' <span class="muted">' + e.code + '</span>' : '') + '</span>';
+      out += '<span class="ledger-meta">' + e.anchorDate + ' @ ' + (e.anchorPrice == null ? '--' : e.anchorPrice) + '　' + badges + '</span></div>';
+      out += '<div class="ledger-q">' + (e.question || '') + '</div>';
+      out += '<div class="ledger-v">' + (e.verdict || '').replace(/\n/g, '<br>') + '</div>';
+      out += '<div class="ledger-meta">立场 ' + e.stance + '　置信度 ' + pct(e.confidence, 0);
+      if (e.overconfidence) out += ' <span style="color:#b91c1c">⚠️ 超出证据上限 ' + pct(e.confidenceCeiling, 0) + '（' + e.ceilingReason + '）</span>';
+      out += '　结算 ' + sc + '</div>';
+      if (e.outcomes && e.outcomes.length) {
+        out += '<table class="data-table compact"><thead><tr><th>周期</th><th>预测</th><th>实际</th><th>涨跌</th><th>方向</th><th>来源</th></tr></thead><tbody>';
+        e.outcomes.forEach((o) => {
+          if (o.pending) { out += '<tr><td>' + o.horizonLabel + '</td><td colspan="4" class="muted">待兑现</td><td>' + (o.source || '') + '</td></tr>'; return; }
+          out += '<tr><td>' + o.horizonLabel + '</td><td>' + o.predictedDir + '（' + o.upProb + '%）</td><td>' + o.actualDir + '</td><td>' + (o.actualPct > 0 ? '+' : '') + o.actualPct + '%</td><td>' + (o.dirHit ? '✅' : '❌') + '</td><td>' + (o.source === 'human-override' ? '<b>人工覆写</b>' : o.source) + '</td></tr>';
+        });
+        out += '</tbody></table>';
+      }
+      if (e.lessons) out += '<div class="ledger-lesson">💡 ' + e.lessons + '</div>';
+      out += '</div>';
+      return out;
+    }).join('') || '<div class="muted">台账为空，请执行 node seed-ledger.js</div>';
+  }
+
   // ---------- 复盘 ----------
   async function loadReviews() {
     try {
@@ -892,6 +1005,7 @@
       b.classList.add('active');
       $('#tab-' + b.dataset.tab).classList.add('active');
       if (b.dataset.tab === 'review') loadReviews();
+      if (b.dataset.tab === 'ledger') loadLedger();
       if (b.dataset.tab === 'predict') { if (predictData) renderPredictChart(); }
       if (b.dataset.tab === 'analysis') {
         // 重新渲染图表：修复标签页隐藏时初始化为 0 尺寸导致分时/K线不显示

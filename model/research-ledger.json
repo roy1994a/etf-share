@@ -1,0 +1,1900 @@
+{
+  "version": 1,
+  "createdAt": "2026-09-13T03:41:20.891Z",
+  "note": "研究台账：每次咨询的结论留痕 + 到期自动结算 + 反馈给 RL 学习器（公开发布版：个人资金信息已脱敏；方向、概率、依据、结算结果完整保留）",
+  "entries": [
+    {
+      "id": "20260910-159516-01",
+      "askedAt": "2026-09-10T15:30:00+08:00",
+      "code": "159516",
+      "name": "半导体设备ETF国泰",
+      "kind": "etf",
+      "question": "半导体设备ETF(159516) 与 能源化工ETF 走势与拐点判断",
+      "stance": "bearish",
+      "confidence": 0.62,
+      "verdict": "偏空（两个月概率加权目标 0.63，约 -5.4%）。空头排列 + 负动量 + 缩量，评分 9/100（轮动池最低档），拐点未到。",
+      "horizon": "m1",
+      "anchorDate": "2026-09-10",
+      "anchorPrice": 0.666,
+      "predictions": [
+        {
+          "horizon": "d1",
+          "dir": "震荡",
+          "source": "model",
+          "upProb": 41,
+          "rangePct": 5,
+          "expectedChg": 0,
+          "priceLow": 0.633,
+          "priceHigh": 0.699
+        },
+        {
+          "horizon": "d3",
+          "dir": "看跌",
+          "source": "model",
+          "upProb": 22,
+          "rangePct": 8.5,
+          "expectedChg": -3.4,
+          "priceLow": 0.609,
+          "priceHigh": 0.723
+        },
+        {
+          "horizon": "w1",
+          "dir": "看跌",
+          "source": "model",
+          "upProb": 27,
+          "rangePct": 13.1,
+          "expectedChg": -5.24,
+          "priceLow": 0.579,
+          "priceHigh": 0.753
+        },
+        {
+          "horizon": "m1",
+          "dir": "看跌",
+          "source": "model",
+          "upProb": 29,
+          "rangePct": 23.1,
+          "expectedChg": -9.24,
+          "priceLow": 0.512,
+          "priceHigh": 0.82
+        }
+      ],
+      "keyLevels": {
+        "support": [
+          0.605,
+          0.58
+        ],
+        "resistance": [
+          0.667,
+          0.677,
+          0.7078
+        ],
+        "stopLoss": 0.598,
+        "note": "MA5 0.6668 / MA10 0.6772 / MA20 0.7078 / MA60 0.7618"
+      },
+      "plan": "不建仓。拐点候选窗口 11月下旬~12月中旬；观察是否能重新站上 MA20。",
+      "evidence": [
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "腾讯财经日K（前复权）",
+          "claim": "2026-09-10 收盘 0.666，近60日 -14.6%"
+        },
+        {
+          "grade": "B",
+          "type": "derived",
+          "source": "自算指标",
+          "claim": "空头排列（MA5<MA10<MA20<MA60），RSI6 约 32，ATR 0.0278"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "东方财富主力资金流",
+          "claim": "主力资金中性，无连续净流入"
+        },
+        {
+          "grade": "C",
+          "type": "news",
+          "source": "web_search 行业新闻",
+          "claim": "半导体设备国产化推进、存储涨价周期"
+        },
+        {
+          "grade": "D",
+          "type": "model",
+          "source": "本系统 predict()",
+          "claim": "综合评分 9/100，1月上涨概率 29%"
+        },
+        {
+          "grade": "E",
+          "type": "narrative",
+          "source": "本人判断",
+          "claim": "6月暴涨168%后的估值与筹码消化尚未结束"
+        }
+      ],
+      "claims": [],
+      "tags": [
+        "报告",
+        "轮动池"
+      ],
+      "outcomes": [
+        {
+          "horizon": "d1",
+          "horizonLabel": "未来1天",
+          "source": "model",
+          "fromDate": "2026-09-10",
+          "toDate": "2026-09-11",
+          "anchorPrice": 0.666,
+          "endClose": 0.653,
+          "actualPct": -1.95,
+          "actualDir": "看跌",
+          "predictedDir": "震荡",
+          "predictedRange": [
+            0.633,
+            0.699
+          ],
+          "rangeWidthPct": 9.91,
+          "moveAbsPct": 3.75,
+          "dirHit": false,
+          "brier": 0.1681,
+          "reward": 0.6638,
+          "upProb": 41,
+          "rangeHitClose": true,
+          "rangeHitPath": false,
+          "pathHigh": 0.657,
+          "pathLow": 0.632
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 2
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 4
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 21
+        }
+      ],
+      "scores": {
+        "n": 1,
+        "hits": 0,
+        "hitRate": 0,
+        "brier": 0.1681,
+        "reward": 0.6638,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 0,
+            "hitRate": 0,
+            "brier": 0.1681
+          }
+        }
+      },
+      "status": "partial",
+      "resolvedAt": null,
+      "lessons": "",
+      "confidenceCeiling": 0.64,
+      "ceilingReason": "平均依据可信度 60%（A2 B1 C1 D1 E1）",
+      "evidenceMix": {
+        "counts": {
+          "A": 2,
+          "B": 1,
+          "C": 1,
+          "D": 1,
+          "E": 1
+        },
+        "pct": {
+          "A": 33,
+          "B": 17,
+          "C": 17,
+          "D": 17,
+          "E": 17
+        },
+        "total": 6
+      },
+      "overconfidence": false
+    },
+    {
+      "id": "20260910-159981-01",
+      "askedAt": "2026-09-10T15:30:00+08:00",
+      "code": "159981",
+      "name": "能源化工ETF建信",
+      "kind": "etf",
+      "question": "半导体设备ETF(159516) 与 能源化工ETF 走势与拐点判断",
+      "stance": "bullish",
+      "confidence": 0.6,
+      "verdict": "偏多（两个月概率加权目标 1.83，约 +3.5%）。全池最强，但短期已过热，等回踩 + 折价确认再介入。",
+      "horizon": "m1",
+      "anchorDate": "2026-09-10",
+      "anchorPrice": 1.769,
+      "predictions": [
+        {
+          "horizon": "d1",
+          "dir": "震荡",
+          "source": "model",
+          "upProb": 51,
+          "rangePct": 2.3,
+          "expectedChg": 0,
+          "priceLow": 1.728,
+          "priceHigh": 1.81
+        },
+        {
+          "horizon": "d3",
+          "dir": "看涨",
+          "source": "model",
+          "upProb": 80,
+          "rangePct": 4,
+          "expectedChg": 1.6,
+          "priceLow": 1.698,
+          "priceHigh": 1.84
+        },
+        {
+          "horizon": "w1",
+          "dir": "看涨",
+          "source": "model",
+          "upProb": 68,
+          "rangePct": 6.1,
+          "expectedChg": 2.44,
+          "priceLow": 1.661,
+          "priceHigh": 1.877
+        },
+        {
+          "horizon": "m1",
+          "dir": "看涨",
+          "source": "model",
+          "upProb": 63,
+          "rangePct": 10.8,
+          "expectedChg": 4.32,
+          "priceLow": 1.578,
+          "priceHigh": 1.96
+        }
+      ],
+      "keyLevels": {
+        "support": [
+          1.7016,
+          1.6291
+        ],
+        "resistance": [
+          1.813,
+          1.879
+        ],
+        "note": "MA5 1.7422 / MA10 1.7016 / MA20 1.6291"
+      },
+      "plan": "等回踩 MA10 附近、且折价/平价为负时建仓；短期不追高。",
+      "evidence": [
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "腾讯财经日K",
+          "claim": "2026-09-10 收盘 1.769，多头排列"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "天天基金 FundMNFInfo",
+          "claim": "净值连涨（真实收益，非情绪炒作）"
+        },
+        {
+          "grade": "B",
+          "type": "derived",
+          "source": "自算指标",
+          "claim": "MA5>MA10>MA20 完美多头排列，量比显著放大"
+        },
+        {
+          "grade": "C",
+          "type": "news",
+          "source": "web_search 化工新闻",
+          "claim": "化工品全面涨价（供给收缩 + 成本推动）"
+        },
+        {
+          "grade": "D",
+          "type": "model",
+          "source": "本系统 predict()",
+          "claim": "综合评分 60/100，1月上涨概率 63%"
+        },
+        {
+          "grade": "E",
+          "type": "narrative",
+          "source": "本人判断",
+          "claim": "反内卷 + 韩国乙烯退出是中期主线"
+        }
+      ],
+      "claims": [],
+      "tags": [
+        "报告"
+      ],
+      "outcomes": [
+        {
+          "horizon": "d1",
+          "horizonLabel": "未来1天",
+          "source": "model",
+          "fromDate": "2026-09-10",
+          "toDate": "2026-09-11",
+          "anchorPrice": 1.769,
+          "endClose": 1.759,
+          "actualPct": -0.57,
+          "actualDir": "看跌",
+          "predictedDir": "震荡",
+          "predictedRange": [
+            1.728,
+            1.81
+          ],
+          "rangeWidthPct": 4.64,
+          "moveAbsPct": 4.35,
+          "dirHit": false,
+          "brier": 0.2601,
+          "reward": 0.4798,
+          "upProb": 51,
+          "rangeHitClose": true,
+          "rangeHitPath": false,
+          "pathHigh": 1.813,
+          "pathLow": 1.736
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 2
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 4
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 21
+        }
+      ],
+      "scores": {
+        "n": 1,
+        "hits": 0,
+        "hitRate": 0,
+        "brier": 0.2601,
+        "reward": 0.4798,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 0,
+            "hitRate": 0,
+            "brier": 0.2601
+          }
+        }
+      },
+      "status": "partial",
+      "resolvedAt": null,
+      "lessons": "",
+      "confidenceCeiling": 0.64,
+      "ceilingReason": "平均依据可信度 60%（A2 B1 C1 D1 E1）",
+      "evidenceMix": {
+        "counts": {
+          "A": 2,
+          "B": 1,
+          "C": 1,
+          "D": 1,
+          "E": 1
+        },
+        "pct": {
+          "A": 33,
+          "B": 17,
+          "C": 17,
+          "D": 17,
+          "E": 17
+        },
+        "total": 6
+      },
+      "overconfidence": false
+    },
+    {
+      "id": "20260910-512660-01",
+      "askedAt": "2026-09-10T15:30:00+08:00",
+      "code": "512660",
+      "name": "军工ETF国泰",
+      "kind": "etf",
+      "question": "军工ETF(512660) 与 有色ETF(512400) 未来两个月走势与拐点",
+      "stance": "bullish",
+      "confidence": 0.58,
+      "verdict": "偏多（两个月概率加权目标 1.26，约 +6.5%）。拐点已过，但 RSI 82.3 极端超买，等回调买点而非追高。",
+      "horizon": "m1",
+      "anchorDate": "2026-09-10",
+      "anchorPrice": 1.18,
+      "predictions": [
+        {
+          "horizon": "d1",
+          "dir": "看跌",
+          "source": "model",
+          "upProb": 39,
+          "rangePct": 2.2,
+          "expectedChg": -0.88,
+          "priceLow": 1.154,
+          "priceHigh": 1.206
+        },
+        {
+          "horizon": "d3",
+          "dir": "看涨",
+          "source": "model",
+          "upProb": 70,
+          "rangePct": 3.7,
+          "expectedChg": 1.48,
+          "priceLow": 1.136,
+          "priceHigh": 1.224
+        },
+        {
+          "horizon": "w1",
+          "dir": "震荡",
+          "source": "model",
+          "upProb": 60,
+          "rangePct": 5.7,
+          "expectedChg": 0,
+          "priceLow": 1.113,
+          "priceHigh": 1.247
+        },
+        {
+          "horizon": "m1",
+          "dir": "震荡",
+          "source": "model",
+          "upProb": 58,
+          "rangePct": 10,
+          "expectedChg": 0,
+          "priceLow": 1.062,
+          "priceHigh": 1.298
+        }
+      ],
+      "keyLevels": {
+        "support": [
+          1.1368,
+          1.1604
+        ],
+        "resistance": [
+          1.495
+        ],
+        "note": "MA5 1.168 / MA10 1.155 / MA20 1.137 / MA60 1.160"
+      },
+      "plan": "不追高。回调至 MA20（约 1.137）附近分批建仓；本轮作为科技主线之外的第二配置。",
+      "evidence": [
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "腾讯财经日K",
+          "claim": "2026-09-10 收盘 1.18"
+        },
+        {
+          "grade": "B",
+          "type": "derived",
+          "source": "自算指标",
+          "claim": "RSI 82.3 极端超买；短均线多头、站上 MA60、放量"
+        },
+        {
+          "grade": "C",
+          "type": "news",
+          "source": "web_search 军工新闻",
+          "claim": "十五五规划、地缘冲突催化，主题催化最明确"
+        },
+        {
+          "grade": "D",
+          "type": "model",
+          "source": "本系统 predict()",
+          "claim": "综合评分 58/100（中性震荡）"
+        },
+        {
+          "grade": "E",
+          "type": "narrative",
+          "source": "本人判断",
+          "claim": "阅兵后订单落地预期"
+        }
+      ],
+      "claims": [],
+      "tags": [
+        "报告",
+        "轮动池"
+      ],
+      "outcomes": [
+        {
+          "horizon": "d1",
+          "horizonLabel": "未来1天",
+          "source": "model",
+          "fromDate": "2026-09-10",
+          "toDate": "2026-09-11",
+          "anchorPrice": 1.18,
+          "endClose": 1.167,
+          "actualPct": -1.1,
+          "actualDir": "看跌",
+          "predictedDir": "看跌",
+          "predictedRange": [
+            1.154,
+            1.206
+          ],
+          "rangeWidthPct": 4.41,
+          "moveAbsPct": 2.54,
+          "dirHit": true,
+          "brier": 0.1521,
+          "reward": 0.6958,
+          "upProb": 39,
+          "rangeHitClose": true,
+          "rangeHitPath": false,
+          "pathHigh": 1.174,
+          "pathLow": 1.144
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 2
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 4
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 21
+        }
+      ],
+      "scores": {
+        "n": 1,
+        "hits": 1,
+        "hitRate": 1,
+        "brier": 0.1521,
+        "reward": 0.6958,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 1,
+            "hitRate": 1,
+            "brier": 0.1521
+          }
+        }
+      },
+      "status": "partial",
+      "resolvedAt": null,
+      "lessons": "",
+      "confidenceCeiling": 0.601,
+      "ceilingReason": "平均依据可信度 54%（A1 B1 C1 D1 E1）；其中 C/D/E 类占 60%，属\"二手信息 + 未验证推断\"为主",
+      "evidenceMix": {
+        "counts": {
+          "A": 1,
+          "B": 1,
+          "C": 1,
+          "D": 1,
+          "E": 1
+        },
+        "pct": {
+          "A": 20,
+          "B": 20,
+          "C": 20,
+          "D": 20,
+          "E": 20
+        },
+        "total": 5
+      },
+      "overconfidence": false
+    },
+    {
+      "id": "20260910-512400-01",
+      "askedAt": "2026-09-10T15:30:00+08:00",
+      "code": "512400",
+      "name": "有色金属ETF南方",
+      "kind": "etf",
+      "question": "军工ETF(512660) 与 有色ETF(512400) 未来两个月走势与拐点",
+      "stance": "neutral",
+      "confidence": 0.5,
+      "verdict": "中性偏多（两个月概率加权目标 1.90，约 +3.9%）。高位缩量待变盘（量比 0.60），方向由 FOMC 决定，拐点未到。",
+      "horizon": "m1",
+      "anchorDate": "2026-09-10",
+      "anchorPrice": 1.828,
+      "predictions": [
+        {
+          "horizon": "d1",
+          "dir": "震荡",
+          "source": "model",
+          "upProb": 51,
+          "rangePct": 3.2,
+          "expectedChg": 0,
+          "priceLow": 1.77,
+          "priceHigh": 1.886
+        },
+        {
+          "horizon": "d3",
+          "dir": "震荡",
+          "source": "model",
+          "upProb": 41,
+          "rangePct": 5.4,
+          "expectedChg": 0,
+          "priceLow": 1.729,
+          "priceHigh": 1.927
+        },
+        {
+          "horizon": "w1",
+          "dir": "震荡",
+          "source": "model",
+          "upProb": 43,
+          "rangePct": 8.3,
+          "expectedChg": 0,
+          "priceLow": 1.676,
+          "priceHigh": 1.98
+        },
+        {
+          "horizon": "m1",
+          "dir": "震荡",
+          "source": "model",
+          "upProb": 42,
+          "rangePct": 14.7,
+          "expectedChg": 0,
+          "priceLow": 1.559,
+          "priceHigh": 2.097
+        }
+      ],
+      "keyLevels": {
+        "support": [
+          1.559
+        ],
+        "resistance": [
+          1.95,
+          2.097
+        ],
+        "note": "箱体 1.78~1.95"
+      },
+      "plan": "箱体震荡对待，先看 9 月 FOMC 结果再决定方向；若转鸽则弹性大于军工。",
+      "evidence": [
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "腾讯财经日K",
+          "claim": "2026-09-10 收盘 1.828，量比仅 0.60（极度缩量）"
+        },
+        {
+          "grade": "B",
+          "type": "derived",
+          "source": "自算指标",
+          "claim": "跌破 MA10/MA20，正动量但趋势转弱"
+        },
+        {
+          "grade": "C",
+          "type": "news",
+          "source": "web_search 有色新闻",
+          "claim": "工业金属强、贵金属弱，内部分化严重"
+        },
+        {
+          "grade": "D",
+          "type": "model",
+          "source": "本系统 predict()",
+          "claim": "综合评分 31/100（强势看空），1月上涨概率 42%"
+        },
+        {
+          "grade": "E",
+          "type": "narrative",
+          "source": "本人判断",
+          "claim": "FOMC 是唯一的关键变量"
+        }
+      ],
+      "claims": [],
+      "tags": [
+        "报告",
+        "轮动池"
+      ],
+      "outcomes": [
+        {
+          "horizon": "d1",
+          "horizonLabel": "未来1天",
+          "source": "model",
+          "fromDate": "2026-09-10",
+          "toDate": "2026-09-11",
+          "anchorPrice": 1.828,
+          "endClose": 1.754,
+          "actualPct": -4.05,
+          "actualDir": "看跌",
+          "predictedDir": "震荡",
+          "predictedRange": [
+            1.77,
+            1.886
+          ],
+          "rangeWidthPct": 6.35,
+          "moveAbsPct": 3.28,
+          "dirHit": false,
+          "brier": 0.2601,
+          "reward": 0.4798,
+          "upProb": 51,
+          "rangeHitClose": false,
+          "rangeHitPath": false,
+          "pathHigh": 1.768,
+          "pathLow": 1.708
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 2
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 4
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 21
+        }
+      ],
+      "scores": {
+        "n": 1,
+        "hits": 0,
+        "hitRate": 0,
+        "brier": 0.2601,
+        "reward": 0.4798,
+        "rangeHitRate": 0,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 0,
+            "hitRate": 0,
+            "brier": 0.2601
+          }
+        }
+      },
+      "status": "partial",
+      "resolvedAt": null,
+      "lessons": "",
+      "confidenceCeiling": 0.601,
+      "ceilingReason": "平均依据可信度 54%（A1 B1 C1 D1 E1）；其中 C/D/E 类占 60%，属\"二手信息 + 未验证推断\"为主",
+      "evidenceMix": {
+        "counts": {
+          "A": 1,
+          "B": 1,
+          "C": 1,
+          "D": 1,
+          "E": 1
+        },
+        "pct": {
+          "A": 20,
+          "B": 20,
+          "C": 20,
+          "D": 20,
+          "E": 20
+        },
+        "total": 5
+      },
+      "overconfidence": false
+    },
+    {
+      "id": "20260910-688783-01",
+      "askedAt": "2026-09-10T15:30:00+08:00",
+      "code": "688783",
+      "name": "西安奕材-U",
+      "kind": "stock",
+      "question": "西安奕材(688783) 10月解禁专题：何时入场布局合适？（当时已产生浮亏，总仓位【已脱敏】，已空仓）",
+      "stance": "avoid",
+      "confidence": 0.72,
+      "verdict": "回避（不买入）。10/28 解禁 28.3686 亿股（占总股本 70.26%、流通盘 1055%），流通盘膨胀 11.5 倍属估值体系重构。主拐点窗口 2026-11-20 ~ 12-15（概率 40%）。",
+      "horizon": "m1",
+      "anchorDate": "2026-09-10",
+      "anchorPrice": 26.42,
+      "predictions": [
+        {
+          "horizon": "d1",
+          "dir": "震荡",
+          "source": "model",
+          "upProb": 44,
+          "rangePct": 7.7,
+          "expectedChg": 0,
+          "priceLow": 24.386,
+          "priceHigh": 28.454
+        },
+        {
+          "horizon": "d3",
+          "dir": "看跌",
+          "source": "model",
+          "upProb": 18,
+          "rangePct": 13.1,
+          "expectedChg": -5.24,
+          "priceLow": 22.959,
+          "priceHigh": 29.881
+        },
+        {
+          "horizon": "w1",
+          "dir": "看跌",
+          "source": "model",
+          "upProb": 23,
+          "rangePct": 20,
+          "expectedChg": -8,
+          "priceLow": 21.136,
+          "priceHigh": 31.704
+        },
+        {
+          "horizon": "m1",
+          "dir": "看跌",
+          "source": "model",
+          "upProb": 28,
+          "rangePct": 35.4,
+          "expectedChg": -14.16,
+          "priceLow": 17.067,
+          "priceHigh": 35.773
+        }
+      ],
+      "keyLevels": {
+        "support": [
+          24.02
+        ],
+        "resistance": [
+          30.09,
+          37.58
+        ],
+        "note": "7/28 解禁当日 -19.98%，3日 -32.3%，底 24.02"
+      },
+      "plan": "解禁前不碰。解禁落地后观察 90 日减持节奏；12 月指数调仓（科创50/中证500）被动买盘是主要机会。",
+      "evidence": [
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "东方财富 RPT_LIFT_STAGE 限售解禁",
+          "claim": "2026-10-28 解禁 28.3686 亿股 / 70 名股东 / 占总股本 70.26% / 为流通盘 1054.99% / 市值约 749~763 亿元"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "东方财富 F10 股东研究 + 股本结构",
+          "claim": "总股本 40.378 亿股，流通 2.689 亿股（6.66%）；股东户数 46,201（6/30）较 4/20 +18.5%"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "2026 年中报",
+          "claim": "营收 15.89 亿（+22%），净利 -2.89 亿；Q2 毛利率 5.64% vs Q1 2.58%；每股净资产 3.008"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "腾讯财经日K",
+          "claim": "7/28 解禁当日 -19.98%，3 日 -32.3%，随后反弹 +57.5%（本股自身的历史模板）"
+        },
+        {
+          "grade": "B",
+          "type": "derived",
+          "source": "自算指标",
+          "claim": "PS(TTM) 36.3×、PB 8.78×（按 2026-09-10 收盘 26.42）；空头排列，RSI 约 23"
+        },
+        {
+          "grade": "C",
+          "type": "news",
+          "source": "web_search",
+          "claim": "科创板未盈利企业控股股东锁定期 36 个月，故 10/28 解禁主体全部为纯财务投资者"
+        },
+        {
+          "grade": "D",
+          "type": "model",
+          "source": "本系统 predict()",
+          "claim": "综合评分 15/100，1月上涨概率 28%；轮动模型仓位 0%"
+        },
+        {
+          "grade": "E",
+          "type": "narrative",
+          "source": "本人判断",
+          "claim": "主拐点落在 11月下旬~12月中（解禁消化 + 指数纳入被动买盘）"
+        }
+      ],
+      "claims": [],
+      "tags": [
+        "报告",
+        "解禁",
+        "轮动池"
+      ],
+      "outcomes": [
+        {
+          "horizon": "d1",
+          "horizonLabel": "未来1天",
+          "source": "model",
+          "fromDate": "2026-09-10",
+          "toDate": "2026-09-11",
+          "anchorPrice": 26.42,
+          "endClose": 25.9,
+          "actualPct": -1.97,
+          "actualDir": "看跌",
+          "predictedDir": "震荡",
+          "predictedRange": [
+            24.386,
+            28.454
+          ],
+          "rangeWidthPct": 15.4,
+          "moveAbsPct": 4.2,
+          "dirHit": false,
+          "brier": 0.1936,
+          "reward": 0.6128,
+          "upProb": 44,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 26.27,
+          "pathLow": 25.16
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 2
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 4
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 21
+        }
+      ],
+      "scores": {
+        "n": 1,
+        "hits": 0,
+        "hitRate": 0,
+        "brier": 0.1936,
+        "reward": 0.6128,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 0,
+            "hitRate": 0,
+            "brier": 0.1936
+          }
+        }
+      },
+      "status": "partial",
+      "resolvedAt": null,
+      "lessons": "",
+      "confidenceCeiling": 0.689,
+      "ceilingReason": "平均依据可信度 68%（A4 B1 C1 D1 E1）；硬数据(A级)占多数，支撑较扎实",
+      "evidenceMix": {
+        "counts": {
+          "A": 4,
+          "B": 1,
+          "C": 1,
+          "D": 1,
+          "E": 1
+        },
+        "pct": {
+          "A": 50,
+          "B": 13,
+          "C": 13,
+          "D": 13,
+          "E": 13
+        },
+        "total": 8
+      },
+      "overconfidence": true,
+      "confidenceRaw": 0.72
+    },
+    {
+      "id": "20260910-159918-01",
+      "askedAt": "2026-09-10T15:30:00+08:00",
+      "code": "159918",
+      "name": "159918 代码勘误",
+      "kind": "correction",
+      "question": "159918 是不是能源化工ETF？",
+      "stance": "avoid",
+      "confidence": 0.95,
+      "verdict": "❌ 勘误：159918 **不是**能源化工ETF，而是**中创400ETF嘉实**，日成交额仅约 101 万元，基本不可交易。正确的能源化工ETF是 **159981 能源化工ETF建信**。",
+      "horizon": "d1",
+      "anchorDate": "2026-09-10",
+      "anchorPrice": 2.45,
+      "predictions": [],
+      "keyLevels": {},
+      "plan": "",
+      "evidence": [
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "腾讯财经行情 + K线",
+          "claim": "159918 名称为中创400ETF嘉实，日均成交约 101 万元"
+        }
+      ],
+      "claims": [],
+      "tags": [
+        "勘误",
+        "流程改进"
+      ],
+      "outcomes": [],
+      "scores": {},
+      "status": "open",
+      "resolvedAt": null,
+      "lessons": "教训：**代码必须先核验名称再分析**。\"159xxx 都是能源化工\"是错误的一厢情愿。已修复 /api/kline 与 /api/minute 返回硬编码名称的 bug（此前所有代码都返回 NAME），并把标的名称校验加入常规流程。",
+      "confidenceCeiling": 0.835,
+      "ceilingReason": "平均依据可信度 90%（A1 B0 C0 D0 E0）；硬数据(A级)占多数，支撑较扎实",
+      "evidenceMix": {
+        "counts": {
+          "A": 1,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0
+        },
+        "pct": {
+          "A": 100,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0
+        },
+        "total": 1
+      },
+      "overconfidence": false
+    },
+    {
+      "id": "20260911-002470-01",
+      "askedAt": "2026-09-11T18:00:00+08:00",
+      "code": "002470",
+      "name": "金正大",
+      "kind": "stock",
+      "question": "金正大(002470) 这支股票现在可以建仓吗？",
+      "stance": "avoid",
+      "confidence": 0.8,
+      "verdict": "❌ 不可建仓，评级回避。9/9 缩量一字板 → 9/10 放量炸板（682 万股 = 3.1 倍均量，-9.7%）→ 9/11 续跌，教科书级主力派发；Q2 单季巨亏 5.08 亿；担保余额占净资产 54.77%；PB 4.76。",
+      "horizon": "w1",
+      "anchorDate": "2026-09-11",
+      "anchorPrice": 2.3,
+      "predictions": [
+        {
+          "horizon": "d1",
+          "dir": "看跌",
+          "source": "human-override",
+          "upProb": 30,
+          "rangePct": 6.5,
+          "expectedChg": -2.6,
+          "priceLow": 2.151,
+          "priceHigh": 2.449
+        },
+        {
+          "horizon": "d3",
+          "dir": "看跌",
+          "source": "human-override",
+          "upProb": 28,
+          "rangePct": 11.1,
+          "expectedChg": -4.44,
+          "priceLow": 2.045,
+          "priceHigh": 2.555
+        },
+        {
+          "horizon": "w1",
+          "dir": "看跌",
+          "source": "human-override",
+          "upProb": 28,
+          "rangePct": 17,
+          "expectedChg": -6.8,
+          "priceLow": 1.909,
+          "priceHigh": 2.691
+        },
+        {
+          "horizon": "d3",
+          "dir": "看涨",
+          "source": "model",
+          "upProb": 70,
+          "rangePct": 11.1,
+          "expectedChg": 4.44,
+          "priceLow": 2.045,
+          "priceHigh": 2.555
+        },
+        {
+          "horizon": "w1",
+          "dir": "看涨",
+          "source": "model",
+          "upProb": 69,
+          "rangePct": 17,
+          "expectedChg": 6.8,
+          "priceLow": 1.909,
+          "priceHigh": 2.691
+        },
+        {
+          "horizon": "m1",
+          "dir": "看涨",
+          "source": "model",
+          "upProb": 63,
+          "rangePct": 30.1,
+          "expectedChg": 12.04,
+          "priceLow": 1.608,
+          "priceHigh": 2.992
+        }
+      ],
+      "keyLevels": {
+        "support": [
+          2.16,
+          2.25
+        ],
+        "resistance": [
+          2.51,
+          2.78
+        ],
+        "note": "概率加权目标 2.21（-6.4%）"
+      },
+      "plan": "不建仓。除非出现：①放量收复 2.51 并站稳 ②Q3 亏损大幅收窄 ③担保问题有实质解决。",
+      "evidence": [
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "腾讯财经日K",
+          "claim": "9/9 一字板 2.78（量 107 万）→ 9/10 开 2.78 收 2.51（-9.7%，量 682 万 = 3.1× 均量）→ 9/11 收 2.3"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "2026 年中报",
+          "claim": "营收 59.53 亿（+24%），净利 -4.97 亿（-534%）；Q2 单季 -5.08 亿（磷石膏处置费 4.13 亿 + 减值）"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "公司公告",
+          "claim": "担保余额占净资产 54.77%；每股净资产 0.4967"
+        },
+        {
+          "grade": "B",
+          "type": "derived",
+          "source": "自算指标",
+          "claim": "PB 4.76（按 2.3 / 每股净资产 0.4967）；炸板派发形态"
+        },
+        {
+          "grade": "C",
+          "type": "news",
+          "source": "公开历史",
+          "claim": "2022 年百亿财务造假、2021 年 *ST、大股东破产风险"
+        },
+        {
+          "grade": "D",
+          "type": "model",
+          "source": "本系统 predict()",
+          "claim": "综合评分 58/100，但 predict() 输出看涨 69~70%"
+        },
+        {
+          "grade": "E",
+          "type": "narrative",
+          "source": "本人判断",
+          "claim": "系统预测存在\"滞后陷阱\"，盘口结构剧变必须人工覆盖"
+        }
+      ],
+      "claims": [],
+      "tags": [
+        "个股",
+        "人工覆写系统",
+        "对照实验"
+      ],
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
+      "status": "open",
+      "resolvedAt": null,
+      "lessons": "关键方法论收获：**模型擅长\"顺势\"，不擅长\"识别转折\"**。遇到一字板炸板这类盘口结构剧变，必须由人工判断覆盖模型输出。这一条已写入系统改进清单。",
+      "confidenceCeiling": 0.668,
+      "ceilingReason": "平均依据可信度 64%（A3 B1 C1 D1 E1）",
+      "evidenceMix": {
+        "counts": {
+          "A": 3,
+          "B": 1,
+          "C": 1,
+          "D": 1,
+          "E": 1
+        },
+        "pct": {
+          "A": 43,
+          "B": 14,
+          "C": 14,
+          "D": 14,
+          "E": 14
+        },
+        "total": 7
+      },
+      "overconfidence": true,
+      "confidenceRaw": 0.8
+    },
+    {
+      "id": "20260911-002156-01",
+      "askedAt": "2026-09-11T20:00:00+08:00",
+      "code": "002156",
+      "name": "通富微电",
+      "kind": "stock",
+      "question": "6 个月内布局什么板块回本概率最大？半导体设备/军工/能源化工/有色，还是个股西安奕材、通富微电？",
+      "stance": "avoid",
+      "confidence": 0.62,
+      "verdict": "不选个股。通富微电基本面很强（2026H1 营收 160.41 亿 +23.03%，净利 17.17 亿 +316.77%，AI 封测/AMD 逻辑），但技术面空头排列、RSI 39.3、PB 5.23，波动远大于 ETF。6 个月回本目标下，应选 ETF 而非个股。",
+      "horizon": "m1",
+      "anchorDate": "2026-09-11",
+      "anchorPrice": 58,
+      "predictions": [
+        {
+          "horizon": "d1",
+          "dir": "震荡",
+          "source": "model",
+          "upProb": 45,
+          "rangePct": 4.4,
+          "expectedChg": 0,
+          "priceLow": 55.448,
+          "priceHigh": 60.552
+        },
+        {
+          "horizon": "d3",
+          "dir": "看跌",
+          "source": "model",
+          "upProb": 38,
+          "rangePct": 7.5,
+          "expectedChg": -3,
+          "priceLow": 53.65,
+          "priceHigh": 62.35
+        },
+        {
+          "horizon": "w1",
+          "dir": "看跌",
+          "source": "model",
+          "upProb": 35,
+          "rangePct": 11.5,
+          "expectedChg": -4.6,
+          "priceLow": 51.33,
+          "priceHigh": 64.67
+        },
+        {
+          "horizon": "m1",
+          "dir": "看跌",
+          "source": "model",
+          "upProb": 32,
+          "rangePct": 20.3,
+          "expectedChg": -8.12,
+          "priceLow": 46.226,
+          "priceHigh": 69.774
+        }
+      ],
+      "keyLevels": {
+        "support": [
+          52
+        ],
+        "resistance": [
+          64,
+          84.7
+        ],
+        "note": "距 120 日高 84.7 为 -31.5%"
+      },
+      "plan": "不建仓。若坚持要买科技弹性，用 159516 ETF 替代，个股波动率约 ETF 的 1.8 倍。",
+      "evidence": [
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "2026 年中报",
+          "claim": "营收 160.41 亿 +23.03%，净利 17.17 亿 +316.77%，Q2 单季净利 13.88 亿，境外营收超百亿"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "腾讯财经日K",
+          "claim": "2026-09-11 收盘 58，距 120 日高 84.7 为 -31.5%"
+        },
+        {
+          "grade": "B",
+          "type": "derived",
+          "source": "自算指标",
+          "claim": "空头排列，RSI12 39.3，ATR 4.42%（波动率约为 ETF 的 1.8 倍）；BPS 11.098 → PB 5.23"
+        },
+        {
+          "grade": "D",
+          "type": "model",
+          "source": "本系统 predict()",
+          "claim": "综合评分 12/100，1月预期 -10.8%"
+        },
+        {
+          "grade": "E",
+          "type": "narrative",
+          "source": "本人判断",
+          "claim": "回本目标下应降低波动、提高胜率，个股不符合"
+        }
+      ],
+      "claims": [],
+      "tags": [
+        "个股",
+        "回本方案"
+      ],
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
+      "status": "open",
+      "resolvedAt": null,
+      "lessons": "",
+      "confidenceCeiling": 0.653,
+      "ceilingReason": "平均依据可信度 62%（A2 B1 C0 D1 E1）",
+      "evidenceMix": {
+        "counts": {
+          "A": 2,
+          "B": 1,
+          "C": 0,
+          "D": 1,
+          "E": 1
+        },
+        "pct": {
+          "A": 40,
+          "B": 20,
+          "C": 0,
+          "D": 20,
+          "E": 20
+        },
+        "total": 5
+      },
+      "overconfidence": false
+    },
+    {
+      "id": "20260913-159516-02",
+      "askedAt": "2026-09-13T11:20:00+08:00",
+      "code": "159516",
+      "name": "半导体设备ETF国泰",
+      "kind": "etf",
+      "question": "判断明日（周一 9/14）半导体设备等走势；为何美联储加息概率变大反而美股会涨；A股能持续吗；能源化工明日前景如何",
+      "stance": "neutral",
+      "confidence": 0.48,
+      "verdict": "高开震荡、冲高回落。区间 0.638~0.672。费半 +1.81% 只够支撑一个高开，美债 4.975% 逼近 5% + FOMC(9/16-17) 避险压制持续性。**明确不建议追高**，等 9/18 FOMC 落地。",
+      "horizon": "d1",
+      "anchorDate": "2026-09-11",
+      "anchorPrice": 0.653,
+      "predictions": [
+        {
+          "horizon": "d1",
+          "dir": "震荡",
+          "source": "model",
+          "upProb": 45,
+          "rangePct": 2.6,
+          "expectedChg": 0,
+          "priceLow": 0.636,
+          "priceHigh": 0.67
+        }
+      ],
+      "keyLevels": {
+        "support": [
+          0.64,
+          0.63,
+          0.605
+        ],
+        "resistance": [
+          0.667,
+          0.677
+        ],
+        "note": "MA5 0.667 是反弹生死线"
+      },
+      "plan": "不加仓。仓位维持 0~15%。等 9/18 FOMC 落地后重新评估。",
+      "evidence": [
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "腾讯财经日K",
+          "claim": "9/11 收盘 0.653，日K连二黑"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "Yahoo Finance ^SOX",
+          "claim": "费城半导体指数 11824，9/11 +1.81%"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "Yahoo Finance ^TNX",
+          "claim": "美债 10Y 4.975%，20日 +33.4bp，逼近 52 周高 4.985"
+        },
+        {
+          "grade": "B",
+          "type": "derived",
+          "source": "自算指标",
+          "claim": "MA5 0.667 附近为压力；ATR 0.0278"
+        },
+        {
+          "grade": "C",
+          "type": "news",
+          "source": "web_search 财经新闻",
+          "claim": "美国 8 月 CPI 同比 +3.4% 符合预期、环比 +0.4% 反弹、核心 CPI 环比超预期；瑞银转鹰\"9月12月各加25bp\""
+        },
+        {
+          "grade": "C",
+          "type": "news",
+          "source": "web_search",
+          "claim": "\"美国10年期公债殖利率逼近5% 威胁AI融资热潮\"、\"美长债收益率飙升 纳指100面临估值重压\""
+        },
+        {
+          "grade": "D",
+          "type": "model",
+          "source": "本系统 predict()",
+          "claim": "空头排列，系统评分处于低位"
+        },
+        {
+          "grade": "E",
+          "type": "narrative",
+          "source": "本人判断",
+          "claim": "\"美股涨不等于A股半导体能涨\"——美债逼近5%对高PS成长股是即时估值压制"
+        }
+      ],
+      "claims": [],
+      "tags": [
+        "明日判断",
+        "证据偏弱"
+      ],
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
+      "status": "open",
+      "resolvedAt": null,
+      "lessons": "该结论**以 C+D+E 级依据为主**（周末只能靠新闻），是本次台账中证据等级最弱的一类。明日收盘后必须回看，验证\"高开冲高回落\"是否成立。",
+      "confidenceCeiling": 0.656,
+      "ceilingReason": "平均依据可信度 63%（A3 B1 C2 D1 E1）",
+      "evidenceMix": {
+        "counts": {
+          "A": 3,
+          "B": 1,
+          "C": 2,
+          "D": 1,
+          "E": 1
+        },
+        "pct": {
+          "A": 38,
+          "B": 13,
+          "C": 25,
+          "D": 13,
+          "E": 13
+        },
+        "total": 8
+      },
+      "overconfidence": false
+    },
+    {
+      "id": "20260913-159981-02",
+      "askedAt": "2026-09-13T11:20:00+08:00",
+      "code": "159981",
+      "name": "能源化工ETF建信",
+      "kind": "etf",
+      "question": "能源化工明日前景如何？",
+      "stance": "bearish",
+      "confidence": 0.52,
+      "verdict": "偏空。区间 1.720~1.770。新增关键利空：**伊朗与海湾六国下周会晤 → 油价应声走低**，直接削弱化工成本推动逻辑；叠加周五化工品篮子由正转负（-0.59%）、甲醇面临压力、放量长上影。",
+      "horizon": "d1",
+      "anchorDate": "2026-09-11",
+      "anchorPrice": 1.759,
+      "predictions": [
+        {
+          "horizon": "d1",
+          "dir": "看跌",
+          "source": "model",
+          "upProb": 35,
+          "rangePct": 2.9,
+          "expectedChg": -1.16,
+          "priceLow": 1.708,
+          "priceHigh": 1.81
+        }
+      ],
+      "keyLevels": {
+        "support": [
+          1.7422,
+          1.736,
+          1.7016
+        ],
+        "resistance": [
+          1.813
+        ],
+        "note": "MA5 1.7422 是短线生死线"
+      },
+      "plan": "有持仓者：反弹至 1.775~1.785 减仓/平仓；跌破 1.736 减半；跌破 1.700 止损。无持仓者不参与。",
+      "evidence": [
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "腾讯财经日K",
+          "claim": "9/11 收盘 1.759（-0.57%），换手 45.51%，成交 16.12 亿，量 905 万手 = 2.06×20日均量，长上影 3.07%"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "新浪期货 PTA/甲醇/玻璃/纯碱/短纤/烧碱/PX",
+          "claim": "化工品期货篮子收盘 -0.59%（烧碱 -2.27%、甲醇 -1.24%、PX -0.65%）"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "天天基金净值 + 篮子估算",
+          "claim": "折溢价约 -0.39%（折价，无溢价风险）"
+        },
+        {
+          "grade": "C",
+          "type": "news",
+          "source": "web_search",
+          "claim": "\"伊朗与海湾六国下周会晤 油价应声走低\"——霍尔木兹风险溢价回落"
+        },
+        {
+          "grade": "C",
+          "type": "news",
+          "source": "web_search",
+          "claim": "\"PTA、塑料价格维持高位震荡 甲醇或面临一定压力\"（9/12）"
+        },
+        {
+          "grade": "D",
+          "type": "model",
+          "source": "本系统 predict()",
+          "claim": "综合评分 58/100（偏多），1月预期 +2.88%——**与本次人工判断方向相反**"
+        },
+        {
+          "grade": "E",
+          "type": "narrative",
+          "source": "本人判断",
+          "claim": "放量长上影 + 油价转弱 = 短期动能衰竭"
+        }
+      ],
+      "claims": [],
+      "tags": [
+        "明日判断",
+        "人工覆写系统",
+        "对照实验"
+      ],
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
+      "status": "open",
+      "resolvedAt": null,
+      "lessons": "本条再次出现\"人工判断与系统模型方向相反\"（模型偏多、人工偏空）。这是第二个对照样本，与金正大一起构成\"人工覆写是否有效\"的检验集。",
+      "confidenceCeiling": 0.645,
+      "ceilingReason": "平均依据可信度 61%（A3 B0 C2 D1 E1）",
+      "evidenceMix": {
+        "counts": {
+          "A": 3,
+          "B": 0,
+          "C": 2,
+          "D": 1,
+          "E": 1
+        },
+        "pct": {
+          "A": 43,
+          "B": 0,
+          "C": 29,
+          "D": 14,
+          "E": 14
+        },
+        "total": 7
+      },
+      "overconfidence": false
+    },
+    {
+      "id": "20260913-512660-02",
+      "askedAt": "2026-09-13T11:20:00+08:00",
+      "code": "512660",
+      "name": "军工ETF国泰",
+      "kind": "etf",
+      "question": "判断明日半导体设备等走势（含军工）",
+      "stance": "neutral",
+      "confidence": 0.5,
+      "verdict": "高位震荡。RSI 85.3 极度超买，**不追**。等回调至 MA20（约 1.137）再考虑。",
+      "horizon": "d1",
+      "anchorDate": "2026-09-11",
+      "anchorPrice": 1.167,
+      "predictions": [
+        {
+          "horizon": "d1",
+          "dir": "震荡",
+          "source": "model",
+          "upProb": 48,
+          "rangePct": 2,
+          "expectedChg": 0,
+          "priceLow": 1.144,
+          "priceHigh": 1.19
+        }
+      ],
+      "keyLevels": {
+        "support": [
+          1.168,
+          1.137
+        ],
+        "resistance": [
+          1.495
+        ],
+        "note": "MA5 1.168 / MA20 1.137"
+      },
+      "plan": "不追高。若回调至 1.137 附近且缩量，可分批建仓（作为 159516 之外的第二配置）。",
+      "evidence": [
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "腾讯财经日K",
+          "claim": "9/11 收盘 1.167"
+        },
+        {
+          "grade": "B",
+          "type": "derived",
+          "source": "自算指标",
+          "claim": "RSI 85.3 极度超买，ATR 0.0229"
+        },
+        {
+          "grade": "D",
+          "type": "model",
+          "source": "本系统 predict()",
+          "claim": "综合评分 62/100（偏多），1月预期 +1.66%"
+        },
+        {
+          "grade": "E",
+          "type": "narrative",
+          "source": "本人判断",
+          "claim": "超买后大概率以时间换空间，而非直接转跌"
+        }
+      ],
+      "claims": [],
+      "tags": [
+        "明日判断"
+      ],
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
+      "status": "open",
+      "resolvedAt": null,
+      "lessons": "",
+      "confidenceCeiling": 0.608,
+      "ceilingReason": "平均依据可信度 55%（A1 B1 C0 D1 E1）",
+      "evidenceMix": {
+        "counts": {
+          "A": 1,
+          "B": 1,
+          "C": 0,
+          "D": 1,
+          "E": 1
+        },
+        "pct": {
+          "A": 25,
+          "B": 25,
+          "C": 0,
+          "D": 25,
+          "E": 25
+        },
+        "total": 4
+      },
+      "overconfidence": false
+    },
+    {
+      "id": "20260913-PORTFOLIO-01",
+      "askedAt": "2026-09-13T10:00:00+08:00",
+      "code": "PORTFOLIO",
+      "name": "6个月回本组合方案",
+      "kind": "portfolio",
+      "question": "目前空仓，总仓位【已脱敏】，已产生浮亏（回本所需涨幅【已脱敏】），未来 6 个月布局什么板块回本概率最大？只想做一两个票或 ETF。",
+      "stance": "neutral",
+      "confidence": 0.45,
+      "verdict": "方案：159516 半导体设备ETF 55% + 512660 军工ETF 25% + 现金 20%。分批建仓：现在 25% → 10/20~11/15 加到 60% → 11/17~12/15 加到 80%。最佳加仓窗口 10/28（西安奕材解禁）至 11 月中。止损 8%。\n诚实概率：完全回本 35% ／ 回本一半 40% ／ 继续亏损 25%。",
+      "horizon": "m6",
+      "anchorDate": "2026-09-11",
+      "anchorPrice": null,
+      "predictions": [
+        {
+          "horizon": "m6",
+          "dir": "看涨",
+          "source": "model",
+          "upProb": 40,
+          "rangePct": 30.5,
+          "expectedChg": 12.2,
+          "priceLow": null,
+          "priceHigh": null,
+          "note": "以组合口径：需要 +24.49% 才回本，给 40% 上涨概率"
+        }
+      ],
+      "keyLevels": {
+        "stopLossPct": 8
+      },
+      "plan": "① 现在先建 25% 仓位（159516 为主）；② 10/20~11/15 加到 60%；③ 11/17~12/15 加到 80%；④ 全程止损 8%，不加杠杆；⑤ 只在 159516 与 512660 之间分配，不碰个股。",
+      "evidence": [
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "腾讯财经日K（各标的）",
+          "claim": "159516 距 120 日高 +62.0% 空间；512660 距高 +28.1%；两者 ATR 分别为 0.0278 / 0.0229"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "东方财富解禁日历",
+          "claim": "10/28 西安奕材解禁是未来 6 个月科技板块最大的单一事件风险"
+        },
+        {
+          "grade": "B",
+          "type": "derived",
+          "source": "组合回本测算",
+          "claim": "49 万亏 12 万 → 需 +24.49%；按 159516 弹性估算需约 +45% 标的涨幅（80% 仓位口径）"
+        },
+        {
+          "grade": "D",
+          "type": "model",
+          "source": "本系统 predict()",
+          "claim": "159516 当前仍为空头排列，系统评分低位；模型不支持\"立刻满仓\""
+        },
+        {
+          "grade": "E",
+          "type": "narrative",
+          "source": "本人判断",
+          "claim": "最佳加仓窗口在 10/28 解禁落地至 11 月中（利空出尽 + 指数调仓）"
+        }
+      ],
+      "claims": [],
+      "tags": [
+        "组合方案",
+        "回本",
+        "重要"
+      ],
+      "outcomes": [],
+      "scores": {},
+      "status": "open",
+      "resolvedAt": null,
+      "lessons": "本方案的核心风险：**回本所需 +24.49% 接近标的 6 个月的 1.2 倍 ATR 区间上限**，属于\"需要行情配合\"的目标，不是\"努力就能做到\"的目标。已如实告知概率分布而非只给乐观路径。",
+      "confidenceCeiling": 0.653,
+      "ceilingReason": "平均依据可信度 62%（A2 B1 C0 D1 E1）",
+      "evidenceMix": {
+        "counts": {
+          "A": 2,
+          "B": 1,
+          "C": 0,
+          "D": 1,
+          "E": 1
+        },
+        "pct": {
+          "A": 40,
+          "B": 20,
+          "C": 0,
+          "D": 20,
+          "E": 20
+        },
+        "total": 5
+      },
+      "overconfidence": false
+    },
+    {
+      "id": "20260913-MACRO-01",
+      "askedAt": "2026-09-13T11:20:00+08:00",
+      "code": "MACRO",
+      "name": "宏观问答：加息为何美股涨 / A股能否持续",
+      "kind": "question",
+      "question": "为何美联储加息概率变大反而美股会涨？A股能持续吗？",
+      "stance": "neutral",
+      "confidence": 0.55,
+      "verdict": "四点解释：①加息的\"原因\"（经济强+通胀）比\"动作\"更重要；②从\"加不加\"到\"加几次\"，**不确定性被消除**；③这是**通胀交易**而非宽松交易（美股金银齐涨是特征）；④盈利改善暂时压过估值压缩。\n⚠️ 但**美债 4.975% 逼近 5% 是分水岭**——估值压缩阶段即将到来，对 A 股高 PS 半导体设备是直接压制。\"美股涨 ≠ A 股半导体能涨\"。\nA 股判断：9/11 沪指 -1.18% 连二黑、超 4800 只下跌，**短期难以持续反弹**，震荡磨底至 9/18 FOMC 落地。",
+      "horizon": "w1",
+      "anchorDate": "2026-09-11",
+      "anchorPrice": null,
+      "predictions": [],
+      "keyLevels": {},
+      "plan": "",
+      "evidence": [
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "Yahoo Finance",
+          "claim": "美债 10Y 4.975%（52周高 4.985）；费半 11824 +1.81%；中债 10Y 1.6897%"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "腾讯财经指数行情",
+          "claim": "9/11 沪指 -1.18%，科创50 -1.01%，超 4800 只个股下跌，放量走\"V\""
+        },
+        {
+          "grade": "C",
+          "type": "news",
+          "source": "web_search",
+          "claim": "\"美国8月CPI同比+3.4%、环比+0.4%\"、\"从加不加息到加几次 美联储加息预期急剧升温\"、\"美股、金银齐涨\""
+        },
+        {
+          "grade": "C",
+          "type": "news",
+          "source": "web_search",
+          "claim": "\"美长债收益率飙升 纳指100面临估值重压\"、\"A股重回年内低位，机构建议大胆布局\""
+        },
+        {
+          "grade": "E",
+          "type": "narrative",
+          "source": "本人推理",
+          "claim": "加息初期的\"盈利改善 > 估值压缩\"正在向\"估值压缩主导\"切换"
+        }
+      ],
+      "claims": [],
+      "tags": [
+        "宏观",
+        "不可打分"
+      ],
+      "outcomes": [],
+      "scores": {},
+      "status": "open",
+      "resolvedAt": null,
+      "lessons": "本条是**纯观点**，无法用单一价格结算，因此标记为不可打分。它的价值在于留痕：如果后续美债破 5% 后成长股真的杀估值，说明这条推理成立；如果没有，说明推理错误。**不应把不可证伪的观点当成结论使用。**",
+      "confidenceCeiling": 0.64,
+      "ceilingReason": "平均依据可信度 60%（A2 B0 C2 D0 E1）；其中 C/D/E 类占 60%，属\"二手信息 + 未验证推断\"为主",
+      "evidenceMix": {
+        "counts": {
+          "A": 2,
+          "B": 0,
+          "C": 2,
+          "D": 0,
+          "E": 1
+        },
+        "pct": {
+          "A": 40,
+          "B": 0,
+          "C": 40,
+          "D": 0,
+          "E": 20
+        },
+        "total": 5
+      },
+      "overconfidence": false
+    }
+  ],
+  "_source": "/Users/liuyang/Desktop/PythonProject/半导体设备ETF交易模拟系统/data/research-ledger.json",
+  "sanitized": true,
+  "sanitizedAt": "2026-09-13T03:42:23.641Z"
+}

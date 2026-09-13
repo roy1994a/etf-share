@@ -482,6 +482,75 @@ const server = http.createServer(async (req, res) => {
       }
     }
 
+    // 研究台账：结论留痕 + 到期结算 + 准确率（回答"你到底准不准"）
+    if (p === '/api/ledger') {
+      try {
+        const Ledger = require('./lib/research-ledger.js');
+        const db = Ledger.loadLedger();
+        const st = Ledger.stats(db);
+        const code = q.code;
+        let entries = db.entries || [];
+        if (code) entries = entries.filter((e) => e.code === code);
+        // 列表瘦身：不带完整 klines，只带结论与结算
+        const slim = entries.map((e) => ({
+          id: e.id, code: e.code, name: e.name, kind: e.kind,
+          askedAt: e.askedAt, anchorDate: e.anchorDate, anchorPrice: e.anchorPrice,
+          question: e.question, verdict: e.verdict, stance: e.stance,
+          confidence: e.confidence, confidenceCeiling: e.confidenceCeiling,
+          ceilingReason: e.ceilingReason, overconfidence: !!e.overconfidence,
+          evidenceMix: e.evidenceMix, evidence: e.evidence,
+          keyLevels: e.keyLevels, plan: e.plan, tags: e.tags,
+          status: e.status, scores: e.scores,
+          outcomes: (e.outcomes || []).map((o) => ({
+            horizon: o.horizon, horizonLabel: o.horizonLabel, source: o.source,
+            predictedDir: o.predictedDir, upProb: o.upProb, actualDir: o.actualDir,
+            actualPct: o.actualPct, dirHit: o.dirHit, rangeHitClose: o.rangeHitClose,
+            brier: o.brier, reward: o.reward, pending: !!o.pending,
+            fromDate: o.fromDate, toDate: o.toDate,
+          })),
+          lessons: e.lessons,
+        }));
+        return sendJSON(res, 200, { ok: true, stats: st, entries: slim, grades: Ledger.EVIDENCE_GRADES });
+      } catch (e) {
+        return sendJSON(res, 500, { ok: false, error: e.message });
+      }
+    }
+
+    // 学到的专家权重 + 概率标定 + 样本外成绩单
+    if (p === '/api/rl') {
+      try {
+        const rl = require('./lib/rl.js');
+        const EXP = require('./lib/signals.js');
+        const state = rl.loadStateWithFallback();
+        const horizons = {};
+        for (const h of rl.HORIZONS) {
+          horizons[h] = {
+            label: rl.HORIZON_LABEL[h],
+            calibration: state.calibration ? state.calibration[h] : null,
+            leaderboard: rl.expertLeaderboard(state, h).map((r) => Object.assign({}, r, {
+              label: EXP.EXPERT_LABEL[r.expert] || r.expert,
+            })),
+          };
+        }
+        let report = null;
+        for (const cand of [path.join(__dirname, 'data', 'rl-report.json'), path.join(__dirname, 'model', 'rl-report.json')]) {
+          try { report = JSON.parse(fs.readFileSync(cand, 'utf8')); break; } catch (e2) { /* 试下一个 */ }
+        }
+        return sendJSON(res, 200, {
+          ok: true,
+          meta: {
+            eta: state.eta, discount: state.discount, floor: state.floor,
+            rounds: state.rounds, updatedAt: state.updatedAt, trainedFrom: state.trainedFrom,
+            ledgerFeedback: state.ledgerFeedback || null,
+          },
+          horizons,
+          report,
+        });
+      } catch (e) {
+        return sendJSON(res, 500, { ok: false, error: e.message });
+      }
+    }
+
     // 轮动池管理：GET 获取；POST 增删（写回 notify.config.json）
     if (p === '/api/pool') {
       const cfgFile = path.join(__dirname, 'notify.config.json');

@@ -27,6 +27,7 @@
     <button class="tab active" data-tab="dashboard">总览</button>
     <button class="tab" data-tab="analysis">行情与指标</button>
     <button class="tab" data-tab="predict">预测</button>
+    <button class="tab" data-tab="ledger">研究台账</button>
     <button class="tab" data-tab="strategy">今日策略</button>
     <button class="tab" data-tab="trade">交易台</button>
     <button class="tab" data-tab="review">盘尾复盘</button>
@@ -137,6 +138,26 @@
       <div class="card">
         <h3>预测与今日策略联动</h3>
         <div id="predictStrategyLink" class="predict-strategy-link">加载中…</div>
+      </div>
+    </section>
+
+    <!-- ============ 研究台账 ============ -->
+    <section id="tab-ledger" class="tab-panel">
+      <div class="card">
+        <h3>📒 研究台账 <span class="hint">每一次结论都留痕、到期自动结算 —— 回答"到底准不准"</span></h3>
+        <div id="ledgerSummary" class="score-panel">加载中…</div>
+      </div>
+      <div class="card">
+        <h3>按证据等级分层 <span class="hint">A硬数据 / B量化衍生 / C二手新闻 / D模型推断 / E主观叙事 —— 靠新闻得出的结论是不是更不准？</span></h3>
+        <div id="ledgerGrades">加载中…</div>
+      </div>
+      <div class="card">
+        <h3>🎯 学到的专家权重 <span class="hint">Hedge 在线学习：在历史数据上样本外验证过的权重</span></h3>
+        <div id="rlPanel">加载中…</div>
+      </div>
+      <div class="card">
+        <h3>结论明细</h3>
+        <div id="ledgerList">加载中…</div>
       </div>
     </section>
 

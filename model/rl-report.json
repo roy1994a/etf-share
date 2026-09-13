@@ -1,0 +1,935 @@
+{
+  "trainedAt": "2026-09-13T03:45:31.570Z",
+  "config": {
+    "codes": [
+      "159516",
+      "512010",
+      "512400",
+      "512660",
+      "688981",
+      "688012",
+      "002371",
+      "688256",
+      "688041",
+      "603986",
+      "688008",
+      "688783",
+      "300475",
+      "159981",
+      "002156",
+      "002470",
+      "159918"
+    ],
+    "bars": 400,
+    "split": 0.6,
+    "trainCut": "2026-02-12",
+    "testCut": "2026-06-04",
+    "trainSamples": 12796,
+    "valSamples": 4760,
+    "testSamples": 4301,
+    "eta": 0.08,
+    "gamma": 1,
+    "index": "1.000300",
+    "at": "2026-09-13T03:45:31.483Z"
+  },
+  "priorTest": {
+    "d1": {
+      "n": 1190,
+      "hitRate": 0.5109,
+      "brier": 0.275
+    },
+    "d3": {
+      "n": 1156,
+      "hitRate": 0.5017,
+      "brier": 0.332
+    },
+    "w1": {
+      "n": 1122,
+      "hitRate": 0.467,
+      "brier": 0.3859
+    },
+    "m1": {
+      "n": 833,
+      "hitRate": 0.4286,
+      "brier": 0.4365
+    }
+  },
+  "learnedTest": {
+    "d1": {
+      "n": 1190,
+      "hitRate": 0.5277,
+      "brier": 0.2572,
+      "calibHitRate": 0.5277,
+      "calibBrier": 0.2491
+    },
+    "d3": {
+      "n": 1156,
+      "hitRate": 0.5294,
+      "brier": 0.2568,
+      "calibHitRate": 0.5294,
+      "calibBrier": 0.2511
+    },
+    "w1": {
+      "n": 1122,
+      "hitRate": 0.5214,
+      "brier": 0.2538,
+      "calibHitRate": 0.5214,
+      "calibBrier": 0.2502
+    },
+    "m1": {
+      "n": 833,
+      "hitRate": 0.5222,
+      "brier": 0.2816,
+      "calibHitRate": 0.5222,
+      "calibBrier": 0.2803
+    }
+  },
+  "priorFit": {
+    "d1": {
+      "n": 4389,
+      "hitRate": 0.5101,
+      "brier": 0.2746
+    },
+    "d3": {
+      "n": 4389,
+      "hitRate": 0.522,
+      "brier": 0.3211
+    },
+    "w1": {
+      "n": 4389,
+      "hitRate": 0.5177,
+      "brier": 0.3539
+    },
+    "m1": {
+      "n": 4389,
+      "hitRate": 0.5439,
+      "brier": 0.3316
+    }
+  },
+  "learnedFit": {
+    "d1": {
+      "n": 4389,
+      "hitRate": 0.5131,
+      "brier": 0.2661,
+      "calibHitRate": 0.5131,
+      "calibBrier": 0.2506
+    },
+    "d3": {
+      "n": 4389,
+      "hitRate": 0.5231,
+      "brier": 0.2661,
+      "calibHitRate": 0.5231,
+      "calibBrier": 0.2538
+    },
+    "w1": {
+      "n": 4389,
+      "hitRate": 0.5247,
+      "brier": 0.2617,
+      "calibHitRate": 0.5247,
+      "calibBrier": 0.2526
+    },
+    "m1": {
+      "n": 4389,
+      "hitRate": 0.5805,
+      "brier": 0.2437,
+      "calibHitRate": 0.5805,
+      "calibBrier": 0.2431
+    }
+  },
+  "naiveTest": {
+    "d1": {
+      "n": 1190,
+      "hitRate": 0.5059,
+      "brier": 0.25
+    },
+    "d3": {
+      "n": 1156,
+      "hitRate": 0.5087,
+      "brier": 0.25
+    },
+    "w1": {
+      "n": 1122,
+      "hitRate": 0.5098,
+      "brier": 0.25
+    },
+    "m1": {
+      "n": 833,
+      "hitRate": 0.587,
+      "brier": 0.25
+    }
+  },
+  "valReport": [
+    {
+      "eta": 0.03,
+      "gamma": 1,
+      "brier": 0.2639,
+      "hitRate": 0.5305
+    },
+    {
+      "eta": 0.03,
+      "gamma": 0.999,
+      "brier": 0.2639,
+      "hitRate": 0.5305
+    },
+    {
+      "eta": 0.03,
+      "gamma": 0.995,
+      "brier": 0.2639,
+      "hitRate": 0.5305
+    },
+    {
+      "eta": 0.03,
+      "gamma": 0.99,
+      "brier": 0.2639,
+      "hitRate": 0.5305
+    },
+    {
+      "eta": 0.08,
+      "gamma": 1,
+      "brier": 0.2613,
+      "hitRate": 0.5422
+    },
+    {
+      "eta": 0.08,
+      "gamma": 0.999,
+      "brier": 0.2613,
+      "hitRate": 0.5422
+    },
+    {
+      "eta": 0.08,
+      "gamma": 0.995,
+      "brier": 0.2613,
+      "hitRate": 0.5422
+    },
+    {
+      "eta": 0.08,
+      "gamma": 0.99,
+      "brier": 0.2613,
+      "hitRate": 0.5422
+    },
+    {
+      "eta": 0.15,
+      "gamma": 1,
+      "brier": 0.262,
+      "hitRate": 0.5437
+    },
+    {
+      "eta": 0.15,
+      "gamma": 0.999,
+      "brier": 0.262,
+      "hitRate": 0.5437
+    },
+    {
+      "eta": 0.15,
+      "gamma": 0.995,
+      "brier": 0.262,
+      "hitRate": 0.5437
+    },
+    {
+      "eta": 0.15,
+      "gamma": 0.99,
+      "brier": 0.262,
+      "hitRate": 0.5437
+    },
+    {
+      "eta": 0.3,
+      "gamma": 1,
+      "brier": 0.2634,
+      "hitRate": 0.5471
+    },
+    {
+      "eta": 0.3,
+      "gamma": 0.999,
+      "brier": 0.2634,
+      "hitRate": 0.5471
+    },
+    {
+      "eta": 0.3,
+      "gamma": 0.995,
+      "brier": 0.2634,
+      "hitRate": 0.5471
+    },
+    {
+      "eta": 0.3,
+      "gamma": 0.99,
+      "brier": 0.2634,
+      "hitRate": 0.5471
+    }
+  ],
+  "leaderboard": {
+    "d1": [
+      {
+        "expert": "volS",
+        "n": 4389,
+        "abstain": 3211,
+        "abstainRate": 0.7316,
+        "hitRate": 0.5129,
+        "brier": 0.2758,
+        "weight": 0.7074,
+        "priorWeight": 0.1429,
+        "trained": true
+      },
+      {
+        "expert": "rsiRev",
+        "n": 4389,
+        "abstain": 2401,
+        "abstainRate": 0.547,
+        "hitRate": 0.5113,
+        "brier": 0.3093,
+        "weight": 0.0149,
+        "priorWeight": 0.2381,
+        "trained": true
+      },
+      {
+        "expert": "rel",
+        "n": 4389,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5136,
+        "brier": 0.3965,
+        "weight": 0.0133,
+        "priorWeight": 0.0095,
+        "trained": true
+      },
+      {
+        "expert": "trend",
+        "n": 4389,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5147,
+        "brier": 0.401,
+        "weight": 0.0127,
+        "priorWeight": 0.0095,
+        "trained": true
+      },
+      {
+        "expert": "mom",
+        "n": 4389,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5074,
+        "brier": 0.4149,
+        "weight": 0.0162,
+        "priorWeight": 0.2857,
+        "trained": true
+      },
+      {
+        "expert": "indexS",
+        "n": 4389,
+        "abstain": 22,
+        "abstainRate": 0.005,
+        "hitRate": 0.5129,
+        "brier": 0.4856,
+        "weight": 0.0141,
+        "priorWeight": 0.0952,
+        "trained": true
+      },
+      {
+        "expert": "macdDir",
+        "n": 4389,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5072,
+        "brier": 0.4928,
+        "weight": 0.012,
+        "priorWeight": 0.0095,
+        "trained": true
+      },
+      {
+        "expert": "soxS",
+        "n": 0,
+        "abstain": 0,
+        "abstainRate": null,
+        "hitRate": null,
+        "brier": null,
+        "weight": 0.0952,
+        "priorWeight": 0.0952,
+        "trained": false
+      },
+      {
+        "expert": "senti",
+        "n": 0,
+        "abstain": 0,
+        "abstainRate": null,
+        "hitRate": null,
+        "brier": null,
+        "weight": 0.0952,
+        "priorWeight": 0.0952,
+        "trained": false
+      },
+      {
+        "expert": "fund",
+        "n": 0,
+        "abstain": 0,
+        "abstainRate": null,
+        "hitRate": null,
+        "brier": null,
+        "weight": 0.0095,
+        "priorWeight": 0.0095,
+        "trained": false
+      },
+      {
+        "expert": "macroS",
+        "n": 0,
+        "abstain": 0,
+        "abstainRate": null,
+        "hitRate": null,
+        "brier": null,
+        "weight": 0.0095,
+        "priorWeight": 0.0095,
+        "trained": false
+      }
+    ],
+    "d3": [
+      {
+        "expert": "volS",
+        "n": 4389,
+        "abstain": 3211,
+        "abstainRate": 0.7316,
+        "hitRate": 0.5316,
+        "brier": 0.2718,
+        "weight": 0.795,
+        "priorWeight": 0.1442,
+        "trained": true
+      },
+      {
+        "expert": "rsiRev",
+        "n": 4389,
+        "abstain": 2401,
+        "abstainRate": 0.547,
+        "hitRate": 0.5085,
+        "brier": 0.3193,
+        "weight": 0.0171,
+        "priorWeight": 0.0096,
+        "trained": true
+      },
+      {
+        "expert": "rel",
+        "n": 4389,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5204,
+        "brier": 0.3889,
+        "weight": 0.012,
+        "priorWeight": 0.0481,
+        "trained": true
+      },
+      {
+        "expert": "trend",
+        "n": 4389,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5183,
+        "brier": 0.3973,
+        "weight": 0.012,
+        "priorWeight": 0.1923,
+        "trained": true
+      },
+      {
+        "expert": "mom",
+        "n": 4389,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5152,
+        "brier": 0.4102,
+        "weight": 0.012,
+        "priorWeight": 0.2404,
+        "trained": true
+      },
+      {
+        "expert": "macdDir",
+        "n": 4389,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5227,
+        "brier": 0.4773,
+        "weight": 0.015,
+        "priorWeight": 0.1442,
+        "trained": true
+      },
+      {
+        "expert": "indexS",
+        "n": 4389,
+        "abstain": 22,
+        "abstainRate": 0.005,
+        "hitRate": 0.5179,
+        "brier": 0.4802,
+        "weight": 0.012,
+        "priorWeight": 0.0962,
+        "trained": true
+      },
+      {
+        "expert": "soxS",
+        "n": 0,
+        "abstain": 0,
+        "abstainRate": null,
+        "hitRate": null,
+        "brier": null,
+        "weight": 0.0962,
+        "priorWeight": 0.0962,
+        "trained": false
+      },
+      {
+        "expert": "senti",
+        "n": 0,
+        "abstain": 0,
+        "abstainRate": null,
+        "hitRate": null,
+        "brier": null,
+        "weight": 0.0096,
+        "priorWeight": 0.0096,
+        "trained": false
+      },
+      {
+        "expert": "fund",
+        "n": 0,
+        "abstain": 0,
+        "abstainRate": null,
+        "hitRate": null,
+        "brier": null,
+        "weight": 0.0096,
+        "priorWeight": 0.0096,
+        "trained": false
+      },
+      {
+        "expert": "macroS",
+        "n": 0,
+        "abstain": 0,
+        "abstainRate": null,
+        "hitRate": null,
+        "brier": null,
+        "weight": 0.0096,
+        "priorWeight": 0.0096,
+        "trained": false
+      }
+    ],
+    "w1": [
+      {
+        "expert": "volS",
+        "n": 4389,
+        "abstain": 3211,
+        "abstainRate": 0.7316,
+        "hitRate": 0.5343,
+        "brier": 0.2705,
+        "weight": 0.5812,
+        "priorWeight": 0.0096,
+        "trained": true
+      },
+      {
+        "expert": "rsiRev",
+        "n": 4389,
+        "abstain": 2401,
+        "abstainRate": 0.547,
+        "hitRate": 0.4972,
+        "brier": 0.3243,
+        "weight": 0.0123,
+        "priorWeight": 0.0096,
+        "trained": true
+      },
+      {
+        "expert": "rel",
+        "n": 4389,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5208,
+        "brier": 0.387,
+        "weight": 0.012,
+        "priorWeight": 0.0962,
+        "trained": true
+      },
+      {
+        "expert": "trend",
+        "n": 4389,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5229,
+        "brier": 0.3907,
+        "weight": 0.0122,
+        "priorWeight": 0.2404,
+        "trained": true
+      },
+      {
+        "expert": "mom",
+        "n": 4389,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5142,
+        "brier": 0.411,
+        "weight": 0.012,
+        "priorWeight": 0.1923,
+        "trained": true
+      },
+      {
+        "expert": "macdDir",
+        "n": 4389,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5382,
+        "brier": 0.4618,
+        "weight": 0.0123,
+        "priorWeight": 0.0096,
+        "trained": true
+      },
+      {
+        "expert": "indexS",
+        "n": 4389,
+        "abstain": 22,
+        "abstainRate": 0.005,
+        "hitRate": 0.5106,
+        "brier": 0.4875,
+        "weight": 0.012,
+        "priorWeight": 0.0962,
+        "trained": true
+      },
+      {
+        "expert": "soxS",
+        "n": 0,
+        "abstain": 0,
+        "abstainRate": null,
+        "hitRate": null,
+        "brier": null,
+        "weight": 0.0096,
+        "priorWeight": 0.0096,
+        "trained": false
+      },
+      {
+        "expert": "senti",
+        "n": 0,
+        "abstain": 0,
+        "abstainRate": null,
+        "hitRate": null,
+        "brier": null,
+        "weight": 0.0481,
+        "priorWeight": 0.0481,
+        "trained": false
+      },
+      {
+        "expert": "fund",
+        "n": 0,
+        "abstain": 0,
+        "abstainRate": null,
+        "hitRate": null,
+        "brier": null,
+        "weight": 0.1442,
+        "priorWeight": 0.1442,
+        "trained": false
+      },
+      {
+        "expert": "macroS",
+        "n": 0,
+        "abstain": 0,
+        "abstainRate": null,
+        "hitRate": null,
+        "brier": null,
+        "weight": 0.1442,
+        "priorWeight": 0.1442,
+        "trained": false
+      }
+    ],
+    "m1": [
+      {
+        "expert": "volS",
+        "n": 4389,
+        "abstain": 3211,
+        "abstainRate": 0.7316,
+        "hitRate": 0.5979,
+        "brier": 0.2631,
+        "weight": 0.3013,
+        "priorWeight": 0.0095,
+        "trained": true
+      },
+      {
+        "expert": "rsiRev",
+        "n": 4389,
+        "abstain": 2401,
+        "abstainRate": 0.547,
+        "hitRate": 0.5188,
+        "brier": 0.3403,
+        "weight": 0.0135,
+        "priorWeight": 0.0095,
+        "trained": true
+      },
+      {
+        "expert": "trend",
+        "n": 4389,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5582,
+        "brier": 0.3661,
+        "weight": 0.0894,
+        "priorWeight": 0.2381,
+        "trained": true
+      },
+      {
+        "expert": "rel",
+        "n": 4389,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5338,
+        "brier": 0.3771,
+        "weight": 0.1238,
+        "priorWeight": 0.0952,
+        "trained": true
+      },
+      {
+        "expert": "mom",
+        "n": 4389,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.524,
+        "brier": 0.4001,
+        "weight": 0.0453,
+        "priorWeight": 0.0952,
+        "trained": true
+      },
+      {
+        "expert": "macdDir",
+        "n": 4389,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5867,
+        "brier": 0.4133,
+        "weight": 0.012,
+        "priorWeight": 0.0095,
+        "trained": true
+      },
+      {
+        "expert": "indexS",
+        "n": 4389,
+        "abstain": 22,
+        "abstainRate": 0.005,
+        "hitRate": 0.5263,
+        "brier": 0.4704,
+        "weight": 0.0148,
+        "priorWeight": 0.1429,
+        "trained": true
+      },
+      {
+        "expert": "soxS",
+        "n": 0,
+        "abstain": 0,
+        "abstainRate": null,
+        "hitRate": null,
+        "brier": null,
+        "weight": 0.0095,
+        "priorWeight": 0.0095,
+        "trained": false
+      },
+      {
+        "expert": "senti",
+        "n": 0,
+        "abstain": 0,
+        "abstainRate": null,
+        "hitRate": null,
+        "brier": null,
+        "weight": 0.0095,
+        "priorWeight": 0.0095,
+        "trained": false
+      },
+      {
+        "expert": "fund",
+        "n": 0,
+        "abstain": 0,
+        "abstainRate": null,
+        "hitRate": null,
+        "brier": null,
+        "weight": 0.1905,
+        "priorWeight": 0.1905,
+        "trained": false
+      },
+      {
+        "expert": "macroS",
+        "n": 0,
+        "abstain": 0,
+        "abstainRate": null,
+        "hitRate": null,
+        "brier": null,
+        "weight": 0.1905,
+        "priorWeight": 0.1905,
+        "trained": false
+      }
+    ]
+  },
+  "summary": {
+    "rounds": 17556,
+    "updatedAt": "2026-09-13T03:45:31.569Z",
+    "trainedFrom": {
+      "codes": [
+        "159516",
+        "512010",
+        "512400",
+        "512660",
+        "688981",
+        "688012",
+        "002371",
+        "688256",
+        "688041",
+        "603986",
+        "688008",
+        "688783",
+        "300475",
+        "159981",
+        "002156",
+        "002470",
+        "159918"
+      ],
+      "bars": 400,
+      "split": 0.6,
+      "trainCut": "2026-02-12",
+      "testCut": "2026-06-04",
+      "trainSamples": 12796,
+      "valSamples": 4760,
+      "testSamples": 4301,
+      "eta": 0.08,
+      "gamma": 1,
+      "index": "1.000300",
+      "at": "2026-09-13T03:45:31.483Z"
+    },
+    "horizons": {
+      "d1": {
+        "label": "未来1天",
+        "n": 800,
+        "hitRate": 0.5425,
+        "brier": 0.2628,
+        "skillScore": -0.0694,
+        "reliability": 0.0197,
+        "resolution": 0.0024,
+        "uncertainty": 0.2458,
+        "topExperts": [
+          {
+            "expert": "volS",
+            "weight": 0.707
+          },
+          {
+            "expert": "soxS",
+            "weight": 0.095
+          },
+          {
+            "expert": "senti",
+            "weight": 0.095
+          },
+          {
+            "expert": "mom",
+            "weight": 0.016
+          }
+        ],
+        "calibration": {
+          "a": 0.207,
+          "b": 0,
+          "n": 800,
+          "fitted": true,
+          "fitIntercept": false,
+          "fitBaseRate": 0.565
+        }
+      },
+      "d3": {
+        "label": "未来3天",
+        "n": 800,
+        "hitRate": 0.555,
+        "brier": 0.2533,
+        "skillScore": -0.0471,
+        "reliability": 0.0136,
+        "resolution": 0.0015,
+        "uncertainty": 0.2419,
+        "topExperts": [
+          {
+            "expert": "volS",
+            "weight": 0.795
+          },
+          {
+            "expert": "soxS",
+            "weight": 0.096
+          },
+          {
+            "expert": "rsiRev",
+            "weight": 0.017
+          },
+          {
+            "expert": "macdDir",
+            "weight": 0.015
+          }
+        ],
+        "calibration": {
+          "a": 0.4333,
+          "b": 0,
+          "n": 800,
+          "fitted": true,
+          "fitIntercept": false,
+          "fitBaseRate": 0.59
+        }
+      },
+      "w1": {
+        "label": "未来1周",
+        "n": 800,
+        "hitRate": 0.5475,
+        "brier": 0.2502,
+        "skillScore": -0.0413,
+        "reliability": 0.0239,
+        "resolution": 0.0121,
+        "uncertainty": 0.2402,
+        "topExperts": [
+          {
+            "expert": "volS",
+            "weight": 0.581
+          },
+          {
+            "expert": "fund",
+            "weight": 0.144
+          },
+          {
+            "expert": "macroS",
+            "weight": 0.144
+          },
+          {
+            "expert": "senti",
+            "weight": 0.048
+          }
+        ],
+        "calibration": {
+          "a": 0.4832,
+          "b": 0,
+          "n": 800,
+          "fitted": true,
+          "fitIntercept": false,
+          "fitBaseRate": 0.5988
+        }
+      },
+      "m1": {
+        "label": "未来1月",
+        "n": 800,
+        "hitRate": 0.6438,
+        "brier": 0.2257,
+        "skillScore": -0.1453,
+        "reliability": 0.0419,
+        "resolution": 0.0143,
+        "uncertainty": 0.1971,
+        "topExperts": [
+          {
+            "expert": "volS",
+            "weight": 0.301
+          },
+          {
+            "expert": "fund",
+            "weight": 0.19
+          },
+          {
+            "expert": "macroS",
+            "weight": 0.19
+          },
+          {
+            "expert": "rel",
+            "weight": 0.124
+          }
+        ],
+        "calibration": {
+          "a": 0.9707,
+          "b": 0,
+          "n": 800,
+          "fitted": true,
+          "fitIntercept": false,
+          "fitBaseRate": 0.73
+        }
+      }
+    }
+  }
+}
