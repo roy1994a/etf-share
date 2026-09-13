@@ -34,32 +34,31 @@ const rl = require('./lib/rl');
 
 const ROOT = __dirname;
 
-// ------------------------------------------------------------ 标的池（扩容）
+// ------------------------------------------------------------ 数据层（与 ablation.js 共用，保证口径一致）
+//
+// 全部数据准备逻辑已抽到 lib/dataset.js：
+//   UNIVERSE_V1 / UNIVERSE_V2 / EXPERTS_V1 / BARS_V1 / BARS_V2
+//   fetchDataset() / buildEvents() / truncateByBars() / alignLag1() ...
+// 这样"正式训练"和"消融实验"走的是**同一条代码路径**，
+// 否则"扩样本带来了提升"就无法排除"两份实现口径不同"这种解释。
 
-/** 宽基与风格 */
-const BROAD = ['510300', '510500', '588000', '159915', '512100', '510880'];
-/** 半导体与科技 */
-const TECH = ['159516', '512480', '512760', '588200', '515000', '512720', '159819',
-  '688981', '688012', '002371', '688256', '688041', '603986', '688008', '688783', '300475', '002156'];
-/** 行业 */
-const SECTOR = ['512010', '512170', '512400', '512660', '512800', '512880', '512690',
-  '515030', '515790', '159611', '512200', '516950', '512980', '159869', '159981',
-  '518880', '513050', '513100', '159941', '512070', '516110', '159825'];
-/** 本会话咨询过的个股/杂项 */
-const EXTRA = ['002470', '159918'];
+const {
+  UNIVERSE_V1, UNIVERSE_V2, EXPERTS_V1, BARS_V1, BARS_V2,
+  fetchDataset, buildEvents,
+} = require('./lib/dataset.js');
 
-const DEFAULT_UNIVERSE = BROAD.concat(TECH, SECTOR, EXTRA);
+const DEFAULT_UNIVERSE = UNIVERSE_V2;
 
 // ------------------------------------------------------------ 参数
 
 function parseArgs(argv) {
   const a = {
-    bars: 640, split: 0.6, codes: null, index: '1.000300',
+    bars: BARS_V2, split: 0.6, codes: null, index: '1.000300',
     tune: true, walkforward: true, folds: 4, yahooRange: '3y',
   };
   for (let i = 2; i < argv.length; i++) {
     const k = argv[i];
-    if (k === '--bars') a.bars = parseInt(argv[++i], 10) || 640;
+    if (k === '--bars') a.bars = parseInt(argv[++i], 10) || BARS_V2;
     else if (k === '--split') a.split = parseFloat(argv[++i]) || 0.6;
     else if (k === '--codes') a.codes = argv[++i].split(',').map((s) => s.trim()).filter(Boolean);
     else if (k === '--index') a.index = argv[++i];
@@ -69,133 +68,6 @@ function parseArgs(argv) {
     else if (k === '--yahoo-range') a.yahooRange = argv[++i];
   }
   return a;
-}
-
-// ------------------------------------------------------------ Yahoo 历史序列
-
-/** 拉 Yahoo 日线收盘序列 → [{date:'YYYY-MM-DD', close}] */
-async function fetchYahooSeries(symbol, range) {
-  const u = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?range=${range}&interval=1d`;
-  const { text } = await market.httpGet(u, { headers: { 'User-Agent': 'Mozilla/5.0' } });
-  const j = JSON.parse(text);
-  const res = j && j.chart && j.chart.result && j.chart.result[0];
-  if (!res) throw new Error('Yahoo 返回异常：' + symbol);
-  const ts = res.timestamp || [];
-  const closes = (res.indicators && res.indicators.quote && res.indicators.quote[0].close) || [];
-  const out = [];
-  for (let i = 0; i < ts.length; i++) {
-    const c = closes[i];
-    if (c == null) continue;
-    out.push({ date: new Date(ts[i] * 1000).toISOString().slice(0, 10), close: c });
-  }
-  return out;
-}
-
-/**
- * 把海外序列按「日期严格小于 A股交易日」对齐到 A股 K 线。
- *
- * ⚠️ 这是防未来函数的关键：A股 T 日收盘时决策，美股 T 日收盘发生在
- * A股 T 日收盘之后，因此只能用最新一个 date < T 的美股收盘价。
- * 直接用同日对齐会把"当天晚上才知道的信息"喂给模型，回测准确率会被凭空抬高。
- */
-function alignLag1(stockKlines, series) {
-  const out = new Array(stockKlines.length).fill(null);
-  if (!series || !series.length) return out;
-  const dates = series.map((x) => x.date);
-  const closes = series.map((x) => x.close);
-  for (let i = 0; i < stockKlines.length; i++) {
-    const d = stockKlines[i].date;
-    let lo = 0, hi = dates.length - 1, pos = -1;
-    while (lo <= hi) {
-      const mid = (lo + hi) >> 1;
-      if (dates[mid] < d) { pos = mid; lo = mid + 1; } else hi = mid - 1;
-    }
-    out[i] = pos >= 0 ? closes[pos] : null;
-  }
-  return out;
-}
-
-/** 由对齐后的收盘序列派生：当日涨跌%、N日动量% */
-function deriveSeries(aligned, momDays) {
-  const n = aligned.length;
-  const chg = new Array(n).fill(null);
-  const mom = new Array(n).fill(null);
-  for (let i = 1; i < n; i++) {
-    if (aligned[i] != null && aligned[i - 1] != null && aligned[i - 1] !== 0) {
-      chg[i] = (aligned[i] - aligned[i - 1]) / aligned[i - 1] * 100;
-    }
-  }
-  for (let i = 0; i < n; i++) {
-    const j = i - (momDays || 20);
-    if (aligned[i] != null && j >= 0 && aligned[j] != null && aligned[j] !== 0) {
-      mom[i] = (aligned[i] - aligned[j]) / aligned[j] * 100;
-    }
-  }
-  return { chg, mom };
-}
-
-// ------------------------------------------------------------ 数据准备
-
-/** 把指数序列按日期对齐到个股 K 线（A股指数与个股同交易日，可同日对齐） */
-function buildIndexContext(stockKlines, indexKlines) {
-  const idxInd = computeAll(indexKlines);
-  const byDate = new Map();
-  for (let i = 0; i < indexKlines.length; i++) {
-    byDate.set(indexKlines[i].date, { close: indexKlines[i].close, ma60: idxInd.ma60[i], atr: idxInd.atr[i] });
-  }
-  const n = stockKlines.length;
-  const indexAligned = new Array(n).fill(null);
-  const indexMa60Aligned = new Array(n).fill(null);
-  const indexAtrPctAligned = new Array(n).fill(null);
-  for (let i = 0; i < n; i++) {
-    let rec = byDate.get(stockKlines[i].date);
-    for (let back = 1; back <= 5 && !rec; back++) {
-      const dd = stockKlines[i - back] && stockKlines[i - back].date;
-      if (dd) rec = byDate.get(dd);
-    }
-    if (!rec) continue;
-    indexAligned[i] = rec.close;
-    indexMa60Aligned[i] = rec.ma60;
-    indexAtrPctAligned[i] = (rec.atr != null && rec.close) ? rec.atr / rec.close * 100 : null;
-  }
-  return { indexAligned, indexMa60Aligned, indexAtrPctAligned };
-}
-
-/**
- * 生成事件流：每个 (标的, 日期, 周期) 一条
- * 事件 = { date, code, i, horizon, votes, y, regime, price, futureClose, fwdRetPct }
- */
-function buildEvents(records) {
-  const events = [];
-  for (const rec of records) {
-    const { code, klines, ind, ctx } = rec;
-    for (let i = 60; i < klines.length - 1; i++) {
-      const votes = extractVotes(klines, ind, i, ctx);
-      if (!votes || Object.keys(votes).length === 0) continue;
-      const price = klines[i].close;
-      if (!(price > 0)) continue;
-      const regime = rl.regimeOf({
-        indexPrice: ctx.indexAligned[i],
-        indexMa60: ctx.indexMa60Aligned[i],
-        atrPct: (ctx.indexAtrPctAligned[i] != null)
-          ? ctx.indexAtrPctAligned[i]
-          : (ind.atr[i] ? ind.atr[i] / price * 100 : null),
-      });
-      for (const h of rl.HORIZONS) {
-        const j = i + rl.HORIZON_DAYS[h];
-        if (j >= klines.length) continue;
-        const fc = klines[j].close;
-        events.push({
-          date: klines[i].date, code, i, horizon: h, votes, regime, price,
-          futureClose: fc,
-          y: fc >= price ? 1 : 0,
-          fwdRetPct: +((fc - price) / price * 100).toFixed(4),
-        });
-      }
-    }
-  }
-  events.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : (a.code < b.code ? -1 : 1)));
-  return events;
 }
 
 // ------------------------------------------------------------ 评估
@@ -520,59 +392,21 @@ async function main() {
   console.log(`标的池：${codes.length} 个　日K：${args.bars} 根`);
   console.log('');
 
-  // 1) 指数
-  let indexKlines = [];
-  try {
-    const r = await market.fetchIndexKlineAuto(args.index, args.bars);
-    indexKlines = r.klines;
-    console.log(`[指数] 沪深300 ${indexKlines.length} 根（${indexKlines[0].date} ~ ${indexKlines[indexKlines.length - 1].date}）来源 ${r.source}`);
-  } catch (e) {
-    console.warn('[指数] 拉取失败，大盘专家将退化为中性：' + e.message);
+  // 1~3) 一次性拉取全量数据集（指数 + Yahoo 海外序列 + 全部标的）
+  const ds = await fetchDataset({
+    codes, bars: args.bars, yahooRange: args.yahooRange, index: args.index,
+    onProgress: (d, total) => { if (d % 10 === 0) console.log(`  …已拉取 ${d}/${total}`); },
+  });
+  const { records, yahoo, indexKlines } = ds;
+  if (indexKlines.length) {
+    console.log(`[指数] 沪深300 ${indexKlines.length} 根（${indexKlines[0].date} ~ ${indexKlines[indexKlines.length - 1].date}）来源 ${ds.indexSource}`);
+  } else {
+    console.warn('[指数] 拉取失败，大盘专家将退化为中性');
   }
-
-  // 2) 海外与宏观（Yahoo，可训练）
-  const yahoo = {};
-  for (const [key, sym] of [['sox', '^SOX'], ['us10y', '^TNX'], ['spx', '^GSPC']]) {
-    try {
-      yahoo[key] = await fetchYahooSeries(sym, args.yahooRange);
-      console.log(`[海外] ${sym} ${yahoo[key].length} 根（${yahoo[key][0].date} ~ ${yahoo[key][yahoo[key].length - 1].date}）`);
-      await new Promise((r) => setTimeout(r, 150));
-    } catch (e) {
-      console.warn(`[海外] ${sym} 拉取失败：${e.message}`);
-    }
+  for (const k of Object.keys(yahoo)) {
+    console.log(`[海外] ${k} ${yahoo[k].length} 根（${yahoo[k][0].date} ~ ${yahoo[k][yahoo[k].length - 1].date}）`);
   }
-  console.log('');
-
-  // 3) 个股/ETF K线
-  const records = [];
-  let failed = 0, done = 0;
-  for (const code of codes) {
-    try {
-      const { klines } = await market.fetchTencentKline('day', args.bars, code);
-      if (!klines || klines.length < 90) { failed++; continue; }
-      const ind = computeAll(klines);
-      const idx = buildIndexContext(klines, indexKlines);
-      const soxD = deriveSeries(alignLag1(klines, yahoo.sox), 20);
-      const tnxD = deriveSeries(alignLag1(klines, yahoo.us10y), 20);
-      const spxD = deriveSeries(alignLag1(klines, yahoo.spx), 20);
-      records.push({
-        code, klines, ind,
-        ctx: {
-          indexAligned: idx.indexAligned,
-          indexMa60Aligned: idx.indexMa60Aligned,
-          indexAtrPctAligned: idx.indexAtrPctAligned,
-          soxChgAligned: soxD.chg, soxMomAligned: soxD.mom,
-          us10yChgAligned: tnxD.chg, spxChgAligned: spxD.chg,
-        },
-      });
-      done++;
-      if (done % 10 === 0) console.log(`  …已拉取 ${done}/${codes.length}`);
-      await new Promise((r) => setTimeout(r, 60));
-    } catch (e) {
-      failed++;
-    }
-  }
-  console.log(`[行情] 成功 ${records.length} 个标的，失败/跳过 ${failed} 个`);
+  console.log(`[行情] 成功 ${records.length} 个标的，失败/跳过 ${ds.failed} 个`);
   if (!records.length) { console.error('没有可用数据，退出。'); process.exit(1); }
   const span = records.map((r) => r.klines.length);
   const avgBars = +(span.reduce((a, b) => a + b, 0) / span.length).toFixed(0);

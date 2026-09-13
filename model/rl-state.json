@@ -1,11 +1,34 @@
 {
   "version": 1,
+  "activeExperts": [
+    "mom",
+    "mom5",
+    "trend",
+    "rsiRev",
+    "macdDir",
+    "kdj",
+    "volS",
+    "obv",
+    "mfi",
+    "boll",
+    "closePos",
+    "rangePos",
+    "indexS",
+    "idxMom",
+    "rel",
+    "soxS",
+    "soxMom",
+    "us10y",
+    "spxS",
+    "fund",
+    "senti"
+  ],
   "eta": 0.05,
   "lossType": "mixed",
   "discount": 1,
   "floor": 0.012,
   "rounds": 84972,
-  "updatedAt": "2026-09-13T04:23:03.270Z",
+  "updatedAt": "2026-09-13T04:29:36.545Z",
   "horizons": {
     "d1": {
       "weights": {
@@ -13998,7 +14021,7 @@
     "gamma": 1,
     "lossType": "mixed",
     "experts": 21,
-    "at": "2026-09-13T04:22:57.493Z"
+    "at": "2026-09-13T04:29:30.574Z"
   },
   "tradingPolicy": {
     "thresholds": {
