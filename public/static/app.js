@@ -281,16 +281,56 @@
     const p = r.prediction, el = $('#predictPanel'), elCards = $('#predictCards');
     const nm = { d1: '1天', d3: '3天', w1: '1周', m1: '1月' };
     const arrow = (d) => (d === '看涨' ? '↑' : d === '看跌' ? '↓' : '→');
+    const sigLabel = { buy: '✅ 达到买入阈值', avoid: '⛔ 达到回避阈值', neutral: '⏸ 未达阈值（观望）' };
     const cardsHtml = ['d1', 'd3', 'w1', 'm1'].map((k) => {
       const x = p[k];
       const cls = x.dir === '看涨' ? 'bull' : (x.dir === '看跌' ? 'bear' : 'flat');
+      // 展示"可信概率"（Platt 标定后），同时把原始概率与打折幅度如实标注
+      let probHtml = '<div class="s">可信概率 涨 <b>' + x.upProb + '%</b> / 跌 ' + x.downProb + '%</div>';
+      if (x.calibrated && x.upProbRawLearned != null && x.upProbRawLearned !== x.upProb) {
+        probHtml += '<div class="s muted">学习器原始 ' + x.upProbRawLearned + '% → 标定 ' + x.upProb + '%</div>';
+      }
+      if (x.upProbRawModel != null && x.upProbRawModel !== x.upProb) {
+        probHtml += '<div class="s muted">（手工模型另给 ' + x.upProbRawModel + '%）</div>';
+      }
+      let sigHtml = '';
+      if (x.signal) {
+        const sc = x.signal === 'buy' ? 'bull' : x.signal === 'avoid' ? 'bear' : 'flat';
+        sigHtml = '<div class="s ' + sc + '">' + (sigLabel[x.signal] || x.signal) + '（阈值 ' + x.threshold + '，样本外胜率 ' + (x.thresholdWinRate == null ? '--' : (x.thresholdWinRate * 100).toFixed(0) + '%') + '）</div>';
+      }
       return '<div class="pr-card"><div class="n">' + nm[k] + '</div>' +
         '<div class="v ' + cls + '">' + arrow(x.dir) + ' ' + x.dir + '</div>' +
         '<div class="s">预期 ' + (x.expectedChg >= 0 ? '+' : '') + x.expectedChg + '% → ' + fmtPrice(x.expectedPrice) + '</div>' +
-        '<div class="s">涨 ' + x.upProb + '% / 跌 ' + x.downProb + '%</div>' +
-        '<div class="s">高点 ' + fmtPrice(x.priceHigh) + ' / 低点 ' + fmtPrice(x.priceLow) + '</div></div>';
+        probHtml +
+        '<div class="s">高点 ' + fmtPrice(x.priceHigh) + ' / 低点 ' + fmtPrice(x.priceLow) + '</div>' + sigHtml + '</div>';
     }).join('');
-    const summaryHtml = '<div class="pr-summary">综合（未来1周）：' + arrow(p.summary.dir) + p.summary.dir + '，上涨概率 ' + p.summary.upProb + '%<br/><span class="muted">' + p.summary.keySignals.join(' · ') + '</span></div>';
+    const live = p.live || r.live;
+    let summaryHtml = '<div class="pr-summary">综合（未来1周）：' + arrow(p.summary.dir) + p.summary.dir + '，<b>可信上涨概率 ' + p.summary.upProb + '%</b>' +
+      (p.summary.upProbRaw != null && p.summary.upProbRaw !== p.summary.upProb ? '（模型原始 ' + p.summary.upProbRaw + '%）' : '') +
+      '<br/><span class="muted">' + (p.summary.keySignals || []).join(' · ') + '</span>';
+    if (live && live.ok) {
+      const M = live.model || {};
+      const tp = M.tradingPolicy && M.tradingPolicy.thresholds ? M.tradingPolicy.thresholds : {};
+      summaryHtml += '<br/><span class="muted">市场状态 ' + live.regime + '　·　Hedge 学习器：' + (M.experts || '--') + ' 专家 / ' + (M.universeSize || '--') + ' 标的 / ' + (M.samples || 0).toLocaleString() + ' 样本　·　损失函数 ' + (M.lossType || '--') + '　·　概率标定 ' + (M.calibrated ? '已启用' : '未启用') + '</span>';
+      const contrib = (live.contributions || []).slice(0, 6);
+      if (contrib.length) {
+        summaryHtml += '<br/><span class="muted">主导专家：' + contrib.map((c) => c.label + (c.contribution > 0 ? ' +' : ' ') + c.contribution).join('　') + '</span>';
+      }
+      summaryHtml += '<br/><span class="muted">实盘阈值（拟合集含费期望最优）：' + ['d1', 'd3', 'w1', 'm1'].filter((k) => tp[k]).map((k) => nm[k] + ' ' + tp[k].threshold + (tp[k].winRate != null ? '（胜率 ' + (tp[k].winRate * 100).toFixed(0) + '%）' : '')).join('　') + '</span>';
+    }
+    summaryHtml += '</div>';
+    // 多周期共振信号（回测里胜率最高的下单方式）
+    const conf = live && live.confluence;
+    if (conf) {
+      const bt = conf.backtest || {};
+      const items = (conf.met || []).map((m) =>
+        '<span class="' + (m.pass ? 'bull' : 'flat') + '" style="margin-right:10px">' + m.label + ' ' + m.upProb + '%' + (m.pass ? ' ✓' : ' ✗') + '（阈值 ' + (m.threshold * 100).toFixed(0) + '%）</span>').join('');
+      summaryHtml += '<div class="pr-summary" style="border-top:1px dashed var(--border);margin-top:6px;padding-top:6px">' +
+        '<b>多周期共振</b> ' + (conf.allPass ? '<span class="bull">✅ 三周期全部达标 —— 可执行买入</span>' : '<span class="flat">⏸ 未全部达标 —— 继续观望</span>') +
+        '<br/>' + items +
+        '<br/><span class="muted">回测（含费）：验证 ' + (bt.valWinRate == null ? '--' : (bt.valWinRate * 100).toFixed(1) + '%') + '（' + (bt.valTrades || 0) + '笔）　测试 <b>' + (bt.testWinRate == null ? '--' : (bt.testWinRate * 100).toFixed(1) + '%') + '</b>（' + (bt.testTrades || 0) + '笔，单笔 ' + (bt.testExpectancy == null ? '--' : bt.testExpectancy + '%') + '）</span>' +
+        '</div>';
+    }
     if (el) el.innerHTML = cardsHtml + summaryHtml;
     if (elCards) elCards.innerHTML = cardsHtml + summaryHtml;
     const pn = $('#predictName');
@@ -884,16 +924,46 @@
       const meta = rlData.meta || {};
       const rep = rlData.report || {};
       let h = '<div class="muted">Hedge 在线学习 · 学习率 η=' + meta.eta + ' · 遗忘因子 γ=' + meta.discount + ' · 权重下限=' + meta.floor + ' · 已学习 ' + (meta.rounds || 0) + ' 轮</div>';
+      const cfg = rep.config || {};
+      if (cfg.universeSize) {
+        h += '<div class="muted">训练配置：<b>' + cfg.universeSize + ' 个标的</b> · 平均 ' + cfg.avgBars + ' 根日K · <b>' + cfg.experts + ' 个专家</b> · 海外序列 ' + (cfg.yahoo || []).join('/') + '（滞后1日） · 损失函数 <b>' + cfg.lossType + '</b> · η=' + cfg.eta + ' · 训练 ' + (cfg.trainSamples + cfg.valSamples).toLocaleString() + ' / 测试 ' + cfg.testSamples.toLocaleString() + ' 样本</div>';
+      }
       if (rep.learnedTest) {
-        h += '<table class="data-table"><thead><tr><th>周期</th><th>朴素基准</th><th>手工权重</th><th>学习后(样本外)</th><th>学习后 Brier</th><th>技巧分</th></tr></thead><tbody>';
+        h += '<div class="rl-title" style="margin-top:10px">① 样本外方向准确率（测试集）</div>';
+        h += '<table class="data-table"><thead><tr><th>周期</th><th>朴素基准</th><th>手工权重</th><th>学习后(样本外)</th><th>Brier</th></tr></thead><tbody>';
         ['d1', 'd3', 'w1', 'm1'].forEach((k) => {
           const lab = (rlData.horizons[k] || {}).label || k;
           const nv = (rep.naiveTest || {})[k] || {}, pr = (rep.priorTest || {})[k] || {}, le = rep.learnedTest[k] || {};
-          h += '<tr><td>' + lab + '</td><td>' + pct(nv.hitRate) + '</td><td>' + pct(pr.hitRate) + '</td><td><b>' + pct(le.hitRate) + '</b></td><td>' + le.brier + '</td><td>' + (rep.summary && rep.summary.horizons && rep.summary.horizons[k] ? rep.summary.horizons[k].skillScore : '--') + '</td></tr>';
+          const gain = (le.hitRate != null && pr.hitRate != null) ? (le.hitRate - pr.hitRate) * 100 : null;
+          h += '<tr><td>' + lab + '</td><td>' + pct(nv.hitRate) + '</td><td>' + pct(pr.hitRate) + '</td><td><b>' + pct(le.hitRate) + '</b>' + (gain != null && gain > 0 ? ' <span style="color:#1a7f37">+' + gain.toFixed(1) + 'pt</span>' : '') + '</td><td>' + le.brier + '</td></tr>';
         });
         h += '</tbody></table>';
-        h += '<div class="warn-box">⚠️ 上表 Brier 约 0.25、技巧分≤0，意味着<b>模型的概率输出目前没有超过"直接猜基础上涨率"</b>。方向上有约 52~53% 的微弱优势，但<b>概率幅度是过度自信的</b>——所以系统会按标定把"70%"压回约 55~58%。这是如实报告的能力边界，不是失败。</div>';
       }
+      if (rep.tradingTest && rep.chosenThreshold) {
+        h += '<div class="rl-title" style="margin-top:12px">② 含费实盘回测（测试集）—— 这才是"胜率"</div>';
+        h += '<table class="data-table"><thead><tr><th>周期</th><th>阈值</th><th>交易数</th><th>胜率</th><th>单笔期望</th><th>单笔夏普</th><th>标的均值</th></tr></thead><tbody>';
+        ['d1', 'd3', 'w1', 'm1'].forEach((k) => {
+          const lab = (rlData.horizons[k] || {}).label || k;
+          const list = rep.tradingTest[k] || [];
+          const th = (rep.chosenThreshold || {})[k];
+          const t = list.find((x) => x.threshold === th) || list[0] || {};
+          const beat = (t.avgRetPct != null && t.baselineAvgPct != null && t.avgRetPct > t.baselineAvgPct);
+          h += '<tr><td>' + lab + '</td><td>' + (t.threshold == null ? '--' : t.threshold) + '</td><td>' + (t.trades || 0) + '</td><td><b>' + pct(t.winRate) + '</b></td><td' + (beat ? ' style="color:#1a7f37"' : '') + '>' + (t.avgRetPct == null ? '--' : (t.avgRetPct > 0 ? '+' : '') + t.avgRetPct + '%') + '</td><td>' + (t.sharpe == null ? '--' : t.sharpe) + '</td><td>' + (t.baselineAvgPct == null ? '--' : t.baselineAvgPct + '%') + '</td></tr>';
+        });
+        h += '</tbody></table>';
+        h += '<div class="muted">已计入双边费用（ETF 0.08% / 个股 0.18%）。阈值在<b>验证集</b>上按含费期望选出，此处为<b>测试集</b>复核。高阈值档位交易数少（百余笔），胜率会偏高，请结合"交易数"一起看。</div>';
+      }
+      if (rep.walkForward && rep.walkForward.length) {
+        h += '<div class="rl-title" style="margin-top:12px">③ Walk-forward 滚动验证（最接近实盘）</div>';
+        h += '<table class="data-table compact"><thead><tr><th>折</th><th>测试区间</th><th>训练样本</th><th>方向命中率</th></tr></thead><tbody>';
+        let sum = 0;
+        rep.walkForward.forEach((w) => {
+          sum += w.hitRate;
+          h += '<tr><td>' + w.fold + '</td><td>' + w.testStart + ' ~ ' + w.testEnd + '</td><td>' + w.trainN.toLocaleString() + '</td><td><b>' + pct(w.hitRate) + '</b></td></tr>';
+        });
+        h += '</tbody></table><div class="muted">平均 <b>' + pct(sum / rep.walkForward.length) + '</b>（' + rep.walkForward.length + ' 折）。各折有波动，说明优势不稳定 —— 不要按单次结果下注。</div>';
+      }
+      h += '<div class="warn-box">⚠️ 诚实边界：方向上有约 +2~6pt 的样本外优势，但<b>概率的技巧分仍 ≤ 0</b>（Brier ≈ 0.25），说明概率幅度本身不提供额外信息。系统已用 Platt 标定把"70%"压回可信区间，并只在超过阈值时才给买入信号。<b>优势很薄，必须靠止损和仓位控制，而不是靠预测。</b></div>';
       ['d1', 'd3', 'w1', 'm1'].forEach((k) => {
         const hz = rlData.horizons[k]; if (!hz) return;
         const cal = hz.calibration || {};

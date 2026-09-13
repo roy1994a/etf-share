@@ -287,8 +287,20 @@ function renderReport(analysis, instruction, state, quote, klines, period, rotat
     const bearMarket = !!(extras.index && extras.index.ma60 && extras.index.price < extras.index.ma60);
     const rotation = Engine.pickRotation(poolResults, { bearMarket, sentimentIndex: extras.hhxg ? extras.hhxg.sentimentIndex : null });
 
-    // 前瞻预测（1天/3天/1周/1月）
-    const prediction = Engine.predict(klines, analysis, extras);
+    // 前瞻预测（1天/3天/1周/1月）—— 已接入「Hedge 学到的权重 + Platt 标定后的概率」
+    let prediction;
+    try {
+      const RL = require('./lib/rl.js');
+      const LP = require('./lib/live-predict.js');
+      const AutoLedger = require('./lib/auto-ledger.js');
+      const { fetchGlobalHistory } = require('./lib/market.js');
+      const state = RL.loadStateWithFallback();
+      const hist = await fetchGlobalHistory({ bars: 640 });
+      prediction = LP.predictWithEngine(Engine, Indicators, klines, quote, extras, state, hist, AutoLedger.liveVotesFromExtras(extras)).prediction;
+    } catch (e) {
+      prediction = Engine.predict(klines, analysis, extras);
+      console.warn('（未接入学习器，回退手工权重：' + e.message + '）');
+    }
 
     const report = renderReport(analysis, instruction, state, quote, klines, PERIOD, rotation, prediction);
     console.log(report);

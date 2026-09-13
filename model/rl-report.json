@@ -1,11 +1,22 @@
 {
-  "trainedAt": "2026-09-13T03:45:31.570Z",
+  "trainedAt": "2026-09-13T04:23:03.272Z",
   "config": {
+    "version": 2,
+    "universeSize": 47,
     "codes": [
+      "510300",
+      "510500",
+      "588000",
+      "159915",
+      "512100",
+      "510880",
       "159516",
-      "512010",
-      "512400",
-      "512660",
+      "512480",
+      "512760",
+      "588200",
+      "515000",
+      "512720",
+      "159819",
       "688981",
       "688012",
       "002371",
@@ -15,335 +26,2259 @@
       "688008",
       "688783",
       "300475",
-      "159981",
       "002156",
+      "512010",
+      "512170",
+      "512400",
+      "512660",
+      "512800",
+      "512880",
+      "512690",
+      "515030",
+      "515790",
+      "159611",
+      "512200",
+      "516950",
+      "512980",
+      "159869",
+      "159981",
+      "518880",
+      "513050",
+      "513100",
+      "159941",
+      "512070",
+      "516110",
+      "159825",
       "002470",
       "159918"
     ],
-    "bars": 400,
-    "split": 0.6,
-    "trainCut": "2026-02-12",
-    "testCut": "2026-06-04",
-    "trainSamples": 12796,
-    "valSamples": 4760,
-    "testSamples": 4301,
-    "eta": 0.08,
+    "bars": 640,
+    "avgBars": 631,
+    "yahoo": [
+      "sox",
+      "us10y",
+      "spx"
+    ],
+    "yahooRange": "3y",
+    "trainCut": "2025-09-19",
+    "testCut": "2026-03-24",
+    "trainSamples": 63148,
+    "valSamples": 21824,
+    "testSamples": 20915,
+    "eta": 0.05,
     "gamma": 1,
-    "index": "1.000300",
-    "at": "2026-09-13T03:45:31.483Z"
+    "lossType": "mixed",
+    "experts": 21,
+    "at": "2026-09-13T04:22:57.493Z"
   },
   "priorTest": {
     "d1": {
-      "n": 1190,
-      "hitRate": 0.5109,
-      "brier": 0.275
+      "n": 5546,
+      "hitRate": 0.4899,
+      "brier": 0.2682
     },
     "d3": {
-      "n": 1156,
-      "hitRate": 0.5017,
-      "brier": 0.332
+      "n": 5452,
+      "hitRate": 0.5147,
+      "brier": 0.284
     },
     "w1": {
-      "n": 1122,
-      "hitRate": 0.467,
-      "brier": 0.3859
+      "n": 5358,
+      "hitRate": 0.5021,
+      "brier": 0.299
     },
     "m1": {
-      "n": 833,
-      "hitRate": 0.4286,
-      "brier": 0.4365
+      "n": 4559,
+      "hitRate": 0.4641,
+      "brier": 0.3174
     }
   },
   "learnedTest": {
     "d1": {
-      "n": 1190,
-      "hitRate": 0.5277,
-      "brier": 0.2572,
-      "calibHitRate": 0.5277,
-      "calibBrier": 0.2491
+      "n": 5546,
+      "hitRate": 0.5128,
+      "brier": 0.2528,
+      "calibHitRate": 0.5128,
+      "calibBrier": 0.256
     },
     "d3": {
-      "n": 1156,
-      "hitRate": 0.5294,
-      "brier": 0.2568,
-      "calibHitRate": 0.5294,
-      "calibBrier": 0.2511
+      "n": 5452,
+      "hitRate": 0.5222,
+      "brier": 0.2584,
+      "calibHitRate": 0.5222,
+      "calibBrier": 0.2514
     },
     "w1": {
-      "n": 1122,
-      "hitRate": 0.5214,
-      "brier": 0.2538,
-      "calibHitRate": 0.5214,
-      "calibBrier": 0.2502
+      "n": 5358,
+      "hitRate": 0.5213,
+      "brier": 0.2737,
+      "calibHitRate": 0.5213,
+      "calibBrier": 0.265
     },
     "m1": {
-      "n": 833,
-      "hitRate": 0.5222,
-      "brier": 0.2816,
-      "calibHitRate": 0.5222,
-      "calibBrier": 0.2803
+      "n": 4559,
+      "hitRate": 0.5451,
+      "brier": 0.274,
+      "calibHitRate": 0.5451,
+      "calibBrier": 0.2522
     }
   },
   "priorFit": {
     "d1": {
-      "n": 4389,
-      "hitRate": 0.5101,
-      "brier": 0.2746
+      "n": 21243,
+      "hitRate": 0.5006,
+      "brier": 0.2629
     },
     "d3": {
-      "n": 4389,
-      "hitRate": 0.522,
-      "brier": 0.3211
+      "n": 21243,
+      "hitRate": 0.5074,
+      "brier": 0.2862
     },
     "w1": {
-      "n": 4389,
-      "hitRate": 0.5177,
-      "brier": 0.3539
+      "n": 21243,
+      "hitRate": 0.5119,
+      "brier": 0.2899
     },
     "m1": {
-      "n": 4389,
-      "hitRate": 0.5439,
-      "brier": 0.3316
+      "n": 21243,
+      "hitRate": 0.5121,
+      "brier": 0.2864
     }
   },
   "learnedFit": {
     "d1": {
-      "n": 4389,
-      "hitRate": 0.5131,
-      "brier": 0.2661,
-      "calibHitRate": 0.5131,
-      "calibBrier": 0.2506
+      "n": 21243,
+      "hitRate": 0.5115,
+      "brier": 0.2535,
+      "calibHitRate": 0.5115,
+      "calibBrier": 0.2567
     },
     "d3": {
-      "n": 4389,
-      "hitRate": 0.5231,
-      "brier": 0.2661,
-      "calibHitRate": 0.5231,
-      "calibBrier": 0.2538
+      "n": 21243,
+      "hitRate": 0.5132,
+      "brier": 0.2563,
+      "calibHitRate": 0.5132,
+      "calibBrier": 0.2514
     },
     "w1": {
-      "n": 4389,
-      "hitRate": 0.5247,
-      "brier": 0.2617,
-      "calibHitRate": 0.5247,
-      "calibBrier": 0.2526
+      "n": 21243,
+      "hitRate": 0.5113,
+      "brier": 0.2662,
+      "calibHitRate": 0.5113,
+      "calibBrier": 0.2598
     },
     "m1": {
-      "n": 4389,
-      "hitRate": 0.5805,
-      "brier": 0.2437,
-      "calibHitRate": 0.5805,
-      "calibBrier": 0.2431
+      "n": 21243,
+      "hitRate": 0.5872,
+      "brier": 0.2525,
+      "calibHitRate": 0.5872,
+      "calibBrier": 0.2414
     }
   },
   "naiveTest": {
     "d1": {
-      "n": 1190,
-      "hitRate": 0.5059,
-      "brier": 0.25
+      "n": 5546,
+      "hitRate": 0.5157,
+      "brier": 0.25,
+      "baseRate": 0.5157
     },
     "d3": {
-      "n": 1156,
-      "hitRate": 0.5087,
-      "brier": 0.25
+      "n": 5452,
+      "hitRate": 0.5145,
+      "brier": 0.25,
+      "baseRate": 0.5145
     },
     "w1": {
-      "n": 1122,
-      "hitRate": 0.5098,
-      "brier": 0.25
+      "n": 5358,
+      "hitRate": 0.5075,
+      "brier": 0.25,
+      "baseRate": 0.5075
     },
     "m1": {
-      "n": 833,
-      "hitRate": 0.587,
-      "brier": 0.25
+      "n": 4559,
+      "hitRate": 0.5227,
+      "brier": 0.25,
+      "baseRate": 0.5227
     }
   },
-  "valReport": [
+  "grid": [
     {
-      "eta": 0.03,
+      "eta": 0.05,
       "gamma": 1,
-      "brier": 0.2639,
-      "hitRate": 0.5305
+      "lossType": "brier",
+      "score": 0.3172,
+      "hitRate": 0.4819,
+      "brier": 0.2793,
+      "trades": 9178
     },
     {
-      "eta": 0.03,
-      "gamma": 0.999,
-      "brier": 0.2639,
-      "hitRate": 0.5305
-    },
-    {
-      "eta": 0.03,
-      "gamma": 0.995,
-      "brier": 0.2639,
-      "hitRate": 0.5305
-    },
-    {
-      "eta": 0.03,
-      "gamma": 0.99,
-      "brier": 0.2639,
-      "hitRate": 0.5305
-    },
-    {
-      "eta": 0.08,
+      "eta": 0.05,
       "gamma": 1,
-      "brier": 0.2613,
-      "hitRate": 0.5422
+      "lossType": "directional",
+      "score": 0.5166,
+      "hitRate": 0.4836,
+      "brier": 0.3207,
+      "trades": 7909
     },
     {
-      "eta": 0.08,
-      "gamma": 0.999,
-      "brier": 0.2613,
-      "hitRate": 0.5422
-    },
-    {
-      "eta": 0.08,
-      "gamma": 0.995,
-      "brier": 0.2613,
-      "hitRate": 0.5422
-    },
-    {
-      "eta": 0.08,
-      "gamma": 0.99,
-      "brier": 0.2613,
-      "hitRate": 0.5422
-    },
-    {
-      "eta": 0.15,
+      "eta": 0.05,
       "gamma": 1,
-      "brier": 0.262,
-      "hitRate": 0.5437
+      "lossType": "mixed",
+      "score": 0.5963,
+      "hitRate": 0.4885,
+      "brier": 0.2925,
+      "trades": 7663
     },
     {
-      "eta": 0.15,
-      "gamma": 0.999,
-      "brier": 0.262,
-      "hitRate": 0.5437
+      "eta": 0.05,
+      "gamma": 0.997,
+      "lossType": "brier",
+      "score": 0.3172,
+      "hitRate": 0.4819,
+      "brier": 0.2793,
+      "trades": 9178
     },
     {
-      "eta": 0.15,
-      "gamma": 0.995,
-      "brier": 0.262,
-      "hitRate": 0.5437
+      "eta": 0.05,
+      "gamma": 0.997,
+      "lossType": "directional",
+      "score": 0.5166,
+      "hitRate": 0.4836,
+      "brier": 0.3207,
+      "trades": 7909
     },
     {
-      "eta": 0.15,
-      "gamma": 0.99,
-      "brier": 0.262,
-      "hitRate": 0.5437
+      "eta": 0.05,
+      "gamma": 0.997,
+      "lossType": "mixed",
+      "score": 0.5963,
+      "hitRate": 0.4885,
+      "brier": 0.2925,
+      "trades": 7663
     },
     {
-      "eta": 0.3,
+      "eta": 0.12,
       "gamma": 1,
-      "brier": 0.2634,
-      "hitRate": 0.5471
+      "lossType": "brier",
+      "score": 0.373,
+      "hitRate": 0.4905,
+      "brier": 0.2696,
+      "trades": 10590
     },
     {
-      "eta": 0.3,
-      "gamma": 0.999,
-      "brier": 0.2634,
-      "hitRate": 0.5471
+      "eta": 0.12,
+      "gamma": 1,
+      "lossType": "directional",
+      "score": 0.3914,
+      "hitRate": 0.481,
+      "brier": 0.3258,
+      "trades": 9052
     },
     {
-      "eta": 0.3,
-      "gamma": 0.995,
-      "brier": 0.2634,
-      "hitRate": 0.5471
+      "eta": 0.12,
+      "gamma": 1,
+      "lossType": "mixed",
+      "score": 0.4021,
+      "hitRate": 0.4898,
+      "brier": 0.3073,
+      "trades": 9241
     },
     {
-      "eta": 0.3,
-      "gamma": 0.99,
-      "brier": 0.2634,
-      "hitRate": 0.5471
+      "eta": 0.12,
+      "gamma": 0.997,
+      "lossType": "brier",
+      "score": 0.373,
+      "hitRate": 0.4905,
+      "brier": 0.2696,
+      "trades": 10590
+    },
+    {
+      "eta": 0.12,
+      "gamma": 0.997,
+      "lossType": "directional",
+      "score": 0.3914,
+      "hitRate": 0.481,
+      "brier": 0.3258,
+      "trades": 9052
+    },
+    {
+      "eta": 0.12,
+      "gamma": 0.997,
+      "lossType": "mixed",
+      "score": 0.4021,
+      "hitRate": 0.4898,
+      "brier": 0.3073,
+      "trades": 9241
+    },
+    {
+      "eta": 0.25,
+      "gamma": 1,
+      "lossType": "brier",
+      "score": 0.4943,
+      "hitRate": 0.4945,
+      "brier": 0.2854,
+      "trades": 8430
+    },
+    {
+      "eta": 0.25,
+      "gamma": 1,
+      "lossType": "directional",
+      "score": 0.3995,
+      "hitRate": 0.4822,
+      "brier": 0.3199,
+      "trades": 9052
+    },
+    {
+      "eta": 0.25,
+      "gamma": 1,
+      "lossType": "mixed",
+      "score": 0.5059,
+      "hitRate": 0.4934,
+      "brier": 0.2937,
+      "trades": 8490
+    },
+    {
+      "eta": 0.25,
+      "gamma": 0.997,
+      "lossType": "brier",
+      "score": 0.4943,
+      "hitRate": 0.4945,
+      "brier": 0.2854,
+      "trades": 8430
+    },
+    {
+      "eta": 0.25,
+      "gamma": 0.997,
+      "lossType": "directional",
+      "score": 0.3995,
+      "hitRate": 0.4822,
+      "brier": 0.3199,
+      "trades": 9052
+    },
+    {
+      "eta": 0.25,
+      "gamma": 0.997,
+      "lossType": "mixed",
+      "score": 0.5059,
+      "hitRate": 0.4934,
+      "brier": 0.2937,
+      "trades": 8490
+    },
+    {
+      "eta": 0.45,
+      "gamma": 1,
+      "lossType": "brier",
+      "score": 0.4796,
+      "hitRate": 0.4896,
+      "brier": 0.2957,
+      "trades": 8530
+    },
+    {
+      "eta": 0.45,
+      "gamma": 1,
+      "lossType": "directional",
+      "score": 0.3761,
+      "hitRate": 0.4845,
+      "brier": 0.2988,
+      "trades": 9435
+    },
+    {
+      "eta": 0.45,
+      "gamma": 1,
+      "lossType": "mixed",
+      "score": 0.5331,
+      "hitRate": 0.4907,
+      "brier": 0.2959,
+      "trades": 8824
+    },
+    {
+      "eta": 0.45,
+      "gamma": 0.997,
+      "lossType": "brier",
+      "score": 0.4796,
+      "hitRate": 0.4896,
+      "brier": 0.2957,
+      "trades": 8530
+    },
+    {
+      "eta": 0.45,
+      "gamma": 0.997,
+      "lossType": "directional",
+      "score": 0.3761,
+      "hitRate": 0.4845,
+      "brier": 0.2988,
+      "trades": 9435
+    },
+    {
+      "eta": 0.45,
+      "gamma": 0.997,
+      "lossType": "mixed",
+      "score": 0.5331,
+      "hitRate": 0.4907,
+      "brier": 0.2959,
+      "trades": 8824
     }
   ],
+  "walkForward": [
+    {
+      "fold": 1,
+      "trainEnd": "2024-09-30",
+      "testStart": "2024-10-08",
+      "testEnd": "2025-03-28",
+      "trainN": 19788,
+      "testN": 21528,
+      "hitRate": 0.5134,
+      "brier": 0.2734,
+      "byHorizon": {
+        "d1": {
+          "n": 5382,
+          "hitRate": 0.4846,
+          "brier": 0.2824,
+          "calibHitRate": 0.4846,
+          "calibBrier": 0.2884
+        },
+        "d3": {
+          "n": 5382,
+          "hitRate": 0.5104,
+          "brier": 0.2658,
+          "calibHitRate": 0.5104,
+          "calibBrier": 0.2577
+        },
+        "w1": {
+          "n": 5382,
+          "hitRate": 0.5141,
+          "brier": 0.2693,
+          "calibHitRate": 0.5141,
+          "calibBrier": 0.2629
+        },
+        "m1": {
+          "n": 5382,
+          "hitRate": 0.5446,
+          "brier": 0.2763,
+          "calibHitRate": 0.5446,
+          "calibBrier": 0.302
+        }
+      }
+    },
+    {
+      "fold": 2,
+      "trainEnd": "2025-03-28",
+      "testStart": "2025-03-31",
+      "testEnd": "2025-09-16",
+      "trainN": 41316,
+      "testN": 21464,
+      "hitRate": 0.5729,
+      "brier": 0.2602,
+      "byHorizon": {
+        "d1": {
+          "n": 5366,
+          "hitRate": 0.5406,
+          "brier": 0.2489,
+          "calibHitRate": 0.5406,
+          "calibBrier": 0.2495
+        },
+        "d3": {
+          "n": 5366,
+          "hitRate": 0.5449,
+          "brier": 0.2844,
+          "calibHitRate": 0.5449,
+          "calibBrier": 0.2658
+        },
+        "w1": {
+          "n": 5366,
+          "hitRate": 0.5464,
+          "brier": 0.2808,
+          "calibHitRate": 0.5464,
+          "calibBrier": 0.2791
+        },
+        "m1": {
+          "n": 5366,
+          "hitRate": 0.6597,
+          "brier": 0.2268,
+          "calibHitRate": 0.6597,
+          "calibBrier": 0.2299
+        }
+      }
+    },
+    {
+      "fold": 3,
+      "trainEnd": "2025-09-16",
+      "testStart": "2025-09-17",
+      "testEnd": "2026-03-18",
+      "trainN": 62780,
+      "testN": 21628,
+      "hitRate": 0.4889,
+      "brier": 0.2913,
+      "byHorizon": {
+        "d1": {
+          "n": 5407,
+          "hitRate": 0.5097,
+          "brier": 0.2515,
+          "calibHitRate": 0.5097,
+          "calibBrier": 0.2518
+        },
+        "d3": {
+          "n": 5407,
+          "hitRate": 0.5101,
+          "brier": 0.2612,
+          "calibHitRate": 0.5101,
+          "calibBrier": 0.2507
+        },
+        "w1": {
+          "n": 5407,
+          "hitRate": 0.508,
+          "brier": 0.2704,
+          "calibHitRate": 0.508,
+          "calibBrier": 0.2533
+        },
+        "m1": {
+          "n": 5407,
+          "hitRate": 0.428,
+          "brier": 0.3821,
+          "calibHitRate": 0.428,
+          "calibBrier": 0.3168
+        }
+      }
+    },
+    {
+      "fold": 4,
+      "trainEnd": "2026-03-18",
+      "testStart": "2026-03-19",
+      "testEnd": "2026-09-10",
+      "trainN": 84408,
+      "testN": 21479,
+      "hitRate": 0.5049,
+      "brier": 0.2754,
+      "byHorizon": {
+        "d1": {
+          "n": 5687,
+          "hitRate": 0.5138,
+          "brier": 0.2544,
+          "calibHitRate": 0.5138,
+          "calibBrier": 0.2602
+        },
+        "d3": {
+          "n": 5593,
+          "hitRate": 0.5233,
+          "brier": 0.258,
+          "calibHitRate": 0.5233,
+          "calibBrier": 0.2515
+        },
+        "w1": {
+          "n": 5499,
+          "hitRate": 0.5143,
+          "brier": 0.2799,
+          "calibHitRate": 0.5143,
+          "calibBrier": 0.2797
+        },
+        "m1": {
+          "n": 4700,
+          "hitRate": 0.4683,
+          "brier": 0.3092,
+          "calibHitRate": 0.4683,
+          "calibBrier": 0.2774
+        }
+      }
+    }
+  ],
+  "tradingVal": {
+    "d1": [
+      {
+        "horizon": "d1",
+        "threshold": 0.5,
+        "baselineAvgPct": 0.0476,
+        "baselineWinRate": 0.483,
+        "samples": 5456,
+        "trades": 3643,
+        "coverage": 0.6677,
+        "winRate": 0.4746,
+        "avgRetPct": -0.0568,
+        "sdPct": 2.4112,
+        "sharpe": -0.0236,
+        "totalRetPct": -207.03
+      },
+      {
+        "horizon": "d1",
+        "threshold": 0.52,
+        "baselineAvgPct": 0.0476,
+        "baselineWinRate": 0.483,
+        "samples": 5456,
+        "trades": 3185,
+        "coverage": 0.5838,
+        "winRate": 0.4801,
+        "avgRetPct": -0.0433,
+        "sdPct": 2.4275,
+        "sharpe": -0.0178,
+        "totalRetPct": -137.95
+      },
+      {
+        "horizon": "d1",
+        "threshold": 0.54,
+        "baselineAvgPct": 0.0476,
+        "baselineWinRate": 0.483,
+        "samples": 5456,
+        "trades": 2491,
+        "coverage": 0.4566,
+        "winRate": 0.4918,
+        "avgRetPct": -0.0151,
+        "sdPct": 2.4439,
+        "sharpe": -0.0062,
+        "totalRetPct": -37.68
+      },
+      {
+        "horizon": "d1",
+        "threshold": 0.56,
+        "baselineAvgPct": 0.0476,
+        "baselineWinRate": 0.483,
+        "samples": 5456,
+        "trades": 1852,
+        "coverage": 0.3394,
+        "winRate": 0.5124,
+        "avgRetPct": 0.0392,
+        "sdPct": 2.5061,
+        "sharpe": 0.0156,
+        "totalRetPct": 72.63
+      },
+      {
+        "horizon": "d1",
+        "threshold": 0.58,
+        "baselineAvgPct": 0.0476,
+        "baselineWinRate": 0.483,
+        "samples": 5456,
+        "trades": 1382,
+        "coverage": 0.2533,
+        "winRate": 0.5289,
+        "avgRetPct": 0.1213,
+        "sdPct": 2.5836,
+        "sharpe": 0.047,
+        "totalRetPct": 167.66
+      },
+      {
+        "horizon": "d1",
+        "threshold": 0.6,
+        "baselineAvgPct": 0.0476,
+        "baselineWinRate": 0.483,
+        "samples": 5456,
+        "trades": 963,
+        "coverage": 0.1765,
+        "winRate": 0.54,
+        "avgRetPct": 0.0868,
+        "sdPct": 2.5753,
+        "sharpe": 0.0337,
+        "totalRetPct": 83.57
+      },
+      {
+        "horizon": "d1",
+        "threshold": 0.63,
+        "baselineAvgPct": 0.0476,
+        "baselineWinRate": 0.483,
+        "samples": 5456,
+        "trades": 430,
+        "coverage": 0.0788,
+        "winRate": 0.5674,
+        "avgRetPct": 0.0405,
+        "sdPct": 2.5724,
+        "sharpe": 0.0157,
+        "totalRetPct": 17.41
+      },
+      {
+        "horizon": "d1",
+        "threshold": 0.66,
+        "baselineAvgPct": 0.0476,
+        "baselineWinRate": 0.483,
+        "samples": 5456,
+        "trades": 169,
+        "coverage": 0.031,
+        "winRate": 0.6154,
+        "avgRetPct": 0.0478,
+        "sdPct": 2.4809,
+        "sharpe": 0.0193,
+        "totalRetPct": 8.08
+      }
+    ],
+    "d3": [
+      {
+        "horizon": "d3",
+        "threshold": 0.5,
+        "baselineAvgPct": 0.1327,
+        "baselineWinRate": 0.4987,
+        "samples": 5456,
+        "trades": 3784,
+        "coverage": 0.6935,
+        "winRate": 0.4937,
+        "avgRetPct": 0.1428,
+        "sdPct": 4.1841,
+        "sharpe": 0.0341,
+        "totalRetPct": 540.22
+      },
+      {
+        "horizon": "d3",
+        "threshold": 0.52,
+        "baselineAvgPct": 0.1327,
+        "baselineWinRate": 0.4987,
+        "samples": 5456,
+        "trades": 2882,
+        "coverage": 0.5282,
+        "winRate": 0.4955,
+        "avgRetPct": 0.1309,
+        "sdPct": 4.3582,
+        "sharpe": 0.03,
+        "totalRetPct": 377.2
+      },
+      {
+        "horizon": "d3",
+        "threshold": 0.54,
+        "baselineAvgPct": 0.1327,
+        "baselineWinRate": 0.4987,
+        "samples": 5456,
+        "trades": 2039,
+        "coverage": 0.3737,
+        "winRate": 0.5091,
+        "avgRetPct": 0.193,
+        "sdPct": 4.3754,
+        "sharpe": 0.0441,
+        "totalRetPct": 393.49
+      },
+      {
+        "horizon": "d3",
+        "threshold": 0.56,
+        "baselineAvgPct": 0.1327,
+        "baselineWinRate": 0.4987,
+        "samples": 5456,
+        "trades": 1117,
+        "coverage": 0.2047,
+        "winRate": 0.5237,
+        "avgRetPct": 0.4086,
+        "sdPct": 4.6496,
+        "sharpe": 0.0879,
+        "totalRetPct": 456.43
+      },
+      {
+        "horizon": "d3",
+        "threshold": 0.58,
+        "baselineAvgPct": 0.1327,
+        "baselineWinRate": 0.4987,
+        "samples": 5456,
+        "trades": 573,
+        "coverage": 0.105,
+        "winRate": 0.5166,
+        "avgRetPct": 0.3287,
+        "sdPct": 4.693,
+        "sharpe": 0.07,
+        "totalRetPct": 188.35
+      },
+      {
+        "horizon": "d3",
+        "threshold": 0.6,
+        "baselineAvgPct": 0.1327,
+        "baselineWinRate": 0.4987,
+        "samples": 5456,
+        "trades": 161,
+        "coverage": 0.0295,
+        "winRate": 0.472,
+        "avgRetPct": -0.3567,
+        "sdPct": 4.7005,
+        "sharpe": -0.0759,
+        "totalRetPct": -57.44
+      },
+      {
+        "horizon": "d3",
+        "threshold": 0.63,
+        "baselineAvgPct": 0.1327,
+        "baselineWinRate": 0.4987,
+        "samples": 5456,
+        "trades": 15,
+        "coverage": 0.0027,
+        "winRate": 0.2667,
+        "avgRetPct": -3.3535,
+        "sdPct": 7.2648,
+        "sharpe": -0.4616,
+        "totalRetPct": -50.3
+      },
+      {
+        "horizon": "d3",
+        "threshold": 0.66,
+        "baselineAvgPct": 0.1327,
+        "baselineWinRate": 0.4987,
+        "samples": 5456,
+        "trades": 1,
+        "coverage": 0.0002,
+        "winRate": 1,
+        "avgRetPct": 10.9301,
+        "sdPct": 0,
+        "sharpe": null,
+        "totalRetPct": 10.93
+      }
+    ],
+    "w1": [
+      {
+        "horizon": "w1",
+        "threshold": 0.5,
+        "baselineAvgPct": 0.169,
+        "baselineWinRate": 0.4861,
+        "samples": 5456,
+        "trades": 4107,
+        "coverage": 0.7527,
+        "winRate": 0.487,
+        "avgRetPct": 0.1489,
+        "sdPct": 5.4265,
+        "sharpe": 0.0274,
+        "totalRetPct": 611.37
+      },
+      {
+        "horizon": "w1",
+        "threshold": 0.52,
+        "baselineAvgPct": 0.169,
+        "baselineWinRate": 0.4861,
+        "samples": 5456,
+        "trades": 3471,
+        "coverage": 0.6362,
+        "winRate": 0.4829,
+        "avgRetPct": 0.1873,
+        "sdPct": 5.6783,
+        "sharpe": 0.033,
+        "totalRetPct": 650.2
+      },
+      {
+        "horizon": "w1",
+        "threshold": 0.54,
+        "baselineAvgPct": 0.169,
+        "baselineWinRate": 0.4861,
+        "samples": 5456,
+        "trades": 2930,
+        "coverage": 0.537,
+        "winRate": 0.4945,
+        "avgRetPct": 0.2956,
+        "sdPct": 5.9145,
+        "sharpe": 0.05,
+        "totalRetPct": 866
+      },
+      {
+        "horizon": "w1",
+        "threshold": 0.56,
+        "baselineAvgPct": 0.169,
+        "baselineWinRate": 0.4861,
+        "samples": 5456,
+        "trades": 2303,
+        "coverage": 0.4221,
+        "winRate": 0.4907,
+        "avgRetPct": 0.3876,
+        "sdPct": 6.2841,
+        "sharpe": 0.0617,
+        "totalRetPct": 892.72
+      },
+      {
+        "horizon": "w1",
+        "threshold": 0.58,
+        "baselineAvgPct": 0.169,
+        "baselineWinRate": 0.4861,
+        "samples": 5456,
+        "trades": 1843,
+        "coverage": 0.3378,
+        "winRate": 0.484,
+        "avgRetPct": 0.3338,
+        "sdPct": 6.5654,
+        "sharpe": 0.0508,
+        "totalRetPct": 615.17
+      },
+      {
+        "horizon": "w1",
+        "threshold": 0.6,
+        "baselineAvgPct": 0.169,
+        "baselineWinRate": 0.4861,
+        "samples": 5456,
+        "trades": 1364,
+        "coverage": 0.25,
+        "winRate": 0.4883,
+        "avgRetPct": 0.3917,
+        "sdPct": 6.7197,
+        "sharpe": 0.0583,
+        "totalRetPct": 534.25
+      },
+      {
+        "horizon": "w1",
+        "threshold": 0.63,
+        "baselineAvgPct": 0.169,
+        "baselineWinRate": 0.4861,
+        "samples": 5456,
+        "trades": 679,
+        "coverage": 0.1245,
+        "winRate": 0.5007,
+        "avgRetPct": 0.5241,
+        "sdPct": 6.7783,
+        "sharpe": 0.0773,
+        "totalRetPct": 355.89
+      },
+      {
+        "horizon": "w1",
+        "threshold": 0.66,
+        "baselineAvgPct": 0.169,
+        "baselineWinRate": 0.4861,
+        "samples": 5456,
+        "trades": 199,
+        "coverage": 0.0365,
+        "winRate": 0.5176,
+        "avgRetPct": 1.3693,
+        "sdPct": 7.0012,
+        "sharpe": 0.1956,
+        "totalRetPct": 272.49
+      }
+    ],
+    "m1": [
+      {
+        "horizon": "m1",
+        "threshold": 0.5,
+        "baselineAvgPct": 0.9078,
+        "baselineWinRate": 0.4518,
+        "samples": 5456,
+        "trades": 4965,
+        "coverage": 0.91,
+        "winRate": 0.43,
+        "avgRetPct": 0.486,
+        "sdPct": 11.1678,
+        "sharpe": 0.0435,
+        "totalRetPct": 2412.98
+      },
+      {
+        "horizon": "m1",
+        "threshold": 0.52,
+        "baselineAvgPct": 0.9078,
+        "baselineWinRate": 0.4518,
+        "samples": 5456,
+        "trades": 4736,
+        "coverage": 0.868,
+        "winRate": 0.4177,
+        "avgRetPct": 0.2218,
+        "sdPct": 11.1296,
+        "sharpe": 0.0199,
+        "totalRetPct": 1050.41
+      },
+      {
+        "horizon": "m1",
+        "threshold": 0.54,
+        "baselineAvgPct": 0.9078,
+        "baselineWinRate": 0.4518,
+        "samples": 5456,
+        "trades": 4618,
+        "coverage": 0.8464,
+        "winRate": 0.4108,
+        "avgRetPct": 0.0743,
+        "sdPct": 11.1022,
+        "sharpe": 0.0067,
+        "totalRetPct": 343.15
+      },
+      {
+        "horizon": "m1",
+        "threshold": 0.56,
+        "baselineAvgPct": 0.9078,
+        "baselineWinRate": 0.4518,
+        "samples": 5456,
+        "trades": 4474,
+        "coverage": 0.82,
+        "winRate": 0.4034,
+        "avgRetPct": -0.1145,
+        "sdPct": 11.0662,
+        "sharpe": -0.0104,
+        "totalRetPct": -512.44
+      },
+      {
+        "horizon": "m1",
+        "threshold": 0.58,
+        "baselineAvgPct": 0.9078,
+        "baselineWinRate": 0.4518,
+        "samples": 5456,
+        "trades": 4307,
+        "coverage": 0.7894,
+        "winRate": 0.3938,
+        "avgRetPct": -0.2997,
+        "sdPct": 11.0535,
+        "sharpe": -0.0271,
+        "totalRetPct": -1290.98
+      },
+      {
+        "horizon": "m1",
+        "threshold": 0.6,
+        "baselineAvgPct": 0.9078,
+        "baselineWinRate": 0.4518,
+        "samples": 5456,
+        "trades": 4168,
+        "coverage": 0.7639,
+        "winRate": 0.3848,
+        "avgRetPct": -0.4472,
+        "sdPct": 11.0561,
+        "sharpe": -0.0405,
+        "totalRetPct": -1864.07
+      },
+      {
+        "horizon": "m1",
+        "threshold": 0.63,
+        "baselineAvgPct": 0.9078,
+        "baselineWinRate": 0.4518,
+        "samples": 5456,
+        "trades": 4077,
+        "coverage": 0.7473,
+        "winRate": 0.3826,
+        "avgRetPct": -0.4712,
+        "sdPct": 11.1083,
+        "sharpe": -0.0424,
+        "totalRetPct": -1921.17
+      },
+      {
+        "horizon": "m1",
+        "threshold": 0.66,
+        "baselineAvgPct": 0.9078,
+        "baselineWinRate": 0.4518,
+        "samples": 5456,
+        "trades": 3716,
+        "coverage": 0.6811,
+        "winRate": 0.387,
+        "avgRetPct": -0.3231,
+        "sdPct": 11.4135,
+        "sharpe": -0.0283,
+        "totalRetPct": -1200.55
+      }
+    ]
+  },
+  "tradingTest": {
+    "d1": [
+      {
+        "horizon": "d1",
+        "threshold": 0.5,
+        "baselineAvgPct": 0.1055,
+        "baselineWinRate": 0.4951,
+        "samples": 5546,
+        "trades": 2284,
+        "coverage": 0.4118,
+        "winRate": 0.5092,
+        "avgRetPct": 0.1122,
+        "sdPct": 3.3617,
+        "sharpe": 0.0334,
+        "totalRetPct": 256.2
+      },
+      {
+        "horizon": "d1",
+        "threshold": 0.52,
+        "baselineAvgPct": 0.1055,
+        "baselineWinRate": 0.4951,
+        "samples": 5546,
+        "trades": 1879,
+        "coverage": 0.3388,
+        "winRate": 0.5258,
+        "avgRetPct": 0.2427,
+        "sdPct": 3.4614,
+        "sharpe": 0.0701,
+        "totalRetPct": 456.12
+      },
+      {
+        "horizon": "d1",
+        "threshold": 0.54,
+        "baselineAvgPct": 0.1055,
+        "baselineWinRate": 0.4951,
+        "samples": 5546,
+        "trades": 1646,
+        "coverage": 0.2968,
+        "winRate": 0.5334,
+        "avgRetPct": 0.315,
+        "sdPct": 3.538,
+        "sharpe": 0.089,
+        "totalRetPct": 518.51
+      },
+      {
+        "horizon": "d1",
+        "threshold": 0.56,
+        "baselineAvgPct": 0.1055,
+        "baselineWinRate": 0.4951,
+        "samples": 5546,
+        "trades": 1460,
+        "coverage": 0.2633,
+        "winRate": 0.5349,
+        "avgRetPct": 0.3751,
+        "sdPct": 3.6292,
+        "sharpe": 0.1034,
+        "totalRetPct": 547.69
+      },
+      {
+        "horizon": "d1",
+        "threshold": 0.58,
+        "baselineAvgPct": 0.1055,
+        "baselineWinRate": 0.4951,
+        "samples": 5546,
+        "trades": 1320,
+        "coverage": 0.238,
+        "winRate": 0.5333,
+        "avgRetPct": 0.3991,
+        "sdPct": 3.7093,
+        "sharpe": 0.1076,
+        "totalRetPct": 526.83
+      },
+      {
+        "horizon": "d1",
+        "threshold": 0.6,
+        "baselineAvgPct": 0.1055,
+        "baselineWinRate": 0.4951,
+        "samples": 5546,
+        "trades": 1184,
+        "coverage": 0.2135,
+        "winRate": 0.522,
+        "avgRetPct": 0.3584,
+        "sdPct": 3.7923,
+        "sharpe": 0.0945,
+        "totalRetPct": 424.4
+      },
+      {
+        "horizon": "d1",
+        "threshold": 0.63,
+        "baselineAvgPct": 0.1055,
+        "baselineWinRate": 0.4951,
+        "samples": 5546,
+        "trades": 1009,
+        "coverage": 0.1819,
+        "winRate": 0.5233,
+        "avgRetPct": 0.3761,
+        "sdPct": 3.8572,
+        "sharpe": 0.0975,
+        "totalRetPct": 379.52
+      },
+      {
+        "horizon": "d1",
+        "threshold": 0.66,
+        "baselineAvgPct": 0.1055,
+        "baselineWinRate": 0.4951,
+        "samples": 5546,
+        "trades": 826,
+        "coverage": 0.1489,
+        "winRate": 0.5145,
+        "avgRetPct": 0.3476,
+        "sdPct": 3.996,
+        "sharpe": 0.087,
+        "totalRetPct": 287.14
+      }
+    ],
+    "d3": [
+      {
+        "horizon": "d3",
+        "threshold": 0.5,
+        "baselineAvgPct": 0.3365,
+        "baselineWinRate": 0.5048,
+        "samples": 5452,
+        "trades": 1984,
+        "coverage": 0.3639,
+        "winRate": 0.5383,
+        "avgRetPct": 0.9743,
+        "sdPct": 6.1599,
+        "sharpe": 0.1582,
+        "totalRetPct": 1933.05
+      },
+      {
+        "horizon": "d3",
+        "threshold": 0.52,
+        "baselineAvgPct": 0.3365,
+        "baselineWinRate": 0.5048,
+        "samples": 5452,
+        "trades": 1320,
+        "coverage": 0.2421,
+        "winRate": 0.5871,
+        "avgRetPct": 1.4731,
+        "sdPct": 6.7493,
+        "sharpe": 0.2183,
+        "totalRetPct": 1944.51
+      },
+      {
+        "horizon": "d3",
+        "threshold": 0.54,
+        "baselineAvgPct": 0.3365,
+        "baselineWinRate": 0.5048,
+        "samples": 5452,
+        "trades": 713,
+        "coverage": 0.1308,
+        "winRate": 0.6283,
+        "avgRetPct": 1.7764,
+        "sdPct": 7.259,
+        "sharpe": 0.2447,
+        "totalRetPct": 1266.57
+      },
+      {
+        "horizon": "d3",
+        "threshold": 0.56,
+        "baselineAvgPct": 0.3365,
+        "baselineWinRate": 0.5048,
+        "samples": 5452,
+        "trades": 167,
+        "coverage": 0.0306,
+        "winRate": 0.6826,
+        "avgRetPct": 2.6879,
+        "sdPct": 7.4247,
+        "sharpe": 0.362,
+        "totalRetPct": 448.88
+      },
+      {
+        "horizon": "d3",
+        "threshold": 0.58,
+        "baselineAvgPct": 0.3365,
+        "baselineWinRate": 0.5048,
+        "samples": 5452,
+        "trades": 9,
+        "coverage": 0.0017,
+        "winRate": 0.7778,
+        "avgRetPct": 4.2509,
+        "sdPct": 8.951,
+        "sharpe": 0.4749,
+        "totalRetPct": 38.26
+      },
+      {
+        "horizon": "d3",
+        "threshold": 0.6,
+        "baselineAvgPct": 0.3365,
+        "baselineWinRate": 0.5048,
+        "samples": 5452,
+        "trades": 0,
+        "coverage": 0,
+        "winRate": null,
+        "avgRetPct": null,
+        "sdPct": null,
+        "sharpe": null,
+        "totalRetPct": 0
+      },
+      {
+        "horizon": "d3",
+        "threshold": 0.63,
+        "baselineAvgPct": 0.3365,
+        "baselineWinRate": 0.5048,
+        "samples": 5452,
+        "trades": 0,
+        "coverage": 0,
+        "winRate": null,
+        "avgRetPct": null,
+        "sdPct": null,
+        "sharpe": null,
+        "totalRetPct": 0
+      },
+      {
+        "horizon": "d3",
+        "threshold": 0.66,
+        "baselineAvgPct": 0.3365,
+        "baselineWinRate": 0.5048,
+        "samples": 5452,
+        "trades": 0,
+        "coverage": 0,
+        "winRate": null,
+        "avgRetPct": null,
+        "sdPct": null,
+        "sharpe": null,
+        "totalRetPct": 0
+      }
+    ],
+    "w1": [
+      {
+        "horizon": "w1",
+        "threshold": 0.5,
+        "baselineAvgPct": 0.6021,
+        "baselineWinRate": 0.4989,
+        "samples": 5358,
+        "trades": 1766,
+        "coverage": 0.3296,
+        "winRate": 0.5328,
+        "avgRetPct": 1.5803,
+        "sdPct": 8.5845,
+        "sharpe": 0.1841,
+        "totalRetPct": 2790.88
+      },
+      {
+        "horizon": "w1",
+        "threshold": 0.52,
+        "baselineAvgPct": 0.6021,
+        "baselineWinRate": 0.4989,
+        "samples": 5358,
+        "trades": 1516,
+        "coverage": 0.2829,
+        "winRate": 0.5554,
+        "avgRetPct": 1.9849,
+        "sdPct": 8.7223,
+        "sharpe": 0.2276,
+        "totalRetPct": 3009.06
+      },
+      {
+        "horizon": "w1",
+        "threshold": 0.54,
+        "baselineAvgPct": 0.6021,
+        "baselineWinRate": 0.4989,
+        "samples": 5358,
+        "trades": 1298,
+        "coverage": 0.2423,
+        "winRate": 0.5817,
+        "avgRetPct": 2.3152,
+        "sdPct": 8.9169,
+        "sharpe": 0.2596,
+        "totalRetPct": 3005.19
+      },
+      {
+        "horizon": "w1",
+        "threshold": 0.56,
+        "baselineAvgPct": 0.6021,
+        "baselineWinRate": 0.4989,
+        "samples": 5358,
+        "trades": 1114,
+        "coverage": 0.2079,
+        "winRate": 0.5889,
+        "avgRetPct": 2.4451,
+        "sdPct": 8.9754,
+        "sharpe": 0.2724,
+        "totalRetPct": 2723.81
+      },
+      {
+        "horizon": "w1",
+        "threshold": 0.58,
+        "baselineAvgPct": 0.6021,
+        "baselineWinRate": 0.4989,
+        "samples": 5358,
+        "trades": 981,
+        "coverage": 0.1831,
+        "winRate": 0.5882,
+        "avgRetPct": 2.4764,
+        "sdPct": 9.1474,
+        "sharpe": 0.2707,
+        "totalRetPct": 2429.38
+      },
+      {
+        "horizon": "w1",
+        "threshold": 0.6,
+        "baselineAvgPct": 0.6021,
+        "baselineWinRate": 0.4989,
+        "samples": 5358,
+        "trades": 880,
+        "coverage": 0.1642,
+        "winRate": 0.5909,
+        "avgRetPct": 2.5583,
+        "sdPct": 9.4328,
+        "sharpe": 0.2712,
+        "totalRetPct": 2251.32
+      },
+      {
+        "horizon": "w1",
+        "threshold": 0.63,
+        "baselineAvgPct": 0.6021,
+        "baselineWinRate": 0.4989,
+        "samples": 5358,
+        "trades": 602,
+        "coverage": 0.1124,
+        "winRate": 0.6213,
+        "avgRetPct": 2.8072,
+        "sdPct": 9.5233,
+        "sharpe": 0.2948,
+        "totalRetPct": 1689.91
+      },
+      {
+        "horizon": "w1",
+        "threshold": 0.66,
+        "baselineAvgPct": 0.6021,
+        "baselineWinRate": 0.4989,
+        "samples": 5358,
+        "trades": 186,
+        "coverage": 0.0347,
+        "winRate": 0.6667,
+        "avgRetPct": 4.0517,
+        "sdPct": 10.4899,
+        "sharpe": 0.3863,
+        "totalRetPct": 753.62
+      }
+    ],
+    "m1": [
+      {
+        "horizon": "m1",
+        "threshold": 0.5,
+        "baselineAvgPct": 2.9711,
+        "baselineWinRate": 0.5207,
+        "samples": 4559,
+        "trades": 2511,
+        "coverage": 0.5508,
+        "winRate": 0.5595,
+        "avgRetPct": 4.4772,
+        "sdPct": 19.4819,
+        "sharpe": 0.2298,
+        "totalRetPct": 11242.3
+      },
+      {
+        "horizon": "m1",
+        "threshold": 0.52,
+        "baselineAvgPct": 2.9711,
+        "baselineWinRate": 0.5207,
+        "samples": 4559,
+        "trades": 2103,
+        "coverage": 0.4613,
+        "winRate": 0.5473,
+        "avgRetPct": 4.1044,
+        "sdPct": 19.5993,
+        "sharpe": 0.2094,
+        "totalRetPct": 8631.54
+      },
+      {
+        "horizon": "m1",
+        "threshold": 0.54,
+        "baselineAvgPct": 2.9711,
+        "baselineWinRate": 0.5207,
+        "samples": 4559,
+        "trades": 1887,
+        "coverage": 0.4139,
+        "winRate": 0.54,
+        "avgRetPct": 4.1289,
+        "sdPct": 19.9752,
+        "sharpe": 0.2067,
+        "totalRetPct": 7791.29
+      },
+      {
+        "horizon": "m1",
+        "threshold": 0.56,
+        "baselineAvgPct": 2.9711,
+        "baselineWinRate": 0.5207,
+        "samples": 4559,
+        "trades": 1611,
+        "coverage": 0.3534,
+        "winRate": 0.5133,
+        "avgRetPct": 3.8544,
+        "sdPct": 20.7268,
+        "sharpe": 0.186,
+        "totalRetPct": 6209.49
+      },
+      {
+        "horizon": "m1",
+        "threshold": 0.58,
+        "baselineAvgPct": 2.9711,
+        "baselineWinRate": 0.5207,
+        "samples": 4559,
+        "trades": 1376,
+        "coverage": 0.3018,
+        "winRate": 0.5094,
+        "avgRetPct": 3.9447,
+        "sdPct": 21.0981,
+        "sharpe": 0.187,
+        "totalRetPct": 5427.89
+      },
+      {
+        "horizon": "m1",
+        "threshold": 0.6,
+        "baselineAvgPct": 2.9711,
+        "baselineWinRate": 0.5207,
+        "samples": 4559,
+        "trades": 1228,
+        "coverage": 0.2694,
+        "winRate": 0.5244,
+        "avgRetPct": 4.5196,
+        "sdPct": 21.3819,
+        "sharpe": 0.2114,
+        "totalRetPct": 5550.06
+      },
+      {
+        "horizon": "m1",
+        "threshold": 0.63,
+        "baselineAvgPct": 2.9711,
+        "baselineWinRate": 0.5207,
+        "samples": 4559,
+        "trades": 1004,
+        "coverage": 0.2202,
+        "winRate": 0.5508,
+        "avgRetPct": 5.05,
+        "sdPct": 21.9443,
+        "sharpe": 0.2301,
+        "totalRetPct": 5070.21
+      },
+      {
+        "horizon": "m1",
+        "threshold": 0.66,
+        "baselineAvgPct": 2.9711,
+        "baselineWinRate": 0.5207,
+        "samples": 4559,
+        "trades": 653,
+        "coverage": 0.1432,
+        "winRate": 0.5789,
+        "avgRetPct": 5.1318,
+        "sdPct": 21.9115,
+        "sharpe": 0.2342,
+        "totalRetPct": 3351.06
+      }
+    ]
+  },
+  "chosenThreshold": {
+    "d1": 0.58,
+    "d3": 0.56,
+    "w1": 0.66,
+    "m1": 0.5
+  },
+  "liveThreshold": {
+    "d1": {
+      "threshold": 0.66,
+      "winRate": 0.5087,
+      "avgRetPct": 0.4491,
+      "trades": 2654
+    },
+    "d3": {
+      "threshold": 0.54,
+      "winRate": 0.5223,
+      "avgRetPct": 0.7365,
+      "trades": 1955
+    },
+    "w1": {
+      "threshold": 0.63,
+      "winRate": 0.5371,
+      "avgRetPct": 1.3599,
+      "trades": 1415
+    },
+    "m1": {
+      "threshold": 0.66,
+      "winRate": 0.6381,
+      "avgRetPct": 5.3169,
+      "trades": 2078
+    }
+  },
+  "strategies": {
+    "val": [
+      {
+        "name": "单周期阈值(d1)",
+        "strategy": "单周期阈值",
+        "horizon": "d1",
+        "threshold": 0.58,
+        "trades": 1382,
+        "coverage": 0.2533,
+        "samples": 5456,
+        "baselineAvgPct": 0.0476,
+        "baselineWinRate": 0.483,
+        "winRate": 0.5289,
+        "avgRetPct": 0.1213,
+        "sdPct": 2.5836,
+        "sharpe": 0.047,
+        "totalRetPct": 167.66
+      },
+      {
+        "name": "单周期阈值(d3)",
+        "strategy": "单周期阈值",
+        "horizon": "d3",
+        "threshold": 0.56,
+        "trades": 1117,
+        "coverage": 0.2047,
+        "samples": 5456,
+        "baselineAvgPct": 0.1327,
+        "baselineWinRate": 0.4987,
+        "winRate": 0.5237,
+        "avgRetPct": 0.4086,
+        "sdPct": 4.6496,
+        "sharpe": 0.0879,
+        "totalRetPct": 456.43
+      },
+      {
+        "name": "单周期阈值(w1)",
+        "strategy": "单周期阈值",
+        "horizon": "w1",
+        "threshold": 0.66,
+        "trades": 199,
+        "coverage": 0.0365,
+        "samples": 5456,
+        "baselineAvgPct": 0.169,
+        "baselineWinRate": 0.4861,
+        "winRate": 0.5176,
+        "avgRetPct": 1.3693,
+        "sdPct": 7.0012,
+        "sharpe": 0.1956,
+        "totalRetPct": 272.49
+      },
+      {
+        "name": "单周期阈值(m1)",
+        "strategy": "单周期阈值",
+        "horizon": "m1",
+        "threshold": 0.5,
+        "trades": 4965,
+        "coverage": 0.91,
+        "samples": 5456,
+        "baselineAvgPct": 0.9078,
+        "baselineWinRate": 0.4518,
+        "winRate": 0.43,
+        "avgRetPct": 0.486,
+        "sdPct": 11.1678,
+        "sharpe": 0.0435,
+        "totalRetPct": 2412.98
+      },
+      {
+        "name": "截面TopK(K=1,w1)",
+        "strategy": "截面TopK",
+        "topK": 1,
+        "trades": 118,
+        "coverage": 0.0216,
+        "samples": 5456,
+        "baselineAvgPct": 0.169,
+        "baselineWinRate": 0.4861,
+        "winRate": 0.5169,
+        "avgRetPct": 1.346,
+        "sdPct": 9.9928,
+        "sharpe": 0.1347,
+        "totalRetPct": 158.83
+      },
+      {
+        "name": "截面TopK(K=1,m1)",
+        "strategy": "截面TopK",
+        "topK": 1,
+        "trades": 118,
+        "coverage": 0.0216,
+        "samples": 5456,
+        "baselineAvgPct": 0.9078,
+        "baselineWinRate": 0.4518,
+        "winRate": 0.4407,
+        "avgRetPct": 1.1206,
+        "sdPct": 14.8772,
+        "sharpe": 0.0753,
+        "totalRetPct": 132.23
+      },
+      {
+        "name": "截面TopK(K=3,w1)",
+        "strategy": "截面TopK",
+        "topK": 3,
+        "trades": 354,
+        "coverage": 0.0649,
+        "samples": 5456,
+        "baselineAvgPct": 0.169,
+        "baselineWinRate": 0.4861,
+        "winRate": 0.5028,
+        "avgRetPct": 0.8117,
+        "sdPct": 7.9858,
+        "sharpe": 0.1016,
+        "totalRetPct": 287.35
+      },
+      {
+        "name": "截面TopK(K=3,m1)",
+        "strategy": "截面TopK",
+        "topK": 3,
+        "trades": 354,
+        "coverage": 0.0649,
+        "samples": 5456,
+        "baselineAvgPct": 0.9078,
+        "baselineWinRate": 0.4518,
+        "winRate": 0.4746,
+        "avgRetPct": 2.2685,
+        "sdPct": 16.7942,
+        "sharpe": 0.1351,
+        "totalRetPct": 803.06
+      },
+      {
+        "name": "截面TopK(K=5,w1)",
+        "strategy": "截面TopK",
+        "topK": 5,
+        "trades": 590,
+        "coverage": 0.1081,
+        "samples": 5456,
+        "baselineAvgPct": 0.169,
+        "baselineWinRate": 0.4861,
+        "winRate": 0.5068,
+        "avgRetPct": 0.786,
+        "sdPct": 7.5966,
+        "sharpe": 0.1035,
+        "totalRetPct": 463.75
+      },
+      {
+        "name": "截面TopK(K=5,m1)",
+        "strategy": "截面TopK",
+        "topK": 5,
+        "trades": 590,
+        "coverage": 0.1081,
+        "samples": 5456,
+        "baselineAvgPct": 0.9078,
+        "baselineWinRate": 0.4518,
+        "winRate": 0.4661,
+        "avgRetPct": 1.8714,
+        "sdPct": 15.488,
+        "sharpe": 0.1208,
+        "totalRetPct": 1104.14
+      },
+      {
+        "name": "截面TopK(K=10,w1)",
+        "strategy": "截面TopK",
+        "topK": 10,
+        "trades": 1180,
+        "coverage": 0.2163,
+        "samples": 5456,
+        "baselineAvgPct": 0.169,
+        "baselineWinRate": 0.4861,
+        "winRate": 0.5136,
+        "avgRetPct": 0.6598,
+        "sdPct": 6.81,
+        "sharpe": 0.0969,
+        "totalRetPct": 778.52
+      },
+      {
+        "name": "截面TopK(K=10,m1)",
+        "strategy": "截面TopK",
+        "topK": 10,
+        "trades": 1180,
+        "coverage": 0.2163,
+        "samples": 5456,
+        "baselineAvgPct": 0.9078,
+        "baselineWinRate": 0.4518,
+        "winRate": 0.4551,
+        "avgRetPct": 1.3916,
+        "sdPct": 14.0205,
+        "sharpe": 0.0993,
+        "totalRetPct": 1642.11
+      },
+      {
+        "name": "多周期共振(d3+w1+m1)",
+        "strategy": "多周期共振",
+        "need": "d3+w1+m1",
+        "trades": 199,
+        "coverage": 0.0365,
+        "samples": 5456,
+        "baselineAvgPct": 0.169,
+        "baselineWinRate": 0.4861,
+        "winRate": 0.5176,
+        "avgRetPct": 1.3693,
+        "sdPct": 7.0012,
+        "sharpe": 0.1956,
+        "totalRetPct": 272.49
+      },
+      {
+        "name": "TopK(3)+阈值(w1)",
+        "strategy": "截面TopK+阈值",
+        "topK": 3,
+        "threshold": 0.66,
+        "trades": 68,
+        "coverage": 0.0125,
+        "samples": 5456,
+        "baselineAvgPct": 0.169,
+        "baselineWinRate": 0.4861,
+        "winRate": 0.4853,
+        "avgRetPct": 1.3155,
+        "sdPct": 6.864,
+        "sharpe": 0.1917,
+        "totalRetPct": 89.46
+      },
+      {
+        "name": "TopK(5)+阈值(w1)",
+        "strategy": "截面TopK+阈值",
+        "topK": 5,
+        "threshold": 0.66,
+        "trades": 98,
+        "coverage": 0.018,
+        "samples": 5456,
+        "baselineAvgPct": 0.169,
+        "baselineWinRate": 0.4861,
+        "winRate": 0.5,
+        "avgRetPct": 1.6071,
+        "sdPct": 6.5206,
+        "sharpe": 0.2465,
+        "totalRetPct": 157.5
+      }
+    ],
+    "test": [
+      {
+        "name": "单周期阈值(d1)",
+        "strategy": "单周期阈值",
+        "horizon": "d1",
+        "threshold": 0.58,
+        "trades": 1320,
+        "coverage": 0.238,
+        "samples": 5546,
+        "baselineAvgPct": 0.1055,
+        "baselineWinRate": 0.4951,
+        "winRate": 0.5333,
+        "avgRetPct": 0.3991,
+        "sdPct": 3.7093,
+        "sharpe": 0.1076,
+        "totalRetPct": 526.83
+      },
+      {
+        "name": "单周期阈值(d3)",
+        "strategy": "单周期阈值",
+        "horizon": "d3",
+        "threshold": 0.56,
+        "trades": 167,
+        "coverage": 0.0306,
+        "samples": 5452,
+        "baselineAvgPct": 0.3365,
+        "baselineWinRate": 0.5048,
+        "winRate": 0.6826,
+        "avgRetPct": 2.6879,
+        "sdPct": 7.4247,
+        "sharpe": 0.362,
+        "totalRetPct": 448.88
+      },
+      {
+        "name": "单周期阈值(w1)",
+        "strategy": "单周期阈值",
+        "horizon": "w1",
+        "threshold": 0.66,
+        "trades": 186,
+        "coverage": 0.0347,
+        "samples": 5358,
+        "baselineAvgPct": 0.6021,
+        "baselineWinRate": 0.4989,
+        "winRate": 0.6667,
+        "avgRetPct": 4.0517,
+        "sdPct": 10.4899,
+        "sharpe": 0.3863,
+        "totalRetPct": 753.62
+      },
+      {
+        "name": "单周期阈值(m1)",
+        "strategy": "单周期阈值",
+        "horizon": "m1",
+        "threshold": 0.5,
+        "trades": 2511,
+        "coverage": 0.5508,
+        "samples": 4559,
+        "baselineAvgPct": 2.9711,
+        "baselineWinRate": 0.5207,
+        "winRate": 0.5595,
+        "avgRetPct": 4.4772,
+        "sdPct": 19.4819,
+        "sharpe": 0.2298,
+        "totalRetPct": 11242.3
+      },
+      {
+        "name": "截面TopK(K=1,w1)",
+        "strategy": "截面TopK",
+        "topK": 1,
+        "trades": 114,
+        "coverage": 0.0213,
+        "samples": 5358,
+        "baselineAvgPct": 0.6021,
+        "baselineWinRate": 0.4989,
+        "winRate": 0.5088,
+        "avgRetPct": 1.2426,
+        "sdPct": 9.3831,
+        "sharpe": 0.1324,
+        "totalRetPct": 141.66
+      },
+      {
+        "name": "截面TopK(K=1,m1)",
+        "strategy": "截面TopK",
+        "topK": 1,
+        "trades": 97,
+        "coverage": 0.0213,
+        "samples": 4559,
+        "baselineAvgPct": 2.9711,
+        "baselineWinRate": 0.5207,
+        "winRate": 0.6495,
+        "avgRetPct": 3.4621,
+        "sdPct": 16.476,
+        "sharpe": 0.2101,
+        "totalRetPct": 335.83
+      },
+      {
+        "name": "截面TopK(K=3,w1)",
+        "strategy": "截面TopK",
+        "topK": 3,
+        "trades": 342,
+        "coverage": 0.0638,
+        "samples": 5358,
+        "baselineAvgPct": 0.6021,
+        "baselineWinRate": 0.4989,
+        "winRate": 0.4971,
+        "avgRetPct": 0.6997,
+        "sdPct": 8.2677,
+        "sharpe": 0.0846,
+        "totalRetPct": 239.28
+      },
+      {
+        "name": "截面TopK(K=3,m1)",
+        "strategy": "截面TopK",
+        "topK": 3,
+        "trades": 291,
+        "coverage": 0.0638,
+        "samples": 4559,
+        "baselineAvgPct": 2.9711,
+        "baselineWinRate": 0.5207,
+        "winRate": 0.5876,
+        "avgRetPct": 3.3385,
+        "sdPct": 16.3414,
+        "sharpe": 0.2043,
+        "totalRetPct": 971.51
+      },
+      {
+        "name": "截面TopK(K=5,w1)",
+        "strategy": "截面TopK",
+        "topK": 5,
+        "trades": 570,
+        "coverage": 0.1064,
+        "samples": 5358,
+        "baselineAvgPct": 0.6021,
+        "baselineWinRate": 0.4989,
+        "winRate": 0.5211,
+        "avgRetPct": 1.1618,
+        "sdPct": 8.3098,
+        "sharpe": 0.1398,
+        "totalRetPct": 662.23
+      },
+      {
+        "name": "截面TopK(K=5,m1)",
+        "strategy": "截面TopK",
+        "topK": 5,
+        "trades": 485,
+        "coverage": 0.1064,
+        "samples": 4559,
+        "baselineAvgPct": 2.9711,
+        "baselineWinRate": 0.5207,
+        "winRate": 0.5794,
+        "avgRetPct": 4.0238,
+        "sdPct": 17.3476,
+        "sharpe": 0.232,
+        "totalRetPct": 1951.55
+      },
+      {
+        "name": "截面TopK(K=10,w1)",
+        "strategy": "截面TopK",
+        "topK": 10,
+        "trades": 1140,
+        "coverage": 0.2128,
+        "samples": 5358,
+        "baselineAvgPct": 0.6021,
+        "baselineWinRate": 0.4989,
+        "winRate": 0.5289,
+        "avgRetPct": 1.2516,
+        "sdPct": 8.2547,
+        "sharpe": 0.1516,
+        "totalRetPct": 1426.87
+      },
+      {
+        "name": "截面TopK(K=10,m1)",
+        "strategy": "截面TopK",
+        "topK": 10,
+        "trades": 970,
+        "coverage": 0.2128,
+        "samples": 4559,
+        "baselineAvgPct": 2.9711,
+        "baselineWinRate": 0.5207,
+        "winRate": 0.5979,
+        "avgRetPct": 4.9277,
+        "sdPct": 17.9874,
+        "sharpe": 0.274,
+        "totalRetPct": 4779.91
+      },
+      {
+        "name": "多周期共振(d3+w1+m1)",
+        "strategy": "多周期共振",
+        "need": "d3+w1+m1",
+        "trades": 129,
+        "coverage": 0.0241,
+        "samples": 5358,
+        "baselineAvgPct": 0.6021,
+        "baselineWinRate": 0.4989,
+        "winRate": 0.6899,
+        "avgRetPct": 4.4349,
+        "sdPct": 10.6265,
+        "sharpe": 0.4173,
+        "totalRetPct": 572.1
+      },
+      {
+        "name": "TopK(3)+阈值(w1)",
+        "strategy": "截面TopK+阈值",
+        "topK": 3,
+        "threshold": 0.66,
+        "trades": 79,
+        "coverage": 0.0147,
+        "samples": 5358,
+        "baselineAvgPct": 0.6021,
+        "baselineWinRate": 0.4989,
+        "winRate": 0.6203,
+        "avgRetPct": 2.9875,
+        "sdPct": 10.6534,
+        "sharpe": 0.2804,
+        "totalRetPct": 236.02
+      },
+      {
+        "name": "TopK(5)+阈值(w1)",
+        "strategy": "截面TopK+阈值",
+        "topK": 5,
+        "threshold": 0.66,
+        "trades": 115,
+        "coverage": 0.0215,
+        "samples": 5358,
+        "baselineAvgPct": 0.6021,
+        "baselineWinRate": 0.4989,
+        "winRate": 0.6261,
+        "avgRetPct": 3.1942,
+        "sdPct": 10.5819,
+        "sharpe": 0.3019,
+        "totalRetPct": 367.33
+      }
+    ],
+    "chosen": {
+      "name": "单周期阈值(w1)",
+      "valExpectancy": 1.3693,
+      "valWinRate": 0.5176,
+      "valTrades": 199,
+      "rule": "验证集交易数≥150 且胜率≥50%，取单笔期望最高"
+    },
+    "confluence": {
+      "need": [
+        "d3",
+        "w1",
+        "m1"
+      ],
+      "thresholds": {
+        "d3": 0.56,
+        "w1": 0.66,
+        "m1": 0.5
+      },
+      "valWinRate": 0.5176,
+      "valExpectancy": 1.3693,
+      "valTrades": 199,
+      "testWinRate": 0.6899,
+      "testExpectancy": 4.4349,
+      "testTrades": 129
+    }
+  },
+  "tradingPolicy": {
+    "thresholds": {
+      "d1": {
+        "threshold": 0.66,
+        "winRate": 0.5087,
+        "avgRetPct": 0.4491,
+        "trades": 2654
+      },
+      "d3": {
+        "threshold": 0.54,
+        "winRate": 0.5223,
+        "avgRetPct": 0.7365,
+        "trades": 1955
+      },
+      "w1": {
+        "threshold": 0.63,
+        "winRate": 0.5371,
+        "avgRetPct": 1.3599,
+        "trades": 1415
+      },
+      "m1": {
+        "threshold": 0.66,
+        "winRate": 0.6381,
+        "avgRetPct": 5.3169,
+        "trades": 2078
+      }
+    },
+    "fees": {
+      "etf": 0.08,
+      "stock": 0.18
+    },
+    "basis": "拟合集(train+val)含费期望最优，交易数≥200"
+  },
+  "feeAssumption": {
+    "etf": 0.08,
+    "stock": 0.18
+  },
   "leaderboard": {
     "d1": [
       {
+        "expert": "us10y",
+        "n": 21243,
+        "abstain": 1145,
+        "abstainRate": 0.0539,
+        "hitRate": 0.534,
+        "brier": 0.2493,
+        "weight": 0.5639,
+        "priorWeight": 0.0093,
+        "trained": true
+      },
+      {
         "expert": "volS",
-        "n": 4389,
-        "abstain": 3211,
-        "abstainRate": 0.7316,
-        "hitRate": 0.5129,
-        "brier": 0.2758,
-        "weight": 0.7074,
-        "priorWeight": 0.1429,
+        "n": 21243,
+        "abstain": 15535,
+        "abstainRate": 0.7313,
+        "hitRate": 0.5038,
+        "brier": 0.275,
+        "weight": 0.0166,
+        "priorWeight": 0.1296,
+        "trained": true
+      },
+      {
+        "expert": "mfi",
+        "n": 21243,
+        "abstain": 9124,
+        "abstainRate": 0.4295,
+        "hitRate": 0.5177,
+        "brier": 0.2877,
+        "weight": 0.0181,
+        "priorWeight": 0.0093,
         "trained": true
       },
       {
         "expert": "rsiRev",
-        "n": 4389,
-        "abstain": 2401,
-        "abstainRate": 0.547,
-        "hitRate": 0.5113,
-        "brier": 0.3093,
-        "weight": 0.0149,
-        "priorWeight": 0.2381,
+        "n": 21243,
+        "abstain": 12037,
+        "abstainRate": 0.5666,
+        "hitRate": 0.5143,
+        "brier": 0.3022,
+        "weight": 0.0471,
+        "priorWeight": 0.1111,
         "trained": true
       },
       {
-        "expert": "rel",
-        "n": 4389,
-        "abstain": 0,
-        "abstainRate": 0,
-        "hitRate": 0.5136,
-        "brier": 0.3965,
-        "weight": 0.0133,
-        "priorWeight": 0.0095,
-        "trained": true
-      },
-      {
-        "expert": "trend",
-        "n": 4389,
-        "abstain": 0,
-        "abstainRate": 0,
-        "hitRate": 0.5147,
-        "brier": 0.401,
-        "weight": 0.0127,
-        "priorWeight": 0.0095,
-        "trained": true
-      },
-      {
-        "expert": "mom",
-        "n": 4389,
-        "abstain": 0,
-        "abstainRate": 0,
-        "hitRate": 0.5074,
-        "brier": 0.4149,
-        "weight": 0.0162,
-        "priorWeight": 0.2857,
-        "trained": true
-      },
-      {
-        "expert": "indexS",
-        "n": 4389,
-        "abstain": 22,
-        "abstainRate": 0.005,
-        "hitRate": 0.5129,
-        "brier": 0.4856,
-        "weight": 0.0141,
-        "priorWeight": 0.0952,
-        "trained": true
-      },
-      {
-        "expert": "macdDir",
-        "n": 4389,
-        "abstain": 0,
-        "abstainRate": 0,
-        "hitRate": 0.5072,
-        "brier": 0.4928,
+        "expert": "spxS",
+        "n": 21243,
+        "abstain": 778,
+        "abstainRate": 0.0366,
+        "hitRate": 0.5236,
+        "brier": 0.307,
         "weight": 0.012,
-        "priorWeight": 0.0095,
+        "priorWeight": 0.0556,
+        "trained": true
+      },
+      {
+        "expert": "rangePos",
+        "n": 21243,
+        "abstain": 49,
+        "abstainRate": 0.0023,
+        "hitRate": 0.498,
+        "brier": 0.3076,
+        "weight": 0.0174,
+        "priorWeight": 0.0093,
+        "trained": true
+      },
+      {
+        "expert": "idxMom",
+        "n": 21243,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5059,
+        "brier": 0.3103,
+        "weight": 0.0262,
+        "priorWeight": 0.0556,
+        "trained": true
+      },
+      {
+        "expert": "boll",
+        "n": 21243,
+        "abstain": 2,
+        "abstainRate": 0.0001,
+        "hitRate": 0.5,
+        "brier": 0.3458,
+        "weight": 0.0486,
+        "priorWeight": 0.037,
+        "trained": true
+      },
+      {
+        "expert": "kdj",
+        "n": 21243,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5167,
+        "brier": 0.3535,
+        "weight": 0.0384,
+        "priorWeight": 0.0463,
+        "trained": true
+      },
+      {
+        "expert": "soxMom",
+        "n": 21243,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5063,
+        "brier": 0.3618,
+        "weight": 0.0337,
+        "priorWeight": 0.0093,
         "trained": true
       },
       {
         "expert": "soxS",
+        "n": 21243,
+        "abstain": 778,
+        "abstainRate": 0.0366,
+        "hitRate": 0.508,
+        "brier": 0.3675,
+        "weight": 0.012,
+        "priorWeight": 0.0926,
+        "trained": true
+      },
+      {
+        "expert": "closePos",
+        "n": 21243,
+        "abstain": 478,
+        "abstainRate": 0.0225,
+        "hitRate": 0.4712,
+        "brier": 0.3689,
+        "weight": 0.012,
+        "priorWeight": 0.0741,
+        "trained": true
+      },
+      {
+        "expert": "rel",
+        "n": 21243,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.4976,
+        "brier": 0.3743,
+        "weight": 0.0127,
+        "priorWeight": 0.0093,
+        "trained": true
+      },
+      {
+        "expert": "mom5",
+        "n": 21243,
+        "abstain": 240,
+        "abstainRate": 0.0113,
+        "hitRate": 0.4956,
+        "brier": 0.375,
+        "weight": 0.012,
+        "priorWeight": 0.1389,
+        "trained": true
+      },
+      {
+        "expert": "obv",
+        "n": 21243,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.4985,
+        "brier": 0.3809,
+        "weight": 0.012,
+        "priorWeight": 0.0093,
+        "trained": true
+      },
+      {
+        "expert": "mom",
+        "n": 21243,
+        "abstain": 2,
+        "abstainRate": 0.0001,
+        "hitRate": 0.5022,
+        "brier": 0.4031,
+        "weight": 0.012,
+        "priorWeight": 0.0463,
+        "trained": true
+      },
+      {
+        "expert": "trend",
+        "n": 21243,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5032,
+        "brier": 0.4084,
+        "weight": 0.0134,
+        "priorWeight": 0.0093,
+        "trained": true
+      },
+      {
+        "expert": "indexS",
+        "n": 21243,
+        "abstain": 24,
+        "abstainRate": 0.0011,
+        "hitRate": 0.5058,
+        "brier": 0.4938,
+        "weight": 0.0245,
+        "priorWeight": 0.0741,
+        "trained": true
+      },
+      {
+        "expert": "macdDir",
+        "n": 21243,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.4985,
+        "brier": 0.5015,
+        "weight": 0.012,
+        "priorWeight": 0.0185,
+        "trained": true
+      },
+      {
+        "expert": "fund",
         "n": 0,
         "abstain": 0,
         "abstainRate": null,
         "hitRate": null,
         "brier": null,
-        "weight": 0.0952,
-        "priorWeight": 0.0952,
+        "weight": 0.0093,
+        "priorWeight": 0.0093,
         "trained": false
       },
       {
@@ -353,120 +2288,230 @@
         "abstainRate": null,
         "hitRate": null,
         "brier": null,
-        "weight": 0.0952,
-        "priorWeight": 0.0952,
-        "trained": false
-      },
-      {
-        "expert": "fund",
-        "n": 0,
-        "abstain": 0,
-        "abstainRate": null,
-        "hitRate": null,
-        "brier": null,
-        "weight": 0.0095,
-        "priorWeight": 0.0095,
-        "trained": false
-      },
-      {
-        "expert": "macroS",
-        "n": 0,
-        "abstain": 0,
-        "abstainRate": null,
-        "hitRate": null,
-        "brier": null,
-        "weight": 0.0095,
-        "priorWeight": 0.0095,
+        "weight": 0.0463,
+        "priorWeight": 0.0463,
         "trained": false
       }
     ],
     "d3": [
       {
+        "expert": "us10y",
+        "n": 21243,
+        "abstain": 1145,
+        "abstainRate": 0.0539,
+        "hitRate": 0.5108,
+        "brier": 0.2496,
+        "weight": 0.3736,
+        "priorWeight": 0.0094,
+        "trained": true
+      },
+      {
         "expert": "volS",
-        "n": 4389,
-        "abstain": 3211,
-        "abstainRate": 0.7316,
-        "hitRate": 0.5316,
-        "brier": 0.2718,
-        "weight": 0.795,
-        "priorWeight": 0.1442,
+        "n": 21243,
+        "abstain": 15535,
+        "abstainRate": 0.7313,
+        "hitRate": 0.5167,
+        "brier": 0.2707,
+        "weight": 0.017,
+        "priorWeight": 0.1132,
+        "trained": true
+      },
+      {
+        "expert": "mfi",
+        "n": 21243,
+        "abstain": 9124,
+        "abstainRate": 0.4295,
+        "hitRate": 0.5298,
+        "brier": 0.2832,
+        "weight": 0.0197,
+        "priorWeight": 0.0189,
+        "trained": true
+      },
+      {
+        "expert": "rangePos",
+        "n": 21243,
+        "abstain": 49,
+        "abstainRate": 0.0023,
+        "hitRate": 0.4988,
+        "brier": 0.3051,
+        "weight": 0.0557,
+        "priorWeight": 0.0094,
         "trained": true
       },
       {
         "expert": "rsiRev",
-        "n": 4389,
-        "abstain": 2401,
-        "abstainRate": 0.547,
-        "hitRate": 0.5085,
-        "brier": 0.3193,
-        "weight": 0.0171,
-        "priorWeight": 0.0096,
+        "n": 21243,
+        "abstain": 12037,
+        "abstainRate": 0.5666,
+        "hitRate": 0.5126,
+        "brier": 0.3056,
+        "weight": 0.0415,
+        "priorWeight": 0.0094,
         "trained": true
       },
       {
-        "expert": "rel",
-        "n": 4389,
+        "expert": "idxMom",
+        "n": 21243,
         "abstain": 0,
         "abstainRate": 0,
-        "hitRate": 0.5204,
-        "brier": 0.3889,
-        "weight": 0.012,
-        "priorWeight": 0.0481,
+        "hitRate": 0.5015,
+        "brier": 0.3077,
+        "weight": 0.0508,
+        "priorWeight": 0.0377,
         "trained": true
       },
       {
-        "expert": "trend",
-        "n": 4389,
+        "expert": "spxS",
+        "n": 21243,
+        "abstain": 778,
+        "abstainRate": 0.0366,
+        "hitRate": 0.5024,
+        "brier": 0.3108,
+        "weight": 0.0197,
+        "priorWeight": 0.0189,
+        "trained": true
+      },
+      {
+        "expert": "boll",
+        "n": 21243,
+        "abstain": 2,
+        "abstainRate": 0.0001,
+        "hitRate": 0.5008,
+        "brier": 0.3492,
+        "weight": 0.0414,
+        "priorWeight": 0.0094,
+        "trained": true
+      },
+      {
+        "expert": "kdj",
+        "n": 21243,
         "abstain": 0,
         "abstainRate": 0,
-        "hitRate": 0.5183,
-        "brier": 0.3973,
-        "weight": 0.012,
-        "priorWeight": 0.1923,
+        "hitRate": 0.5103,
+        "brier": 0.3534,
+        "weight": 0.0384,
+        "priorWeight": 0.0472,
         "trained": true
       },
       {
-        "expert": "mom",
-        "n": 4389,
+        "expert": "closePos",
+        "n": 21243,
+        "abstain": 478,
+        "abstainRate": 0.0225,
+        "hitRate": 0.4889,
+        "brier": 0.3578,
+        "weight": 0.0121,
+        "priorWeight": 0.0189,
+        "trained": true
+      },
+      {
+        "expert": "soxMom",
+        "n": 21243,
         "abstain": 0,
         "abstainRate": 0,
-        "hitRate": 0.5152,
-        "brier": 0.4102,
-        "weight": 0.012,
-        "priorWeight": 0.2404,
-        "trained": true
-      },
-      {
-        "expert": "macdDir",
-        "n": 4389,
-        "abstain": 0,
-        "abstainRate": 0,
-        "hitRate": 0.5227,
-        "brier": 0.4773,
-        "weight": 0.015,
-        "priorWeight": 0.1442,
-        "trained": true
-      },
-      {
-        "expert": "indexS",
-        "n": 4389,
-        "abstain": 22,
-        "abstainRate": 0.005,
-        "hitRate": 0.5179,
-        "brier": 0.4802,
-        "weight": 0.012,
-        "priorWeight": 0.0962,
+        "hitRate": 0.5171,
+        "brier": 0.3598,
+        "weight": 0.1308,
+        "priorWeight": 0.0377,
         "trained": true
       },
       {
         "expert": "soxS",
+        "n": 21243,
+        "abstain": 778,
+        "abstainRate": 0.0366,
+        "hitRate": 0.5029,
+        "brier": 0.3662,
+        "weight": 0.0121,
+        "priorWeight": 0.0755,
+        "trained": true
+      },
+      {
+        "expert": "rel",
+        "n": 21243,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.505,
+        "brier": 0.3689,
+        "weight": 0.0237,
+        "priorWeight": 0.0472,
+        "trained": true
+      },
+      {
+        "expert": "mom5",
+        "n": 21243,
+        "abstain": 240,
+        "abstainRate": 0.0113,
+        "hitRate": 0.4908,
+        "brier": 0.3769,
+        "weight": 0.0121,
+        "priorWeight": 0.0566,
+        "trained": true
+      },
+      {
+        "expert": "obv",
+        "n": 21243,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.4976,
+        "brier": 0.3797,
+        "weight": 0.0137,
+        "priorWeight": 0.0377,
+        "trained": true
+      },
+      {
+        "expert": "mom",
+        "n": 21243,
+        "abstain": 2,
+        "abstainRate": 0.0001,
+        "hitRate": 0.5088,
+        "brier": 0.3983,
+        "weight": 0.0121,
+        "priorWeight": 0.1509,
+        "trained": true
+      },
+      {
+        "expert": "trend",
+        "n": 21243,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5029,
+        "brier": 0.4084,
+        "weight": 0.0267,
+        "priorWeight": 0.1226,
+        "trained": true
+      },
+      {
+        "expert": "indexS",
+        "n": 21243,
+        "abstain": 24,
+        "abstainRate": 0.0011,
+        "hitRate": 0.5079,
+        "brier": 0.4918,
+        "weight": 0.0678,
+        "priorWeight": 0.0755,
+        "trained": true
+      },
+      {
+        "expert": "macdDir",
+        "n": 21243,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.4975,
+        "brier": 0.5025,
+        "weight": 0.0121,
+        "priorWeight": 0.0849,
+        "trained": true
+      },
+      {
+        "expert": "fund",
         "n": 0,
         "abstain": 0,
         "abstainRate": null,
         "hitRate": null,
         "brier": null,
-        "weight": 0.0962,
-        "priorWeight": 0.0962,
+        "weight": 0.0094,
+        "priorWeight": 0.0094,
         "trained": false
       },
       {
@@ -476,120 +2521,230 @@
         "abstainRate": null,
         "hitRate": null,
         "brier": null,
-        "weight": 0.0096,
-        "priorWeight": 0.0096,
-        "trained": false
-      },
-      {
-        "expert": "fund",
-        "n": 0,
-        "abstain": 0,
-        "abstainRate": null,
-        "hitRate": null,
-        "brier": null,
-        "weight": 0.0096,
-        "priorWeight": 0.0096,
-        "trained": false
-      },
-      {
-        "expert": "macroS",
-        "n": 0,
-        "abstain": 0,
-        "abstainRate": null,
-        "hitRate": null,
-        "brier": null,
-        "weight": 0.0096,
-        "priorWeight": 0.0096,
+        "weight": 0.0094,
+        "priorWeight": 0.0094,
         "trained": false
       }
     ],
     "w1": [
       {
+        "expert": "us10y",
+        "n": 21243,
+        "abstain": 1145,
+        "abstainRate": 0.0539,
+        "hitRate": 0.5072,
+        "brier": 0.2502,
+        "weight": 0.0614,
+        "priorWeight": 0.0849,
+        "trained": true
+      },
+      {
         "expert": "volS",
-        "n": 4389,
-        "abstain": 3211,
-        "abstainRate": 0.7316,
-        "hitRate": 0.5343,
-        "brier": 0.2705,
-        "weight": 0.5812,
-        "priorWeight": 0.0096,
+        "n": 21243,
+        "abstain": 15535,
+        "abstainRate": 0.7313,
+        "hitRate": 0.5133,
+        "brier": 0.2712,
+        "weight": 0.0185,
+        "priorWeight": 0.0283,
+        "trained": true
+      },
+      {
+        "expert": "mfi",
+        "n": 21243,
+        "abstain": 9124,
+        "abstainRate": 0.4295,
+        "hitRate": 0.5286,
+        "brier": 0.2819,
+        "weight": 0.0207,
+        "priorWeight": 0.0566,
+        "trained": true
+      },
+      {
+        "expert": "rangePos",
+        "n": 21243,
+        "abstain": 49,
+        "abstainRate": 0.0023,
+        "hitRate": 0.5086,
+        "brier": 0.301,
+        "weight": 0.1426,
+        "priorWeight": 0.0094,
+        "trained": true
+      },
+      {
+        "expert": "idxMom",
+        "n": 21243,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5013,
+        "brier": 0.305,
+        "weight": 0.0453,
+        "priorWeight": 0.0566,
         "trained": true
       },
       {
         "expert": "rsiRev",
-        "n": 4389,
-        "abstain": 2401,
-        "abstainRate": 0.547,
-        "hitRate": 0.4972,
-        "brier": 0.3243,
-        "weight": 0.0123,
-        "priorWeight": 0.0096,
+        "n": 21243,
+        "abstain": 12037,
+        "abstainRate": 0.5666,
+        "hitRate": 0.5078,
+        "brier": 0.3061,
+        "weight": 0.0428,
+        "priorWeight": 0.0094,
         "trained": true
       },
       {
-        "expert": "rel",
-        "n": 4389,
+        "expert": "spxS",
+        "n": 21243,
+        "abstain": 778,
+        "abstainRate": 0.0366,
+        "hitRate": 0.5049,
+        "brier": 0.3097,
+        "weight": 0.0157,
+        "priorWeight": 0.0094,
+        "trained": true
+      },
+      {
+        "expert": "closePos",
+        "n": 21243,
+        "abstain": 478,
+        "abstainRate": 0.0225,
+        "hitRate": 0.4999,
+        "brier": 0.3503,
+        "weight": 0.0133,
+        "priorWeight": 0.0094,
+        "trained": true
+      },
+      {
+        "expert": "boll",
+        "n": 21243,
+        "abstain": 2,
+        "abstainRate": 0.0001,
+        "hitRate": 0.4949,
+        "brier": 0.352,
+        "weight": 0.0419,
+        "priorWeight": 0.0094,
+        "trained": true
+      },
+      {
+        "expert": "kdj",
+        "n": 21243,
         "abstain": 0,
         "abstainRate": 0,
-        "hitRate": 0.5208,
-        "brier": 0.387,
-        "weight": 0.012,
-        "priorWeight": 0.0962,
+        "hitRate": 0.5104,
+        "brier": 0.3521,
+        "weight": 0.0356,
+        "priorWeight": 0.0094,
         "trained": true
       },
       {
-        "expert": "trend",
-        "n": 4389,
+        "expert": "soxMom",
+        "n": 21243,
         "abstain": 0,
         "abstainRate": 0,
-        "hitRate": 0.5229,
-        "brier": 0.3907,
-        "weight": 0.0122,
-        "priorWeight": 0.2404,
-        "trained": true
-      },
-      {
-        "expert": "mom",
-        "n": 4389,
-        "abstain": 0,
-        "abstainRate": 0,
-        "hitRate": 0.5142,
-        "brier": 0.411,
-        "weight": 0.012,
-        "priorWeight": 0.1923,
-        "trained": true
-      },
-      {
-        "expert": "macdDir",
-        "n": 4389,
-        "abstain": 0,
-        "abstainRate": 0,
-        "hitRate": 0.5382,
-        "brier": 0.4618,
-        "weight": 0.0123,
-        "priorWeight": 0.0096,
-        "trained": true
-      },
-      {
-        "expert": "indexS",
-        "n": 4389,
-        "abstain": 22,
-        "abstainRate": 0.005,
-        "hitRate": 0.5106,
-        "brier": 0.4875,
-        "weight": 0.012,
-        "priorWeight": 0.0962,
+        "hitRate": 0.5203,
+        "brier": 0.3526,
+        "weight": 0.0656,
+        "priorWeight": 0.066,
         "trained": true
       },
       {
         "expert": "soxS",
+        "n": 21243,
+        "abstain": 778,
+        "abstainRate": 0.0366,
+        "hitRate": 0.5093,
+        "brier": 0.3647,
+        "weight": 0.0121,
+        "priorWeight": 0.0094,
+        "trained": true
+      },
+      {
+        "expert": "rel",
+        "n": 21243,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5101,
+        "brier": 0.3658,
+        "weight": 0.1446,
+        "priorWeight": 0.0755,
+        "trained": true
+      },
+      {
+        "expert": "mom5",
+        "n": 21243,
+        "abstain": 240,
+        "abstainRate": 0.0113,
+        "hitRate": 0.4995,
+        "brier": 0.3713,
+        "weight": 0.0121,
+        "priorWeight": 0.0094,
+        "trained": true
+      },
+      {
+        "expert": "obv",
+        "n": 21243,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5032,
+        "brier": 0.3739,
+        "weight": 0.0281,
+        "priorWeight": 0.0755,
+        "trained": true
+      },
+      {
+        "expert": "mom",
+        "n": 21243,
+        "abstain": 2,
+        "abstainRate": 0.0001,
+        "hitRate": 0.5065,
+        "brier": 0.4005,
+        "weight": 0.0121,
+        "priorWeight": 0.1226,
+        "trained": true
+      },
+      {
+        "expert": "trend",
+        "n": 21243,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5053,
+        "brier": 0.4043,
+        "weight": 0.0599,
+        "priorWeight": 0.1604,
+        "trained": true
+      },
+      {
+        "expert": "macdDir",
+        "n": 21243,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5067,
+        "brier": 0.4933,
+        "weight": 0.0226,
+        "priorWeight": 0.0189,
+        "trained": true
+      },
+      {
+        "expert": "indexS",
+        "n": 21243,
+        "abstain": 24,
+        "abstainRate": 0.0011,
+        "hitRate": 0.5049,
+        "brier": 0.4948,
+        "weight": 0.1014,
+        "priorWeight": 0.0755,
+        "trained": true
+      },
+      {
+        "expert": "fund",
         "n": 0,
         "abstain": 0,
         "abstainRate": null,
         "hitRate": null,
         "brier": null,
-        "weight": 0.0096,
-        "priorWeight": 0.0096,
+        "weight": 0.0755,
+        "priorWeight": 0.0755,
         "trained": false
       },
       {
@@ -599,120 +2754,230 @@
         "abstainRate": null,
         "hitRate": null,
         "brier": null,
-        "weight": 0.0481,
-        "priorWeight": 0.0481,
-        "trained": false
-      },
-      {
-        "expert": "fund",
-        "n": 0,
-        "abstain": 0,
-        "abstainRate": null,
-        "hitRate": null,
-        "brier": null,
-        "weight": 0.1442,
-        "priorWeight": 0.1442,
-        "trained": false
-      },
-      {
-        "expert": "macroS",
-        "n": 0,
-        "abstain": 0,
-        "abstainRate": null,
-        "hitRate": null,
-        "brier": null,
-        "weight": 0.1442,
-        "priorWeight": 0.1442,
+        "weight": 0.0283,
+        "priorWeight": 0.0283,
         "trained": false
       }
     ],
     "m1": [
       {
+        "expert": "us10y",
+        "n": 21243,
+        "abstain": 1145,
+        "abstainRate": 0.0539,
+        "hitRate": 0.4909,
+        "brier": 0.2506,
+        "weight": 0.0222,
+        "priorWeight": 0.0971,
+        "trained": true
+      },
+      {
         "expert": "volS",
-        "n": 4389,
-        "abstain": 3211,
-        "abstainRate": 0.7316,
-        "hitRate": 0.5979,
-        "brier": 0.2631,
-        "weight": 0.3013,
-        "priorWeight": 0.0095,
+        "n": 21243,
+        "abstain": 15535,
+        "abstainRate": 0.7313,
+        "hitRate": 0.5319,
+        "brier": 0.2669,
+        "weight": 0.0431,
+        "priorWeight": 0.0097,
+        "trained": true
+      },
+      {
+        "expert": "mfi",
+        "n": 21243,
+        "abstain": 9124,
+        "abstainRate": 0.4295,
+        "hitRate": 0.5265,
+        "brier": 0.2875,
+        "weight": 0.0119,
+        "priorWeight": 0.0485,
+        "trained": true
+      },
+      {
+        "expert": "rangePos",
+        "n": 21243,
+        "abstain": 49,
+        "abstainRate": 0.0023,
+        "hitRate": 0.5288,
+        "brier": 0.2925,
+        "weight": 0.0714,
+        "priorWeight": 0.0097,
+        "trained": true
+      },
+      {
+        "expert": "idxMom",
+        "n": 21243,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5052,
+        "brier": 0.2944,
+        "weight": 0.024,
+        "priorWeight": 0.1165,
+        "trained": true
+      },
+      {
+        "expert": "spxS",
+        "n": 21243,
+        "abstain": 778,
+        "abstainRate": 0.0366,
+        "hitRate": 0.5047,
+        "brier": 0.3056,
+        "weight": 0.0119,
+        "priorWeight": 0.0097,
         "trained": true
       },
       {
         "expert": "rsiRev",
-        "n": 4389,
-        "abstain": 2401,
-        "abstainRate": 0.547,
-        "hitRate": 0.5188,
-        "brier": 0.3403,
-        "weight": 0.0135,
-        "priorWeight": 0.0095,
+        "n": 21243,
+        "abstain": 12037,
+        "abstainRate": 0.5666,
+        "hitRate": 0.4987,
+        "brier": 0.3176,
+        "weight": 0.2249,
+        "priorWeight": 0.0097,
         "trained": true
       },
       {
-        "expert": "trend",
-        "n": 4389,
+        "expert": "soxMom",
+        "n": 21243,
         "abstain": 0,
         "abstainRate": 0,
-        "hitRate": 0.5582,
-        "brier": 0.3661,
-        "weight": 0.0894,
-        "priorWeight": 0.2381,
+        "hitRate": 0.5583,
+        "brier": 0.3267,
+        "weight": 0.0158,
+        "priorWeight": 0.0485,
         "trained": true
       },
       {
-        "expert": "rel",
-        "n": 4389,
+        "expert": "closePos",
+        "n": 21243,
+        "abstain": 478,
+        "abstainRate": 0.0225,
+        "hitRate": 0.5012,
+        "brier": 0.3482,
+        "weight": 0.0119,
+        "priorWeight": 0.0097,
+        "trained": true
+      },
+      {
+        "expert": "obv",
+        "n": 21243,
         "abstain": 0,
         "abstainRate": 0,
-        "hitRate": 0.5338,
-        "brier": 0.3771,
-        "weight": 0.1238,
-        "priorWeight": 0.0952,
+        "hitRate": 0.5282,
+        "brier": 0.3518,
+        "weight": 0.0119,
+        "priorWeight": 0.0583,
         "trained": true
       },
       {
-        "expert": "mom",
-        "n": 4389,
-        "abstain": 0,
-        "abstainRate": 0,
-        "hitRate": 0.524,
-        "brier": 0.4001,
-        "weight": 0.0453,
-        "priorWeight": 0.0952,
-        "trained": true
-      },
-      {
-        "expert": "macdDir",
-        "n": 4389,
-        "abstain": 0,
-        "abstainRate": 0,
-        "hitRate": 0.5867,
-        "brier": 0.4133,
-        "weight": 0.012,
-        "priorWeight": 0.0095,
-        "trained": true
-      },
-      {
-        "expert": "indexS",
-        "n": 4389,
-        "abstain": 22,
-        "abstainRate": 0.005,
-        "hitRate": 0.5263,
-        "brier": 0.4704,
-        "weight": 0.0148,
-        "priorWeight": 0.1429,
+        "expert": "mom5",
+        "n": 21243,
+        "abstain": 240,
+        "abstainRate": 0.0113,
+        "hitRate": 0.5195,
+        "brier": 0.3571,
+        "weight": 0.0119,
+        "priorWeight": 0.0097,
         "trained": true
       },
       {
         "expert": "soxS",
+        "n": 21243,
+        "abstain": 778,
+        "abstainRate": 0.0366,
+        "hitRate": 0.5277,
+        "brier": 0.3608,
+        "weight": 0.0119,
+        "priorWeight": 0.0097,
+        "trained": true
+      },
+      {
+        "expert": "boll",
+        "n": 21243,
+        "abstain": 2,
+        "abstainRate": 0.0001,
+        "hitRate": 0.472,
+        "brier": 0.3672,
+        "weight": 0.3194,
+        "priorWeight": 0.0097,
+        "trained": true
+      },
+      {
+        "expert": "kdj",
+        "n": 21243,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.491,
+        "brier": 0.3704,
+        "weight": 0.0379,
+        "priorWeight": 0.0097,
+        "trained": true
+      },
+      {
+        "expert": "rel",
+        "n": 21243,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.4983,
+        "brier": 0.3727,
+        "weight": 0.0119,
+        "priorWeight": 0.0971,
+        "trained": true
+      },
+      {
+        "expert": "trend",
+        "n": 21243,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5182,
+        "brier": 0.4,
+        "weight": 0.0119,
+        "priorWeight": 0.165,
+        "trained": true
+      },
+      {
+        "expert": "mom",
+        "n": 21243,
+        "abstain": 2,
+        "abstainRate": 0.0001,
+        "hitRate": 0.4843,
+        "brier": 0.4209,
+        "weight": 0.0119,
+        "priorWeight": 0.0777,
+        "trained": true
+      },
+      {
+        "expert": "macdDir",
+        "n": 21243,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5583,
+        "brier": 0.4417,
+        "weight": 0.0151,
+        "priorWeight": 0.0194,
+        "trained": true
+      },
+      {
+        "expert": "indexS",
+        "n": 21243,
+        "abstain": 24,
+        "abstainRate": 0.0011,
+        "hitRate": 0.4828,
+        "brier": 0.5165,
+        "weight": 0.0119,
+        "priorWeight": 0.0777,
+        "trained": true
+      },
+      {
+        "expert": "fund",
         "n": 0,
         "abstain": 0,
         "abstainRate": null,
         "hitRate": null,
         "brier": null,
-        "weight": 0.0095,
-        "priorWeight": 0.0095,
+        "weight": 0.0971,
+        "priorWeight": 0.0971,
         "trained": false
       },
       {
@@ -722,43 +2987,32 @@
         "abstainRate": null,
         "hitRate": null,
         "brier": null,
-        "weight": 0.0095,
-        "priorWeight": 0.0095,
-        "trained": false
-      },
-      {
-        "expert": "fund",
-        "n": 0,
-        "abstain": 0,
-        "abstainRate": null,
-        "hitRate": null,
-        "brier": null,
-        "weight": 0.1905,
-        "priorWeight": 0.1905,
-        "trained": false
-      },
-      {
-        "expert": "macroS",
-        "n": 0,
-        "abstain": 0,
-        "abstainRate": null,
-        "hitRate": null,
-        "brier": null,
-        "weight": 0.1905,
-        "priorWeight": 0.1905,
+        "weight": 0.0097,
+        "priorWeight": 0.0097,
         "trained": false
       }
     ]
   },
   "summary": {
-    "rounds": 17556,
-    "updatedAt": "2026-09-13T03:45:31.569Z",
+    "rounds": 84972,
+    "updatedAt": "2026-09-13T04:23:03.270Z",
     "trainedFrom": {
+      "version": 2,
+      "universeSize": 47,
       "codes": [
+        "510300",
+        "510500",
+        "588000",
+        "159915",
+        "512100",
+        "510880",
         "159516",
-        "512010",
-        "512400",
-        "512660",
+        "512480",
+        "512760",
+        "588200",
+        "515000",
+        "512720",
+        "159819",
         "688981",
         "688012",
         "002371",
@@ -768,166 +3022,194 @@
         "688008",
         "688783",
         "300475",
-        "159981",
         "002156",
+        "512010",
+        "512170",
+        "512400",
+        "512660",
+        "512800",
+        "512880",
+        "512690",
+        "515030",
+        "515790",
+        "159611",
+        "512200",
+        "516950",
+        "512980",
+        "159869",
+        "159981",
+        "518880",
+        "513050",
+        "513100",
+        "159941",
+        "512070",
+        "516110",
+        "159825",
         "002470",
         "159918"
       ],
-      "bars": 400,
-      "split": 0.6,
-      "trainCut": "2026-02-12",
-      "testCut": "2026-06-04",
-      "trainSamples": 12796,
-      "valSamples": 4760,
-      "testSamples": 4301,
-      "eta": 0.08,
+      "bars": 640,
+      "avgBars": 631,
+      "yahoo": [
+        "sox",
+        "us10y",
+        "spx"
+      ],
+      "yahooRange": "3y",
+      "trainCut": "2025-09-19",
+      "testCut": "2026-03-24",
+      "trainSamples": 63148,
+      "valSamples": 21824,
+      "testSamples": 20915,
+      "eta": 0.05,
       "gamma": 1,
-      "index": "1.000300",
-      "at": "2026-09-13T03:45:31.483Z"
+      "lossType": "mixed",
+      "experts": 21,
+      "at": "2026-09-13T04:22:57.493Z"
     },
     "horizons": {
       "d1": {
         "label": "未来1天",
         "n": 800,
-        "hitRate": 0.5425,
-        "brier": 0.2628,
-        "skillScore": -0.0694,
-        "reliability": 0.0197,
-        "resolution": 0.0024,
-        "uncertainty": 0.2458,
+        "hitRate": 0.5913,
+        "brier": 0.2409,
+        "skillScore": -0.0113,
+        "reliability": 0.008,
+        "resolution": 0.0055,
+        "uncertainty": 0.2382,
         "topExperts": [
           {
-            "expert": "volS",
-            "weight": 0.707
+            "expert": "us10y",
+            "weight": 0.564
           },
           {
-            "expert": "soxS",
-            "weight": 0.095
+            "expert": "boll",
+            "weight": 0.049
+          },
+          {
+            "expert": "rsiRev",
+            "weight": 0.047
           },
           {
             "expert": "senti",
-            "weight": 0.095
-          },
-          {
-            "expert": "mom",
-            "weight": 0.016
+            "weight": 0.046
           }
         ],
         "calibration": {
-          "a": 0.207,
+          "a": 1.3067,
           "b": 0,
           "n": 800,
           "fitted": true,
           "fitIntercept": false,
-          "fitBaseRate": 0.565
+          "fitBaseRate": 0.3912
         }
       },
       "d3": {
         "label": "未来3天",
         "n": 800,
-        "hitRate": 0.555,
-        "brier": 0.2533,
-        "skillScore": -0.0471,
-        "reliability": 0.0136,
-        "resolution": 0.0015,
-        "uncertainty": 0.2419,
+        "hitRate": 0.5775,
+        "brier": 0.2525,
+        "skillScore": -0.0625,
+        "reliability": 0.0283,
+        "resolution": 0.0128,
+        "uncertainty": 0.2376,
         "topExperts": [
           {
-            "expert": "volS",
-            "weight": 0.795
+            "expert": "us10y",
+            "weight": 0.374
           },
           {
-            "expert": "soxS",
-            "weight": 0.096
+            "expert": "soxMom",
+            "weight": 0.131
           },
           {
-            "expert": "rsiRev",
-            "weight": 0.017
+            "expert": "indexS",
+            "weight": 0.068
           },
           {
-            "expert": "macdDir",
-            "weight": 0.015
+            "expert": "rangePos",
+            "weight": 0.056
           }
         ],
         "calibration": {
-          "a": 0.4333,
+          "a": 0.4878,
           "b": 0,
           "n": 800,
           "fitted": true,
           "fitIntercept": false,
-          "fitBaseRate": 0.59
+          "fitBaseRate": 0.3887
         }
       },
       "w1": {
         "label": "未来1周",
         "n": 800,
-        "hitRate": 0.5475,
-        "brier": 0.2502,
-        "skillScore": -0.0413,
-        "reliability": 0.0239,
-        "resolution": 0.0121,
-        "uncertainty": 0.2402,
+        "hitRate": 0.6675,
+        "brier": 0.2318,
+        "skillScore": -0.0651,
+        "reliability": 0.0386,
+        "resolution": 0.0238,
+        "uncertainty": 0.2176,
         "topExperts": [
           {
-            "expert": "volS",
-            "weight": 0.581
+            "expert": "rel",
+            "weight": 0.145
+          },
+          {
+            "expert": "rangePos",
+            "weight": 0.143
+          },
+          {
+            "expert": "indexS",
+            "weight": 0.101
           },
           {
             "expert": "fund",
-            "weight": 0.144
-          },
-          {
-            "expert": "macroS",
-            "weight": 0.144
-          },
-          {
-            "expert": "senti",
-            "weight": 0.048
+            "weight": 0.075
           }
         ],
         "calibration": {
-          "a": 0.4832,
+          "a": 0.7732,
           "b": 0,
           "n": 800,
           "fitted": true,
           "fitIntercept": false,
-          "fitBaseRate": 0.5988
+          "fitBaseRate": 0.32
         }
       },
       "m1": {
         "label": "未来1月",
         "n": 800,
-        "hitRate": 0.6438,
-        "brier": 0.2257,
-        "skillScore": -0.1453,
-        "reliability": 0.0419,
-        "resolution": 0.0143,
-        "uncertainty": 0.1971,
+        "hitRate": 0.5637,
+        "brier": 0.2549,
+        "skillScore": -0.0847,
+        "reliability": 0.0256,
+        "resolution": 0.0069,
+        "uncertainty": 0.235,
         "topExperts": [
           {
-            "expert": "volS",
-            "weight": 0.301
+            "expert": "boll",
+            "weight": 0.319
+          },
+          {
+            "expert": "rsiRev",
+            "weight": 0.225
           },
           {
             "expert": "fund",
-            "weight": 0.19
+            "weight": 0.097
           },
           {
-            "expert": "macroS",
-            "weight": 0.19
-          },
-          {
-            "expert": "rel",
-            "weight": 0.124
+            "expert": "rangePos",
+            "weight": 0.071
           }
         ],
         "calibration": {
-          "a": 0.9707,
+          "a": 0.4611,
           "b": 0,
           "n": 800,
           "fitted": true,
           "fitIntercept": false,
-          "fitBaseRate": 0.73
+          "fitBaseRate": 0.3775
         }
       }
     }

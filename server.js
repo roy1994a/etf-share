@@ -13,8 +13,10 @@ const path = require('path');
 const url = require('url');
 const zlib = require('zlib');
 const { spawn } = require('child_process');
-const { fetchUs10y, fetchCn10y, fetchSox, fetchFundFlow, fetchMarketBreadth, fetchHhxgSnapshot, fetchIndexKline, calibrateKlines } = require('./lib/market.js'); // 宏观/科技/资金/情绪数据
+const { fetchUs10y, fetchCn10y, fetchSox, fetchFundFlow, fetchMarketBreadth, fetchHhxgSnapshot, fetchIndexKline, calibrateKlines, fetchGlobalHistory } = require('./lib/market.js'); // 宏观/科技/资金/情绪数据
 const Indicators = require('./public/static/indicators.js');
+const RL = require('./lib/rl.js');
+const LivePredict = require('./lib/live-predict.js');
 const Engine = require('./public/static/engine.js');
 
 const PORT = process.env.PORT || 8899;
@@ -197,6 +199,47 @@ const cache = new Map();
 const predictCache = new Map(); // 前瞻预测结果缓存（5分钟）
 const searchCache = new Map(); // 搜索缓存（5分钟，加速重复搜索）
 let globalExtrasCache = { t: 0, v: null }; // 预测用全局数据缓存（10分钟）
+// ------------------------------------------------------------------ RL 学习状态（带 mtime 失效，训练完无需重启即可生效）
+let _rlCache = { mtime: 0, state: null, path: null };
+function getRlState() {
+  const cands = [RL.defaultStatePath(), RL.bundledStatePath()];
+  for (const f of cands) {
+    try {
+      if (!fs.existsSync(f)) continue;
+      const mt = fs.statSync(f).mtimeMs;
+      if (_rlCache.path === f && _rlCache.mtime === mt && _rlCache.state) return _rlCache.state;
+      const st = RL.loadState(f);
+      _rlCache = { mtime: mt, state: st, path: f };
+      return st;
+    } catch (e) { /* 试下一个 */ }
+  }
+  return RL.initState();
+}
+
+/** 把当日外部数据转成 fund / senti 两个专家的投票票值（仅实盘可用） */
+function buildLiveVotes(extras) { // 已迁移到 lib/auto-ledger.js 的 liveVotesFromExtras，此处保留兼容
+  const v = {};
+  const ff = extras && extras.fundFlow;
+  if (ff && ff.length) {
+    const lp = ff[ff.length - 1];
+    const mp = lp.mainNetInflowPct || 0;
+    if (mp > 5) v.fund = 1;
+    else if (mp > 0) v.fund = 0.6;
+    else if (mp > -5) v.fund = -0.6;
+    else v.fund = -1;
+  }
+  const hx = extras && extras.hhxg;
+  if (hx && hx.sentimentIndex != null) {
+    const s = hx.sentimentIndex;
+    if (s >= 85) v.senti = -0.8;
+    else if (s >= 65) v.senti = 0.8;
+    else if (s >= 45) v.senti = 0;
+    else if (s >= 25) v.senti = -0.5;
+    else v.senti = 0.8;
+  }
+  return v;
+}
+
 async function getGlobalExtras() {
   if (globalExtrasCache.v && Date.now() - globalExtrasCache.t < 600000) return globalExtrasCache.v;
   const [fundR, brR, hxgR, idxR, usR, cnR, soxR, relR] = await Promise.allSettled([
@@ -474,7 +517,26 @@ const server = http.createServer(async (req, res) => {
         const extras = await getGlobalExtras(); // 全局数据走 10 分钟缓存
         const analysis = Engine.analyze(klines, Indicators.computeAll(klines), quote, Engine.DEFAULT_SETTINGS, extras);
         const prediction = Engine.predict(klines, analysis, extras);
-        const out = { ok: true, code, name: quote ? quote.name : code, price: analysis.price, score: analysis.score, status: analysis.status, prediction };
+
+        // ---- 接入「学到的权重 + 标定后的概率」的实盘预测 ----
+        let live = null;
+        try {
+          const state = getRlState();
+          const hist = await fetchGlobalHistory({ bars: 640 });
+          live = LivePredict.predictLive(klines, {
+            indexKlines: hist.indexKlines,
+            soxSeries: hist.soxSeries,
+            us10ySeries: hist.us10ySeries,
+            spxSeries: hist.spxSeries,
+          }, state, { liveVotes: buildLiveVotes(extras) });
+          // 用标定后的方向与概率覆盖手工结果，原始值保留在 *_rawModel 字段
+          // （绝不隐藏"打折"这件事）。合并逻辑集中在 lib/live-predict.js，避免多处实现不一致。
+          LivePredict.applyLiveToPrediction(prediction, live);
+        } catch (e) {
+          live = { ok: false, error: e.message };
+        }
+
+        const out = { ok: true, code, name: quote ? quote.name : code, price: analysis.price, score: analysis.score, status: analysis.status, prediction, live };
         predictCache.set(ck, { t: Date.now(), v: out });
         return sendJSON(res, 200, out);
       } catch (e) {

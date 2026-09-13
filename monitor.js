@@ -28,6 +28,9 @@ const Indicators = require('./public/static/indicators.js');
 const Engine = require('./public/static/engine.js');
 const { fetchTencentKline, calibrateKlines, httpGet, httpPostJson, httpPostForm, fetchFundFlow, fetchMarketBreadth, fetchNewsSentiment, fetchIndexKline, fetchHhxgSnapshot, fetchUs10y, fetchCn10y, fetchSox, fetchFundNav, fetchChemFutures, estimatePremium, NAME, CODE } = require('./lib/market.js');
 const { loadAccount: loadRotationAccount, saveAccount: saveRotationAccount, syncRotation, totalValue } = require('./lib/rotation-account.js');
+const RL = require('./lib/rl.js');
+const LP = require('./lib/live-predict.js');
+const AutoLedger = require('./lib/auto-ledger.js');
 
 // ---------- 常量 ----------
 const CONFIG_FILE = path.join(__dirname, 'notify.config.json');
@@ -359,6 +362,15 @@ function detectEvents(a, ins, account, ms, now, cfg) {
   if (sessionPhase(now) === 'post' && !ms.closeSent) {
     ms.closeSent = true;
     events.push({ kind: 'close' });
+    // 6b) 收盘后把当日全池模型预测自动写入研究台账（后台执行，不阻塞推送）
+    if (!ms.autoLedgerDate || ms.autoLedgerDate !== now.toISOString().slice(0, 10)) {
+      ms.autoLedgerDate = now.toISOString().slice(0, 10);
+      try {
+        AutoLedger.autolog({}).then((r) => {
+          console.log(`[台账] 自动入账完成：新增 ${r.added} 条，跳过 ${r.skipped} 条，失败 ${r.failed} 条`);
+        }).catch((e) => console.warn('[台账] 自动入账失败：' + e.message));
+      } catch (e) { console.warn('[台账] 无法加载 auto-ledger：' + e.message); }
+    }
   }
 
   // 去重/优先级：开盘与评分异动已含当日计划；止损止盈为最高优先级
@@ -550,10 +562,14 @@ async function evaluateRotation(cfg) {
 
   const rotation = Engine.pickRotation(results, market);
   // 前瞻预测：对当前最优标的（pick）计算 1天/3天/1周/1月
+  let _rlState = null, _hist = null;
+  try { _rlState = RL.loadStateWithFallback(); } catch (e) { /* 未训练则回退手工权重 */ }
+  try { _hist = await require('./lib/market.js').fetchGlobalHistory({ bars: 640 }); } catch (e) { /* 海外序列缺失 */ }
   let prediction = null;
   const pickItem = rotation.pick ? results.find((x) => x.code === rotation.pick.code) : null;
   if (pickItem && pickItem.analysis) {
-    prediction = Engine.predict(pickItem.klines, pickItem.analysis, sharedExtras);
+    const merged = LP.predictWithEngine(Engine, Indicators, pickItem.klines, pickItem.quote, sharedExtras, _rlState, _hist, AutoLedger.liveVotesFromExtras(sharedExtras));
+    prediction = merged.prediction;
   }
   return { pool: results, market, rotation, index, hhxg, us10y, cn10y, sox, relStrength, prediction };
 }

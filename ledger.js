@@ -20,6 +20,7 @@ const path = require('path');
 const market = require('./lib/market');
 const L = require('./lib/research-ledger');
 const rl = require('./lib/rl');
+const AutoLedger = require('./lib/auto-ledger');
 
 const ROOT = __dirname;
 const argv = process.argv.slice(2);
@@ -157,6 +158,14 @@ function showStats(db) {
       console.log(`  ${L.EVIDENCE_GRADES[g].label.padEnd(16)} 条目${String(b.entries).padStart(3)}  n=${String(b.n).padStart(3)}  命中率 ${b.hitRate == null ? '--' : (b.hitRate * 100).toFixed(1) + '%'}  Brier ${b.brier == null ? '--' : b.brier}`);
     }
   }
+  if (Object.keys(st.bySource || {}).length) {
+    console.log('\n-- 按预测来源（模型 vs 人工覆写）--');
+    for (const k of Object.keys(st.bySource)) {
+      const b = st.bySource[k];
+      const tag = k === 'human-override' ? '人工覆写' : k === 'live-model' ? '模型自动' : k;
+      console.log(`  ${tag.padEnd(12)} n=${String(b.n).padStart(4)}  命中率 ${(b.hitRate * 100).toFixed(1)}%  Brier ${b.brier}  方向调整后均收益 ${b.avgSignedRetPct}%`);
+    }
+  }
   if (Object.keys(st.byStance).length) {
     console.log('\n-- 按立场 --');
     for (const s of Object.keys(st.byStance)) {
@@ -236,6 +245,64 @@ function showEntry(db, key) {
 
   if (cmd === 'feedback') { feedback(db); return; }
 
+  if (cmd === 'autolog') {
+    console.log('开始自动入账（全池每日模型快照）…');
+    const r = await AutoLedger.autolog({
+      codes: flag('codes') ? flag('codes').split(',') : null,
+      limit: flag('limit') ? parseInt(flag('limit'), 10) : null,
+      dryRun: has('dry-run'),
+    });
+    console.log(`\n新增 ${r.added} 条，跳过（已存在）${r.skipped} 条，失败 ${r.failed} 条，共 ${r.total} 个标的`);
+    if (r.dryRun) console.log('（--dry-run：未写入）');
+    for (const x of r.results.slice(0, 20)) console.log(`  ${x.code} ${x.name} ${x.anchorDate} ${x.dir} 1周上涨概率 ${x.upProb}%`);
+    db = L.loadLedger(ledgerPath);
+    showStats(db);
+    return;
+  }
+
+  if (cmd === 'compare') {
+    // 人工覆写 vs 模型：同一批样本的直接对比
+    const withBoth = db.entries.filter((e) => {
+      const srcs = new Set((e.predictions || []).map((p) => p.source || 'model'));
+      return srcs.size > 1;
+    });
+    console.log('\n=== 人工覆写 vs 模型：对照实验 ===\n');
+    console.log(`同时记录了两种来源的条目：${withBoth.length} 条\n`);
+    const agg = {};
+    for (const e of withBoth) {
+      console.log(`【${e.name}（${e.code}）】${e.anchorDate}`);
+      const byH = {};
+      for (const o of (e.outcomes || [])) {
+        if (o.pending) continue;
+        const src = o.source || 'model';
+        byH[o.horizon] = byH[o.horizon] || {};
+        byH[o.horizon][src] = o;
+      }
+      for (const h of Object.keys(byH)) {
+        const parts = Object.keys(byH[h]).map((src) => {
+          const o = byH[h][src];
+          const tag = src === 'human-override' ? '人工' : '模型';
+          agg[src] = agg[src] || { n: 0, hits: 0 };
+          agg[src].n++; agg[src].hits += o.dirHit ? 1 : 0;
+          return `${tag}: ${o.predictedDir}(${o.upProb}%) vs 实际 ${o.actualPct}% ${o.dirHit ? '✅' : '❌'}`;
+        });
+        console.log(`  ${h}: ${parts.join('　｜　')}`);
+      }
+      console.log('');
+    }
+    if (Object.keys(agg).length) {
+      console.log('-- 汇总 --');
+      for (const k of Object.keys(agg)) {
+        const tag = k === 'human-override' ? '人工覆写' : '模型';
+        console.log(`  ${tag.padEnd(10)} n=${agg[k].n}  命中率 ${(agg[k].hits / agg[k].n * 100).toFixed(1)}%`);
+      }
+    } else {
+      console.log('（尚无到期的对照样本；已有 ' + withBoth.length + ' 条对照条目在等待结算）');
+    }
+    console.log('');
+    return;
+  }
+
   if (cmd === 'export') {
     // 导出脱敏台账到 model/，随 git 发布，供公开站点只读展示
     const out = flag('out') || L.publicLedgerPath();
@@ -262,5 +329,5 @@ function showEntry(db, key) {
   }
 
   console.log(`未知命令：${cmd}`);
-  console.log('可用：list / show <id> / stats / resolve [--code X] / feedback / report [--out 路径]');
+  console.log('可用：list / show <id> / stats / resolve [--code X] / feedback / report / export / autolog / compare');
 })();
