@@ -894,7 +894,7 @@
     const rows = [
       ['条目总数', st.totalEntries + ' 条'],
       ['已结算 / 部分 / 待结算', st.resolvedEntries + ' / ' + st.partialEntries + ' / ' + st.openEntries],
-      ['可判定预测', st.scoredOutcomes + ' 个'],
+      ['可判定预测', st.scoredOutcomes + ' 个（来自 ' + (st.distinctDates || '--') + ' 个到期日、' + (st.distinctCodes || '--') + ' 个标的）'],
       ['方向命中率', st.scoredOutcomes ? pct(st.hitRate) : '尚无到期样本'],
       ['Brier 分数', st.scoredOutcomes ? String(st.brier) + '（0.25 = 与"永远猜50%"持平）' : '--'],
       ['平均奖励', st.scoredOutcomes ? String(st.reward) : '--'],
@@ -907,6 +907,9 @@
     }
     if (!st.scoredOutcomes) {
       html += '<div class="warn-box">⚠️ 目前<b>还没有到期可判定的预测</b>。这正是台账存在的意义：在真实结果出来之前，任何"准确率"说法都是空话。周/月周期的预测需要时间兑现。</div>';
+    }
+    if (st.correlationWarning) {
+      html += '<div class="warn-box">' + st.correlationWarning + '</div>';
     }
     html += '<div class="muted">' + (st.baselineNote || '') + '</div>';
     $('#ledgerSummary').innerHTML = html;

@@ -375,7 +375,8 @@ async function main() {
       stance: 'bearish', confidence: 0.52, horizon: 'd1',
       anchorDate: d, anchorPrice: a,
       predictions: [
-        pred(a, 'd1', '看跌', 35, 2.9),
+        // 人工覆写：系统模型当时偏多，我判断偏空 → 必须标注来源，否则"人工 vs 模型"对照会失真
+        pred(a, 'd1', '看跌', 35, 2.9, 'human-override'),
       ],
       keyLevels: { support: [1.7422, 1.736, 1.7016], resistance: [1.813], note: 'MA5 1.7422 是短线生死线' },
       plan: '有持仓者：反弹至 1.775~1.785 减仓/平仓；跌破 1.736 减半；跌破 1.700 止损。无持仓者不参与。',

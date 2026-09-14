@@ -145,17 +145,17 @@
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 2
+          "needBars": 1
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 4
+          "needBars": 3
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 21
+          "needBars": 20
         }
       ],
       "scores": {
@@ -337,17 +337,17 @@
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 2
+          "needBars": 1
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 4
+          "needBars": 3
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 21
+          "needBars": 20
         }
       ],
       "scores": {
@@ -523,17 +523,17 @@
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 2
+          "needBars": 1
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 4
+          "needBars": 3
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 21
+          "needBars": 20
         }
       ],
       "scores": {
@@ -709,17 +709,17 @@
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 2
+          "needBars": 1
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 4
+          "needBars": 3
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 21
+          "needBars": 20
         }
       ],
       "scores": {
@@ -914,17 +914,17 @@
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 2
+          "needBars": 1
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 4
+          "needBars": 3
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 21
+          "needBars": 20
         }
       ],
       "scores": {
@@ -1162,40 +1162,74 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "human-override",
+          "fromDate": "2026-09-11",
+          "toDate": "2026-09-14",
+          "anchorPrice": 2.3,
+          "endClose": 2.21,
+          "actualPct": -3.91,
+          "actualDir": "看跌",
+          "predictedDir": "看跌",
+          "predictedRange": [
+            2.151,
+            2.449
+          ],
+          "rangeWidthPct": 12.96,
+          "moveAbsPct": 6.96,
+          "dirHit": true,
+          "brier": 0.09,
+          "reward": 0.82,
+          "upProb": 30,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 2.34,
+          "pathLow": 2.18
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 1,
+        "hitRate": 1,
+        "brier": 0.09,
+        "reward": 0.82,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 1,
+            "hitRate": 1,
+            "brier": 0.09
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "关键方法论收获：**模型擅长\"顺势\"，不擅长\"识别转折\"**。遇到一字板炸板这类盘口结构剧变，必须由人工判断覆盖模型输出。这一条已写入系统改进清单。",
       "confidenceCeiling": 0.668,
@@ -1325,30 +1359,64 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "model",
+          "fromDate": "2026-09-11",
+          "toDate": "2026-09-14",
+          "anchorPrice": 58,
+          "endClose": 56.91,
+          "actualPct": -1.88,
+          "actualDir": "看跌",
+          "predictedDir": "震荡",
+          "predictedRange": [
+            55.448,
+            60.552
+          ],
+          "rangeWidthPct": 8.8,
+          "moveAbsPct": 2.67,
+          "dirHit": false,
+          "brier": 0.2025,
+          "reward": 0.595,
+          "upProb": 45,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 57.88,
+          "pathLow": 56.33
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 0,
+        "hitRate": 0,
+        "brier": 0.2025,
+        "reward": 0.595,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 0,
+            "hitRate": 0,
+            "brier": 0.2025
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "",
       "confidenceCeiling": 0.653,
@@ -1467,16 +1535,50 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "model",
+          "fromDate": "2026-09-11",
+          "toDate": "2026-09-14",
+          "anchorPrice": 0.653,
+          "endClose": 0.65,
+          "actualPct": -0.46,
+          "actualDir": "看跌",
+          "predictedDir": "震荡",
+          "predictedRange": [
+            0.636,
+            0.67
+          ],
+          "rangeWidthPct": 5.21,
+          "moveAbsPct": 3.06,
+          "dirHit": false,
+          "brier": 0.2025,
+          "reward": 0.595,
+          "upProb": 45,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 0.66,
+          "pathLow": 0.64
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 0,
+        "hitRate": 0,
+        "brier": 0.2025,
+        "reward": 0.595,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 0,
+            "hitRate": 0,
+            "brier": 0.2025
+          }
+        }
       },
-      "status": "open",
-      "resolvedAt": null,
+      "status": "resolved",
+      "resolvedAt": "2026-09-14T06:12:35.408Z",
       "lessons": "该结论**以 C+D+E 级依据为主**（周末只能靠新闻），是本次台账中证据等级最弱的一类。明日收盘后必须回看，验证\"高开冲高回落\"是否成立。",
       "confidenceCeiling": 0.656,
       "ceilingReason": "平均依据可信度 63%（A3 B1 C2 D1 E1）",
@@ -1516,7 +1618,7 @@
         {
           "horizon": "d1",
           "dir": "看跌",
-          "source": "model",
+          "source": "human-override",
           "upProb": 35,
           "rangePct": 2.9,
           "expectedChg": -1.16,
@@ -1588,16 +1690,50 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "human-override",
+          "fromDate": "2026-09-11",
+          "toDate": "2026-09-14",
+          "anchorPrice": 1.759,
+          "endClose": 1.772,
+          "actualPct": 0.74,
+          "actualDir": "看涨",
+          "predictedDir": "看跌",
+          "predictedRange": [
+            1.708,
+            1.81
+          ],
+          "rangeWidthPct": 5.8,
+          "moveAbsPct": 2.96,
+          "dirHit": false,
+          "brier": 0.4225,
+          "reward": 0.155,
+          "upProb": 35,
+          "rangeHitClose": true,
+          "rangeHitPath": false,
+          "pathHigh": 1.816,
+          "pathLow": 1.764
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 0,
+        "hitRate": 0,
+        "brier": 0.4225,
+        "reward": 0.155,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 0,
+            "hitRate": 0,
+            "brier": 0.4225
+          }
+        }
       },
-      "status": "open",
-      "resolvedAt": null,
+      "status": "resolved",
+      "resolvedAt": "2026-09-14T06:12:35.412Z",
       "lessons": "本条再次出现\"人工判断与系统模型方向相反\"（模型偏多、人工偏空）。这是第二个对照样本，与金正大一起构成\"人工覆写是否有效\"的检验集。",
       "confidenceCeiling": 0.645,
       "ceilingReason": "平均依据可信度 61%（A3 B0 C2 D1 E1）",
@@ -1688,16 +1824,50 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "model",
+          "fromDate": "2026-09-11",
+          "toDate": "2026-09-14",
+          "anchorPrice": 1.167,
+          "endClose": 1.15,
+          "actualPct": -1.46,
+          "actualDir": "看跌",
+          "predictedDir": "震荡",
+          "predictedRange": [
+            1.144,
+            1.19
+          ],
+          "rangeWidthPct": 3.94,
+          "moveAbsPct": 1.63,
+          "dirHit": false,
+          "brier": 0.2304,
+          "reward": 0.5392,
+          "upProb": 48,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 1.166,
+          "pathLow": 1.147
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 0,
+        "hitRate": 0,
+        "brier": 0.2304,
+        "reward": 0.5392,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 0,
+            "hitRate": 0,
+            "brier": 0.2304
+          }
+        }
       },
-      "status": "open",
-      "resolvedAt": null,
+      "status": "resolved",
+      "resolvedAt": "2026-09-14T06:12:35.412Z",
       "lessons": "",
       "confidenceCeiling": 0.608,
       "ceilingReason": "平均依据可信度 55%（A1 B1 C0 D1 E1）",
@@ -2041,30 +2211,64 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "live-model",
+          "fromDate": "2026-09-11",
+          "toDate": "2026-09-14",
+          "anchorPrice": 0.653,
+          "endClose": 0.65,
+          "actualPct": -0.46,
+          "actualDir": "看跌",
+          "predictedDir": "看跌",
+          "predictedRange": [
+            0.619,
+            0.687
+          ],
+          "rangeWidthPct": 10.41,
+          "moveAbsPct": 3.06,
+          "dirHit": true,
+          "brier": 0.1849,
+          "reward": 0.6302,
+          "upProb": 43,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 0.66,
+          "pathLow": 0.64
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 1,
+        "hitRate": 1,
+        "brier": 0.1849,
+        "reward": 0.6302,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 1,
+            "hitRate": 1,
+            "brier": 0.1849
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "",
       "confidenceCeiling": 0.705,
@@ -2236,30 +2440,64 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "live-model",
+          "fromDate": "2026-09-11",
+          "toDate": "2026-09-14",
+          "anchorPrice": 0.365,
+          "endClose": 0.37,
+          "actualPct": 1.37,
+          "actualDir": "看涨",
+          "predictedDir": "看跌",
+          "predictedRange": [
+            0.357,
+            0.373
+          ],
+          "rangeWidthPct": 4.38,
+          "moveAbsPct": 2.74,
+          "dirHit": false,
+          "brier": 0.3136,
+          "reward": 0.3728,
+          "upProb": 44,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 0.37,
+          "pathLow": 0.36
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 0,
+        "hitRate": 0,
+        "brier": 0.3136,
+        "reward": 0.3728,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 0,
+            "hitRate": 0,
+            "brier": 0.3136
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "",
       "confidenceCeiling": 0.705,
@@ -2431,30 +2669,64 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "live-model",
+          "fromDate": "2026-09-11",
+          "toDate": "2026-09-14",
+          "anchorPrice": 1.754,
+          "endClose": 1.74,
+          "actualPct": -0.8,
+          "actualDir": "看跌",
+          "predictedDir": "看跌",
+          "predictedRange": [
+            1.691,
+            1.817
+          ],
+          "rangeWidthPct": 7.18,
+          "moveAbsPct": 2.28,
+          "dirHit": true,
+          "brier": 0.1521,
+          "reward": 0.6958,
+          "upProb": 39,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 1.76,
+          "pathLow": 1.72
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 1,
+        "hitRate": 1,
+        "brier": 0.1521,
+        "reward": 0.6958,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 1,
+            "hitRate": 1,
+            "brier": 0.1521
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "",
       "confidenceCeiling": 0.705,
@@ -2626,30 +2898,64 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "live-model",
+          "fromDate": "2026-09-11",
+          "toDate": "2026-09-14",
+          "anchorPrice": 1.167,
+          "endClose": 1.15,
+          "actualPct": -1.46,
+          "actualDir": "看跌",
+          "predictedDir": "看跌",
+          "predictedRange": [
+            1.141,
+            1.193
+          ],
+          "rangeWidthPct": 4.46,
+          "moveAbsPct": 1.63,
+          "dirHit": true,
+          "brier": 0.1764,
+          "reward": 0.6472,
+          "upProb": 42,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 1.166,
+          "pathLow": 1.147
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 1,
+        "hitRate": 1,
+        "brier": 0.1764,
+        "reward": 0.6472,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 1,
+            "hitRate": 1,
+            "brier": 0.1764
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "",
       "confidenceCeiling": 0.705,
@@ -2821,30 +3127,64 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "live-model",
+          "fromDate": "2026-09-11",
+          "toDate": "2026-09-14",
+          "anchorPrice": 117.41,
+          "endClose": 114.66,
+          "actualPct": -2.34,
+          "actualDir": "看跌",
+          "predictedDir": "看跌",
+          "predictedRange": [
+            112.49,
+            122.33
+          ],
+          "rangeWidthPct": 8.38,
+          "moveAbsPct": 2.04,
+          "dirHit": true,
+          "brier": 0.1764,
+          "reward": 0.6472,
+          "upProb": 42,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 116.8,
+          "pathLow": 114.4
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 1,
+        "hitRate": 1,
+        "brier": 0.1764,
+        "reward": 0.6472,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 1,
+            "hitRate": 1,
+            "brier": 0.1764
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "",
       "confidenceCeiling": 0.705,
@@ -3016,30 +3356,64 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "live-model",
+          "fromDate": "2026-09-11",
+          "toDate": "2026-09-14",
+          "anchorPrice": 333.59,
+          "endClose": 324.55,
+          "actualPct": -2.71,
+          "actualDir": "看跌",
+          "predictedDir": "看跌",
+          "predictedRange": [
+            316.395,
+            350.785
+          ],
+          "rangeWidthPct": 10.31,
+          "moveAbsPct": 2.51,
+          "dirHit": true,
+          "brier": 0.1849,
+          "reward": 0.6302,
+          "upProb": 43,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 329.86,
+          "pathLow": 321.5
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 1,
+        "hitRate": 1,
+        "brier": 0.1849,
+        "reward": 0.6302,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 1,
+            "hitRate": 1,
+            "brier": 0.1849
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "",
       "confidenceCeiling": 0.705,
@@ -3211,30 +3585,64 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "live-model",
+          "fromDate": "2026-09-11",
+          "toDate": "2026-09-14",
+          "anchorPrice": 634,
+          "endClose": 625.84,
+          "actualPct": -1.29,
+          "actualDir": "看跌",
+          "predictedDir": "看跌",
+          "predictedRange": [
+            602.568,
+            665.432
+          ],
+          "rangeWidthPct": 9.92,
+          "moveAbsPct": 2.05,
+          "dirHit": true,
+          "brier": 0.1849,
+          "reward": 0.6302,
+          "upProb": 43,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 633.01,
+          "pathLow": 620.01
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 1,
+        "hitRate": 1,
+        "brier": 0.1849,
+        "reward": 0.6302,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 1,
+            "hitRate": 1,
+            "brier": 0.1849
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "",
       "confidenceCeiling": 0.705,
@@ -3406,30 +3814,64 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "live-model",
+          "fromDate": "2026-09-11",
+          "toDate": "2026-09-14",
+          "anchorPrice": 1040,
+          "endClose": 1040,
+          "actualPct": 0,
+          "actualDir": "震荡",
+          "predictedDir": "看跌",
+          "predictedRange": [
+            979.841,
+            1100.159
+          ],
+          "rangeWidthPct": 11.57,
+          "moveAbsPct": 4.82,
+          "dirHit": false,
+          "brier": 0.16,
+          "reward": 0.68,
+          "upProb": 40,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 1048.98,
+          "pathLow": 998.88
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 0,
+        "hitRate": 0,
+        "brier": 0.16,
+        "reward": 0.68,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 0,
+            "hitRate": 0,
+            "brier": 0.16
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "",
       "confidenceCeiling": 0.705,
@@ -3601,30 +4043,64 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "live-model",
+          "fromDate": "2026-09-11",
+          "toDate": "2026-09-14",
+          "anchorPrice": 230.89,
+          "endClose": 223.92,
+          "actualPct": -3.02,
+          "actualDir": "看跌",
+          "predictedDir": "看跌",
+          "predictedRange": [
+            218.524,
+            243.256
+          ],
+          "rangeWidthPct": 10.71,
+          "moveAbsPct": 3.04,
+          "dirHit": true,
+          "brier": 0.1936,
+          "reward": 0.6128,
+          "upProb": 44,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 227.8,
+          "pathLow": 220.77
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 1,
+        "hitRate": 1,
+        "brier": 0.1936,
+        "reward": 0.6128,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 1,
+            "hitRate": 1,
+            "brier": 0.1936
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "",
       "confidenceCeiling": 0.705,
@@ -3796,30 +4272,64 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "live-model",
+          "fromDate": "2026-09-11",
+          "toDate": "2026-09-14",
+          "anchorPrice": 371.32,
+          "endClose": 357.48,
+          "actualPct": -3.73,
+          "actualDir": "看跌",
+          "predictedDir": "看跌",
+          "predictedRange": [
+            349.521,
+            393.119
+          ],
+          "rangeWidthPct": 11.74,
+          "moveAbsPct": 2.78,
+          "dirHit": true,
+          "brier": 0.1681,
+          "reward": 0.6638,
+          "upProb": 41,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 365.88,
+          "pathLow": 355.55
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 1,
+        "hitRate": 1,
+        "brier": 0.1681,
+        "reward": 0.6638,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 1,
+            "hitRate": 1,
+            "brier": 0.1681
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "",
       "confidenceCeiling": 0.705,
@@ -3991,30 +4501,64 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "live-model",
+          "fromDate": "2026-09-11",
+          "toDate": "2026-09-14",
+          "anchorPrice": 191.96,
+          "endClose": 184.9,
+          "actualPct": -3.68,
+          "actualDir": "看跌",
+          "predictedDir": "看跌",
+          "predictedRange": [
+            180.586,
+            203.334
+          ],
+          "rangeWidthPct": 11.85,
+          "moveAbsPct": 2.26,
+          "dirHit": true,
+          "brier": 0.1764,
+          "reward": 0.6472,
+          "upProb": 42,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 188.33,
+          "pathLow": 184
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 1,
+        "hitRate": 1,
+        "brier": 0.1764,
+        "reward": 0.6472,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 1,
+            "hitRate": 1,
+            "brier": 0.1764
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "",
       "confidenceCeiling": 0.705,
@@ -4186,30 +4730,64 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "live-model",
+          "fromDate": "2026-09-11",
+          "toDate": "2026-09-14",
+          "anchorPrice": 25.9,
+          "endClose": 26.23,
+          "actualPct": 1.27,
+          "actualDir": "看涨",
+          "predictedDir": "看跌",
+          "predictedRange": [
+            23.924,
+            27.876
+          ],
+          "rangeWidthPct": 15.26,
+          "moveAbsPct": 7.07,
+          "dirHit": false,
+          "brier": 0.3249,
+          "reward": 0.3502,
+          "upProb": 43,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 26.8,
+          "pathLow": 24.97
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 0,
+        "hitRate": 0,
+        "brier": 0.3249,
+        "reward": 0.3502,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 0,
+            "hitRate": 0,
+            "brier": 0.3249
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "",
       "confidenceCeiling": 0.705,
@@ -4381,30 +4959,64 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "live-model",
+          "fromDate": "2026-09-11",
+          "toDate": "2026-09-14",
+          "anchorPrice": 167.65,
+          "endClose": 161.6,
+          "actualPct": -3.61,
+          "actualDir": "看跌",
+          "predictedDir": "看跌",
+          "predictedRange": [
+            156.051,
+            179.249
+          ],
+          "rangeWidthPct": 13.84,
+          "moveAbsPct": 4.56,
+          "dirHit": true,
+          "brier": 0.1849,
+          "reward": 0.6302,
+          "upProb": 43,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 165.99,
+          "pathLow": 158.34
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 1,
+        "hitRate": 1,
+        "brier": 0.1849,
+        "reward": 0.6302,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 1,
+            "hitRate": 1,
+            "brier": 0.1849
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "",
       "confidenceCeiling": 0.705,
@@ -4431,5 +5043,5 @@
   ],
   "_source": "/Users/liuyang/Desktop/PythonProject/半导体设备ETF交易模拟系统/data/research-ledger.json",
   "sanitized": true,
-  "sanitizedAt": "2026-09-13T04:24:34.460Z"
+  "sanitizedAt": "2026-09-14T06:13:10.370Z"
 }

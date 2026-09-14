@@ -133,7 +133,8 @@ function showStats(db) {
   const st = L.stats(db);
   console.log('\n=== 研究台账 · 准确率总览 ===\n');
   console.log(`条目总数 ${st.totalEntries}：已结算 ${st.resolvedEntries} ／ 部分结算 ${st.partialEntries} ／ 待结算 ${st.openEntries} ／ 记录类 ${st.recordEntries} ／ 不可结算 ${st.unresolvableEntries}`);
-  console.log(`可判定预测 ${st.scoredOutcomes} 个`);
+  console.log(`可判定预测 ${st.scoredOutcomes} 个（来自 ${st.distinctDates} 个不同到期日、${st.distinctCodes} 个标的）`);
+  if (st.correlationWarning) console.log('\n' + st.correlationWarning);
   if (st.scoredOutcomes) {
     console.log(`\n方向命中率：${(st.hitRate * 100).toFixed(1)}%`);
     console.log(`Brier 分数 ：${st.brier}   （0.25 = 与"永远猜50%"持平，越低越好）`);
@@ -260,6 +261,61 @@ function showEntry(db, key) {
     return;
   }
 
+  if (cmd === 'monthly') {
+    // 一键月度维护：结算 → 回灌 → 统计 → 人工/模型对照 → 出报告
+    console.log('\n════════ 月度维护开始 ════════\n');
+    console.log('【1/5】结算到期预测（拉真实行情）');
+    db = await resolveAll(db);
+    L.saveLedger(db, ledgerPath);
+
+    console.log('\n【2/5】回灌给 RL 学习器');
+    feedback(db);
+
+    console.log('\n【3/5】准确率统计');
+    showStats(db);
+
+    console.log('【4/5】人工覆写 vs 模型 对照');
+    const withBoth = db.entries.filter((e) => new Set((e.predictions || []).map((x) => x.source || 'model')).size > 1);
+    const agg = {};
+    for (const e of withBoth) {
+      for (const o of (e.outcomes || [])) {
+        if (o.pending) continue;
+        const src = o.source || 'model';
+        agg[src] = agg[src] || { n: 0, hits: 0 };
+        agg[src].n++; agg[src].hits += o.dirHit ? 1 : 0;
+      }
+    }
+    if (!Object.keys(agg).length) {
+      console.log(`  对照条目 ${withBoth.length} 条，但尚无到期的成对样本 —— 需要更长时间兑现`);
+    } else {
+      for (const k of Object.keys(agg)) {
+        console.log(`  ${(k === 'human-override' ? '人工覆写' : '模型').padEnd(10)} n=${agg[k].n}  命中率 ${(agg[k].hits / agg[k].n * 100).toFixed(1)}%`);
+      }
+    }
+
+    console.log('\n【5/5】生成报告与脱敏导出');
+    const out = path.join(ROOT, 'reports', `研究台账与准确率追踪报告-${new Date().toISOString().slice(0, 10).replace(/-/g, '')}.md`);
+    fs.mkdirSync(path.dirname(out), { recursive: true });
+    fs.writeFileSync(out, L.buildLedgerReport(db), 'utf8');
+    console.log('  报告 → ' + out);
+    try {
+      fs.mkdirSync(path.dirname(L.publicLedgerPath()), { recursive: true });
+      fs.writeFileSync(L.publicLedgerPath(), JSON.stringify(L.sanitizeLedger(db), null, 2), 'utf8');
+      console.log('  脱敏台账 → ' + L.publicLedgerPath());
+    } catch (e) { console.log('  脱敏导出失败：' + e.message); }
+
+    const st = L.stats(db);
+    console.log('\n════════ 月度维护完成 ════════');
+    console.log(`台账 ${st.totalEntries} 条　可判定预测 ${st.scoredOutcomes} 个`);
+    if (st.scoredOutcomes >= 30) {
+      console.log(`方向命中率 ${(st.hitRate * 100).toFixed(1)}% —— 样本量已足够下初步结论（基准 50%，>53% 才算有边际）`);
+    } else {
+      console.log(`方向命中率 ${st.scoredOutcomes ? (st.hitRate * 100).toFixed(1) + '%' : '--'} —— 样本仅 ${st.scoredOutcomes} 个，**还不足以下结论**（建议 ≥30 个）`);
+    }
+    console.log('\n别忘了顺便重训一次：node train-rl.js\n');
+    return;
+  }
+
   if (cmd === 'compare') {
     // 人工覆写 vs 模型：同一批样本的直接对比
     const withBoth = db.entries.filter((e) => {
@@ -329,5 +385,5 @@ function showEntry(db, key) {
   }
 
   console.log(`未知命令：${cmd}`);
-  console.log('可用：list / show <id> / stats / resolve [--code X] / feedback / report / export / autolog / compare');
+  console.log('可用：list / show <id> / stats / resolve [--code X] / feedback / report / export / autolog / compare / monthly');
 })();
