@@ -2,40 +2,128 @@
   "channel": "serverchan",
   "pollIntervalSec": 60,
   "reportIntervalMin": 30,
+  "pushPolicy": {
+    "mode": "actionable"
+  },
+  "_pushPolicy说明": "推送策略 —— 只推「可执行动作」，不推常规播报。mode='actionable'（默认）：建仓条件 / 成交 / 轮动切换 / 止损 / 止盈；mode='trades'（更严格）：仅建仓条件 / 成交 / 止损 / 止盈；mode='all'（旧行为）：额外包含 开盘策略 / 盘中快照(每30分钟) / 评分异动 / 收盘复盘。allowKinds 为自定义白名单，给了它就覆盖 mode。也可临时用命令行覆盖：node monitor.js --push=all",
   "risk": 1,
   "stopPct": 5,
   "takePct": 8,
   "lots": 10,
   "maxPosition": 100,
-  "thresholds": [36, 48, 60, 72],
-  "crossCooldownMin": 15,
-  "holidays": ["2026-10-01", "2026-10-02", "2026-10-05", "2026-10-06", "2026-10-07", "2026-10-08"],
-  "etfPool": [
-    { "code": "159516", "name": "半导体设备", "type": "etf" },
-    { "code": "512010", "name": "医药", "type": "etf" },
-    { "code": "512400", "name": "有色", "type": "etf" },
-    { "code": "512660", "name": "军工", "type": "etf" },
-    { "code": "688981", "name": "中芯国际", "type": "stock" },
-    { "code": "688012", "name": "中微公司", "type": "stock" },
-    { "code": "002371", "name": "北方华创", "type": "stock" },
-    { "code": "603501", "name": "韦尔股份", "type": "stock" },
-    { "code": "688256", "name": "寒武纪", "type": "stock" },
-    { "code": "688041", "name": "海光信息", "type": "stock" },
-    { "code": "603986", "name": "兆易创新", "type": "stock" },
-    { "code": "688008", "name": "澜起科技", "type": "stock" }
+  "thresholds": [
+    36,
+    48,
+    60,
+    72
   ],
-
+  "crossCooldownMin": 15,
+  "holidays": [
+    "2026-10-01",
+    "2026-10-02",
+    "2026-10-05",
+    "2026-10-06",
+    "2026-10-07",
+    "2026-10-08"
+  ],
+  "etfPool": [
+    {
+      "code": "159516",
+      "name": "半导体设备",
+      "type": "etf"
+    },
+    {
+      "code": "512010",
+      "name": "医药",
+      "type": "etf"
+    },
+    {
+      "code": "512400",
+      "name": "有色",
+      "type": "etf"
+    },
+    {
+      "code": "512660",
+      "name": "军工",
+      "type": "etf"
+    },
+    {
+      "code": "688981",
+      "name": "中芯国际",
+      "type": "stock"
+    },
+    {
+      "code": "688012",
+      "name": "中微公司",
+      "type": "stock"
+    },
+    {
+      "code": "002371",
+      "name": "北方华创",
+      "type": "stock"
+    },
+    {
+      "code": "603501",
+      "name": "韦尔股份",
+      "type": "stock"
+    },
+    {
+      "code": "688256",
+      "name": "寒武纪",
+      "type": "stock"
+    },
+    {
+      "code": "688041",
+      "name": "海光信息",
+      "type": "stock"
+    },
+    {
+      "code": "603986",
+      "name": "兆易创新",
+      "type": "stock"
+    },
+    {
+      "code": "688008",
+      "name": "澜起科技",
+      "type": "stock"
+    }
+  ],
   "_entryWatch说明": "建仓条件监控（双档）。A档建仓：价格 ≤ maxPrice 且 折溢价 ≤ maxPremiumPct；B档危险：折溢价 ≥ dangerPremiumPct（禁买/减仓警告）。maxAlertsPerDay 为每日每规则推送上限（A/B 各最多一次），默认 2。折溢价为估算值＝T-1净值×(1+期货篮子涨跌)，商品期货ETF无免费实时IOPV。",
   "entryWatch": [
-    { "code": "159981", "name": "能源化工ETF", "maxPrice": 1.797, "maxPremiumPct": 0.5, "dangerPremiumPct": 2.0, "maxAlertsPerDay": 2, "futuresBasket": "chem", "plan": "首仓2成 · 止损1.700 · 目标1.88" }
+    {
+      "code": "159981",
+      "name": "能源化工ETF",
+      "maxPrice": 1.797,
+      "maxPremiumPct": 0.5,
+      "dangerPremiumPct": 2.0,
+      "maxAlertsPerDay": 2,
+      "futuresBasket": "chem",
+      "plan": "首仓2成 · 止损1.700 · 目标1.88"
+    }
   ],
-
   "notify": {
-    "serverchan": { "sendkey": "SCT 开头的 SendKey，在 https://sct.ftqq.com 获取" },
-    "pushplus": { "token": "PushPlus token，在 https://www.pushplus.plus 获取" },
-    "wecom": { "webhook": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=..." },
-    "wecomapp": { "corpid": "ww开头的企业ID", "secret": "应用Secret", "agentid": 1000002, "touser": "你的UserId，如 ZhangSan；多人用 | 分隔" },
-    "dingtalk": { "webhook": "https://oapi.dingtalk.com/robot/send?access_token=..." },
-    "generic": { "url": "https://your-sms-or-webhook-gateway", "headers": {}, "bodyTemplate": "{\"title\":\"{title}\",\"text\":\"{text}\"}" }
+    "serverchan": {
+      "sendkey": "SCT 开头的 SendKey，在 https://sct.ftqq.com 获取"
+    },
+    "pushplus": {
+      "token": "PushPlus token，在 https://www.pushplus.plus 获取"
+    },
+    "wecom": {
+      "webhook": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=..."
+    },
+    "wecomapp": {
+      "corpid": "ww开头的企业ID",
+      "secret": "应用Secret",
+      "agentid": 1000002,
+      "touser": "你的UserId，如 ZhangSan；多人用 | 分隔"
+    },
+    "dingtalk": {
+      "webhook": "https://oapi.dingtalk.com/robot/send?access_token=..."
+    },
+    "generic": {
+      "url": "https://your-sms-or-webhook-gateway",
+      "headers": {},
+      "bodyTemplate": "{\"title\":\"{title}\",\"text\":\"{text}\"}"
+    }
   }
 }

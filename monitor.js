@@ -16,6 +16,13 @@
  *   4. 调仓提醒       —— 目标仓位偏离 ≥ 半份资金（0.5 份）时给出买卖指令
  *   5. 风控预警       —— 持仓价格触及止损价 / 止盈价（高优先级）
  *   6. 收盘复盘       —— 15:00 收盘后生成当日复盘 + 明日预案（仅一次）
+ *   7. 建仓条件       —— 价格与折溢价同时达标时提示建仓（双档）
+ *   8. 止损/止盈      —— 按实际持仓成本检查，跌破/涨破阈值立即提醒
+ *
+ * 推送策略（pushPolicy）：默认只推「可执行动作」——
+ *   建仓条件 / 成交 / 轮动切换 / 止损 / 止盈；
+ *   常规播报（开盘策略、盘中快照、评分异动、收盘复盘）默认只写日志不推送。
+ *   用 node monitor.js --push=all 可临时恢复全量推送。
  *
  * 免责声明：本工具仅供学习研究，不构成任何投资建议。
  */
@@ -51,6 +58,8 @@ function removePidFile() {
 const args = process.argv.slice(2);
 const ONCE = args.includes('--once');
 const DRY_RUN = args.includes('--dry-run');
+// --push=actionable（默认，只推可执行动作）| trades（更严格，只推建仓/减仓/止损止盈）| all（旧行为，全推）
+const PUSH_ARG = (args.find((a) => a.startsWith('--push=')) || '').split('=')[1] || null;
 
 // ---------- 工具 ----------
 function fmt(n, d) { return (n == null || isNaN(n)) ? '--' : (+n).toLocaleString('zh-CN', { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 }); }
@@ -72,6 +81,12 @@ function defaultConfig() {
     thresholds: [36, 48, 60, 72],
     crossCooldownMin: 15,      // 评分异动提醒的最小间隔（分钟），防止在阈值附近反复触发
     holidays: [],              // 非交易日（YYYY-MM-DD），如 "2026-10-01"
+    // 推送策略：只推「可执行动作」，不推常规播报
+    //   mode: 'actionable'（默认）建仓/减仓/成交/轮动切换/止损止盈
+    //         'trades'     更严格：仅建仓/减仓/成交/止损止盈
+    //         'all'        旧行为：开盘策略+盘中快照+评分异动+收盘复盘 全推
+    //   allowKinds: 自定义白名单（给了它就以它为准，覆盖 mode）
+    pushPolicy: { mode: 'actionable' },
     // 建仓条件监控（双档，每日最多 maxAlertsPerDay 次，A/B 各最多一次）
     //   A档 建仓：价格 ≤ maxPrice 且 折溢价 ≤ maxPremiumPct
     //   B档 危险：折溢价 ≥ dangerPremiumPct（禁买／减仓警告）
@@ -362,15 +377,7 @@ function detectEvents(a, ins, account, ms, now, cfg) {
   if (sessionPhase(now) === 'post' && !ms.closeSent) {
     ms.closeSent = true;
     events.push({ kind: 'close' });
-    // 6b) 收盘后把当日全池模型预测自动写入研究台账（后台执行，不阻塞推送）
-    if (!ms.autoLedgerDate || ms.autoLedgerDate !== now.toISOString().slice(0, 10)) {
-      ms.autoLedgerDate = now.toISOString().slice(0, 10);
-      try {
-        AutoLedger.autolog({}).then((r) => {
-          console.log(`[台账] 自动入账完成：新增 ${r.added} 条，跳过 ${r.skipped} 条，失败 ${r.failed} 条`);
-        }).catch((e) => console.warn('[台账] 自动入账失败：' + e.message));
-      } catch (e) { console.warn('[台账] 无法加载 auto-ledger：' + e.message); }
-    }
+    // 注：自动入账钩子已移到 detectRotationEvents()（常驻循环实际走的那条路径）
   }
 
   // 去重/优先级：开盘与评分异动已含当日计划；止损止盈为最高优先级
@@ -574,6 +581,75 @@ async function evaluateRotation(cfg) {
   return { pool: results, market, rotation, index, hhxg, us10y, cn10y, sox, relStrength, prediction };
 }
 
+// ---------- 推送策略：只推「可执行动作」，不推常规播报 ----------
+//
+// 背景：原来的盯盘每 reportIntervalMin 分钟推一次「盘中快照」，加上开盘策略、
+// 评分异动，一天能推十几条 —— 全是"看着有用、实际不产生任何动作"的信息噪音。
+// 真正的价值只发生在**要动手**的时刻：建仓、减仓、成交、止损止盈。
+//
+// kind 说明：
+//   entry  建仓条件触发 / 溢价危险警告（建仓监控）
+//   trade  真实成交（买入/卖出，自动轮动产生）
+//   rotate 轮动目标切换（该建仓/该减仓的信号，即使没成交也要知道）
+//   stop   触及止损
+//   take   触及止盈
+//   open   开盘策略（常规）   regular 盘中快照（常规）
+//   cross  评分异动（常规）   close   收盘复盘（常规）
+const PUSH_PRESETS = {
+  actionable: ['entry', 'trade', 'rotate', 'stop', 'take'],   // 默认：只推会引发动作的
+  trades: ['entry', 'trade', 'stop', 'take'],                 // 最严格：只有建仓/减仓/风控
+  all: null,                                                  // 旧行为：全部推送
+};
+const KIND_LABEL = {
+  entry: '建仓条件', trade: '成交', rotate: '轮动切换', stop: '止损', take: '止盈',
+  open: '开盘策略', regular: '盘中快照', cross: '评分异动', close: '收盘复盘',
+};
+
+/**
+ * 该事件是否应该推送。优先级：
+ *   1) 命令行 --push=xxx（临时覆盖，最高）
+ *   2) pushPolicy.allowKinds（自定义白名单，给了就以它为准）
+ *   3) pushPolicy.mode 预设
+ *   4) 默认 actionable
+ */
+function shouldPush(cfg, kind) {
+  const pol = (cfg && cfg.pushPolicy) || {};
+  if (!PUSH_ARG && Array.isArray(pol.allowKinds) && pol.allowKinds.length) {
+    return pol.allowKinds.indexOf(kind) >= 0;
+  }
+  const mode = PUSH_ARG || pol.mode || 'actionable';
+  if (mode === 'all') return true;
+  const allow = PUSH_PRESETS[mode] || PUSH_PRESETS.actionable;
+  return allow.indexOf(kind) >= 0;
+}
+
+function pushModeOf(cfg) {
+  return (PUSH_ARG || (cfg && cfg.pushPolicy && cfg.pushPolicy.mode) || 'actionable');
+}
+
+/** 成交提醒：这是最有价值的一条消息，自带上下文，可独立阅读 */
+function buildTradeMessage(rotation, trades, market, time, cfg) {
+  const r = rotation;
+  const buys = trades.filter((t) => t.side === 'buy');
+  const sells = trades.filter((t) => t.side === 'sell');
+  const action = buys.length && sells.length ? '调仓' : buys.length ? '建仓' : '减仓';
+  const nm = r.pick ? r.pick.name + 'ETF' : '空仓';
+  const head = action === '建仓' ? '🟢' : action === '减仓' ? '🔴' : '🔄';
+  const L = [];
+  L.push(`${head}【${action}提醒】${time} → ${nm}`);
+  L.push('');
+  for (const t of buys) L.push(`买入 ${t.name} ${t.shares}份 @${fmtPrice(t.price)}（约${Math.round(t.shares * t.price)}元）`);
+  for (const t of sells) L.push(`卖出 ${t.name} ${t.shares}份 @${fmtPrice(t.price)}（约${Math.round(t.shares * t.price)}元）`);
+  L.push('');
+  const stopPct = (cfg && cfg.stopPct) || 5;
+  const takePct = (cfg && cfg.takePct) || 8;
+  L.push(`目标仓位 ${r.targetPct}%　方向 ${r.action}（${r.reason}）`);
+  if (r.pick) L.push(`止损 ${fmtPrice(r.pick.rotation.price * (1 - stopPct / 100))} · 止盈 ${fmtPrice(r.pick.rotation.price * (1 + takePct / 100))}`);
+  const gate = `大盘:${market.bearMarket ? '熊市' : '多头'} · 情绪:${market.sentimentIndex != null ? market.sentimentIndex : '--'} · 美债10Y:${market.us10y != null ? fmtPrice(market.us10y) + '%' : '--'}${market.soxChg != null ? ' · 费半:' + signed(market.soxChg, 1) + '%' : ''}`;
+  L.push(gate);
+  return { title: `${action} ${nm}（${r.action}）`, text: L.join('\n') };
+}
+
 function buildRotationMessage(rotation, market, cfg, kind, time, extra) {
   const r = rotation;
   const stopPct = (cfg && cfg.stopPct) || 5, takePct = (cfg && cfg.takePct) || 8;
@@ -611,6 +687,62 @@ function buildRotationMessage(rotation, market, cfg, kind, time, extra) {
   };
 }
 
+// ---------- 持仓风控：止损 / 止盈 ----------
+//
+// ⚠️ 修复说明：原来的止损/止盈检测写在 detectEvents() 里，而常驻盯盘循环
+// 走的是 evaluateRotation() + detectRotationEvents()，**detectEvents 从未被调用**。
+// 结果是：README 承诺的"止损/止盈预警"实际上从来没有触发过。
+// 这里按"实际持仓成本"重新实现，并纳入推送白名单（stop/take 属于可执行动作）。
+function detectHoldingRisk(r, account, ms, now, cfg) {
+  const out = [];
+  const positions = (account && account.positions) || {};
+  const codes = Object.keys(positions);
+  if (!codes.length) return out;
+  const stopPct = (cfg && cfg.stopPct) || 5;
+  const takePct = (cfg && cfg.takePct) || 8;
+  if (!isInSession(now)) return out;      // 只在交易时段检查，避免非交易时段污染状态
+  const day = now.toISOString().slice(0, 10);
+  ms.riskAlerted = ms.riskAlerted || {};
+  if (ms.riskDate !== day) { ms.riskDate = day; ms.riskAlerted = {}; }
+
+  for (const code of codes) {
+    const pos = positions[code];
+    if (!pos || !(pos.shares > 0) || !(pos.avgCost > 0)) continue;
+    const item = (r.pool || []).find((x) => x.code === code);
+    const price = item && item.quote ? item.quote.price : null;
+    if (!price) continue;
+    const stopLoss = +(pos.avgCost * (1 - stopPct / 100)).toFixed(3);
+    const takeProfit = +(pos.avgCost * (1 + takePct / 100)).toFixed(3);
+    const pnlPct = +((price - pos.avgCost) / pos.avgCost * 100).toFixed(2);
+    const key = code + '@' + day;
+    if (price <= stopLoss && ms.riskAlerted[key] !== 'stop') {
+      ms.riskAlerted[key] = 'stop';
+      out.push({ kind: 'stop', code, name: pos.name || code, price, avgCost: pos.avgCost, shares: pos.shares, stopLoss, takeProfit, pnlPct, pnl: +((price - pos.avgCost) * pos.shares).toFixed(0) });
+    } else if (price >= takeProfit && ms.riskAlerted[key] !== 'take') {
+      ms.riskAlerted[key] = 'take';
+      out.push({ kind: 'take', code, name: pos.name || code, price, avgCost: pos.avgCost, shares: pos.shares, stopLoss, takeProfit, pnlPct, pnl: +((price - pos.avgCost) * pos.shares).toFixed(0) });
+    }
+  }
+  return out;
+}
+
+/** 止损/止盈提醒文案 */
+function buildRiskMessage(ev, cfg) {
+  const isStop = ev.kind === 'stop';
+  const head = isStop ? '🚨' : '🎉';
+  const label = isStop ? '止损触发' : '止盈触发';
+  const L = [];
+  L.push(`${head}【${label}】${ev.name}(${ev.code})`);
+  L.push('');
+  L.push(`现价 ${fmtPrice(ev.price)}　成本 ${fmtPrice(ev.avgCost)}　浮动 ${signed(ev.pnlPct, 2)}%（约 ${ev.pnl >= 0 ? '+' : ''}${ev.pnl} 元）`);
+  L.push(`持仓 ${ev.shares} 份　止损线 ${fmtPrice(ev.stopLoss)}　止盈线 ${fmtPrice(ev.takeProfit)}`);
+  L.push('');
+  L.push(isStop
+    ? `⛔ 已跌破止损线（成本 -${(cfg && cfg.stopPct) || 5}%）—— 按纪律应减仓/清仓，不要等反弹。`
+    : `✅ 已达到止盈线（成本 +${(cfg && cfg.takePct) || 8}%）—— 建议分批止盈，落袋为安。`);
+  return { title: `${label} ${ev.name} ${signed(ev.pnlPct, 1)}%`, text: L.join('\n') };
+}
+
 function detectRotationEvents(rotation, ms, now, cfg) {
   const events = [];
   const dateStr = now.toISOString().slice(0, 10);
@@ -626,7 +758,21 @@ function detectRotationEvents(rotation, ms, now, cfg) {
   if (inSession && !ms.openSent) { ms.openSent = true; ms.lastRegularAt = Date.now(); events.push({ kind: 'open' }); }
   const snapDue = Date.now() - ms.lastRegularAt >= cfg.reportIntervalMin * 60000;
   if (inSession && snapDue && !events.length) { ms.lastRegularAt = Date.now(); events.push({ kind: 'regular' }); }
-  if (sessionPhase(now) === 'post' && !ms.closeSent) { ms.closeSent = true; events.push({ kind: 'close' }); }
+  if (sessionPhase(now) === 'post' && !ms.closeSent) {
+    ms.closeSent = true;
+    events.push({ kind: 'close' });
+    // 收盘后把当日全池模型预测写入研究台账（后台执行，不阻塞推送）
+    // ⚠️ 修复说明：这个钩子原来挂在 detectEvents() 里，而常驻循环走的是
+    // detectRotationEvents()，所以"每日自动入账"实际上从未执行过。现已移到此处。
+    if (!ms.autoLedgerDate || ms.autoLedgerDate !== dateStr) {
+      ms.autoLedgerDate = dateStr;
+      try {
+        AutoLedger.autolog({}).then((x) => {
+          log(`[台账] 自动入账完成：新增 ${x.added} 条，跳过 ${x.skipped} 条，失败 ${x.failed} 条`);
+        }).catch((e) => log('[台账] 自动入账失败：' + e.message));
+      } catch (e) { log('[台账] 无法加载 auto-ledger：' + e.message); }
+    }
+  }
   return events;
 }
 
@@ -739,8 +885,11 @@ async function main() {
   console.log('==============================================');
   console.log('  多ETF动量轮动 实时盯盘助手');
   console.log('  轮动池: ' + pool);
-  console.log('  渠道: ' + cfg.channel + (DRY_RUN ? '（dry-run，仅打印）' : '') + '  轮询: ' + cfg.pollIntervalSec + 's  快照: ' + cfg.reportIntervalMin + 'min');
-  console.log('  触发: 开盘 / 盘中快照 / 轮动切换 / 收盘复盘');
+  console.log('  渠道: ' + cfg.channel + (DRY_RUN ? '（dry-run，仅打印）' : '') + '  轮询: ' + cfg.pollIntervalSec + 's');
+  const _pm = pushModeOf(cfg);
+  console.log('  推送策略: ' + _pm + (_pm === 'all' ? '（全部推送）' : '（只推：' + ((cfg.pushPolicy && cfg.pushPolicy.allowKinds) || PUSH_PRESETS[_pm] || PUSH_PRESETS.actionable).map((k) => KIND_LABEL[k] || k).join('、') + '）'));
+  console.log('  推送触发: ' + (_pm === 'all' ? '开盘 / 盘中快照 / 评分异动 / 轮动切换 / 收盘复盘 / 建仓 / 止损止盈' : '建仓条件 / 成交 / 轮动切换 / 止损 / 止盈')
+    + (_pm === 'all' ? '' : '　（常规播报已静默，仅写日志）'));
   console.log('==============================================');
 
   if (ONCE) {
@@ -778,16 +927,19 @@ async function main() {
           for (const a of entryAlerts) {
             const em = buildEntryMessage(a);
             log('🎯 建仓条件触发: ' + a.rule.code + ' @ ' + a.price.toFixed(3));
+            if (!shouldPush(cfg, 'entry')) { log('（已静默 entry，pushPolicy=' + pushModeOf(cfg) + '）'); continue; }
             try { await sendVia(cfg, em.title, em.text); } catch (err) { log('❌ 推送失败: ' + err.message); }
           }
         }
       }
 
       // 自动交易：开盘/轮动切换/盘中快照时，把账户同步到轮动目标（卖旧买新）
+      // 注意：自动交易照常执行，与"是否推送"无关 —— 推送策略只影响通知，不影响交易。
       let tradeSummary = '';
+      let trades = [];
+      const account = loadRotationAccount();
       if (events.some((e) => e.kind === 'open' || e.kind === 'rotate' || e.kind === 'regular')) {
-        const account = loadRotationAccount();
-        const trades = syncRotation(account, r.rotation, r.pool);
+        trades = syncRotation(account, r.rotation, r.pool);
         saveRotationAccount(account);
         if (trades.length) {
           tradeSummary = trades.map((t) => (t.side === 'buy' ? '买入' : '卖出') + t.name + t.shares + '份@' + fmtPrice(t.price)).join('；');
@@ -795,10 +947,40 @@ async function main() {
         }
       }
 
+      // ⓪ 持仓风控（最高优先级）：用**调仓后的最新持仓**检查止损/止盈，
+      //    避免刚卖掉的仓位还触发一次无意义的止损提醒
+      const riskEvents = detectHoldingRisk(r, account, ms, now, cfg);
+      if (riskEvents.length) saveMonitorState(ms);
+      for (const ev of riskEvents) {
+        log((ev.kind === 'stop' ? '🚨 止损触发: ' : '🎉 止盈触发: ') + ev.name + ' ' + ev.pnlPct + '%');
+        if (!shouldPush(cfg, ev.kind)) { log('（已静默 ' + ev.kind + '，pushPolicy=' + pushModeOf(cfg) + '）'); continue; }
+        try { const rm = buildRiskMessage(ev, cfg); await sendVia(cfg, rm.title, rm.text); }
+        catch (err) { log('❌ 推送失败: ' + err.message); }
+      }
+
+      // ① 成交提醒（最高优先级）：只要真的发生了买卖，无论触发事件是否在推送白名单里，都必须通知。
+      //    否则会出现"自动交易悄悄调了仓，用户完全不知道"这种最糟糕的情况。
+      let tradePushed = false;
+      if (trades.length && shouldPush(cfg, 'trade')) {
+        try {
+          const tm = buildTradeMessage(r.rotation, trades, r.market, hhmm(now), cfg);
+          await sendVia(cfg, tm.title, tm.text);
+          tradePushed = true;
+        } catch (err) { log('❌ 推送失败: ' + err.message); }
+      }
+
+      // ② 其余事件按推送策略过滤：常规播报（开盘策略/盘中快照/评分异动/收盘复盘）默认静默
+      const suppressed = [];
       for (const e of events) {
+        // 已推过成交提醒时，轮动切换的信息已被它完整覆盖，避免重复打扰
+        if (tradePushed && e.kind === 'rotate') { suppressed.push(e.kind + '(已并入成交提醒)'); continue; }
+        if (!shouldPush(cfg, e.kind)) { suppressed.push(e.kind); continue; }
         const prevName = e.prevCode === 'CASH' ? '现金' : ((r.pool.find((p) => p.code === e.prevCode) || {}).name || e.prevCode);
         const m = buildRotationMessage(r.rotation, r.market, cfg, e.kind, hhmm(now), { prevName, tradeSummary, prediction: r.prediction });
         try { await sendVia(cfg, m.title, m.text); } catch (err) { log('❌ 推送失败: ' + err.message); }
+      }
+      if (suppressed.length) {
+        log('（静默 ' + [...new Set(suppressed)].join('、') + '　pushPolicy=' + pushModeOf(cfg) + '，需要全推请用 --push=all）');
       }
       if (isInSession(now) && !events.length) {
         const t = r.rotation.top;
@@ -819,5 +1001,5 @@ if (require.main === module) {
   main().catch((e) => { console.error('启动失败:', e.message); process.exit(1); });
 } else {
   // 供测试/复用
-  module.exports = { detectEvents, buildMessage, evaluateRotation, buildRotationMessage, detectRotationEvents, checkEntryWatch, buildEntryMessage, bandOf, isInSession, sessionPhase, isTradingDay, isWeekend, isHoliday, loadConfig, loadAccount, loadMonitorState, defaultMonitorState, engineSettings, fmt, fmtPrice, signed };
+  module.exports = { detectEvents, buildMessage, evaluateRotation, buildRotationMessage, detectRotationEvents, checkEntryWatch, buildEntryMessage, buildTradeMessage, detectHoldingRisk, buildRiskMessage, shouldPush, pushModeOf, PUSH_PRESETS, KIND_LABEL, bandOf, isInSession, sessionPhase, isTradingDay, isWeekend, isHoliday, loadConfig, loadAccount, loadMonitorState, defaultMonitorState, engineSettings, fmt, fmtPrice, signed };
 }
