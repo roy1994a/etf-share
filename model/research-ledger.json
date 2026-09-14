@@ -1365,8 +1365,8 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-14",
           "anchorPrice": 58,
-          "endClose": 56.91,
-          "actualPct": -1.88,
+          "endClose": 56.78,
+          "actualPct": -2.1,
           "actualDir": "看跌",
           "predictedDir": "震荡",
           "predictedRange": [
@@ -1578,7 +1578,7 @@
         }
       },
       "status": "resolved",
-      "resolvedAt": "2026-09-14T06:12:35.408Z",
+      "resolvedAt": "2026-09-14T08:27:14.129Z",
       "lessons": "该结论**以 C+D+E 级依据为主**（周末只能靠新闻），是本次台账中证据等级最弱的一类。明日收盘后必须回看，验证\"高开冲高回落\"是否成立。",
       "confidenceCeiling": 0.656,
       "ceilingReason": "平均依据可信度 63%（A3 B1 C2 D1 E1）",
@@ -1696,8 +1696,8 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-14",
           "anchorPrice": 1.759,
-          "endClose": 1.772,
-          "actualPct": 0.74,
+          "endClose": 1.778,
+          "actualPct": 1.08,
           "actualDir": "看涨",
           "predictedDir": "看跌",
           "predictedRange": [
@@ -1733,7 +1733,7 @@
         }
       },
       "status": "resolved",
-      "resolvedAt": "2026-09-14T06:12:35.412Z",
+      "resolvedAt": "2026-09-14T08:27:14.131Z",
       "lessons": "本条再次出现\"人工判断与系统模型方向相反\"（模型偏多、人工偏空）。这是第二个对照样本，与金正大一起构成\"人工覆写是否有效\"的检验集。",
       "confidenceCeiling": 0.645,
       "ceilingReason": "平均依据可信度 61%（A3 B0 C2 D1 E1）",
@@ -1830,8 +1830,8 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-14",
           "anchorPrice": 1.167,
-          "endClose": 1.15,
-          "actualPct": -1.46,
+          "endClose": 1.149,
+          "actualPct": -1.54,
           "actualDir": "看跌",
           "predictedDir": "震荡",
           "predictedRange": [
@@ -1867,7 +1867,7 @@
         }
       },
       "status": "resolved",
-      "resolvedAt": "2026-09-14T06:12:35.412Z",
+      "resolvedAt": "2026-09-14T08:27:14.131Z",
       "lessons": "",
       "confidenceCeiling": 0.608,
       "ceilingReason": "平均依据可信度 55%（A1 B1 C0 D1 E1）",
@@ -2904,8 +2904,8 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-14",
           "anchorPrice": 1.167,
-          "endClose": 1.15,
-          "actualPct": -1.46,
+          "endClose": 1.149,
+          "actualPct": -1.54,
           "actualDir": "看跌",
           "predictedDir": "看跌",
           "predictedRange": [
@@ -3133,8 +3133,8 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-14",
           "anchorPrice": 117.41,
-          "endClose": 114.66,
-          "actualPct": -2.34,
+          "endClose": 114.07,
+          "actualPct": -2.84,
           "actualDir": "看跌",
           "predictedDir": "看跌",
           "predictedRange": [
@@ -3142,7 +3142,7 @@
             122.33
           ],
           "rangeWidthPct": 8.38,
-          "moveAbsPct": 2.04,
+          "moveAbsPct": 2.42,
           "dirHit": true,
           "brier": 0.1764,
           "reward": 0.6472,
@@ -3150,7 +3150,7 @@
           "rangeHitClose": true,
           "rangeHitPath": true,
           "pathHigh": 116.8,
-          "pathLow": 114.4
+          "pathLow": 113.96
         },
         {
           "pending": true,
@@ -3362,8 +3362,8 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-14",
           "anchorPrice": 333.59,
-          "endClose": 324.55,
-          "actualPct": -2.71,
+          "endClose": 324.64,
+          "actualPct": -2.68,
           "actualDir": "看跌",
           "predictedDir": "看跌",
           "predictedRange": [
@@ -3591,8 +3591,8 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-14",
           "anchorPrice": 634,
-          "endClose": 625.84,
-          "actualPct": -1.29,
+          "endClose": 626,
+          "actualPct": -1.26,
           "actualDir": "看跌",
           "predictedDir": "看跌",
           "predictedRange": [
@@ -4049,8 +4049,8 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-14",
           "anchorPrice": 230.89,
-          "endClose": 223.92,
-          "actualPct": -3.02,
+          "endClose": 223.69,
+          "actualPct": -3.12,
           "actualDir": "看跌",
           "predictedDir": "看跌",
           "predictedRange": [
@@ -4278,8 +4278,8 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-14",
           "anchorPrice": 371.32,
-          "endClose": 357.48,
-          "actualPct": -3.73,
+          "endClose": 356.88,
+          "actualPct": -3.89,
           "actualDir": "看跌",
           "predictedDir": "看跌",
           "predictedRange": [
@@ -4507,8 +4507,8 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-14",
           "anchorPrice": 191.96,
-          "endClose": 184.9,
-          "actualPct": -3.68,
+          "endClose": 184.65,
+          "actualPct": -3.81,
           "actualDir": "看跌",
           "predictedDir": "看跌",
           "predictedRange": [
@@ -4965,8 +4965,8 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-14",
           "anchorPrice": 167.65,
-          "endClose": 161.6,
-          "actualPct": -3.61,
+          "endClose": 161.38,
+          "actualPct": -3.74,
           "actualDir": "看跌",
           "predictedDir": "看跌",
           "predictedRange": [
@@ -5186,8 +5186,31 @@
         "自动入账",
         "模型快照"
       ],
-      "outcomes": [],
-      "scores": {},
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
       "status": "open",
       "resolvedAt": null,
       "lessons": "",
@@ -5358,8 +5381,31 @@
         "自动入账",
         "模型快照"
       ],
-      "outcomes": [],
-      "scores": {},
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
       "status": "open",
       "resolvedAt": null,
       "lessons": "",
@@ -5530,8 +5576,31 @@
         "自动入账",
         "模型快照"
       ],
-      "outcomes": [],
-      "scores": {},
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
       "status": "open",
       "resolvedAt": null,
       "lessons": "",
@@ -5702,8 +5771,31 @@
         "自动入账",
         "模型快照"
       ],
-      "outcomes": [],
-      "scores": {},
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
       "status": "open",
       "resolvedAt": null,
       "lessons": "",
@@ -5874,8 +5966,31 @@
         "自动入账",
         "模型快照"
       ],
-      "outcomes": [],
-      "scores": {},
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
       "status": "open",
       "resolvedAt": null,
       "lessons": "",
@@ -6046,8 +6161,31 @@
         "自动入账",
         "模型快照"
       ],
-      "outcomes": [],
-      "scores": {},
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
       "status": "open",
       "resolvedAt": null,
       "lessons": "",
@@ -6218,8 +6356,31 @@
         "自动入账",
         "模型快照"
       ],
-      "outcomes": [],
-      "scores": {},
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
       "status": "open",
       "resolvedAt": null,
       "lessons": "",
@@ -6390,8 +6551,31 @@
         "自动入账",
         "模型快照"
       ],
-      "outcomes": [],
-      "scores": {},
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
       "status": "open",
       "resolvedAt": null,
       "lessons": "",
@@ -6562,8 +6746,31 @@
         "自动入账",
         "模型快照"
       ],
-      "outcomes": [],
-      "scores": {},
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
       "status": "open",
       "resolvedAt": null,
       "lessons": "",
@@ -6734,8 +6941,31 @@
         "自动入账",
         "模型快照"
       ],
-      "outcomes": [],
-      "scores": {},
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
       "status": "open",
       "resolvedAt": null,
       "lessons": "",
@@ -6906,8 +7136,31 @@
         "自动入账",
         "模型快照"
       ],
-      "outcomes": [],
-      "scores": {},
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
       "status": "open",
       "resolvedAt": null,
       "lessons": "",
@@ -7078,8 +7331,31 @@
         "自动入账",
         "模型快照"
       ],
-      "outcomes": [],
-      "scores": {},
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
       "status": "open",
       "resolvedAt": null,
       "lessons": "",
@@ -7250,8 +7526,31 @@
         "自动入账",
         "模型快照"
       ],
-      "outcomes": [],
-      "scores": {},
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
       "status": "open",
       "resolvedAt": null,
       "lessons": "",
@@ -7279,5 +7578,5 @@
   ],
   "_source": "/Users/liuyang/Desktop/PythonProject/半导体设备ETF交易模拟系统/data/research-ledger.json",
   "sanitized": true,
-  "sanitizedAt": "2026-09-14T08:17:47.772Z"
+  "sanitizedAt": "2026-09-14T08:27:14.182Z"
 }

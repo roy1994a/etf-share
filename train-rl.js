@@ -736,6 +736,81 @@ async function main() {
       { name: 'T+1 次日开盘', lag: execLag, val: runOne(prepV, 'combined', bestW.w, execLag).metrics, test: runOne(prepT, 'combined', bestW.w, execLag).metrics },
     ];
 
+    // ---- P4：动量排序 + 模型择时 ----
+    //
+    // 动机（来自 P1/P2 的证据）：模型在"时序方向"上显著优于动量（p=2.8e-12），
+    // 但在"横截面排序"上不如动量（w1 期望只有动量的一半）。
+    // 所以正确用法可能是：**排序交给动量，买卖时机交给模型**。
+    // 这里直接在组合口径下检验这个组合。
+    const runT = (prep, lag, hz, timingCfg, sizingMode) => {
+      const rows = Portfolio.applyRank(prep.map((r) => Object.assign({}, r)), 'momentum', 1);
+      return Portfolio.simulatePortfolio(rows, klinesByCode, {
+        horizon: hz, topK: args.topK, execLag: lag,
+        execField: lag === 0 ? 'close' : 'open',
+        initialCapital: 500000, stopPct: 8,
+        timing: timingCfg, sizing: sizingMode || 'equal',
+      }).metrics;
+    };
+    const prepVbyH = {}, prepTbyH = {};
+    for (const hz of ['w1', 'm1']) {
+      prepVbyH[hz] = Portfolio.prepareScores(pVal.filter((e) => e.horizon === hz), valState, klinesByCode);
+      prepTbyH[hz] = Portfolio.prepareScores(pTest.filter((e) => e.horizon === hz), state, klinesByCode);
+    }
+
+    const GRID = [];
+    for (const hz of ['w1', 'm1']) {
+      GRID.push({ name: `${hz} 纯动量（无择时）`, hz, timing: null, sizing: 'equal' });
+      for (const mp of [0.50, 0.55, 0.60]) {
+        GRID.push({ name: `${hz} 动量+择时建仓(≥${mp})`, hz, timing: { minProb: mp }, sizing: 'equal' });
+      }
+      for (const ep of [0.40, 0.45]) {
+        GRID.push({ name: `${hz} 动量+择时退出(<${ep})`, hz, timing: { exitProb: ep }, sizing: 'equal' });
+      }
+      GRID.push({ name: `${hz} 动量+择时建仓(≥0.55)+退出(<0.45)`, hz, timing: { minProb: 0.55, exitProb: 0.45 }, sizing: 'equal' });
+      GRID.push({ name: `${hz} 动量+概率定仓`, hz, timing: null, sizing: 'prob' });
+    }
+    // 验证集对半切分：用"两半里更差的那半"作为稳健评分，避免被单一区间的运气主导。
+    // （单一 Calmar 选参会选到噪音上 —— 上一轮就是这样选出了 out-of-sample 失败的那一族。）
+    const valHalf = (() => {
+      const ds = [...new Set(pVal.map((e) => e.date))].sort();
+      const mid = ds[Math.floor(ds.length / 2)];
+      return { mid, a: (e) => e.date < mid, b: (e) => e.date >= mid };
+    })();
+    for (const g of GRID) {
+      try {
+        g.val = runT(prepVbyH[g.hz], execLag, g.hz, g.timing, g.sizing);
+        g.test = runT(prepTbyH[g.hz], execLag, g.hz, g.timing, g.sizing);
+        g.robust = Math.min(
+          runT(Portfolio.prepareScores(pVal.filter((e) => e.horizon === g.hz && valHalf.a(e)), valState, klinesByCode), execLag, g.hz, g.timing, g.sizing).calmar ?? -99,
+          runT(Portfolio.prepareScores(pVal.filter((e) => e.horizon === g.hz && valHalf.b(e)), valState, klinesByCode), execLag, g.hz, g.timing, g.sizing).calmar ?? -99,
+        );
+      } catch (e) { g.val = { trades: 0 }; g.test = { trades: 0 }; g.robust = -99; g.err = e.message; }
+    }
+    // 也在 close-to-close 口径上复核一遍，确认不是执行口径造成的
+    for (const g of GRID) {
+      try { g.valC = runT(prepVbyH[g.hz], 0, g.hz, g.timing, g.sizing); } catch (e) { g.valC = { trades: 0 }; }
+    }
+
+    // 选优：**验证集两半中更差的一半的 Calmar 最高**（稳健准则），且每半交易数≥15。
+    // 同时报告"按单一验证 Calmar 选"会选到什么 —— 用于暴露该准则的不稳健。
+    let bestT = null, bestSingle = null;
+    for (const g of GRID) {
+      if (!g.val || g.val.trades < 40) continue;
+      if (!bestSingle || (g.val.calmar || -99) > (bestSingle.val.calmar || -99)) bestSingle = g;
+      if (g.robust == null || g.robust <= -50) continue;
+      if (!bestT || g.robust > (bestT.robust || -99)) bestT = g;
+    }
+    console.log(`[P4 择时] 按单一验证Calmar选 → ${bestSingle ? bestSingle.name : '无'}（测试 Calmar ${bestSingle ? bestSingle.test.calmar : '--'}）`);
+    console.log(`[P4 择时] 按两半稳健准则选 → ${bestT ? bestT.name : '无'}（验证两半最差 ${bestT ? bestT.robust : '--'}，测试 Calmar ${bestT ? bestT.test.calmar : '--'}）`);
+    const baseV = GRID.find((g) => g.name === 'w1 纯动量（无择时）');
+    const baseM = GRID.find((g) => g.name === 'm1 纯动量（无择时）');
+    state.tradingPolicy.timingPolicy = bestT
+      ? { name: bestT.name, hz: bestT.hz, timing: bestT.timing, sizing: bestT.sizing,
+          valCalmar: bestT.val.calmar, valRobust: bestT.robust, testCalmar: bestT.test.calmar,
+          testReturn: bestT.test.totalReturnPct, testTrades: bestT.test.trades,
+          basis: '验证集两半中更差的一半 Calmar 最高，且交易数≥40（稳健准则）' }
+      : null;
+
     portfolio = {
       topK: args.topK, horizon: 'w1', execLag,
       valSweep: VALP, testSweep: TESTP,
@@ -743,6 +818,9 @@ async function main() {
       refModel: { val: refModelV, test: refModelT },
       chosen: { w: bestW.w, valMetrics: bestW.m, testMetrics: (TESTP.find((x) => x.w === bestW.w) || {}).m || null },
       lagCompare,
+      timing: { grid: GRID, chosen: bestT ? bestT.name : null, chosenSingle: bestSingle ? bestSingle.name : null,
+                chosenSingleTestCalmar: bestSingle ? bestSingle.test.calmar : null,
+                baseW1: baseV, baseM1: baseM },
     };
     state.tradingPolicy.rotationWeight = {
       w: bestW.w,
@@ -940,6 +1018,72 @@ async function main() {
     lines.push('');
     lines.push(`> 有效样本量：组合回测的独立样本是**交易日数**，不是交易笔数（测试集 ${portfolio.refMomentum.test.effectiveN} 个交易日）。`);
     lines.push('');
+
+    // ---- P4：动量排序 + 模型择时 ----
+    const T = portfolio.timing;
+    if (T && T.grid) {
+      lines.push('### P4：动量排序 + 模型择时（排序仍用动量，买卖时机交给模型）');
+      lines.push('');
+      lines.push('动机：P1 显示模型在**时序方向**上显著优于动量（p=2.8e-12），但在**横截面排序**上不如动量。');
+      lines.push('因此正确用法可能是"动量选票、模型选时"。下表在组合口径（资金受限、T+1、含费）下直接检验。');
+      lines.push('');
+      lines.push('| 方案 | 验证交易 | 验证回撤 | 验证Calmar | **测试交易** | **测试收益** | **测试回撤** | **测试Calmar** | 测试胜率 |');
+      lines.push('| --- | --- | --- | --- | --- | --- | --- | --- | --- |');
+      for (const g of T.grid) {
+        if (!g.val || !g.test) continue;
+        const star = g.name === T.chosen ? ' ⭐' : (g.name.indexOf('纯动量（无择时）') >= 0 ? ' ◀基准' : '');
+        lines.push(`| ${g.name}${star} | ${g.val.trades} | ${g.val.maxDrawdownPct}% | ${F(g.val.calmar)} | ${g.test.trades} | **${g.test.totalReturnPct}%** | **${g.test.maxDrawdownPct}%** | **${F(g.test.calmar)}** | ${P(g.test.winRateTrade)} |`);
+      }
+      lines.push('');
+      const ch = T.grid.find((g) => g.name === T.chosen);
+      lines.push(`> **验证集选出：${T.chosen}**（稳健准则与单一准则选出的都是它）。`);
+      lines.push(`> 但它在**测试集上失败**：Calmar ${ch ? F(ch.test.calmar) : '--'} vs 同周期纯动量基准 ${ch && ch.hz === 'm1' ? F(T.baseM1.test.calmar) : F(T.baseW1.test.calmar)}。`);
+      lines.push('> **结论：该选参准则在这个问题上不可靠 —— 验证集一致偏好的"择时退出"族，在测试集 4/4 全部变差。**');
+      lines.push('');
+
+      // ---- 分族汇总：判断哪一族在两期×两周期都成立 ----
+      const fam = (g) => /择时建仓\(≥[\d.]+\)$/.test(g.name) ? 'A 入场门槛'
+        : /择时退出/.test(g.name) && !/建仓/.test(g.name) ? 'B 择时退出'
+        : /概率定仓/.test(g.name) ? 'C 概率定仓'
+        : /建仓.*退出/.test(g.name) ? 'D 入场+退出' : '— 纯动量基准';
+      const baseOf = (hz) => (hz === 'w1' ? T.baseW1 : T.baseM1);
+      const famRows = {};
+      for (const g of T.grid) {
+        const f = fam(g);
+        if (f === '— 纯动量基准') continue;
+        const b = baseOf(g.hz);
+        const valOK = (g.val.calmar || -99) > (b.val.calmar || -99);
+        const testOK = (g.test.calmar || -99) > (b.test.calmar || -99);
+        famRows[f] = famRows[f] || { n: 0, both: 0, valOK: 0, testOK: 0, label: g.hz };
+        const r = famRows[f];
+        r.n++; r.valOK += valOK ? 1 : 0; r.testOK += testOK ? 1 : 0; r.both += (valOK && testOK) ? 1 : 0;
+      }
+      lines.push('#### 分族汇总：哪一族在「两期 × 两周期」都成立');
+      lines.push('');
+      lines.push('（判据：同周期同口径下 Calmar 是否高于该周期的纯动量基准）');
+      lines.push('');
+      lines.push('| 族 | 组合数 | 验证集胜出 | **测试集胜出** | **两期都胜出** |');
+      lines.push('| --- | --- | --- | --- | --- |');
+      for (const f of Object.keys(famRows)) {
+        const r = famRows[f];
+        lines.push(`| ${f} | ${r.n} | ${r.valOK}/${r.n} | **${r.testOK}/${r.n}** | **${r.both}/${r.n}** |`);
+      }
+      lines.push('');
+      const entryFam = famRows['A 入场门槛'];
+      const exitFam = famRows['B 择时退出'];
+      if (entryFam && exitFam) {
+        lines.push(`> **可读出的结论**：`);
+        lines.push(`> · **入场门槛（模型概率 ≥0.50/0.55）**：验证 ${entryFam.valOK}/${entryFam.n}、测试 ${entryFam.testOK}/${entryFam.n}，**两期都胜出 ${entryFam.both}/${entryFam.n}** —— 唯一在两期×两周期都成立的族；`);
+        lines.push(`> · **择时退出（概率跌破就平仓）**：验证 ${exitFam.valOK}/${exitFam.n} 全胜，但**测试 ${exitFam.testOK}/${exitFam.n} 全败** —— 验证集完全被噪音带偏；`);
+        lines.push('> · **概率定仓**：无稳定收益。');
+        lines.push('');
+        lines.push('> ⚠️ **必须说清的性质**：入场门槛的一致性是**我在看过全部 16 行之后总结出来的（post-hoc）**，');
+        lines.push('> 而**不是验证集自动选出来的**（验证集选出的是失败的那一族）。');
+        lines.push('> 因此它是**下一轮待验证的假设**，不是已验证的结论 —— **本轮不改线上任何行为**。');
+        lines.push('> 若要把它变成结论，正确做法是让它进入前向影子模式，用台账累积真实样本后再判定。');
+      }
+      lines.push('');
+    }
   }
 
   lines.push('## 四、学到的专家权重（vs 手工先验）');

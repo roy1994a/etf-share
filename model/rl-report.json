@@ -1,5 +1,5 @@
 {
-  "trainedAt": "2026-09-14T08:14:12.206Z",
+  "trainedAt": "2026-09-14T08:25:46.434Z",
   "config": {
     "version": 2,
     "universeSize": 47,
@@ -69,7 +69,7 @@
     "gamma": 1,
     "lossType": "mixed",
     "experts": 21,
-    "at": "2026-09-14T08:14:07.074Z"
+    "at": "2026-09-14T08:25:40.539Z"
   },
   "priorTest": {
     "d1": {
@@ -155,9 +155,9 @@
     },
     "d3": {
       "n": 21290,
-      "hitRate": 0.5196,
+      "hitRate": 0.5195,
       "brier": 0.2516,
-      "calibHitRate": 0.5196,
+      "calibHitRate": 0.5195,
       "calibBrier": 0.2497
     },
     "w1": {
@@ -427,7 +427,7 @@
       "testEnd": "2025-04-01",
       "trainN": 19972,
       "testN": 21712,
-      "hitRate": 0.5099,
+      "hitRate": 0.51,
       "brier": 0.2699,
       "byHorizon": {
         "d1": {
@@ -439,9 +439,9 @@
         },
         "d3": {
           "n": 5428,
-          "hitRate": 0.5066,
+          "hitRate": 0.5068,
           "brier": 0.261,
-          "calibHitRate": 0.5066,
+          "calibHitRate": 0.5068,
           "calibBrier": 0.2526
         },
         "w1": {
@@ -1565,7 +1565,10 @@
               "n": 24,
               "avgRetPct": -8.303
             }
-          }
+          },
+          "timingMinProb": null,
+          "timingExitProb": null,
+          "sizing": "equal"
         }
       },
       {
@@ -1599,7 +1602,10 @@
               "n": 21,
               "avgRetPct": -8.341
             }
-          }
+          },
+          "timingMinProb": null,
+          "timingExitProb": null,
+          "sizing": "equal"
         }
       },
       {
@@ -1633,7 +1639,10 @@
               "n": 16,
               "avgRetPct": -8.369
             }
-          }
+          },
+          "timingMinProb": null,
+          "timingExitProb": null,
+          "sizing": "equal"
         }
       },
       {
@@ -1667,7 +1676,10 @@
               "n": 14,
               "avgRetPct": -8.413
             }
-          }
+          },
+          "timingMinProb": null,
+          "timingExitProb": null,
+          "sizing": "equal"
         }
       },
       {
@@ -1701,7 +1713,10 @@
               "n": 14,
               "avgRetPct": -8.153
             }
-          }
+          },
+          "timingMinProb": null,
+          "timingExitProb": null,
+          "sizing": "equal"
         }
       }
     ],
@@ -1737,7 +1752,10 @@
               "n": 22,
               "avgRetPct": -8.429
             }
-          }
+          },
+          "timingMinProb": null,
+          "timingExitProb": null,
+          "sizing": "equal"
         }
       },
       {
@@ -1771,7 +1789,10 @@
               "n": 55,
               "avgRetPct": 4.37
             }
-          }
+          },
+          "timingMinProb": null,
+          "timingExitProb": null,
+          "sizing": "equal"
         }
       },
       {
@@ -1805,7 +1826,10 @@
               "n": 56,
               "avgRetPct": 4.383
             }
-          }
+          },
+          "timingMinProb": null,
+          "timingExitProb": null,
+          "sizing": "equal"
         }
       },
       {
@@ -1839,7 +1863,10 @@
               "n": 54,
               "avgRetPct": 4.719
             }
-          }
+          },
+          "timingMinProb": null,
+          "timingExitProb": null,
+          "sizing": "equal"
         }
       },
       {
@@ -1873,7 +1900,10 @@
               "n": 14,
               "avgRetPct": -8.267
             }
-          }
+          },
+          "timingMinProb": null,
+          "timingExitProb": null,
+          "sizing": "equal"
         }
       }
     ],
@@ -1906,7 +1936,10 @@
             "n": 24,
             "avgRetPct": -8.303
           }
-        }
+        },
+        "timingMinProb": null,
+        "timingExitProb": null,
+        "sizing": "equal"
       },
       "test": {
         "horizon": "w1",
@@ -1936,7 +1969,10 @@
             "n": 22,
             "avgRetPct": -8.429
           }
-        }
+        },
+        "timingMinProb": null,
+        "timingExitProb": null,
+        "sizing": "equal"
       }
     },
     "refModel": {
@@ -1968,7 +2004,10 @@
             "n": 14,
             "avgRetPct": -8.153
           }
-        }
+        },
+        "timingMinProb": null,
+        "timingExitProb": null,
+        "sizing": "equal"
       },
       "test": {
         "horizon": "w1",
@@ -1998,7 +2037,10 @@
             "n": 14,
             "avgRetPct": -8.267
           }
-        }
+        },
+        "timingMinProb": null,
+        "timingExitProb": null,
+        "sizing": "equal"
       }
     },
     "chosen": {
@@ -2031,7 +2073,10 @@
             "n": 14,
             "avgRetPct": -8.413
           }
-        }
+        },
+        "timingMinProb": null,
+        "timingExitProb": null,
+        "sizing": "equal"
       },
       "testMetrics": {
         "horizon": "w1",
@@ -2061,7 +2106,10 @@
             "n": 54,
             "avgRetPct": 4.719
           }
-        }
+        },
+        "timingMinProb": null,
+        "timingExitProb": null,
+        "sizing": "equal"
       }
     },
     "lagCompare": [
@@ -2096,7 +2144,10 @@
               "n": 57,
               "avgRetPct": 4.151
             }
-          }
+          },
+          "timingMinProb": null,
+          "timingExitProb": null,
+          "sizing": "equal"
         },
         "test": {
           "horizon": "w1",
@@ -2126,7 +2177,10 @@
               "n": 53,
               "avgRetPct": 5.144
             }
-          }
+          },
+          "timingMinProb": null,
+          "timingExitProb": null,
+          "sizing": "equal"
         }
       },
       {
@@ -2160,7 +2214,10 @@
               "n": 14,
               "avgRetPct": -8.413
             }
-          }
+          },
+          "timingMinProb": null,
+          "timingExitProb": null,
+          "sizing": "equal"
         },
         "test": {
           "horizon": "w1",
@@ -2190,10 +2247,1996 @@
               "n": 54,
               "avgRetPct": 4.719
             }
-          }
+          },
+          "timingMinProb": null,
+          "timingExitProb": null,
+          "sizing": "equal"
         }
       }
-    ]
+    ],
+    "timing": {
+      "grid": [
+        {
+          "name": "w1 纯动量（无择时）",
+          "hz": "w1",
+          "timing": null,
+          "sizing": "equal",
+          "val": {
+            "horizon": "w1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 491152.93,
+            "totalReturnPct": -1.77,
+            "annualReturnPct": -1.82,
+            "maxDrawdownPct": 26.89,
+            "calmar": -0.068,
+            "sharpeDaily": 0.039,
+            "trades": 79,
+            "winRateTrade": 0.4177,
+            "avgHoldDays": 4.3,
+            "turnoverPct": 5151.1,
+            "exposurePct": 46.54,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "expire": {
+                "n": 55,
+                "avgRetPct": 4.075
+              },
+              "stop": {
+                "n": 24,
+                "avgRetPct": -8.303
+              }
+            },
+            "timingMinProb": null,
+            "timingExitProb": null,
+            "sizing": "equal"
+          },
+          "test": {
+            "horizon": "w1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 636338.61,
+            "totalReturnPct": 27.27,
+            "annualReturnPct": 63.95,
+            "maxDrawdownPct": 29.91,
+            "calmar": 2.138,
+            "sharpeDaily": 1.243,
+            "trades": 77,
+            "winRateTrade": 0.5195,
+            "avgHoldDays": 4.3,
+            "turnoverPct": 5887.9,
+            "exposurePct": 86.54,
+            "tradingDays": 119,
+            "effectiveN": 119,
+            "avgTradeRetByReason": {
+              "expire": {
+                "n": 55,
+                "avgRetPct": 6.029
+              },
+              "stop": {
+                "n": 22,
+                "avgRetPct": -8.429
+              }
+            },
+            "timingMinProb": null,
+            "timingExitProb": null,
+            "sizing": "equal"
+          },
+          "robust": 0.096,
+          "valC": {
+            "horizon": "w1",
+            "topK": 3,
+            "execLag": 0,
+            "execField": "close",
+            "initialCapital": 500000,
+            "finalNav": 509533.14,
+            "totalReturnPct": 1.91,
+            "annualReturnPct": 1.96,
+            "maxDrawdownPct": 20.52,
+            "calmar": 0.096,
+            "sharpeDaily": 0.223,
+            "trades": 81,
+            "winRateTrade": 0.4321,
+            "avgHoldDays": 4.2,
+            "turnoverPct": 5299.4,
+            "exposurePct": 46.34,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "stop": {
+                "n": 24,
+                "avgRetPct": -8.154
+              },
+              "expire": {
+                "n": 57,
+                "avgRetPct": 4.1
+              }
+            },
+            "timingMinProb": null,
+            "timingExitProb": null,
+            "sizing": "equal"
+          }
+        },
+        {
+          "name": "w1 动量+择时建仓(≥0.5)",
+          "hz": "w1",
+          "timing": {
+            "minProb": 0.5
+          },
+          "sizing": "equal",
+          "val": {
+            "horizon": "w1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 561055.47,
+            "totalReturnPct": 12.21,
+            "annualReturnPct": 12.59,
+            "maxDrawdownPct": 21.95,
+            "calmar": 0.574,
+            "sharpeDaily": 0.485,
+            "trades": 73,
+            "winRateTrade": 0.4658,
+            "avgHoldDays": 4.6,
+            "turnoverPct": 4919.9,
+            "exposurePct": 46.13,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "expire": {
+                "n": 57,
+                "avgRetPct": 3.508
+              },
+              "stop": {
+                "n": 16,
+                "avgRetPct": -8.414
+              }
+            },
+            "timingMinProb": 0.5,
+            "sizing": "equal"
+          },
+          "test": {
+            "horizon": "w1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 658225.96,
+            "totalReturnPct": 31.65,
+            "annualReturnPct": 75.72,
+            "maxDrawdownPct": 24.99,
+            "calmar": 3.03,
+            "sharpeDaily": 1.409,
+            "trades": 58,
+            "winRateTrade": 0.6034,
+            "avgHoldDays": 4.4,
+            "turnoverPct": 4687.1,
+            "exposurePct": 66.12,
+            "tradingDays": 119,
+            "effectiveN": 119,
+            "avgTradeRetByReason": {
+              "expire": {
+                "n": 44,
+                "avgRetPct": 5.65
+              },
+              "stop": {
+                "n": 14,
+                "avgRetPct": -8.293
+              }
+            },
+            "timingMinProb": 0.5,
+            "sizing": "equal"
+          },
+          "robust": -0.025,
+          "valC": {
+            "horizon": "w1",
+            "topK": 3,
+            "execLag": 0,
+            "execField": "close",
+            "initialCapital": 500000,
+            "finalNav": 608677,
+            "totalReturnPct": 21.74,
+            "annualReturnPct": 22.44,
+            "maxDrawdownPct": 18.64,
+            "calmar": 1.204,
+            "sharpeDaily": 0.809,
+            "trades": 78,
+            "winRateTrade": 0.4359,
+            "avgHoldDays": 4.4,
+            "turnoverPct": 5399.8,
+            "exposurePct": 46.43,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "stop": {
+                "n": 18,
+                "avgRetPct": -8.103
+              },
+              "expire": {
+                "n": 60,
+                "avgRetPct": 4.033
+              }
+            },
+            "timingMinProb": 0.5,
+            "sizing": "equal"
+          }
+        },
+        {
+          "name": "w1 动量+择时建仓(≥0.55)",
+          "hz": "w1",
+          "timing": {
+            "minProb": 0.55
+          },
+          "sizing": "equal",
+          "val": {
+            "horizon": "w1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 550558.41,
+            "totalReturnPct": 10.11,
+            "annualReturnPct": 10.43,
+            "maxDrawdownPct": 21.68,
+            "calmar": 0.481,
+            "sharpeDaily": 0.422,
+            "trades": 77,
+            "winRateTrade": 0.4935,
+            "avgHoldDays": 4.5,
+            "turnoverPct": 5160.6,
+            "exposurePct": 47.36,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "expire": {
+                "n": 56,
+                "avgRetPct": 4.055
+              },
+              "stop": {
+                "n": 21,
+                "avgRetPct": -8.188
+              }
+            },
+            "timingMinProb": 0.55,
+            "sizing": "equal"
+          },
+          "test": {
+            "horizon": "w1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 707888.84,
+            "totalReturnPct": 41.58,
+            "annualReturnPct": 103.99,
+            "maxDrawdownPct": 22.05,
+            "calmar": 4.717,
+            "sharpeDaily": 1.645,
+            "trades": 44,
+            "winRateTrade": 0.5455,
+            "avgHoldDays": 4.4,
+            "turnoverPct": 3753.2,
+            "exposurePct": 51.55,
+            "tradingDays": 119,
+            "effectiveN": 119,
+            "avgTradeRetByReason": {
+              "expire": {
+                "n": 33,
+                "avgRetPct": 7.123
+              },
+              "stop": {
+                "n": 11,
+                "avgRetPct": -8.272
+              }
+            },
+            "timingMinProb": 0.55,
+            "sizing": "equal"
+          },
+          "robust": 0.176,
+          "valC": {
+            "horizon": "w1",
+            "topK": 3,
+            "execLag": 0,
+            "execField": "close",
+            "initialCapital": 500000,
+            "finalNav": 554027.18,
+            "totalReturnPct": 10.81,
+            "annualReturnPct": 11.14,
+            "maxDrawdownPct": 19.78,
+            "calmar": 0.563,
+            "sharpeDaily": 0.506,
+            "trades": 80,
+            "winRateTrade": 0.4875,
+            "avgHoldDays": 4.3,
+            "turnoverPct": 5338.5,
+            "exposurePct": 46.87,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "stop": {
+                "n": 22,
+                "avgRetPct": -8.29
+              },
+              "expire": {
+                "n": 58,
+                "avgRetPct": 4.206
+              }
+            },
+            "timingMinProb": 0.55,
+            "sizing": "equal"
+          }
+        },
+        {
+          "name": "w1 动量+择时建仓(≥0.6)",
+          "hz": "w1",
+          "timing": {
+            "minProb": 0.6
+          },
+          "sizing": "equal",
+          "val": {
+            "horizon": "w1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 547155.46,
+            "totalReturnPct": 9.43,
+            "annualReturnPct": 9.72,
+            "maxDrawdownPct": 18.77,
+            "calmar": 0.518,
+            "sharpeDaily": 0.457,
+            "trades": 63,
+            "winRateTrade": 0.4603,
+            "avgHoldDays": 4.6,
+            "turnoverPct": 4537,
+            "exposurePct": 39.6,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "expire": {
+                "n": 48,
+                "avgRetPct": 3.708
+              },
+              "stop": {
+                "n": 15,
+                "avgRetPct": -8.257
+              }
+            },
+            "timingMinProb": 0.6,
+            "sizing": "equal"
+          },
+          "test": {
+            "horizon": "w1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 598079.67,
+            "totalReturnPct": 19.62,
+            "annualReturnPct": 44.38,
+            "maxDrawdownPct": 22.46,
+            "calmar": 1.976,
+            "sharpeDaily": 1.017,
+            "trades": 40,
+            "winRateTrade": 0.525,
+            "avgHoldDays": 4.3,
+            "turnoverPct": 3109.1,
+            "exposurePct": 44.83,
+            "tradingDays": 119,
+            "effectiveN": 119,
+            "avgTradeRetByReason": {
+              "expire": {
+                "n": 27,
+                "avgRetPct": 7.247
+              },
+              "stop": {
+                "n": 13,
+                "avgRetPct": -8.138
+              }
+            },
+            "timingMinProb": 0.6,
+            "sizing": "equal"
+          },
+          "robust": 0.153,
+          "valC": {
+            "horizon": "w1",
+            "topK": 3,
+            "execLag": 0,
+            "execField": "close",
+            "initialCapital": 500000,
+            "finalNav": 588603.38,
+            "totalReturnPct": 17.72,
+            "annualReturnPct": 18.29,
+            "maxDrawdownPct": 16.18,
+            "calmar": 1.131,
+            "sharpeDaily": 0.735,
+            "trades": 62,
+            "winRateTrade": 0.4516,
+            "avgHoldDays": 4.6,
+            "turnoverPct": 4505.9,
+            "exposurePct": 39.18,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "expire": {
+                "n": 48,
+                "avgRetPct": 3.998
+              },
+              "stop": {
+                "n": 14,
+                "avgRetPct": -8.19
+              }
+            },
+            "timingMinProb": 0.6,
+            "sizing": "equal"
+          }
+        },
+        {
+          "name": "w1 动量+择时退出(<0.4)",
+          "hz": "w1",
+          "timing": {
+            "exitProb": 0.4
+          },
+          "sizing": "equal",
+          "val": {
+            "horizon": "w1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 534195.91,
+            "totalReturnPct": 6.84,
+            "annualReturnPct": 7.05,
+            "maxDrawdownPct": 26.8,
+            "calmar": 0.263,
+            "sharpeDaily": 0.314,
+            "trades": 80,
+            "winRateTrade": 0.4125,
+            "avgHoldDays": 4.2,
+            "turnoverPct": 5263.4,
+            "exposurePct": 46.17,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "expire": {
+                "n": 53,
+                "avgRetPct": 4.319
+              },
+              "stop": {
+                "n": 24,
+                "avgRetPct": -8.176
+              },
+              "timing-exit": {
+                "n": 3,
+                "avgRetPct": 5.891
+              }
+            },
+            "timingExitProb": 0.4,
+            "sizing": "equal"
+          },
+          "test": {
+            "horizon": "w1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 618063.1,
+            "totalReturnPct": 23.61,
+            "annualReturnPct": 54.44,
+            "maxDrawdownPct": 33.73,
+            "calmar": 1.614,
+            "sharpeDaily": 1.126,
+            "trades": 80,
+            "winRateTrade": 0.425,
+            "avgHoldDays": 3.9,
+            "turnoverPct": 6198.5,
+            "exposurePct": 82.29,
+            "tradingDays": 119,
+            "effectiveN": 119,
+            "avgTradeRetByReason": {
+              "timing-exit": {
+                "n": 13,
+                "avgRetPct": -2.237
+              },
+              "expire": {
+                "n": 47,
+                "avgRetPct": 7.194
+              },
+              "stop": {
+                "n": 20,
+                "avgRetPct": -8.413
+              }
+            },
+            "timingExitProb": 0.4,
+            "sizing": "equal"
+          },
+          "robust": 0.104,
+          "valC": {
+            "horizon": "w1",
+            "topK": 3,
+            "execLag": 0,
+            "execField": "close",
+            "initialCapital": 500000,
+            "finalNav": 536266.27,
+            "totalReturnPct": 7.25,
+            "annualReturnPct": 7.48,
+            "maxDrawdownPct": 20.52,
+            "calmar": 0.364,
+            "sharpeDaily": 0.39,
+            "trades": 82,
+            "winRateTrade": 0.439,
+            "avgHoldDays": 4.2,
+            "turnoverPct": 5405.2,
+            "exposurePct": 46.38,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "stop": {
+                "n": 24,
+                "avgRetPct": -8.343
+              },
+              "expire": {
+                "n": 55,
+                "avgRetPct": 4.016
+              },
+              "timing-exit": {
+                "n": 3,
+                "avgRetPct": 10.558
+              }
+            },
+            "timingExitProb": 0.4,
+            "sizing": "equal"
+          }
+        },
+        {
+          "name": "w1 动量+择时退出(<0.45)",
+          "hz": "w1",
+          "timing": {
+            "exitProb": 0.45
+          },
+          "sizing": "equal",
+          "val": {
+            "horizon": "w1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 500609.35,
+            "totalReturnPct": 0.12,
+            "annualReturnPct": 0.13,
+            "maxDrawdownPct": 27.77,
+            "calmar": 0.005,
+            "sharpeDaily": 0.106,
+            "trades": 93,
+            "winRateTrade": 0.4409,
+            "avgHoldDays": 3.8,
+            "turnoverPct": 6125.7,
+            "exposurePct": 47.53,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "expire": {
+                "n": 50,
+                "avgRetPct": 3.385
+              },
+              "stop": {
+                "n": 22,
+                "avgRetPct": -8.44
+              },
+              "timing-exit": {
+                "n": 21,
+                "avgRetPct": 2.376
+              }
+            },
+            "timingExitProb": 0.45,
+            "sizing": "equal"
+          },
+          "test": {
+            "horizon": "w1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 482215.39,
+            "totalReturnPct": -3.56,
+            "annualReturnPct": -7.16,
+            "maxDrawdownPct": 33.97,
+            "calmar": -0.211,
+            "sharpeDaily": 0.17,
+            "trades": 109,
+            "winRateTrade": 0.4679,
+            "avgHoldDays": 3,
+            "turnoverPct": 7231.1,
+            "exposurePct": 84.97,
+            "tradingDays": 119,
+            "effectiveN": 119,
+            "avgTradeRetByReason": {
+              "timing-exit": {
+                "n": 51,
+                "avgRetPct": -1.161
+              },
+              "stop": {
+                "n": 20,
+                "avgRetPct": -8.334
+              },
+              "expire": {
+                "n": 38,
+                "avgRetPct": 7.216
+              }
+            },
+            "timingExitProb": 0.45,
+            "sizing": "equal"
+          },
+          "robust": -0.244,
+          "valC": {
+            "horizon": "w1",
+            "topK": 3,
+            "execLag": 0,
+            "execField": "close",
+            "initialCapital": 500000,
+            "finalNav": 521142.62,
+            "totalReturnPct": 4.23,
+            "annualReturnPct": 4.36,
+            "maxDrawdownPct": 21.03,
+            "calmar": 0.207,
+            "sharpeDaily": 0.297,
+            "trades": 92,
+            "winRateTrade": 0.4565,
+            "avgHoldDays": 3.7,
+            "turnoverPct": 6093.1,
+            "exposurePct": 46.57,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "stop": {
+                "n": 26,
+                "avgRetPct": -8.357
+              },
+              "expire": {
+                "n": 51,
+                "avgRetPct": 4.22
+              },
+              "timing-exit": {
+                "n": 15,
+                "avgRetPct": 3.541
+              }
+            },
+            "timingExitProb": 0.45,
+            "sizing": "equal"
+          }
+        },
+        {
+          "name": "w1 动量+择时建仓(≥0.55)+退出(<0.45)",
+          "hz": "w1",
+          "timing": {
+            "minProb": 0.55,
+            "exitProb": 0.45
+          },
+          "sizing": "equal",
+          "val": {
+            "horizon": "w1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 544760.04,
+            "totalReturnPct": 8.95,
+            "annualReturnPct": 9.23,
+            "maxDrawdownPct": 18.67,
+            "calmar": 0.494,
+            "sharpeDaily": 0.383,
+            "trades": 79,
+            "winRateTrade": 0.5443,
+            "avgHoldDays": 4.3,
+            "turnoverPct": 5361.5,
+            "exposurePct": 46.57,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "expire": {
+                "n": 49,
+                "avgRetPct": 3.709
+              },
+              "stop": {
+                "n": 20,
+                "avgRetPct": -8.312
+              },
+              "timing-exit": {
+                "n": 10,
+                "avgRetPct": 3.59
+              }
+            },
+            "timingMinProb": 0.55,
+            "timingExitProb": 0.45,
+            "sizing": "equal"
+          },
+          "test": {
+            "horizon": "w1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 643439.39,
+            "totalReturnPct": 28.69,
+            "annualReturnPct": 67.73,
+            "maxDrawdownPct": 27.89,
+            "calmar": 2.429,
+            "sharpeDaily": 1.272,
+            "trades": 46,
+            "winRateTrade": 0.5217,
+            "avgHoldDays": 4,
+            "turnoverPct": 3853.4,
+            "exposurePct": 48.4,
+            "tradingDays": 119,
+            "effectiveN": 119,
+            "avgTradeRetByReason": {
+              "expire": {
+                "n": 25,
+                "avgRetPct": 9.169
+              },
+              "timing-exit": {
+                "n": 8,
+                "avgRetPct": -0.442
+              },
+              "stop": {
+                "n": 13,
+                "avgRetPct": -8.432
+              }
+            },
+            "timingMinProb": 0.55,
+            "timingExitProb": 0.45,
+            "sizing": "equal"
+          },
+          "robust": -0.299,
+          "valC": {
+            "horizon": "w1",
+            "topK": 3,
+            "execLag": 0,
+            "execField": "close",
+            "initialCapital": 500000,
+            "finalNav": 587529.92,
+            "totalReturnPct": 17.51,
+            "annualReturnPct": 18.07,
+            "maxDrawdownPct": 19.9,
+            "calmar": 0.908,
+            "sharpeDaily": 0.702,
+            "trades": 83,
+            "winRateTrade": 0.4819,
+            "avgHoldDays": 4.2,
+            "turnoverPct": 5646.5,
+            "exposurePct": 47.13,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "stop": {
+                "n": 19,
+                "avgRetPct": -8.257
+              },
+              "expire": {
+                "n": 54,
+                "avgRetPct": 3.935
+              },
+              "timing-exit": {
+                "n": 10,
+                "avgRetPct": 2.947
+              }
+            },
+            "timingMinProb": 0.55,
+            "timingExitProb": 0.45,
+            "sizing": "equal"
+          }
+        },
+        {
+          "name": "w1 动量+概率定仓",
+          "hz": "w1",
+          "timing": null,
+          "sizing": "prob",
+          "val": {
+            "horizon": "w1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 526946.2,
+            "totalReturnPct": 5.39,
+            "annualReturnPct": 5.55,
+            "maxDrawdownPct": 25.49,
+            "calmar": 0.218,
+            "sharpeDaily": 0.27,
+            "trades": 76,
+            "winRateTrade": 0.4342,
+            "avgHoldDays": 4.5,
+            "turnoverPct": 5021.5,
+            "exposurePct": 46.05,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "expire": {
+                "n": 54,
+                "avgRetPct": 4.083
+              },
+              "stop": {
+                "n": 22,
+                "avgRetPct": -8.186
+              }
+            },
+            "timingMinProb": null,
+            "timingExitProb": null,
+            "sizing": "prob"
+          },
+          "test": {
+            "horizon": "w1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 569611.88,
+            "totalReturnPct": 13.92,
+            "annualReturnPct": 30.64,
+            "maxDrawdownPct": 34.4,
+            "calmar": 0.891,
+            "sharpeDaily": 0.807,
+            "trades": 76,
+            "winRateTrade": 0.4737,
+            "avgHoldDays": 4.3,
+            "turnoverPct": 5935.9,
+            "exposurePct": 87.81,
+            "tradingDays": 119,
+            "effectiveN": 119,
+            "avgTradeRetByReason": {
+              "expire": {
+                "n": 55,
+                "avgRetPct": 5.212
+              },
+              "stop": {
+                "n": 21,
+                "avgRetPct": -8.356
+              }
+            },
+            "timingMinProb": null,
+            "timingExitProb": null,
+            "sizing": "prob"
+          },
+          "robust": 0.117,
+          "valC": {
+            "horizon": "w1",
+            "topK": 3,
+            "execLag": 0,
+            "execField": "close",
+            "initialCapital": 500000,
+            "finalNav": 512625.85,
+            "totalReturnPct": 2.53,
+            "annualReturnPct": 2.6,
+            "maxDrawdownPct": 20.89,
+            "calmar": 0.125,
+            "sharpeDaily": 0.246,
+            "trades": 81,
+            "winRateTrade": 0.4444,
+            "avgHoldDays": 4.2,
+            "turnoverPct": 5351.7,
+            "exposurePct": 46.17,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "stop": {
+                "n": 25,
+                "avgRetPct": -8.18
+              },
+              "expire": {
+                "n": 56,
+                "avgRetPct": 4.276
+              }
+            },
+            "timingMinProb": null,
+            "timingExitProb": null,
+            "sizing": "prob"
+          }
+        },
+        {
+          "name": "m1 纯动量（无择时）",
+          "hz": "m1",
+          "timing": null,
+          "sizing": "equal",
+          "val": {
+            "horizon": "m1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 462231.87,
+            "totalReturnPct": -7.55,
+            "annualReturnPct": -7.77,
+            "maxDrawdownPct": 26.93,
+            "calmar": -0.288,
+            "sharpeDaily": -0.13,
+            "trades": 27,
+            "winRateTrade": 0.3333,
+            "avgHoldDays": 13.5,
+            "turnoverPct": 1742.6,
+            "exposurePct": 49.76,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "stop": {
+                "n": 14,
+                "avgRetPct": -8.386
+              },
+              "expire": {
+                "n": 13,
+                "avgRetPct": 8.248
+              }
+            },
+            "timingMinProb": null,
+            "timingExitProb": null,
+            "sizing": "equal"
+          },
+          "test": {
+            "horizon": "m1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 567472.14,
+            "totalReturnPct": 13.49,
+            "annualReturnPct": 29.63,
+            "maxDrawdownPct": 32.32,
+            "calmar": 0.917,
+            "sharpeDaily": 0.786,
+            "trades": 24,
+            "winRateTrade": 0.2917,
+            "avgHoldDays": 11.6,
+            "turnoverPct": 1761.1,
+            "exposurePct": 74.2,
+            "tradingDays": 119,
+            "effectiveN": 119,
+            "avgTradeRetByReason": {
+              "stop": {
+                "n": 14,
+                "avgRetPct": -8.036
+              },
+              "expire": {
+                "n": 10,
+                "avgRetPct": 21.379
+              }
+            },
+            "timingMinProb": null,
+            "timingExitProb": null,
+            "sizing": "equal"
+          },
+          "robust": 0.042,
+          "valC": {
+            "horizon": "m1",
+            "topK": 3,
+            "execLag": 0,
+            "execField": "close",
+            "initialCapital": 500000,
+            "finalNav": 595479.76,
+            "totalReturnPct": 19.1,
+            "annualReturnPct": 19.71,
+            "maxDrawdownPct": 19.88,
+            "calmar": 0.992,
+            "sharpeDaily": 0.697,
+            "trades": 26,
+            "winRateTrade": 0.2692,
+            "avgHoldDays": 14.4,
+            "turnoverPct": 1806.4,
+            "exposurePct": 51.68,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "stop": {
+                "n": 13,
+                "avgRetPct": -8.444
+              },
+              "expire": {
+                "n": 13,
+                "avgRetPct": 14.14
+              }
+            },
+            "timingMinProb": null,
+            "timingExitProb": null,
+            "sizing": "equal"
+          }
+        },
+        {
+          "name": "m1 动量+择时建仓(≥0.5)",
+          "hz": "m1",
+          "timing": {
+            "minProb": 0.5
+          },
+          "sizing": "equal",
+          "val": {
+            "horizon": "m1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 471674.68,
+            "totalReturnPct": -5.67,
+            "annualReturnPct": -5.83,
+            "maxDrawdownPct": 26.09,
+            "calmar": -0.223,
+            "sharpeDaily": -0.091,
+            "trades": 26,
+            "winRateTrade": 0.3077,
+            "avgHoldDays": 13.9,
+            "turnoverPct": 1641,
+            "exposurePct": 49.23,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "stop": {
+                "n": 13,
+                "avgRetPct": -8.192
+              },
+              "expire": {
+                "n": 13,
+                "avgRetPct": 7.397
+              }
+            },
+            "timingMinProb": 0.5,
+            "sizing": "equal"
+          },
+          "test": {
+            "horizon": "m1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 711946.61,
+            "totalReturnPct": 42.39,
+            "annualReturnPct": 106.39,
+            "maxDrawdownPct": 24.17,
+            "calmar": 4.402,
+            "sharpeDaily": 1.643,
+            "trades": 21,
+            "winRateTrade": 0.381,
+            "avgHoldDays": 15,
+            "turnoverPct": 1649.8,
+            "exposurePct": 83.3,
+            "tradingDays": 119,
+            "effectiveN": 119,
+            "avgTradeRetByReason": {
+              "stop": {
+                "n": 9,
+                "avgRetPct": -8.281
+              },
+              "expire": {
+                "n": 12,
+                "avgRetPct": 19.847
+              }
+            },
+            "timingMinProb": 0.5,
+            "sizing": "equal"
+          },
+          "robust": -0.076,
+          "valC": {
+            "horizon": "m1",
+            "topK": 3,
+            "execLag": 0,
+            "execField": "close",
+            "initialCapital": 500000,
+            "finalNav": 462345.13,
+            "totalReturnPct": -7.53,
+            "annualReturnPct": -7.74,
+            "maxDrawdownPct": 26.13,
+            "calmar": -0.296,
+            "sharpeDaily": -0.101,
+            "trades": 24,
+            "winRateTrade": 0.25,
+            "avgHoldDays": 15.5,
+            "turnoverPct": 1482.1,
+            "exposurePct": 50.54,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "stop": {
+                "n": 11,
+                "avgRetPct": -8.018
+              },
+              "expire": {
+                "n": 13,
+                "avgRetPct": 5.334
+              }
+            },
+            "timingMinProb": 0.5,
+            "sizing": "equal"
+          }
+        },
+        {
+          "name": "m1 动量+择时建仓(≥0.55)",
+          "hz": "m1",
+          "timing": {
+            "minProb": 0.55
+          },
+          "sizing": "equal",
+          "val": {
+            "horizon": "m1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 518137.98,
+            "totalReturnPct": 3.63,
+            "annualReturnPct": 3.74,
+            "maxDrawdownPct": 22.98,
+            "calmar": 0.163,
+            "sharpeDaily": 0.215,
+            "trades": 25,
+            "winRateTrade": 0.4,
+            "avgHoldDays": 14.8,
+            "turnoverPct": 1640.5,
+            "exposurePct": 50.38,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "stop": {
+                "n": 12,
+                "avgRetPct": -8.421
+              },
+              "expire": {
+                "n": 13,
+                "avgRetPct": 9.397
+              }
+            },
+            "timingMinProb": 0.55,
+            "sizing": "equal"
+          },
+          "test": {
+            "horizon": "m1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 653989.56,
+            "totalReturnPct": 30.8,
+            "annualReturnPct": 73.41,
+            "maxDrawdownPct": 26.04,
+            "calmar": 2.819,
+            "sharpeDaily": 1.299,
+            "trades": 23,
+            "winRateTrade": 0.3913,
+            "avgHoldDays": 14.3,
+            "turnoverPct": 1836.9,
+            "exposurePct": 86.85,
+            "tradingDays": 119,
+            "effectiveN": 119,
+            "avgTradeRetByReason": {
+              "expire": {
+                "n": 12,
+                "avgRetPct": 19.935
+              },
+              "stop": {
+                "n": 11,
+                "avgRetPct": -8.389
+              }
+            },
+            "timingMinProb": 0.55,
+            "sizing": "equal"
+          },
+          "robust": -0.185,
+          "valC": {
+            "horizon": "m1",
+            "topK": 3,
+            "execLag": 0,
+            "execField": "close",
+            "initialCapital": 500000,
+            "finalNav": 441097.97,
+            "totalReturnPct": -11.78,
+            "annualReturnPct": -12.11,
+            "maxDrawdownPct": 28.52,
+            "calmar": -0.425,
+            "sharpeDaily": -0.259,
+            "trades": 27,
+            "winRateTrade": 0.2222,
+            "avgHoldDays": 14.2,
+            "turnoverPct": 1710.5,
+            "exposurePct": 52.92,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "stop": {
+                "n": 14,
+                "avgRetPct": -8.014
+              },
+              "expire": {
+                "n": 13,
+                "avgRetPct": 6.697
+              }
+            },
+            "timingMinProb": 0.55,
+            "sizing": "equal"
+          }
+        },
+        {
+          "name": "m1 动量+择时建仓(≥0.6)",
+          "hz": "m1",
+          "timing": {
+            "minProb": 0.6
+          },
+          "sizing": "equal",
+          "val": {
+            "horizon": "m1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 483725.09,
+            "totalReturnPct": -3.25,
+            "annualReturnPct": -3.35,
+            "maxDrawdownPct": 22.86,
+            "calmar": -0.146,
+            "sharpeDaily": 0,
+            "trades": 26,
+            "winRateTrade": 0.3846,
+            "avgHoldDays": 13.7,
+            "turnoverPct": 1702.8,
+            "exposurePct": 49.52,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "stop": {
+                "n": 14,
+                "avgRetPct": -8.136
+              },
+              "expire": {
+                "n": 12,
+                "avgRetPct": 9.456
+              }
+            },
+            "timingMinProb": 0.6,
+            "sizing": "equal"
+          },
+          "test": {
+            "horizon": "m1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 763203.41,
+            "totalReturnPct": 52.64,
+            "annualReturnPct": 138.01,
+            "maxDrawdownPct": 16.69,
+            "calmar": 8.268,
+            "sharpeDaily": 1.951,
+            "trades": 20,
+            "winRateTrade": 0.55,
+            "avgHoldDays": 16.2,
+            "turnoverPct": 1615.2,
+            "exposurePct": 84.93,
+            "tradingDays": 119,
+            "effectiveN": 119,
+            "avgTradeRetByReason": {
+              "expire": {
+                "n": 13,
+                "avgRetPct": 19.162
+              },
+              "stop": {
+                "n": 7,
+                "avgRetPct": -8.432
+              }
+            },
+            "timingMinProb": 0.6,
+            "sizing": "equal"
+          },
+          "robust": -0.169,
+          "valC": {
+            "horizon": "m1",
+            "topK": 3,
+            "execLag": 0,
+            "execField": "close",
+            "initialCapital": 500000,
+            "finalNav": 442239.33,
+            "totalReturnPct": -11.55,
+            "annualReturnPct": -11.87,
+            "maxDrawdownPct": 27.52,
+            "calmar": -0.431,
+            "sharpeDaily": -0.263,
+            "trades": 27,
+            "winRateTrade": 0.2222,
+            "avgHoldDays": 13.3,
+            "turnoverPct": 1718.9,
+            "exposurePct": 49.4,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "stop": {
+                "n": 15,
+                "avgRetPct": -8.04
+              },
+              "expire": {
+                "n": 12,
+                "avgRetPct": 7.955
+              }
+            },
+            "timingMinProb": 0.6,
+            "sizing": "equal"
+          }
+        },
+        {
+          "name": "m1 动量+择时退出(<0.4)",
+          "hz": "m1",
+          "timing": {
+            "exitProb": 0.4
+          },
+          "sizing": "equal",
+          "val": {
+            "horizon": "m1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 579014.15,
+            "totalReturnPct": 15.8,
+            "annualReturnPct": 16.31,
+            "maxDrawdownPct": 22.67,
+            "calmar": 0.719,
+            "sharpeDaily": 0.57,
+            "trades": 32,
+            "winRateTrade": 0.375,
+            "avgHoldDays": 11.1,
+            "turnoverPct": 2272.7,
+            "exposurePct": 48.89,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "stop": {
+                "n": 13,
+                "avgRetPct": -8.332
+              },
+              "expire": {
+                "n": 11,
+                "avgRetPct": 11.788
+              },
+              "timing-exit": {
+                "n": 8,
+                "avgRetPct": 5.613
+              }
+            },
+            "timingExitProb": 0.4,
+            "sizing": "equal"
+          },
+          "test": {
+            "horizon": "m1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 542701.17,
+            "totalReturnPct": 8.54,
+            "annualReturnPct": 18.3,
+            "maxDrawdownPct": 34.76,
+            "calmar": 0.526,
+            "sharpeDaily": 0.642,
+            "trades": 38,
+            "winRateTrade": 0.4211,
+            "avgHoldDays": 7.6,
+            "turnoverPct": 2733.7,
+            "exposurePct": 76.49,
+            "tradingDays": 119,
+            "effectiveN": 119,
+            "avgTradeRetByReason": {
+              "timing-exit": {
+                "n": 16,
+                "avgRetPct": 3.894
+              },
+              "stop": {
+                "n": 17,
+                "avgRetPct": -8.064
+              },
+              "expire": {
+                "n": 5,
+                "avgRetPct": 29.696
+              }
+            },
+            "timingExitProb": 0.4,
+            "sizing": "equal"
+          },
+          "robust": 0.635,
+          "valC": {
+            "horizon": "m1",
+            "topK": 3,
+            "execLag": 0,
+            "execField": "close",
+            "initialCapital": 500000,
+            "finalNav": 680095.95,
+            "totalReturnPct": 36.02,
+            "annualReturnPct": 37.26,
+            "maxDrawdownPct": 19.67,
+            "calmar": 1.894,
+            "sharpeDaily": 1.101,
+            "trades": 39,
+            "winRateTrade": 0.4615,
+            "avgHoldDays": 9.1,
+            "turnoverPct": 3113.3,
+            "exposurePct": 48.65,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "stop": {
+                "n": 15,
+                "avgRetPct": -8.439
+              },
+              "expire": {
+                "n": 10,
+                "avgRetPct": 14.799
+              },
+              "timing-exit": {
+                "n": 14,
+                "avgRetPct": 7.234
+              }
+            },
+            "timingExitProb": 0.4,
+            "sizing": "equal"
+          }
+        },
+        {
+          "name": "m1 动量+择时退出(<0.45)",
+          "hz": "m1",
+          "timing": {
+            "exitProb": 0.45
+          },
+          "sizing": "equal",
+          "val": {
+            "horizon": "m1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 563752.16,
+            "totalReturnPct": 12.75,
+            "annualReturnPct": 13.15,
+            "maxDrawdownPct": 22.67,
+            "calmar": 0.58,
+            "sharpeDaily": 0.481,
+            "trades": 52,
+            "winRateTrade": 0.4615,
+            "avgHoldDays": 7,
+            "turnoverPct": 3606.3,
+            "exposurePct": 50.21,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "stop": {
+                "n": 16,
+                "avgRetPct": -8.27
+              },
+              "expire": {
+                "n": 9,
+                "avgRetPct": 10.624
+              },
+              "timing-exit": {
+                "n": 27,
+                "avgRetPct": 3.351
+              }
+            },
+            "timingExitProb": 0.45,
+            "sizing": "equal"
+          },
+          "test": {
+            "horizon": "m1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 517132,
+            "totalReturnPct": 3.43,
+            "annualReturnPct": 7.15,
+            "maxDrawdownPct": 34.44,
+            "calmar": 0.208,
+            "sharpeDaily": 0.439,
+            "trades": 52,
+            "winRateTrade": 0.4423,
+            "avgHoldDays": 6.1,
+            "turnoverPct": 3608,
+            "exposurePct": 84.5,
+            "tradingDays": 119,
+            "effectiveN": 119,
+            "avgTradeRetByReason": {
+              "timing-exit": {
+                "n": 30,
+                "avgRetPct": 2.245
+              },
+              "stop": {
+                "n": 17,
+                "avgRetPct": -8.045
+              },
+              "expire": {
+                "n": 5,
+                "avgRetPct": 25.604
+              }
+            },
+            "timingExitProb": 0.45,
+            "sizing": "equal"
+          },
+          "robust": 0.419,
+          "valC": {
+            "horizon": "m1",
+            "topK": 3,
+            "execLag": 0,
+            "execField": "close",
+            "initialCapital": 500000,
+            "finalNav": 536759.54,
+            "totalReturnPct": 7.35,
+            "annualReturnPct": 7.58,
+            "maxDrawdownPct": 20.6,
+            "calmar": 0.368,
+            "sharpeDaily": 0.392,
+            "trades": 45,
+            "winRateTrade": 0.4,
+            "avgHoldDays": 7.9,
+            "turnoverPct": 3210.5,
+            "exposurePct": 48.75,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "stop": {
+                "n": 19,
+                "avgRetPct": -8.143
+              },
+              "expire": {
+                "n": 9,
+                "avgRetPct": 12.707
+              },
+              "timing-exit": {
+                "n": 17,
+                "avgRetPct": 5.214
+              }
+            },
+            "timingExitProb": 0.45,
+            "sizing": "equal"
+          }
+        },
+        {
+          "name": "m1 动量+择时建仓(≥0.55)+退出(<0.45)",
+          "hz": "m1",
+          "timing": {
+            "minProb": 0.55,
+            "exitProb": 0.45
+          },
+          "sizing": "equal",
+          "val": {
+            "horizon": "m1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 466832.01,
+            "totalReturnPct": -6.63,
+            "annualReturnPct": -6.82,
+            "maxDrawdownPct": 25.73,
+            "calmar": -0.265,
+            "sharpeDaily": -0.12,
+            "trades": 29,
+            "winRateTrade": 0.3448,
+            "avgHoldDays": 12.5,
+            "turnoverPct": 1848.1,
+            "exposurePct": 49.76,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "stop": {
+                "n": 16,
+                "avgRetPct": -8.143
+              },
+              "expire": {
+                "n": 10,
+                "avgRetPct": 9.847
+              },
+              "timing-exit": {
+                "n": 3,
+                "avgRetPct": 6.233
+              }
+            },
+            "timingMinProb": 0.55,
+            "timingExitProb": 0.45,
+            "sizing": "equal"
+          },
+          "test": {
+            "horizon": "m1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 652495.22,
+            "totalReturnPct": 30.5,
+            "annualReturnPct": 72.6,
+            "maxDrawdownPct": 26.38,
+            "calmar": 2.752,
+            "sharpeDaily": 1.348,
+            "trades": 36,
+            "winRateTrade": 0.5278,
+            "avgHoldDays": 9.1,
+            "turnoverPct": 2643.6,
+            "exposurePct": 86.32,
+            "tradingDays": 119,
+            "effectiveN": 119,
+            "avgTradeRetByReason": {
+              "timing-exit": {
+                "n": 18,
+                "avgRetPct": 5.257
+              },
+              "expire": {
+                "n": 7,
+                "avgRetPct": 19.638
+              },
+              "stop": {
+                "n": 11,
+                "avgRetPct": -8
+              }
+            },
+            "timingMinProb": 0.55,
+            "timingExitProb": 0.45,
+            "sizing": "equal"
+          },
+          "robust": -0.355,
+          "valC": {
+            "horizon": "m1",
+            "topK": 3,
+            "execLag": 0,
+            "execField": "close",
+            "initialCapital": 500000,
+            "finalNav": 452571.85,
+            "totalReturnPct": -9.49,
+            "annualReturnPct": -9.75,
+            "maxDrawdownPct": 25.82,
+            "calmar": -0.378,
+            "sharpeDaily": -0.175,
+            "trades": 29,
+            "winRateTrade": 0.2414,
+            "avgHoldDays": 12.5,
+            "turnoverPct": 1850.1,
+            "exposurePct": 49.93,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "stop": {
+                "n": 15,
+                "avgRetPct": -8.057
+              },
+              "expire": {
+                "n": 11,
+                "avgRetPct": 8.754
+              },
+              "timing-exit": {
+                "n": 3,
+                "avgRetPct": 2.601
+              }
+            },
+            "timingMinProb": 0.55,
+            "timingExitProb": 0.45,
+            "sizing": "equal"
+          }
+        },
+        {
+          "name": "m1 动量+概率定仓",
+          "hz": "m1",
+          "timing": null,
+          "sizing": "prob",
+          "val": {
+            "horizon": "m1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 491857.37,
+            "totalReturnPct": -1.63,
+            "annualReturnPct": -1.68,
+            "maxDrawdownPct": 22.64,
+            "calmar": -0.074,
+            "sharpeDaily": 0.055,
+            "trades": 27,
+            "winRateTrade": 0.2963,
+            "avgHoldDays": 13.7,
+            "turnoverPct": 1780.3,
+            "exposurePct": 50.11,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "stop": {
+                "n": 14,
+                "avgRetPct": -8.214
+              },
+              "expire": {
+                "n": 13,
+                "avgRetPct": 9.421
+              }
+            },
+            "timingMinProb": null,
+            "timingExitProb": null,
+            "sizing": "prob"
+          },
+          "test": {
+            "horizon": "m1",
+            "topK": 3,
+            "execLag": 1,
+            "execField": "open",
+            "initialCapital": 500000,
+            "finalNav": 583315.49,
+            "totalReturnPct": 16.66,
+            "annualReturnPct": 37.16,
+            "maxDrawdownPct": 32.21,
+            "calmar": 1.154,
+            "sharpeDaily": 0.878,
+            "trades": 25,
+            "winRateTrade": 0.24,
+            "avgHoldDays": 11.4,
+            "turnoverPct": 1870.6,
+            "exposurePct": 79.18,
+            "tradingDays": 119,
+            "effectiveN": 119,
+            "avgTradeRetByReason": {
+              "stop": {
+                "n": 15,
+                "avgRetPct": -8.056
+              },
+              "expire": {
+                "n": 10,
+                "avgRetPct": 20.863
+              }
+            },
+            "timingMinProb": null,
+            "timingExitProb": null,
+            "sizing": "prob"
+          },
+          "robust": 0.06,
+          "valC": {
+            "horizon": "m1",
+            "topK": 3,
+            "execLag": 0,
+            "execField": "close",
+            "initialCapital": 500000,
+            "finalNav": 480416.49,
+            "totalReturnPct": -3.92,
+            "annualReturnPct": -4.03,
+            "maxDrawdownPct": 24.47,
+            "calmar": -0.165,
+            "sharpeDaily": 0.061,
+            "trades": 26,
+            "winRateTrade": 0.2692,
+            "avgHoldDays": 14.3,
+            "turnoverPct": 1737.3,
+            "exposurePct": 51.07,
+            "tradingDays": 237,
+            "effectiveN": 237,
+            "avgTradeRetByReason": {
+              "stop": {
+                "n": 15,
+                "avgRetPct": -8.028
+              },
+              "expire": {
+                "n": 11,
+                "avgRetPct": 12.081
+              }
+            },
+            "timingMinProb": null,
+            "timingExitProb": null,
+            "sizing": "prob"
+          }
+        }
+      ],
+      "chosen": "m1 动量+择时退出(<0.45)",
+      "chosenSingle": "m1 动量+择时退出(<0.45)",
+      "chosenSingleTestCalmar": 0.208,
+      "baseW1": {
+        "name": "w1 纯动量（无择时）",
+        "hz": "w1",
+        "timing": null,
+        "sizing": "equal",
+        "val": {
+          "horizon": "w1",
+          "topK": 3,
+          "execLag": 1,
+          "execField": "open",
+          "initialCapital": 500000,
+          "finalNav": 491152.93,
+          "totalReturnPct": -1.77,
+          "annualReturnPct": -1.82,
+          "maxDrawdownPct": 26.89,
+          "calmar": -0.068,
+          "sharpeDaily": 0.039,
+          "trades": 79,
+          "winRateTrade": 0.4177,
+          "avgHoldDays": 4.3,
+          "turnoverPct": 5151.1,
+          "exposurePct": 46.54,
+          "tradingDays": 237,
+          "effectiveN": 237,
+          "avgTradeRetByReason": {
+            "expire": {
+              "n": 55,
+              "avgRetPct": 4.075
+            },
+            "stop": {
+              "n": 24,
+              "avgRetPct": -8.303
+            }
+          },
+          "timingMinProb": null,
+          "timingExitProb": null,
+          "sizing": "equal"
+        },
+        "test": {
+          "horizon": "w1",
+          "topK": 3,
+          "execLag": 1,
+          "execField": "open",
+          "initialCapital": 500000,
+          "finalNav": 636338.61,
+          "totalReturnPct": 27.27,
+          "annualReturnPct": 63.95,
+          "maxDrawdownPct": 29.91,
+          "calmar": 2.138,
+          "sharpeDaily": 1.243,
+          "trades": 77,
+          "winRateTrade": 0.5195,
+          "avgHoldDays": 4.3,
+          "turnoverPct": 5887.9,
+          "exposurePct": 86.54,
+          "tradingDays": 119,
+          "effectiveN": 119,
+          "avgTradeRetByReason": {
+            "expire": {
+              "n": 55,
+              "avgRetPct": 6.029
+            },
+            "stop": {
+              "n": 22,
+              "avgRetPct": -8.429
+            }
+          },
+          "timingMinProb": null,
+          "timingExitProb": null,
+          "sizing": "equal"
+        },
+        "robust": 0.096,
+        "valC": {
+          "horizon": "w1",
+          "topK": 3,
+          "execLag": 0,
+          "execField": "close",
+          "initialCapital": 500000,
+          "finalNav": 509533.14,
+          "totalReturnPct": 1.91,
+          "annualReturnPct": 1.96,
+          "maxDrawdownPct": 20.52,
+          "calmar": 0.096,
+          "sharpeDaily": 0.223,
+          "trades": 81,
+          "winRateTrade": 0.4321,
+          "avgHoldDays": 4.2,
+          "turnoverPct": 5299.4,
+          "exposurePct": 46.34,
+          "tradingDays": 237,
+          "effectiveN": 237,
+          "avgTradeRetByReason": {
+            "stop": {
+              "n": 24,
+              "avgRetPct": -8.154
+            },
+            "expire": {
+              "n": 57,
+              "avgRetPct": 4.1
+            }
+          },
+          "timingMinProb": null,
+          "timingExitProb": null,
+          "sizing": "equal"
+        }
+      },
+      "baseM1": {
+        "name": "m1 纯动量（无择时）",
+        "hz": "m1",
+        "timing": null,
+        "sizing": "equal",
+        "val": {
+          "horizon": "m1",
+          "topK": 3,
+          "execLag": 1,
+          "execField": "open",
+          "initialCapital": 500000,
+          "finalNav": 462231.87,
+          "totalReturnPct": -7.55,
+          "annualReturnPct": -7.77,
+          "maxDrawdownPct": 26.93,
+          "calmar": -0.288,
+          "sharpeDaily": -0.13,
+          "trades": 27,
+          "winRateTrade": 0.3333,
+          "avgHoldDays": 13.5,
+          "turnoverPct": 1742.6,
+          "exposurePct": 49.76,
+          "tradingDays": 237,
+          "effectiveN": 237,
+          "avgTradeRetByReason": {
+            "stop": {
+              "n": 14,
+              "avgRetPct": -8.386
+            },
+            "expire": {
+              "n": 13,
+              "avgRetPct": 8.248
+            }
+          },
+          "timingMinProb": null,
+          "timingExitProb": null,
+          "sizing": "equal"
+        },
+        "test": {
+          "horizon": "m1",
+          "topK": 3,
+          "execLag": 1,
+          "execField": "open",
+          "initialCapital": 500000,
+          "finalNav": 567472.14,
+          "totalReturnPct": 13.49,
+          "annualReturnPct": 29.63,
+          "maxDrawdownPct": 32.32,
+          "calmar": 0.917,
+          "sharpeDaily": 0.786,
+          "trades": 24,
+          "winRateTrade": 0.2917,
+          "avgHoldDays": 11.6,
+          "turnoverPct": 1761.1,
+          "exposurePct": 74.2,
+          "tradingDays": 119,
+          "effectiveN": 119,
+          "avgTradeRetByReason": {
+            "stop": {
+              "n": 14,
+              "avgRetPct": -8.036
+            },
+            "expire": {
+              "n": 10,
+              "avgRetPct": 21.379
+            }
+          },
+          "timingMinProb": null,
+          "timingExitProb": null,
+          "sizing": "equal"
+        },
+        "robust": 0.042,
+        "valC": {
+          "horizon": "m1",
+          "topK": 3,
+          "execLag": 0,
+          "execField": "close",
+          "initialCapital": 500000,
+          "finalNav": 595479.76,
+          "totalReturnPct": 19.1,
+          "annualReturnPct": 19.71,
+          "maxDrawdownPct": 19.88,
+          "calmar": 0.992,
+          "sharpeDaily": 0.697,
+          "trades": 26,
+          "winRateTrade": 0.2692,
+          "avgHoldDays": 14.4,
+          "turnoverPct": 1806.4,
+          "exposurePct": 51.68,
+          "tradingDays": 237,
+          "effectiveN": 237,
+          "avgTradeRetByReason": {
+            "stop": {
+              "n": 13,
+              "avgRetPct": -8.444
+            },
+            "expire": {
+              "n": 13,
+              "avgRetPct": 14.14
+            }
+          },
+          "timingMinProb": null,
+          "timingExitProb": null,
+          "sizing": "equal"
+        }
+      }
+    }
   },
   "strategies": {
     "val": [
@@ -3310,6 +5353,20 @@
       "stock": 0.18
     },
     "basis": "拟合集(train+val)含费期望最优，交易数≥200",
+    "timingPolicy": {
+      "name": "m1 动量+择时退出(<0.45)",
+      "hz": "m1",
+      "timing": {
+        "exitProb": 0.45
+      },
+      "sizing": "equal",
+      "valCalmar": 0.58,
+      "valRobust": 0.419,
+      "testCalmar": 0.208,
+      "testReturn": 3.43,
+      "testTrades": 52,
+      "basis": "验证集两半中更差的一半 Calmar 最高，且交易数≥40（稳健准则）"
+    },
     "rotationWeight": {
       "w": 0.25,
       "basis": "验证集组合口径 Calmar 最高且交易数≥60；w=动量权重",
@@ -3514,8 +5571,8 @@
       {
         "expert": "indexS",
         "n": 21290,
-        "abstain": 24,
-        "abstainRate": 0.0011,
+        "abstain": 28,
+        "abstainRate": 0.0013,
         "hitRate": 0.5048,
         "brier": 0.4948,
         "weight": 0.0119,
@@ -3747,8 +5804,8 @@
       {
         "expert": "indexS",
         "n": 21290,
-        "abstain": 24,
-        "abstainRate": 0.0011,
+        "abstain": 28,
+        "abstainRate": 0.0013,
         "hitRate": 0.5075,
         "brier": 0.4923,
         "weight": 0.0314,
@@ -3991,10 +6048,10 @@
       {
         "expert": "indexS",
         "n": 21290,
-        "abstain": 24,
-        "abstainRate": 0.0011,
+        "abstain": 28,
+        "abstainRate": 0.0013,
         "hitRate": 0.5051,
-        "brier": 0.4946,
+        "brier": 0.4947,
         "weight": 0.0979,
         "priorWeight": 0.0755,
         "trained": true
@@ -4224,10 +6281,10 @@
       {
         "expert": "indexS",
         "n": 21290,
-        "abstain": 24,
-        "abstainRate": 0.0011,
+        "abstain": 28,
+        "abstainRate": 0.0013,
         "hitRate": 0.482,
-        "brier": 0.5174,
+        "brier": 0.5173,
         "weight": 0.0119,
         "priorWeight": 0.0777,
         "trained": true
@@ -4258,7 +6315,7 @@
   },
   "summary": {
     "rounds": 85160,
-    "updatedAt": "2026-09-14T08:14:12.205Z",
+    "updatedAt": "2026-09-14T08:25:46.433Z",
     "trainedFrom": {
       "version": 2,
       "universeSize": 47,
@@ -4328,7 +6385,7 @@
       "gamma": 1,
       "lossType": "mixed",
       "experts": 21,
-      "at": "2026-09-14T08:14:07.074Z"
+      "at": "2026-09-14T08:25:40.539Z"
     },
     "horizons": {
       "d1": {

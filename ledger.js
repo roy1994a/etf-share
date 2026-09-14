@@ -261,6 +261,62 @@ function showEntry(db, key) {
     return;
   }
 
+  if (cmd === 'gate') {
+    // 前向检验「模型入场门槛」假设：用台账里已结算的模型自动快照，
+    // 对比"门槛通过(≥阈值) vs 不通过"两组的真实表现。
+    //
+    // 背景：组合回测里"动量排序 + 模型入场门槛"是唯一在两期×两周期都胜出的一族，
+    // 但那是 post-hoc 观察。要变成结论，必须用**前向真实样本**验证 —— 这里就是那个检验。
+    const TH = flag('threshold') ? parseFloat(flag('threshold')) : 0.55;
+    const HZ = flag('horizon') || 'w1';
+    const rows = [];
+    const avail = {};
+    for (const e of db.entries) {
+      for (const o of (e.outcomes || [])) {
+        if ((o.source || '') !== 'live-model') continue;
+        const k = o.horizon + (o.pending ? '(待兑现)' : '(已结算)');
+        avail[k] = (avail[k] || 0) + 1;
+        if (o.pending) continue;
+        if (o.horizon !== HZ) continue;
+        if (o.upProb == null) continue;
+        rows.push({ code: e.code, toDate: o.toDate, p: o.upProb / 100, hit: o.dirHit, ret: o.actualPct });
+      }
+    }
+    console.log('台账中模型自动快照的构成：' + (Object.keys(avail).sort().map((k) => k + '×' + avail[k]).join('　') || '（无）'));
+    console.log(`\n=== 前向检验：模型入场门槛 ≥ ${TH}（口径：台账已结算的 live-model / 未来1周）===`);
+    if (!rows.length) {
+      console.log(`暂无已结算的 ${HZ} 快照（周/月周期需时间兑现）。`);
+      console.log('提示：node ledger.js resolve 结算后再跑；或用 --horizon d1 看已兑现的短周期。');
+      return;
+    }
+    const pass = rows.filter((r) => r.p >= TH);
+    const fail = rows.filter((r) => r.p < TH);
+    const stat = (g) => {
+      if (!g.length) return { n: 0, hitRate: null, avgRet: null };
+      const dir = (r) => (r.ret == null ? 0 : r.ret);   // live-model 全是看跌/看涨方向仓，这里用原始涨跌
+      return {
+        n: g.length,
+        hitRate: +(g.filter((r) => r.hit).length / g.length).toFixed(4),
+        avgRet: +(g.reduce((a, r) => a + dir(r), 0) / g.length).toFixed(3),
+      };
+    };
+    const A = stat(pass), B = stat(fail);
+    console.log(`  门槛通过 (p≥${TH})  n=${A.n}  命中率 ${A.hitRate == null ? '--' : (A.hitRate * 100).toFixed(1) + '%'}  平均涨跌 ${A.avgRet == null ? '--' : A.avgRet + '%'}`);
+    console.log(`  门槛不通过(p<${TH})  n=${B.n}  命中率 ${B.hitRate == null ? '--' : (B.hitRate * 100).toFixed(1) + '%'}  平均涨跌 ${B.avgRet == null ? '--' : B.avgRet + '%'}`);
+    const dates = [...new Set(rows.map((r) => r.toDate))];
+    console.log('');
+    console.log(`  ⚠️ 有效样本量：${rows.length} 条记录只来自 ${dates.length} 个到期日（${dates.join('、')}）`);
+    console.log(`     同一到期日的多个标的高度相关 —— 有效样本量约 ${dates.length}，**远不足以判定**。`);
+    if (dates.length < 10) {
+      console.log('     结论：样本不足，暂不做任何判断。继续每日入账，攒够 10 个以上独立到期日再看。');
+    } else {
+      const diff = (A.hitRate || 0) - (B.hitRate || 0);
+      console.log(`     命中率差 (通过 − 不通过) = ${(diff * 100).toFixed(1)}pt；` + (diff > 0.03 ? '方向与假设一致' : '方向与假设不一致或差异过小'));
+    }
+    console.log('');
+    return;
+  }
+
   if (cmd === 'monthly') {
     // 一键月度维护：结算 → 回灌 → 统计 → 人工/模型对照 → 出报告
     console.log('\n════════ 月度维护开始 ════════\n');
@@ -385,5 +441,5 @@ function showEntry(db, key) {
   }
 
   console.log(`未知命令：${cmd}`);
-  console.log('可用：list / show <id> / stats / resolve [--code X] / feedback / report / export / autolog / compare / monthly');
+  console.log('可用：list / show <id> / stats / resolve [--code X] / feedback / report / export / autolog / compare / gate [--threshold 0.55] / monthly');
 })();
