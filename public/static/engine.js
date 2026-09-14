@@ -389,6 +389,15 @@
   }
 
   // 轮动决策：pool=[{code,name,rotation,analyzeScore}], market={bearMarket,sentimentIndex,...}
+  //
+  // ⚠️ 权重说明（2026-09-14 组合级回测结论）：
+  //   本函数按 `combined = 动量分×0.5 + 综合评分×0.5` 排序，而不是按动量排序。
+  //   组合口径（资金受限、T+1 执行、含费）下的权重扫描结果是：
+  //     · 验证集最优 w=0.25（Calmar 1.248），测试集最优 w=1.00（纯动量，Calmar 2.138）
+  //     · 两个口径**结论相反**，说明 w 在统计上不可靠估计
+  //   因此**暂不改权重**（保持 0.5），但下方 reason 文案已改为如实描述排序依据。
+  //   详见 reports/组合级回测与轮动权重消融-20260914.md
+  const ROTATION_WEIGHT = 0.5;
   function pickRotation(pool, market) {
     const m = market || {};
     // 综合分 = 动量分 × 50% + 综合评分（技术面+宏观+情绪） × 50%
@@ -396,7 +405,7 @@
       if (r.rotation) {
         const base = r.rotation.score;
         const full = r.analyzeScore != null ? r.analyzeScore : base;
-        r.combined = Math.round(base * 0.5 + full * 0.5);
+        r.combined = Math.round(base * ROTATION_WEIGHT + full * (1 - ROTATION_WEIGHT));
       }
     });
     const sorted = pool.slice().filter((r) => r.rotation).sort((a, b) => b.combined - a.combined);
@@ -405,7 +414,15 @@
     let pick = null, action = '空仓', reason = '';
     if (m.bearMarket) { action = '空仓'; reason = '大盘熊市（沪深300<MA60）'; }
     else if (!eligible.length) { action = '空仓'; reason = '所有ETF 20日动量均为负'; }
-    else { pick = eligible[0]; action = '持有'; reason = `动量最强（20日 ${r2(pick.rotation.mom20, 2)}%）`; }
+    else {
+      pick = eligible[0];
+      action = '持有';
+      // 如实描述：排序依据是综合分（动量50%+评分50%），不是单纯的动量
+      const mRank = sorted.filter((r) => r.rotation.mom20 > 0).sort((a, b) => b.rotation.mom20 - a.rotation.mom20)[0];
+      const sameAsMom = mRank && mRank.code === pick.code;
+      reason = `综合分最高（动量20日 ${r2(pick.rotation.mom20, 2)}% · 综合分 ${pick.combined}）` +
+        (sameAsMom ? '' : `；纯动量第一为 ${mRank.name}（${r2(mRank.rotation.mom20, 2)}%）`);
+    }
 
     let targetPct = 0;
     if (pick) {

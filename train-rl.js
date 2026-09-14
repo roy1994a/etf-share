@@ -31,6 +31,7 @@ const market = require('./lib/market');
 const { computeAll } = require('./lib/indicators');
 const { ALL_EXPERTS, EXPERT_LABEL, extractVotes } = require('./lib/signals');
 const rl = require('./lib/rl');
+const Portfolio = require('./lib/portfolio-sim.js');
 
 const ROOT = __dirname;
 
@@ -44,7 +45,7 @@ const ROOT = __dirname;
 
 const {
   UNIVERSE_V1, UNIVERSE_V2, EXPERTS_V1, BARS_V1, BARS_V2,
-  fetchDataset, buildEvents,
+  fetchDataset, buildEvents, auditKlines,
 } = require('./lib/dataset.js');
 
 const DEFAULT_UNIVERSE = UNIVERSE_V2;
@@ -55,6 +56,14 @@ function parseArgs(argv) {
   const a = {
     bars: BARS_V2, split: 0.6, codes: null, index: '1.000300',
     tune: true, walkforward: true, folds: 4, yahooRange: '3y',
+    portfolio: true, execLag: 1, topK: 3,
+    rejected: [
+      { name: '融资融券强度（真实数据，东财 RPTA_WEB_RZRQ_GGMX）', evidence: 'IC 预检 12 只标的：d1 −0.021(t=−1.44)、d5 −0.029(t=−1.34)、d22 +0.009(t=0.37)，均不显著' },
+      { name: '涨跌停板方向特征', evidence: '全样本 29,609 个交易日×标的，触及率仅 0.76%（ETF 0.45%），无方差即无信息' },
+      { name: 'GNN / Transformer / HRL / 因果推断', evidence: '源自 sector_rotation_system 的实测结果：−4.10%、Sharpe 0.043、回撤 −47.9%；2037 维状态空间 vs 约 3,727 步样本' },
+      { name: '概率最低分位反转（深度看跌反而看涨）', evidence: '验证集 Q1=51.1%（最弱）vs 测试集 Q1=57.9%（最强），两期不一致，未复现' },
+      { name: 'regime 门禁作为通用规则', evidence: '同一门禁用在动量基准上：验证集 bear +5.3% vs 测试集 bear −1.4%，两期符号相反' },
+    ],
   };
   for (let i = 2; i < argv.length; i++) {
     const k = argv[i];
@@ -66,6 +75,9 @@ function parseArgs(argv) {
     else if (k === '--no-walkforward') a.walkforward = false;
     else if (k === '--folds') a.folds = parseInt(argv[++i], 10) || 4;
     else if (k === '--yahoo-range') a.yahooRange = argv[++i];
+    else if (k === '--no-portfolio') a.portfolio = false;
+    else if (k === '--exec-lag') a.execLag = parseInt(argv[++i], 10);
+    else if (k === '--topk') a.topK = parseInt(argv[++i], 10) || 3;
   }
   return a;
 }
@@ -242,7 +254,8 @@ function summarizeTrades(trades, universeRows) {
  * 每个交易日把全部标的按可信概率排名，只做最强的 K 个。
  * 思路：单标的的绝对概率噪音大，但**相对排名**往往更稳定 —— 这是量化里最常用的提胜率手法。
  */
-function evalTopK(rows, horizon, topK) {
+function evalTopKBy(rows, horizon, topK, key) {
+  key = key || 'pCal';
   const universe = rows.filter((r) => r.horizon === horizon);
   const byDate = new Map();
   for (const r of universe) {
@@ -251,10 +264,57 @@ function evalTopK(rows, horizon, topK) {
   }
   const trades = [];
   for (const list of byDate.values()) {
-    list.sort((a, b) => b.pCal - a.pCal);
+    list.sort((a, b) => b[key] - a[key]);
     for (let i = 0; i < Math.min(topK, list.length); i++) trades.push(list[i]);
   }
-  return Object.assign({ strategy: '截面TopK', topK }, summarizeTrades(trades, universe));
+  return Object.assign({ strategy: '截面TopK', topK, rankKey: key }, summarizeTrades(trades, universe));
+}
+function evalTopK(rows, horizon, topK) { return evalTopKBy(rows, horizon, topK, 'pCal'); }
+
+/**
+ * 纯动量基准：与模型同口径（同 TopK、同含费），只是把排名换成 20 日动量。
+ * 这是 P1 的核心 —— 任何模型都必须先跑赢它，才值得上线。
+ */
+function momentumRows(events, klinesByCode) {
+  const prep = Portfolio.prepareScores(events, null, klinesByCode);
+  return prep.map((r) => Object.assign({}, r, { pCal: r._zm }));
+}
+
+/** 组合排名行：rank = w×动量z + (1−w)×模型z，写进 pCal 供 evalTopKBy 复用 */
+function combinedRows(events, state, klinesByCode, w, mode) {
+  const prep = Portfolio.prepareScores(events, state, klinesByCode);
+  return Portfolio.applyRank(prep, mode || 'combined', w).map((r) => Object.assign({}, r, { pCal: r.rank }));
+}
+
+/**
+ * 分市场状态的准确率（检验 regime 门禁是否可泛化）。
+ * 对"模型"与"纯动量"分别算，看两期是否一致 —— 只有一致才算规律。
+ */
+function regimeBreakdown(events, state, klinesByCode) {
+  const prep = Portfolio.prepareScores(events, state, klinesByCode);
+  const out = {};
+  for (const h of ['w1']) {
+    const sub = prep.filter((r) => r.horizon === h);
+    const by = {};
+    for (const r of sub) {
+      by[r.regime] = by[r.regime] || { model: { n: 0, hit: 0 }, mom: { n: 0, hit: 0 }, base: { n: 0, up: 0 } };
+      const b = by[r.regime];
+      b.base.n++; b.base.up += r.y;
+      if (r._p != null) { b.model.n++; b.model.hit += ((r._p >= 0.5 ? 1 : 0) === r.y) ? 1 : 0; }
+      if (r._zm != null) { b.mom.n++; b.mom.hit += ((r._zm >= 0 ? 1 : 0) === r.y) ? 1 : 0; }
+    }
+    out[h] = {};
+    for (const rg of Object.keys(by)) {
+      const b = by[rg];
+      out[h][rg] = {
+        n: b.base.n,
+        baseRate: +(b.base.up / b.base.n).toFixed(4),
+        modelHit: b.model.n ? +(b.model.hit / b.model.n).toFixed(4) : null,
+        momHit: b.mom.n ? +(b.mom.hit / b.mom.n).toFixed(4) : null,
+      };
+    }
+  }
+  return out;
 }
 
 /**
@@ -411,6 +471,9 @@ async function main() {
   const span = records.map((r) => r.klines.length);
   const avgBars = +(span.reduce((a, b) => a + b, 0) / span.length).toFixed(0);
   console.log(`[行情] 平均 ${avgBars} 根/标的（最少 ${Math.min(...span)}，最多 ${Math.max(...span)}）`);
+  const audit = auditKlines(records);
+  console.log(`[体检] 标的 ${audit.summary.instruments} 个 · 无效价格 ${audit.summary.badPrice} · 超涨跌停 ${audit.summary.overLimit} · 日期缺口 ${audit.summary.gap} · 重复日期 ${audit.summary.dup}`);
+  for (const f of audit.flags) console.log(`         ⚠ ${f.code}: 超限${f.overLimit} 缺口${f.gap} 重复${f.dup} 最大间隔${f.maxGapDays}天`);
 
   // 4) 事件流
   const events = buildEvents(records);
@@ -425,6 +488,10 @@ async function main() {
   const valEvents = events.filter((e) => e.date >= d1 && e.date < d2);
   const testEvents = events.filter((e) => e.date >= d2);
   console.log(`[切分] 训练 ${trainEvents.length}（<${d1}）　验证 ${valEvents.length}（${d1}~${d2}）　测试 ${testEvents.length}（≥${d2}）\n`);
+
+  // 5b) 标的K线索引（动量基准与组合回测共用）
+  const klinesByCode = {};
+  for (const r of records) klinesByCode[r.code] = r.klines;
 
   // 6) 基准
   const priorW = {};
@@ -514,6 +581,7 @@ async function main() {
       : { threshold: 0.55, winRate: null, avgRetPct: null, trades: 0 };
   }
   state.tradingPolicy = { thresholds: liveThreshold, fees: FEE_ROUND_TRIP_PCT, basis: '拟合集(train+val)含费期望最优，交易数≥200' };
+  // rotationWeight 在 9c) 组合回测后写入（见下）
 
   // 9b) 策略对比（4 种交易构造方式）：验证集选最优，测试集复核
   const STRATEGIES = [];
@@ -529,13 +597,40 @@ async function main() {
     STRATEGIES.push({ name: `截面TopK(K=${topK},w1)`, fn: (rows) => evalTopK(rows, 'w1', topK) });
     STRATEGIES.push({ name: `截面TopK(K=${topK},m1)`, fn: (rows) => evalTopK(rows, 'm1', topK) });
   }
+  // P1：纯动量基准（同一 TopK 口径、同一含费）。模型跑不赢它就不该上线。
+  for (const topK of [1, 3, 5, 8]) {
+    STRATEGIES.push({ name: `【基准】纯动量TopK(K=${topK},w1)`, isBaseline: true, needsMom: 'w1', fn: (rows) => evalTopKBy(rows, 'w1', topK, 'pCal') });
+    STRATEGIES.push({ name: `【基准】纯动量TopK(K=${topK},m1)`, isBaseline: true, needsMom: 'm1', fn: (rows) => evalTopKBy(rows, 'm1', topK, 'pCal') });
+  }
+  // P1：动量 + k×模型z（检验模型能否在动量之上加分）。k=0 退化为纯动量，作为对照锚点。
+  for (const k of [0, 0.3, 1.0, 3.0]) {
+    STRATEGIES.push({ name: `动量+${k}×模型z(K=3,w1)`, needsComb: k, combMode: 'plus', fn: (rows) => evalTopKBy(rows, 'w1', 3, 'pCal') });
+    STRATEGIES.push({ name: `动量+${k}×模型z(K=3,m1)`, needsComb: k, combMode: 'plus', combH: 'm1', fn: (rows) => evalTopKBy(rows, 'm1', 3, 'pCal') });
+  }
   STRATEGIES.push({ name: '多周期共振(d3+w1+m1)', fn: (rows) => evalConfluence(rows, chosenThreshold) });
   for (const topK of [3, 5]) {
     STRATEGIES.push({ name: `TopK(${topK})+阈值(w1)`, fn: (rows) => evalTopKThreshold(rows, 'w1', topK, chosenThreshold.w1) });
   }
 
-  const stratVal = STRATEGIES.map((st) => Object.assign({ name: st.name }, st.fn(valRows)));
-  const stratTest = STRATEGIES.map((st) => Object.assign({ name: st.name }, st.fn(testRows)));
+  const momValRows = momentumRows(valEvents, klinesByCode);
+  const momTestRows = momentumRows(testEvents, klinesByCode);
+  const combCache = {};
+  const combRows = (which, w, evts, mode) => {
+    const key = which + '|' + mode + '|' + w;
+    if (!combCache[key]) combCache[key] = combinedRows(evts, which === 'val' ? valState : state, klinesByCode, w, mode);
+    return combCache[key];
+  };
+  const rowsFor = (st, which) => {
+    if (st.needsComb != null) {
+      const cr = combRows(which, st.needsComb, which === 'val' ? valEvents : testEvents, st.combMode);
+      return cr.filter((r) => r.horizon === (st.combH || 'w1'));
+    }
+    if (!st.needsMom) return which === 'val' ? valRows : testRows;
+    const mr = which === 'val' ? momValRows : momTestRows;
+    return mr.filter((r) => r.horizon === st.needsMom);
+  };
+  const stratVal = STRATEGIES.map((st) => Object.assign({ name: st.name, isBaseline: !!st.isBaseline }, st.fn(rowsFor(st, 'val'))));
+  const stratTest = STRATEGIES.map((st) => Object.assign({ name: st.name, isBaseline: !!st.isBaseline }, st.fn(rowsFor(st, 'test'))));
 
   // 选策略：**先要求验证集胜率 ≥50%，再取单笔期望最高**（对齐"提高胜率"这个目标）
   // 只看期望会选出"胜率不到一半、靠少数大赢单撑起来"的策略 —— 那种策略实盘极难执行。
@@ -543,12 +638,14 @@ async function main() {
   const MIN_WINRATE_STRAT = 0.50;
   let bestStrat = null;
   for (const r of stratVal) {
+    if (r.isBaseline) continue;                       // 基准只做对照，不参与选优
     if (r.trades < MIN_TRADES_STRAT || r.avgRetPct == null) continue;
     if ((r.winRate || 0) < MIN_WINRATE_STRAT) continue;
     if (!bestStrat || r.avgRetPct > bestStrat.avgRetPct) bestStrat = r;
   }
   if (!bestStrat) {
     for (const r of stratVal) {
+      if (r.isBaseline) continue;
       if (r.trades < MIN_TRADES_STRAT || r.avgRetPct == null) continue;
       if (!bestStrat || r.avgRetPct > bestStrat.avgRetPct) bestStrat = r;
     }
@@ -567,6 +664,95 @@ async function main() {
     valWinRate: confVal.winRate, valExpectancy: confVal.avgRetPct, valTrades: confVal.trades,
     testWinRate: confTest ? confTest.winRate : null, testExpectancy: confTest ? confTest.avgRetPct : null, testTrades: confTest ? confTest.trades : null,
   } : null;
+
+  // 9c) 组合级净值回测（P0）+ 轮动权重消融（P2）
+  //
+  // 为什么必须做：逐笔口径把每个 (标的,日期,周期) 当独立一笔，没有资金约束、
+  // 没有净值曲线、没有回撤，无法回答"实盘能不能做"。这里用真实资金按日模拟。
+  //
+  // 同时修一个前视偏差：execLag=1 表示**用次日开盘成交**，而不是用当日收盘。
+  let portfolio = null;
+  if (args.portfolio) {
+    const klinesByCode = {};
+    for (const r of records) klinesByCode[r.code] = r.klines;
+
+    // 组合口径必须用"按实际成交价算收益"的事件流
+    const mkEvents = (evts, lag) => {
+      const pos = new Map(evts.map((e, i) => [i, e]));
+      return evts.map((e) => {
+        const ks = klinesByCode[e.code];
+        if (!ks) return e;
+        const eb = ks[e.i + lag];
+        if (!eb) return e;
+        const entryPrice = (eb.open != null && eb.open > 0) ? eb.open : eb.close;
+        if (!(entryPrice > 0)) return e;
+        const fwd = (e.futureClose - entryPrice) / entryPrice * 100;
+        return Object.assign({}, e, { entryDate: eb.date, entryPrice, y: e.futureClose >= entryPrice ? 1 : 0, fwdRetPct: +fwd.toFixed(4) });
+      });
+    };
+
+    const execLag = args.execLag;
+    const pVal = mkEvents(valEvents, execLag);
+    const pTest = mkEvents(testEvents, execLag);
+    const pVal0 = mkEvents(valEvents, 0);
+    const pTest0 = mkEvents(testEvents, 0);
+
+    // 一次性算好动量z与模型z，后续不同权重复用
+    const prepV = Portfolio.prepareScores(pVal, valState, klinesByCode);
+    const prepT = Portfolio.prepareScores(pTest, state, klinesByCode);
+    // close-to-close 对照（量化前视偏差）
+    const prepV0 = Portfolio.prepareScores(pVal0, valState, klinesByCode);
+    const prepT0 = Portfolio.prepareScores(pTest0, state, klinesByCode);
+
+    const W_LIST = [1.0, 0.75, 0.5, 0.25, 0.0];
+    const runOne = (prep, mode, w, lag) => {
+      const rows = Portfolio.applyRank(prep.map((r) => Object.assign({}, r)), mode, w);
+      return Portfolio.simulatePortfolio(rows, klinesByCode, {
+        horizon: 'w1', topK: args.topK, execLag: lag,
+        execField: lag === 0 ? 'close' : 'open',   // 0→当日收盘（旧口径）；≥1→次日开盘（可执行）
+        initialCapital: 500000, stopPct: 8,
+      });
+    };
+
+    // --- P2：验证集选 w*，测试集复核 ---
+    const VALP = W_LIST.map((w) => ({ w, mode: 'combined', m: runOne(prepV, 'combined', w, execLag).metrics }));
+    const TESTP = W_LIST.map((w) => ({ w, mode: 'combined', m: runOne(prepT, 'combined', w, execLag).metrics }));
+    const refMomV = runOne(prepV, 'momentum', 1, execLag).metrics;
+    const refMomT = runOne(prepT, 'momentum', 1, execLag).metrics;
+    const refModelV = runOne(prepV, 'model', 0, execLag).metrics;
+    const refModelT = runOne(prepT, 'model', 0, execLag).metrics;
+
+    // 选 w*：验证集上 Calmar 最高（要求交易数≥60），并列时取更接近纯动量者
+    let bestW = null;
+    for (const x of VALP) {
+      if (x.m.trades < 60) continue;
+      if (!bestW || (x.m.calmar || -9) > (bestW.m.calmar || -9)) bestW = x;
+    }
+    if (!bestW) bestW = VALP.find((x) => x.w === 0.5) || VALP[0];
+
+    // --- 前视偏差量化（T+1 vs close-to-close） ---
+    const lagCompare = [
+      { name: 'close-to-close', lag: 0, val: runOne(prepV0, 'combined', bestW.w, 0).metrics, test: runOne(prepT0, 'combined', bestW.w, 0).metrics },
+      { name: 'T+1 次日开盘', lag: execLag, val: runOne(prepV, 'combined', bestW.w, execLag).metrics, test: runOne(prepT, 'combined', bestW.w, execLag).metrics },
+    ];
+
+    portfolio = {
+      topK: args.topK, horizon: 'w1', execLag,
+      valSweep: VALP, testSweep: TESTP,
+      refMomentum: { val: refMomV, test: refMomT },
+      refModel: { val: refModelV, test: refModelT },
+      chosen: { w: bestW.w, valMetrics: bestW.m, testMetrics: (TESTP.find((x) => x.w === bestW.w) || {}).m || null },
+      lagCompare,
+    };
+    state.tradingPolicy.rotationWeight = {
+      w: bestW.w,
+      basis: '验证集组合口径 Calmar 最高且交易数≥60；w=动量权重',
+      valCalmar: bestW.m.calmar, testCalmar: (TESTP.find((x) => x.w === bestW.w) || {}).m ? TESTP.find((x) => x.w === bestW.w).m.calmar : null,
+      onlineCurrent: 0.5,
+    };
+    console.log(`[组合回测] 验证集选出 w* = ${bestW.w}（动量权重），测试集复核 Calmar ${(portfolio.chosen.testMetrics || {}).calmar}`);
+    console.log(`[组合回测] 前视偏差：close 口径 测试总收益 ${lagCompare[0].test.totalReturnPct}% → T+1 口径 ${lagCompare[1].test.totalReturnPct}%`);
+  }
 
   // 10) walk-forward
   let wf = [];
@@ -637,7 +823,7 @@ async function main() {
   lines.push('| --- | --- | --- | --- | --- | --- | --- | --- |');
   for (const v of stratVal) {
     const t = stratTest.find((x) => x.name === v.name) || {};
-    const star = (bestStrat && v.name === bestStrat.name) ? ' ⭐' : '';
+    const star = (bestStrat && v.name === bestStrat.name) ? ' ⭐' : (v.isBaseline ? ' ◀基准' : '');
     lines.push(`| ${v.name}${star} | ${v.trades} | ${P(v.winRate)} | ${F(v.avgRetPct)}% | ${t.trades} | **${P(t.winRate)}** | **${F(t.avgRetPct)}%** | ${F(t.sharpe)} |`);
   }
   lines.push('');
@@ -665,6 +851,94 @@ async function main() {
     const avgWf = wf.reduce((s, w) => s + w.hitRate, 0) / (wf.length || 1);
     lines.push('');
     lines.push(`**滚动验证平均方向命中率：${P(avgWf)}**（共 ${wf.length} 折）`);
+    lines.push('');
+  }
+
+  // ---- P1 决胜检验：模型 vs 动量（这是本项目最重要的一张表）----
+  {
+    const regV = regimeBreakdown(valEvents, valState, klinesByCode);
+    const regT = regimeBreakdown(testEvents, state, klinesByCode);
+    lines.push('## 二·补、决胜检验：模型 vs 朴素动量（P1）');
+    lines.push('');
+    lines.push('> **这张表决定要不要继续投入模型。** 同口径（TopK、含费、同一测试集），只换排名依据。');
+    lines.push('');
+    lines.push('| 排名依据 | 验证 交易数 | 验证 胜率 | 验证 期望 | **测试 交易数** | **测试 胜率** | **测试 期望** |');
+    lines.push('| --- | --- | --- | --- | --- | --- | --- |');
+    for (const v of stratVal) {
+      if (!v.isBaseline && !/^动量\+/.test(v.name)) continue;
+      const t = stratTest.find((x) => x.name === v.name) || {};
+      lines.push(`| ${v.name}${v.isBaseline ? ' ◀基准' : ''} | ${v.trades} | ${P(v.winRate)} | ${F(v.avgRetPct)}% | ${t.trades} | **${P(t.winRate)}** | **${F(t.avgRetPct)}%** |`);
+    }
+    for (const nm2 of ['单周期阈值(m1)', '截面TopK(K=3,m1)']) {
+      const v = stratVal.find((x) => x.name === nm2); if (!v) continue;
+      const t = stratTest.find((x) => x.name === nm2) || {};
+      lines.push(`| ${nm2}（模型） | ${v.trades} | ${P(v.winRate)} | ${F(v.avgRetPct)}% | ${t.trades} | **${P(t.winRate)}** | **${F(t.avgRetPct)}%** |`);
+    }
+    lines.push('');
+    lines.push('### 分市场状态准确率：模型 vs 动量（检验 regime 规则能否泛化）');
+    lines.push('');
+    lines.push('| 数据集 | 状态 | 样本 | 实际上涨率 | 模型命中率 | 模型超额 | 动量命中率 | 动量超额 |');
+    lines.push('| --- | --- | --- | --- | --- | --- | --- | --- |');
+    for (const [lab, reg] of [['验证集', regV], ['测试集', regT]]) {
+      for (const rg of Object.keys(reg.w1 || {})) {
+        const x = reg.w1[rg];
+        const me = x.modelHit != null ? (x.modelHit - x.baseRate) * 100 : null;
+        const mo = x.momHit != null ? (x.momHit - x.baseRate) * 100 : null;
+        lines.push(`| ${lab} | ${rg} | ${x.n} | ${P(x.baseRate)} | ${P(x.modelHit)} | ${me == null ? '--' : (me >= 0 ? '+' : '') + me.toFixed(1) + 'pt'} | ${P(x.momHit)} | ${mo == null ? '--' : (mo >= 0 ? '+' : '') + mo.toFixed(1) + 'pt'} |`);
+      }
+    }
+    lines.push('');
+    lines.push('> 只有**两期符号一致**才算规律。若模型与动量在同一状态上结论相反，说明该"规律"是模型特有的失效模式，不可泛化。');
+    lines.push('');
+  }
+
+  if (portfolio) {
+    lines.push('## 三·补、组合级净值回测（P0：资金受限、按日盯市、T+1 执行）');
+    lines.push('');
+    lines.push(`初始资金 50 万，最多持有 ${portfolio.topK} 只，等权，止损 8%，周频（w1）轮动。`);
+    lines.push('**执行口径：信号在 T 日收盘产生，T+1 开盘成交** —— 这才可执行。');
+    lines.push('');
+    lines.push('### 轮动权重消融：combined = w×动量z + (1−w)×模型z');
+    lines.push('');
+    lines.push('| w（动量权重） | 验证总收益 | 验证回撤 | 验证Calmar | 验证交易 | **测试总收益** | **测试回撤** | **测试Calmar** | 测试胜率 | 测试换手 |');
+    lines.push('| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |');
+    for (const x of portfolio.valSweep) {
+      const t = portfolio.testSweep.find((y) => y.w === x.w) || { m: {} };
+      const star = x.w === portfolio.chosen.w ? ' ⭐' : '';
+      lines.push(`| ${x.w === 1 ? '1.00（纯动量）' : x.w === 0 ? '0.00（纯模型）' : x.w}${star} | ${x.m.totalReturnPct}% | ${x.m.maxDrawdownPct}% | ${F(x.m.calmar)} | ${x.m.trades} | **${t.m.totalReturnPct}%** | **${t.m.maxDrawdownPct}%** | **${F(t.m.calmar)}** | ${P(t.m.winRateTrade)} | ${t.m.turnoverPct}% |`);
+    }
+    lines.push('');
+    const cw = portfolio.chosen;
+    lines.push(`> **验证集选出的 w\* = ${cw.w}**（动量权重；规则：验证集 Calmar 最高且交易数 ≥60）。`);
+    lines.push(`> 测试集复核：总收益 ${(cw.testMetrics || {}).totalReturnPct}%，最大回撤 ${(cw.testMetrics || {}).maxDrawdownPct}%，Calmar ${F((cw.testMetrics || {}).calmar)}。`);
+    lines.push('> 线上现值是 **w = 0.50**（`engine.js:pickRotation` 的 `combined = 动量分×0.5 + analyzeScore×0.5`）。');
+    lines.push('');
+
+    lines.push('### 前视偏差量化（close-to-close vs T+1 次日开盘）');
+    lines.push('');
+    lines.push('| 执行口径 | 验证总收益 | 验证Calmar | 测试总收益 | 测试Calmar | 测试回撤 |');
+    lines.push('| --- | --- | --- | --- | --- | --- |');
+    for (const l of portfolio.lagCompare) {
+      lines.push(`| ${l.name} | ${l.val.totalReturnPct}% | ${F(l.val.calmar)} | ${l.test.totalReturnPct}% | ${F(l.test.calmar)} | ${l.test.maxDrawdownPct}% |`);
+    }
+    const a = portfolio.lagCompare[0].test, b = portfolio.lagCompare[1].test;
+    lines.push('');
+    lines.push(`> 改成次日开盘执行后，测试集总收益从 **${a.totalReturnPct}%** 变为 **${b.totalReturnPct}%**` +
+      `（差 ${(b.totalReturnPct - a.totalReturnPct).toFixed(2)}pt），Calmar 从 ${F(a.calmar)} 变为 ${F(b.calmar)}。`);
+    lines.push('> 这个差值就是"看着能做、实际做不到"的那部分收益。');
+    lines.push('');
+
+    lines.push('### 纯动量 vs 纯模型（组合口径，测试集）');
+    lines.push('');
+    lines.push('| 口径 | 总收益 | 最大回撤 | Calmar | 夏普(日频年化) | 交易数 | 胜率 | 换手 | 平均持有天数 |');
+    lines.push('| --- | --- | --- | --- | --- | --- | --- | --- | --- |');
+    const rl2 = [['纯动量', portfolio.refMomentum], ['纯模型(21专家)', portfolio.refModel]];
+    for (const [nm2, ref] of rl2) {
+      const m = ref.test;
+      lines.push(`| ${nm2} | ${m.totalReturnPct}% | ${m.maxDrawdownPct}% | ${F(m.calmar)} | ${F(m.sharpeDaily)} | ${m.trades} | ${P(m.winRateTrade)} | ${m.turnoverPct}% | ${F(m.avgHoldDays)} |`);
+    }
+    lines.push('');
+    lines.push(`> 有效样本量：组合回测的独立样本是**交易日数**，不是交易笔数（测试集 ${portfolio.refMomentum.test.effectiveN} 个交易日）。`);
     lines.push('');
   }
 
@@ -722,6 +996,23 @@ async function main() {
     lines.push('');
   }
 
+  // ---- P3 准入闸门 ----
+  lines.push('## 七、特征准入闸门与「已评估·未采用」清单');
+  lines.push('');
+  lines.push('**准入规则（写死在流程里）**：任何新特征/新专家，必须同时满足');
+  lines.push('① 在**组合口径**（资金受限、T+1 执行、含费）下，验证集与测试集**两期都**优于纯动量基准；');
+  lines.push('② `ablation.js` 的 McNemar 配对检验 p<0.05；');
+  lines.push('否则不并入 `ALL_EXPERTS`/`PRIOR_WEIGHTS`，只登记在本清单里。');
+  lines.push('');
+  lines.push('| 候选 | 结论 | 证据 |');
+  lines.push('| --- | --- | --- |');
+  for (const r of args.rejected || []) {
+    lines.push(`| ${r.name} | ❌ 未采用 | ${r.evidence} |`);
+  }
+  lines.push('');
+  lines.push('> 这条闸门的作用：避免重演 `sector_rotation_system` 的老路 —— 加了大量特征、Sharpe 仍是 0.04。');
+  lines.push('');
+
   const report = lines.join('\n');
   console.log(report);
 
@@ -734,6 +1025,7 @@ async function main() {
     config: state.trainedFrom,
     priorTest, learnedTest, priorFit, learnedFit, naiveTest,
     grid, walkForward: wf, tradingVal, tradingTest, chosenThreshold, liveThreshold,
+    portfolio,
     strategies: { val: stratVal, test: stratTest, chosen: state.chosenStrategy, confluence: state.confluencePolicy },
     tradingPolicy: state.tradingPolicy,
     feeAssumption: FEE_ROUND_TRIP_PCT,

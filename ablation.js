@@ -130,6 +130,30 @@ function evaluate(state, testEvents, thresholds) {
   };
 }
 
+/**
+ * 纯动量基准（方向口径）：用 20 日动量的符号当预测，与模型同口径对比。
+ * 这是"模型到底有没有用"的下限 —— 任何模型跑不赢它就没有存在价值。
+ */
+function evaluateMomentumDirection(testEvents, records) {
+  const kBy = {};
+  for (const r of records) kBy[r.code] = r.klines;
+  const byHorizon = {}, perEvent = [];
+  let n = 0, hits = 0;
+  for (const ev of testEvents) {
+    const ks = kBy[ev.code];
+    if (!ks || ev.i < 20) continue;
+    const mom = (ks[ev.i].close / ks[ev.i - 20].close - 1) * 100;
+    const pred = mom >= 0 ? 1 : 0;
+    const hit = pred === ev.y;
+    n++; hits += hit ? 1 : 0;
+    byHorizon[ev.horizon] = byHorizon[ev.horizon] || { n: 0, hits: 0 };
+    byHorizon[ev.horizon].n++; byHorizon[ev.horizon].hits += hit ? 1 : 0;
+    perEvent.push({ horizon: ev.horizon, code: ev.code, date: ev.date, hit, pCal: pred, y: ev.y, fwdRetPct: ev.fwdRetPct });
+  }
+  for (const h of Object.keys(byHorizon)) byHorizon[h].hitRate = +(byHorizon[h].hits / byHorizon[h].n).toFixed(4);
+  return { n, hitRate: n ? +(hits / n).toFixed(4) : null, byHorizon, perEvent, trading: {} };
+}
+
 const FEE = { etf: 0.08, stock: 0.18 };
 function feeOf(code) { return /^(15|51|56|58)/.test(String(code)) ? FEE.etf : FEE.stock; }
 
@@ -254,15 +278,31 @@ async function main() {
     console.log(`[${c.key}] ${c.name.padEnd(10)} ${String(c.codes.length).padStart(2)} 标的 / ${c.bars} 根 / ${String(c.experts.length).padStart(2)} 专家 → 训练 ${String(train.length).padStart(6)} 条　方向命中率 ${(res.hitRate * 100).toFixed(2)}%　Brier ${res.brier}`);
   }
 
+  // 6b) 纯动量基准（方向口径）
+  const momRes = evaluateMomentumDirection(commonTest, records);
+  results.M = {
+    key: 'M', name: '纯动量（基准）', codes: UNIVERSE_V1.length, bars: BARS_V2,
+    experts: 1, trainSamples: 0, trainInstruments: UNIVERSE_V1.length,
+    n: momRes.n, hitRate: momRes.hitRate, byHorizon: momRes.byHorizon, perEvent: momRes.perEvent, trading: {},
+  };
+  console.log(`[M] ${'纯动量（基准）'.padEnd(10)}  无训练        方向命中率 ${(momRes.hitRate * 100).toFixed(2)}%`);
+
   // 7) 配对显著性检验（相对基线 A）
   console.log('\n=== McNemar 配对检验（相对 A 基线，同一测试集逐样本配对）===');
   const pairs = {};
-  for (const c of CONFIGS.slice(1)) {
+  for (const c of CONFIGS.slice(1).concat([{ key: 'M', name: '纯动量（基准）' }])) {
     const m = mcnemar(results.A.perEvent, results[c.key].perEvent);
     pairs[c.key] = m;
     const verdict = m.p < 0.01 ? '**极显著**' : m.p < 0.05 ? '**显著**' : m.p < 0.10 ? '边际显著' : '不显著（不能排除噪音）';
     console.log(`  ${c.key} ${c.name.padEnd(10)} 新增对 ${String(m.b).padStart(5)}　丢失 ${String(m.c).padStart(5)}　净增 ${String(m.delta).padStart(5)}　p = ${m.p.toExponential(3)}  → ${verdict.replace(/\*\*/g, '')}`);
   }
+
+  // 7b) 决定性对比：最好的模型配置 vs 纯动量（同一测试集逐样本配对）
+  const modelVsMom = mcnemar(results.M.perEvent, results.E.perEvent);
+  const modelVsMomD = mcnemar(results.M.perEvent, results.D.perEvent);
+  console.log('\n=== 模型 vs 纯动量（决定性对比）===');
+  console.log(`  E(v2全量) vs M(纯动量): 新增对 ${modelVsMom.b}　丢失 ${modelVsMom.c}　净增 ${modelVsMom.delta}　p = ${modelVsMom.p.toExponential(3)}`);
+  console.log(`  D(17标的+21专家) vs M: 新增对 ${modelVsMomD.b}　丢失 ${modelVsMomD.c}　净增 ${modelVsMomD.delta}　p = ${modelVsMomD.p.toExponential(3)}`);
 
   // 8) 报告
   const lines = [];
@@ -302,6 +342,8 @@ async function main() {
     const d = c.key === 'A' ? '—' : ((r.hitRate - results.A.hitRate) * 100).toFixed(2) + 'pt';
     lines.push(`| ${c.key} ${c.name} | ${r.trainSamples.toLocaleString()} | **${P(r.hitRate)}** | ${d} | ${r.brier} | ${r.calibBrier} |`);
   }
+  const m0 = results.M;
+  lines.push(`| **M 纯动量（基准）** | 0 | **${P(m0.hitRate)}** | ${((m0.hitRate - results.A.hitRate) * 100).toFixed(2)}pt | -- | -- |`);
   lines.push('');
 
   lines.push('## 二、分周期准确率');
@@ -321,11 +363,24 @@ async function main() {
   lines.push('');
   lines.push('| 配置 | 新增对 | 丢失 | 净增 | p 值 | 结论 |');
   lines.push('| --- | --- | --- | --- | --- | --- |');
-  for (const c of CONFIGS.slice(1)) {
+  for (const c of CONFIGS.slice(1).concat([{ key: 'M', name: '纯动量（基准）' }])) {
     const m = pairs[c.key];
     const verdict = m.p < 0.01 ? '**极显著**' : m.p < 0.05 ? '**显著**' : m.p < 0.10 ? '边际显著' : '不显著（不能排除噪音）';
     lines.push(`| ${c.key} ${c.name} | ${m.b} | ${m.c} | ${m.delta > 0 ? '+' : ''}${m.delta} | ${m.p.toExponential(3)} | ${verdict} |`);
   }
+  lines.push('');
+  lines.push('### 决定性对比：模型 vs 纯动量（这才是"模型有没有用"）');
+  lines.push('');
+  lines.push('| 对比 | 新增对（动量错/模型对） | 丢失（动量对/模型错） | 净增 | p 值 | 结论 |');
+  lines.push('| --- | --- | --- | --- | --- | --- |');
+  for (const [nm2, mm] of [['E(v2 全量) vs M(纯动量)', modelVsMom], ['D(17标的+21专家) vs M', modelVsMomD]]) {
+    const v = mm.p < 0.01 ? '**极显著**' : mm.p < 0.05 ? '**显著**' : mm.p < 0.10 ? '边际显著' : '不显著（不能排除噪音）';
+    lines.push(`| ${nm2} | ${mm.b} | ${mm.c} | ${mm.delta > 0 ? '+' : ''}${mm.delta} | ${mm.p.toExponential(3)} | ${v} |`);
+  }
+  lines.push('');
+  lines.push(`> 方向准确率：E v2 全量 ${P(results.E.hitRate)} vs M 纯动量 ${P(results.M.hitRate)}（差 ${((results.E.hitRate - results.M.hitRate) * 100).toFixed(2)}pt）。`);
+  lines.push('> **注意口径差异**：本节是"时序方向"任务（该标的明天下不下跌），而组合回测那节是"横截面排序"任务。');
+  lines.push('> 两者的结论可能不同 —— 报结论时必须说清是哪一个口径。');
   lines.push('');
 
   lines.push('## 四、含费实盘胜率（固定阈值口径，保证各配置可比）');
@@ -355,7 +410,9 @@ async function main() {
     hyperparams: cfg,
     configs: CONFIGS.map((c) => c.key),
     allInBaseline: results.A.allIn,
-    results: Object.fromEntries(CONFIGS.map((c) => [c.key, Object.assign({}, results[c.key], { perEvent: undefined })])),
+    modelVsMomentum: modelVsMom,
+    modelVsMomentumD: modelVsMomD,
+    results: Object.fromEntries(CONFIGS.concat([{ key: 'M' }]).map((c) => [c.key, Object.assign({}, results[c.key], { perEvent: undefined })])),
     mcnemar: pairs,
   }, null, 2), 'utf8');
   const mdPath = path.join(ROOT, 'reports', `消融实验-扩样本是否有效-${new Date().toISOString().slice(0, 10).replace(/-/g, '')}.md`);
