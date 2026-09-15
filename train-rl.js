@@ -75,6 +75,8 @@ function parseArgs(argv) {
     else if (k === '--no-walkforward') a.walkforward = false;
     else if (k === '--folds') a.folds = parseInt(argv[++i], 10) || 4;
     else if (k === '--yahoo-range') a.yahooRange = argv[++i];
+    else if (k === '--refresh-history') a.refreshHistory = true;
+    else if (k === '--allow-degraded') a.allowDegraded = true;
     else if (k === '--no-portfolio') a.portfolio = false;
     else if (k === '--exec-lag') a.execLag = parseInt(argv[++i], 10);
     else if (k === '--topk') a.topK = parseInt(argv[++i], 10) || 3;
@@ -455,9 +457,28 @@ async function main() {
   // 1~3) 一次性拉取全量数据集（指数 + Yahoo 海外序列 + 全部标的）
   const ds = await fetchDataset({
     codes, bars: args.bars, yahooRange: args.yahooRange, index: args.index,
+    refreshHistory: args.refreshHistory,
     onProgress: (d, total) => { if (d % 10 === 0) console.log(`  …已拉取 ${d}/${total}`); },
+    onHistoryError: (k, msg) => console.warn(`[海外] ${k} 拉取失败：${msg}`),
   });
   const { records, yahoo, indexKlines } = ds;
+
+  // ===== 数据完整性闸门 =====
+  // 海外序列（费半/美债/标普）支撑 21 个专家里的 4 个。若它们缺失，
+  // 训练会**静默**产出一个"看起来正常但实际残废"的模型 —— 这已真实发生过一次
+  // （Yahoo 限流返回空序列 → 滚动验证从 52.0% 掉到 50.6%、w1 周期 0 笔交易）。
+  // 所以这里硬性拦住：不完整就中止，除非显式 --allow-degraded。
+  if (ds.degraded && !args.allowDegraded) {
+    console.error('');
+    console.error('❌ 中止训练：海外序列不完整（费半/美债/标普），21 个专家里有 4 个会全程弃权。');
+    console.error('   已有缓存：' + (require('./lib/dataset.js').loadHistoryCache() ? '有' : '无'));
+    console.error('   处理办法：');
+    console.error('     1) 等 Yahoo 限流恢复后执行  node train-rl.js --refresh-history');
+    console.error('     2) 或确认缓存文件存在： data/us-history.json 或 model/us-history.json');
+    console.error('     3) 确实要用残缺数据训练，加 --allow-degraded（会标记 degraded:true）');
+    process.exit(2);
+  }
+  if (ds.degraded) console.warn('⚠️ 警告：海外序列不完整，本次模型将标记 degraded:true（不应用于实盘判断）');
   if (indexKlines.length) {
     console.log(`[指数] 沪深300 ${indexKlines.length} 根（${indexKlines[0].date} ~ ${indexKlines[indexKlines.length - 1].date}）来源 ${ds.indexSource}`);
   } else {
@@ -466,6 +487,7 @@ async function main() {
   for (const k of Object.keys(yahoo)) {
     console.log(`[海外] ${k} ${yahoo[k].length} 根（${yahoo[k][0].date} ~ ${yahoo[k][yahoo[k].length - 1].date}）`);
   }
+  console.log(`[海外] 来源：${ds.historySource || '无'}${ds.degraded ? '  ⚠️ 不完整' : ''}`);
   console.log(`[行情] 成功 ${records.length} 个标的，失败/跳过 ${ds.failed} 个`);
   if (!records.length) { console.error('没有可用数据，退出。'); process.exit(1); }
   const span = records.map((r) => r.klines.length);
@@ -549,7 +571,10 @@ async function main() {
     trainCut: d1, testCut: d2, trainSamples: trainEvents.length,
     valSamples: valEvents.length, testSamples: testEvents.length,
     eta: best.eta, gamma: best.gamma, lossType: best.lossType,
-    experts: ALL_EXPERTS.length, at: new Date().toISOString(),
+    experts: ALL_EXPERTS.length,
+    historySource: ds.historySource || null,
+    degraded: !!ds.degraded,
+    at: new Date().toISOString(),
   };
   const learnedFit = evalLearned(state, fitEvents);
   const learnedTest = evalLearned(state, testEvents);

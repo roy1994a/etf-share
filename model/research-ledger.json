@@ -1713,7 +1713,7 @@
         }
       },
       "status": "resolved",
-      "resolvedAt": "2026-09-15T07:30:57.490Z",
+      "resolvedAt": "2026-09-15T09:04:25.073Z",
       "lessons": "该结论**以 C+D+E 级依据为主**（周末只能靠新闻），是本次台账中证据等级最弱的一类。明日收盘后必须回看，验证\"高开冲高回落\"是否成立。",
       "confidenceCeiling": 0.656,
       "ceilingReason": "平均依据可信度 63%（A3 B1 C2 D1 E1）",
@@ -1868,7 +1868,7 @@
         }
       },
       "status": "resolved",
-      "resolvedAt": "2026-09-15T07:30:57.491Z",
+      "resolvedAt": "2026-09-15T09:04:25.075Z",
       "lessons": "本条再次出现\"人工判断与系统模型方向相反\"（模型偏多、人工偏空）。这是第二个对照样本，与金正大一起构成\"人工覆写是否有效\"的检验集。",
       "confidenceCeiling": 0.645,
       "ceilingReason": "平均依据可信度 61%（A3 B0 C2 D1 E1）",
@@ -2002,7 +2002,7 @@
         }
       },
       "status": "resolved",
-      "resolvedAt": "2026-09-15T07:30:57.491Z",
+      "resolvedAt": "2026-09-15T09:04:25.075Z",
       "lessons": "",
       "confidenceCeiling": 0.608,
       "ceilingReason": "平均依据可信度 55%（A1 B1 C0 D1 E1）",
@@ -10534,5 +10534,5 @@
   ],
   "_source": "/Users/liuyang/Desktop/PythonProject/半导体设备ETF交易模拟系统/data/research-ledger.json",
   "sanitized": true,
-  "sanitizedAt": "2026-09-15T07:30:57.546Z"
+  "sanitizedAt": "2026-09-15T09:04:25.129Z"
 }

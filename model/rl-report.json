@@ -1,5 +1,5 @@
 {
-  "trainedAt": "2026-09-15T07:29:32.318Z",
+  "trainedAt": "2026-09-15T09:03:30.902Z",
   "config": {
     "version": 2,
     "universeSize": 47,
@@ -54,121 +54,127 @@
     ],
     "bars": 640,
     "avgBars": 632,
-    "yahoo": [],
+    "yahoo": [
+      "sox",
+      "us10y",
+      "spx"
+    ],
     "yahooRange": "3y",
     "trainCut": "2025-09-23",
     "testCut": "2026-03-26",
-    "trainSamples": 63332,
+    "trainSamples": 63304,
     "valSamples": 21832,
     "testSamples": 20915,
     "eta": 0.25,
     "gamma": 1,
     "lossType": "brier",
     "experts": 21,
-    "at": "2026-09-15T07:29:26.516Z"
+    "historySource": "cache@2026-09-14T08:15:18.756Z",
+    "degraded": false,
+    "at": "2026-09-15T09:03:24.899Z"
   },
   "priorTest": {
     "d1": {
       "n": 5546,
-      "hitRate": 0.4845,
-      "brier": 0.2612
+      "hitRate": 0.4915,
+      "brier": 0.2683
     },
     "d3": {
       "n": 5452,
-      "hitRate": 0.5154,
-      "brier": 0.2773
+      "hitRate": 0.5174,
+      "brier": 0.2821
     },
     "w1": {
       "n": 5358,
-      "hitRate": 0.5045,
-      "brier": 0.2902
+      "hitRate": 0.5049,
+      "brier": 0.2969
     },
     "m1": {
       "n": 4559,
-      "hitRate": 0.4714,
-      "brier": 0.3057
+      "hitRate": 0.469,
+      "brier": 0.3131
     }
   },
   "learnedTest": {
     "d1": {
       "n": 5546,
-      "hitRate": 0.5139,
-      "brier": 0.2685,
-      "calibHitRate": 0.5139,
-      "calibBrier": 0.2984
+      "hitRate": 0.5197,
+      "brier": 0.2686,
+      "calibHitRate": 0.5197,
+      "calibBrier": 0.2923
     },
     "d3": {
       "n": 5452,
-      "hitRate": 0.5398,
-      "brier": 0.2488,
-      "calibHitRate": 0.5398,
-      "calibBrier": 0.249
+      "hitRate": 0.5281,
+      "brier": 0.2484,
+      "calibHitRate": 0.5281,
+      "calibBrier": 0.2487
     },
     "w1": {
       "n": 5358,
-      "hitRate": 0.5306,
-      "brier": 0.2489,
-      "calibHitRate": 0.5306,
-      "calibBrier": 0.249
+      "hitRate": 0.5093,
+      "brier": 0.25,
+      "calibHitRate": 0.5093,
+      "calibBrier": 0.2498
     },
     "m1": {
       "n": 4559,
-      "hitRate": 0.5492,
-      "brier": 0.2486,
-      "calibHitRate": 0.5492,
-      "calibBrier": 0.2535
+      "hitRate": 0.5286,
+      "brier": 0.2641,
+      "calibHitRate": 0.5286,
+      "calibBrier": 0.2717
     }
   },
   "priorFit": {
     "d1": {
-      "n": 21291,
-      "hitRate": 0.4899,
-      "brier": 0.2602
+      "n": 21284,
+      "hitRate": 0.5001,
+      "brier": 0.2629
     },
     "d3": {
-      "n": 21291,
-      "hitRate": 0.5086,
-      "brier": 0.2831
+      "n": 21284,
+      "hitRate": 0.5078,
+      "brier": 0.2862
     },
     "w1": {
-      "n": 21291,
-      "hitRate": 0.5123,
-      "brier": 0.2871
+      "n": 21284,
+      "hitRate": 0.5125,
+      "brier": 0.2898
     },
     "m1": {
-      "n": 21291,
-      "hitRate": 0.5075,
-      "brier": 0.2869
+      "n": 21284,
+      "hitRate": 0.5107,
+      "brier": 0.2874
     }
   },
   "learnedFit": {
     "d1": {
-      "n": 21291,
-      "hitRate": 0.5021,
-      "brier": 0.267,
-      "calibHitRate": 0.5021,
-      "calibBrier": 0.2928
+      "n": 21284,
+      "hitRate": 0.506,
+      "brier": 0.2653,
+      "calibHitRate": 0.506,
+      "calibBrier": 0.2846
     },
     "d3": {
-      "n": 21291,
-      "hitRate": 0.5233,
-      "brier": 0.2503,
-      "calibHitRate": 0.5233,
-      "calibBrier": 0.2508
+      "n": 21284,
+      "hitRate": 0.5296,
+      "brier": 0.2505,
+      "calibHitRate": 0.5296,
+      "calibBrier": 0.251
     },
     "w1": {
-      "n": 21291,
-      "hitRate": 0.5302,
+      "n": 21284,
+      "hitRate": 0.5349,
       "brier": 0.2508,
-      "calibHitRate": 0.5302,
-      "calibBrier": 0.2516
+      "calibHitRate": 0.5349,
+      "calibBrier": 0.2506
     },
     "m1": {
-      "n": 21291,
-      "hitRate": 0.5733,
+      "n": 21284,
+      "hitRate": 0.5789,
       "brier": 0.2508,
-      "calibHitRate": 0.5733,
-      "calibBrier": 0.2551
+      "calibHitRate": 0.5789,
+      "calibBrier": 0.2547
     }
   },
   "naiveTest": {
@@ -202,217 +208,217 @@
       "eta": 0.05,
       "gamma": 1,
       "lossType": "brier",
-      "score": 0.6323,
-      "hitRate": 0.4743,
-      "brier": 0.2791,
-      "trades": 6697
+      "score": 0.2492,
+      "hitRate": 0.482,
+      "brier": 0.2804,
+      "trades": 10020
     },
     {
       "eta": 0.05,
       "gamma": 1,
       "lossType": "directional",
-      "score": 0.2887,
-      "hitRate": 0.4598,
-      "brier": 0.2615,
-      "trades": 6179
+      "score": 0.2241,
+      "hitRate": 0.483,
+      "brier": 0.3246,
+      "trades": 9856
     },
     {
       "eta": 0.05,
       "gamma": 1,
       "lossType": "mixed",
-      "score": 0.6042,
-      "hitRate": 0.4678,
-      "brier": 0.29,
-      "trades": 4936
+      "score": 0.2601,
+      "hitRate": 0.4879,
+      "brier": 0.2934,
+      "trades": 8346
     },
     {
       "eta": 0.05,
       "gamma": 0.997,
       "lossType": "brier",
-      "score": 0.6323,
-      "hitRate": 0.4743,
-      "brier": 0.2791,
-      "trades": 6697
+      "score": 0.2492,
+      "hitRate": 0.482,
+      "brier": 0.2804,
+      "trades": 10020
     },
     {
       "eta": 0.05,
       "gamma": 0.997,
       "lossType": "directional",
-      "score": 0.2887,
-      "hitRate": 0.4598,
-      "brier": 0.2615,
-      "trades": 6179
+      "score": 0.2241,
+      "hitRate": 0.483,
+      "brier": 0.3246,
+      "trades": 9856
     },
     {
       "eta": 0.05,
       "gamma": 0.997,
       "lossType": "mixed",
-      "score": 0.6042,
-      "hitRate": 0.4678,
-      "brier": 0.29,
-      "trades": 4936
+      "score": 0.2601,
+      "hitRate": 0.4879,
+      "brier": 0.2934,
+      "trades": 8346
     },
     {
       "eta": 0.12,
       "gamma": 1,
       "lossType": "brier",
-      "score": 0.6994,
-      "hitRate": 0.4765,
-      "brier": 0.262,
-      "trades": 4463
+      "score": 0.2877,
+      "hitRate": 0.4866,
+      "brier": 0.2711,
+      "trades": 10407
     },
     {
       "eta": 0.12,
       "gamma": 1,
       "lossType": "directional",
-      "score": 0.2426,
-      "hitRate": 0.4636,
-      "brier": 0.2697,
-      "trades": 7569
+      "score": 0.207,
+      "hitRate": 0.4789,
+      "brier": 0.3246,
+      "trades": 10416
     },
     {
       "eta": 0.12,
       "gamma": 1,
       "lossType": "mixed",
-      "score": 0.1592,
-      "hitRate": 0.4688,
-      "brier": 0.2865,
-      "trades": 7379
+      "score": 0.2937,
+      "hitRate": 0.487,
+      "brier": 0.3081,
+      "trades": 9539
     },
     {
       "eta": 0.12,
       "gamma": 0.997,
       "lossType": "brier",
-      "score": 0.6994,
-      "hitRate": 0.4765,
-      "brier": 0.262,
-      "trades": 4463
+      "score": 0.2877,
+      "hitRate": 0.4866,
+      "brier": 0.2711,
+      "trades": 10407
     },
     {
       "eta": 0.12,
       "gamma": 0.997,
       "lossType": "directional",
-      "score": 0.2426,
-      "hitRate": 0.4636,
-      "brier": 0.2697,
-      "trades": 7569
+      "score": 0.207,
+      "hitRate": 0.4789,
+      "brier": 0.3246,
+      "trades": 10416
     },
     {
       "eta": 0.12,
       "gamma": 0.997,
       "lossType": "mixed",
-      "score": 0.1592,
-      "hitRate": 0.4688,
-      "brier": 0.2865,
-      "trades": 7379
+      "score": 0.2937,
+      "hitRate": 0.487,
+      "brier": 0.3081,
+      "trades": 9539
     },
     {
       "eta": 0.25,
       "gamma": 1,
       "lossType": "brier",
-      "score": 0.9696,
-      "hitRate": 0.48,
-      "brier": 0.2649,
-      "trades": 2943
+      "score": 0.4262,
+      "hitRate": 0.4913,
+      "brier": 0.2904,
+      "trades": 9837
     },
     {
       "eta": 0.25,
       "gamma": 1,
       "lossType": "directional",
-      "score": 0.4902,
-      "hitRate": 0.4675,
-      "brier": 0.2759,
-      "trades": 4718
+      "score": 0.2023,
+      "hitRate": 0.481,
+      "brier": 0.3185,
+      "trades": 10214
     },
     {
       "eta": 0.25,
       "gamma": 1,
       "lossType": "mixed",
-      "score": 0.5738,
-      "hitRate": 0.475,
-      "brier": 0.2677,
-      "trades": 3741
+      "score": 0.3719,
+      "hitRate": 0.4868,
+      "brier": 0.2967,
+      "trades": 8729
     },
     {
       "eta": 0.25,
       "gamma": 0.997,
       "lossType": "brier",
-      "score": 0.9696,
-      "hitRate": 0.48,
-      "brier": 0.2649,
-      "trades": 2943
+      "score": 0.4262,
+      "hitRate": 0.4913,
+      "brier": 0.2904,
+      "trades": 9837
     },
     {
       "eta": 0.25,
       "gamma": 0.997,
       "lossType": "directional",
-      "score": 0.4902,
-      "hitRate": 0.4675,
-      "brier": 0.2759,
-      "trades": 4718
+      "score": 0.2023,
+      "hitRate": 0.481,
+      "brier": 0.3185,
+      "trades": 10214
     },
     {
       "eta": 0.25,
       "gamma": 0.997,
       "lossType": "mixed",
-      "score": 0.5738,
-      "hitRate": 0.475,
-      "brier": 0.2677,
-      "trades": 3741
+      "score": 0.3719,
+      "hitRate": 0.4868,
+      "brier": 0.2967,
+      "trades": 8729
     },
     {
       "eta": 0.45,
       "gamma": 1,
       "lossType": "brier",
-      "score": 0.6542,
-      "hitRate": 0.4758,
-      "brier": 0.275,
-      "trades": 4717
+      "score": 0.4018,
+      "hitRate": 0.4855,
+      "brier": 0.2966,
+      "trades": 8765
     },
     {
       "eta": 0.45,
       "gamma": 1,
       "lossType": "directional",
-      "score": 0.2596,
-      "hitRate": 0.4679,
-      "brier": 0.2724,
-      "trades": 5998
+      "score": 0.21,
+      "hitRate": 0.4791,
+      "brier": 0.296,
+      "trades": 9735
     },
     {
       "eta": 0.45,
       "gamma": 1,
       "lossType": "mixed",
-      "score": 0.5058,
-      "hitRate": 0.4689,
-      "brier": 0.2785,
-      "trades": 4388
+      "score": 0.3906,
+      "hitRate": 0.4836,
+      "brier": 0.298,
+      "trades": 8507
     },
     {
       "eta": 0.45,
       "gamma": 0.997,
       "lossType": "brier",
-      "score": 0.6542,
-      "hitRate": 0.4758,
-      "brier": 0.275,
-      "trades": 4717
+      "score": 0.4018,
+      "hitRate": 0.4855,
+      "brier": 0.2966,
+      "trades": 8765
     },
     {
       "eta": 0.45,
       "gamma": 0.997,
       "lossType": "directional",
-      "score": 0.2596,
-      "hitRate": 0.4679,
-      "brier": 0.2724,
-      "trades": 5998
+      "score": 0.21,
+      "hitRate": 0.4791,
+      "brier": 0.296,
+      "trades": 9735
     },
     {
       "eta": 0.45,
       "gamma": 0.997,
       "lossType": "mixed",
-      "score": 0.5058,
-      "hitRate": 0.4689,
-      "brier": 0.2785,
-      "trades": 4388
+      "score": 0.3906,
+      "hitRate": 0.4836,
+      "brier": 0.298,
+      "trades": 8507
     }
   ],
   "walkForward": [
@@ -421,38 +427,38 @@
       "trainEnd": "2024-10-09",
       "testStart": "2024-10-10",
       "testEnd": "2025-04-02",
-      "trainN": 19972,
+      "trainN": 19944,
       "testN": 21712,
-      "hitRate": 0.4748,
-      "brier": 0.2989,
+      "hitRate": 0.4785,
+      "brier": 0.2949,
       "byHorizon": {
         "d1": {
           "n": 5428,
-          "hitRate": 0.4928,
-          "brier": 0.3021,
-          "calibHitRate": 0.4928,
-          "calibBrier": 0.3218
+          "hitRate": 0.5134,
+          "brier": 0.3008,
+          "calibHitRate": 0.5134,
+          "calibBrier": 0.3205
         },
         "d3": {
           "n": 5428,
-          "hitRate": 0.4961,
-          "brier": 0.2655,
-          "calibHitRate": 0.4961,
-          "calibBrier": 0.2669
+          "hitRate": 0.4792,
+          "brier": 0.2666,
+          "calibHitRate": 0.4792,
+          "calibBrier": 0.2681
         },
         "w1": {
           "n": 5428,
-          "hitRate": 0.4679,
-          "brier": 0.2746,
-          "calibHitRate": 0.4679,
-          "calibBrier": 0.2807
+          "hitRate": 0.4819,
+          "brier": 0.2694,
+          "calibHitRate": 0.4819,
+          "calibBrier": 0.277
         },
         "m1": {
           "n": 5428,
-          "hitRate": 0.4423,
-          "brier": 0.3535,
-          "calibHitRate": 0.4423,
-          "calibBrier": 0.3895
+          "hitRate": 0.4396,
+          "brier": 0.3427,
+          "calibHitRate": 0.4396,
+          "calibBrier": 0.3893
         }
       }
     },
@@ -461,38 +467,38 @@
       "trainEnd": "2025-04-02",
       "testStart": "2025-04-03",
       "testEnd": "2025-09-22",
-      "trainN": 41684,
+      "trainN": 41656,
       "testN": 21648,
-      "hitRate": 0.5347,
-      "brier": 0.2641,
+      "hitRate": 0.5711,
+      "brier": 0.2635,
       "byHorizon": {
         "d1": {
           "n": 5412,
-          "hitRate": 0.5087,
-          "brier": 0.2512,
-          "calibHitRate": 0.5087,
-          "calibBrier": 0.2519
+          "hitRate": 0.5394,
+          "brier": 0.2497,
+          "calibHitRate": 0.5394,
+          "calibBrier": 0.2536
         },
         "d3": {
           "n": 5412,
-          "hitRate": 0.5316,
-          "brier": 0.2793,
-          "calibHitRate": 0.5316,
-          "calibBrier": 0.303
+          "hitRate": 0.5338,
+          "brier": 0.2792,
+          "calibHitRate": 0.5338,
+          "calibBrier": 0.3246
         },
         "w1": {
           "n": 5412,
-          "hitRate": 0.4994,
-          "brier": 0.2977,
-          "calibHitRate": 0.4994,
-          "calibBrier": 0.3472
+          "hitRate": 0.5423,
+          "brier": 0.3059,
+          "calibHitRate": 0.5423,
+          "calibBrier": 0.3383
         },
         "m1": {
           "n": 5412,
-          "hitRate": 0.5989,
-          "brier": 0.228,
-          "calibHitRate": 0.5989,
-          "calibBrier": 0.2299
+          "hitRate": 0.6689,
+          "brier": 0.2192,
+          "calibHitRate": 0.6689,
+          "calibBrier": 0.2196
         }
       }
     },
@@ -501,38 +507,38 @@
       "trainEnd": "2025-09-22",
       "testStart": "2025-09-23",
       "testEnd": "2026-03-25",
-      "trainN": 63332,
+      "trainN": 63304,
       "testN": 21832,
-      "hitRate": 0.48,
-      "brier": 0.2649,
+      "hitRate": 0.4913,
+      "brier": 0.2904,
       "byHorizon": {
         "d1": {
           "n": 5458,
-          "hitRate": 0.4853,
-          "brier": 0.2516,
-          "calibHitRate": 0.4853,
-          "calibBrier": 0.2531
+          "hitRate": 0.5152,
+          "brier": 0.2783,
+          "calibHitRate": 0.5152,
+          "calibBrier": 0.2918
         },
         "d3": {
           "n": 5458,
-          "hitRate": 0.4798,
-          "brier": 0.2678,
-          "calibHitRate": 0.4798,
-          "calibBrier": 0.2706
+          "hitRate": 0.4817,
+          "brier": 0.275,
+          "calibHitRate": 0.4817,
+          "calibBrier": 0.2848
         },
         "w1": {
           "n": 5458,
-          "hitRate": 0.4921,
-          "brier": 0.2736,
-          "calibHitRate": 0.4921,
-          "calibBrier": 0.2767
+          "hitRate": 0.5246,
+          "brier": 0.2772,
+          "calibHitRate": 0.5246,
+          "calibBrier": 0.2805
         },
         "m1": {
           "n": 5458,
-          "hitRate": 0.4628,
-          "brier": 0.2666,
-          "calibHitRate": 0.4628,
-          "calibBrier": 0.2646
+          "hitRate": 0.4438,
+          "brier": 0.3313,
+          "calibHitRate": 0.4438,
+          "calibBrier": 0.322
         }
       }
     },
@@ -541,38 +547,38 @@
       "trainEnd": "2026-03-25",
       "testStart": "2026-03-26",
       "testEnd": "2026-09-14",
-      "trainN": 85164,
+      "trainN": 85136,
       "testN": 20915,
-      "hitRate": 0.5334,
-      "brier": 0.2537,
+      "hitRate": 0.5214,
+      "brier": 0.2578,
       "byHorizon": {
         "d1": {
           "n": 5546,
-          "hitRate": 0.5139,
-          "brier": 0.2685,
-          "calibHitRate": 0.5139,
-          "calibBrier": 0.2984
+          "hitRate": 0.5197,
+          "brier": 0.2686,
+          "calibHitRate": 0.5197,
+          "calibBrier": 0.2923
         },
         "d3": {
           "n": 5452,
-          "hitRate": 0.5398,
-          "brier": 0.2488,
-          "calibHitRate": 0.5398,
-          "calibBrier": 0.249
+          "hitRate": 0.5281,
+          "brier": 0.2484,
+          "calibHitRate": 0.5281,
+          "calibBrier": 0.2487
         },
         "w1": {
           "n": 5358,
-          "hitRate": 0.5306,
-          "brier": 0.2489,
-          "calibHitRate": 0.5306,
-          "calibBrier": 0.249
+          "hitRate": 0.5093,
+          "brier": 0.25,
+          "calibHitRate": 0.5093,
+          "calibBrier": 0.2498
         },
         "m1": {
           "n": 4559,
-          "hitRate": 0.5492,
-          "brier": 0.2486,
-          "calibHitRate": 0.5492,
-          "calibBrier": 0.2535
+          "hitRate": 0.5286,
+          "brier": 0.2641,
+          "calibHitRate": 0.5286,
+          "calibBrier": 0.2717
         }
       }
     }
@@ -585,13 +591,13 @@
         "baselineAvgPct": 0.0375,
         "baselineWinRate": 0.4826,
         "samples": 5458,
-        "trades": 3031,
-        "coverage": 0.5553,
-        "winRate": 0.4599,
-        "avgRetPct": -0.0602,
-        "sdPct": 2.5706,
-        "sharpe": -0.0234,
-        "totalRetPct": -182.57
+        "trades": 3098,
+        "coverage": 0.5676,
+        "winRate": 0.4793,
+        "avgRetPct": -0.0332,
+        "sdPct": 2.2948,
+        "sharpe": -0.0145,
+        "totalRetPct": -102.77
       },
       {
         "horizon": "d1",
@@ -599,13 +605,13 @@
         "baselineAvgPct": 0.0375,
         "baselineWinRate": 0.4826,
         "samples": 5458,
-        "trades": 2155,
-        "coverage": 0.3948,
-        "winRate": 0.4729,
-        "avgRetPct": -0.0011,
-        "sdPct": 2.724,
-        "sharpe": -0.0004,
-        "totalRetPct": -2.31
+        "trades": 2912,
+        "coverage": 0.5335,
+        "winRate": 0.4815,
+        "avgRetPct": -0.0286,
+        "sdPct": 2.2768,
+        "sharpe": -0.0126,
+        "totalRetPct": -83.25
       },
       {
         "horizon": "d1",
@@ -613,13 +619,13 @@
         "baselineAvgPct": 0.0375,
         "baselineWinRate": 0.4826,
         "samples": 5458,
-        "trades": 1305,
-        "coverage": 0.2391,
-        "winRate": 0.4835,
-        "avgRetPct": 0.0299,
-        "sdPct": 2.8982,
-        "sharpe": 0.0103,
-        "totalRetPct": 38.99
+        "trades": 2652,
+        "coverage": 0.4859,
+        "winRate": 0.4891,
+        "avgRetPct": -0.0016,
+        "sdPct": 2.2691,
+        "sharpe": -0.0007,
+        "totalRetPct": -4.28
       },
       {
         "horizon": "d1",
@@ -627,13 +633,13 @@
         "baselineAvgPct": 0.0375,
         "baselineWinRate": 0.4826,
         "samples": 5458,
-        "trades": 434,
-        "coverage": 0.0795,
-        "winRate": 0.5115,
-        "avgRetPct": 0.1786,
-        "sdPct": 3.1198,
-        "sharpe": 0.0572,
-        "totalRetPct": 77.51
+        "trades": 2394,
+        "coverage": 0.4386,
+        "winRate": 0.4996,
+        "avgRetPct": 0.0198,
+        "sdPct": 2.2545,
+        "sharpe": 0.0088,
+        "totalRetPct": 47.46
       },
       {
         "horizon": "d1",
@@ -641,13 +647,13 @@
         "baselineAvgPct": 0.0375,
         "baselineWinRate": 0.4826,
         "samples": 5458,
-        "trades": 40,
-        "coverage": 0.0073,
-        "winRate": 0.55,
-        "avgRetPct": 0.7837,
-        "sdPct": 2.8399,
-        "sharpe": 0.276,
-        "totalRetPct": 31.35
+        "trades": 2219,
+        "coverage": 0.4066,
+        "winRate": 0.5052,
+        "avgRetPct": 0.0456,
+        "sdPct": 2.2465,
+        "sharpe": 0.0203,
+        "totalRetPct": 101.12
       },
       {
         "horizon": "d1",
@@ -655,13 +661,13 @@
         "baselineAvgPct": 0.0375,
         "baselineWinRate": 0.4826,
         "samples": 5458,
-        "trades": 0,
-        "coverage": 0,
-        "winRate": null,
-        "avgRetPct": null,
-        "sdPct": null,
-        "sharpe": null,
-        "totalRetPct": 0
+        "trades": 2056,
+        "coverage": 0.3767,
+        "winRate": 0.5195,
+        "avgRetPct": 0.1191,
+        "sdPct": 2.2404,
+        "sharpe": 0.0531,
+        "totalRetPct": 244.82
       },
       {
         "horizon": "d1",
@@ -669,13 +675,13 @@
         "baselineAvgPct": 0.0375,
         "baselineWinRate": 0.4826,
         "samples": 5458,
-        "trades": 0,
-        "coverage": 0,
-        "winRate": null,
-        "avgRetPct": null,
-        "sdPct": null,
-        "sharpe": null,
-        "totalRetPct": 0
+        "trades": 1838,
+        "coverage": 0.3368,
+        "winRate": 0.5446,
+        "avgRetPct": 0.213,
+        "sdPct": 2.2173,
+        "sharpe": 0.0961,
+        "totalRetPct": 391.45
       },
       {
         "horizon": "d1",
@@ -683,13 +689,13 @@
         "baselineAvgPct": 0.0375,
         "baselineWinRate": 0.4826,
         "samples": 5458,
-        "trades": 0,
-        "coverage": 0,
-        "winRate": null,
-        "avgRetPct": null,
-        "sdPct": null,
-        "sharpe": null,
-        "totalRetPct": 0
+        "trades": 1609,
+        "coverage": 0.2948,
+        "winRate": 0.5531,
+        "avgRetPct": 0.249,
+        "sdPct": 2.2218,
+        "sharpe": 0.1121,
+        "totalRetPct": 400.63
       }
     ],
     "d3": [
@@ -699,13 +705,13 @@
         "baselineAvgPct": 0.0764,
         "baselineWinRate": 0.4943,
         "samples": 5458,
-        "trades": 2716,
-        "coverage": 0.4976,
-        "winRate": 0.4694,
-        "avgRetPct": 0.0315,
-        "sdPct": 4.5782,
-        "sharpe": 0.0069,
-        "totalRetPct": 85.68
+        "trades": 2884,
+        "coverage": 0.5284,
+        "winRate": 0.4695,
+        "avgRetPct": 0.0545,
+        "sdPct": 4.297,
+        "sharpe": 0.0127,
+        "totalRetPct": 157.31
       },
       {
         "horizon": "d3",
@@ -713,13 +719,13 @@
         "baselineAvgPct": 0.0764,
         "baselineWinRate": 0.4943,
         "samples": 5458,
-        "trades": 2484,
-        "coverage": 0.4551,
-        "winRate": 0.4762,
-        "avgRetPct": 0.0708,
-        "sdPct": 4.6581,
-        "sharpe": 0.0152,
-        "totalRetPct": 175.97
+        "trades": 2694,
+        "coverage": 0.4936,
+        "winRate": 0.4733,
+        "avgRetPct": 0.0475,
+        "sdPct": 4.3076,
+        "sharpe": 0.011,
+        "totalRetPct": 127.88
       },
       {
         "horizon": "d3",
@@ -727,13 +733,13 @@
         "baselineAvgPct": 0.0764,
         "baselineWinRate": 0.4943,
         "samples": 5458,
-        "trades": 2277,
-        "coverage": 0.4172,
-        "winRate": 0.4822,
-        "avgRetPct": 0.112,
-        "sdPct": 4.7506,
-        "sharpe": 0.0236,
-        "totalRetPct": 254.95
+        "trades": 2484,
+        "coverage": 0.4551,
+        "winRate": 0.4722,
+        "avgRetPct": 0.0083,
+        "sdPct": 4.3403,
+        "sharpe": 0.0019,
+        "totalRetPct": 20.72
       },
       {
         "horizon": "d3",
@@ -741,13 +747,13 @@
         "baselineAvgPct": 0.0764,
         "baselineWinRate": 0.4943,
         "samples": 5458,
-        "trades": 2070,
-        "coverage": 0.3793,
-        "winRate": 0.4845,
-        "avgRetPct": 0.1644,
-        "sdPct": 4.8578,
-        "sharpe": 0.0338,
-        "totalRetPct": 340.21
+        "trades": 2292,
+        "coverage": 0.4199,
+        "winRate": 0.4673,
+        "avgRetPct": -0.0089,
+        "sdPct": 4.4089,
+        "sharpe": -0.002,
+        "totalRetPct": -20.38
       },
       {
         "horizon": "d3",
@@ -755,13 +761,13 @@
         "baselineAvgPct": 0.0764,
         "baselineWinRate": 0.4943,
         "samples": 5458,
-        "trades": 1853,
-        "coverage": 0.3395,
-        "winRate": 0.4868,
-        "avgRetPct": 0.2092,
-        "sdPct": 4.8811,
-        "sharpe": 0.0429,
-        "totalRetPct": 387.69
+        "trades": 2077,
+        "coverage": 0.3805,
+        "winRate": 0.467,
+        "avgRetPct": -0.0327,
+        "sdPct": 4.4007,
+        "sharpe": -0.0074,
+        "totalRetPct": -67.82
       },
       {
         "horizon": "d3",
@@ -769,13 +775,13 @@
         "baselineAvgPct": 0.0764,
         "baselineWinRate": 0.4943,
         "samples": 5458,
-        "trades": 1640,
-        "coverage": 0.3005,
-        "winRate": 0.4909,
-        "avgRetPct": 0.2972,
-        "sdPct": 4.9868,
-        "sharpe": 0.0596,
-        "totalRetPct": 487.47
+        "trades": 1831,
+        "coverage": 0.3355,
+        "winRate": 0.4604,
+        "avgRetPct": -0.113,
+        "sdPct": 4.3523,
+        "sharpe": -0.026,
+        "totalRetPct": -206.97
       },
       {
         "horizon": "d3",
@@ -783,13 +789,13 @@
         "baselineAvgPct": 0.0764,
         "baselineWinRate": 0.4943,
         "samples": 5458,
-        "trades": 1277,
-        "coverage": 0.234,
-        "winRate": 0.5012,
-        "avgRetPct": 0.4395,
-        "sdPct": 5.1584,
-        "sharpe": 0.0852,
-        "totalRetPct": 561.26
+        "trades": 1450,
+        "coverage": 0.2657,
+        "winRate": 0.4669,
+        "avgRetPct": -0.0808,
+        "sdPct": 4.5299,
+        "sharpe": -0.0178,
+        "totalRetPct": -117.13
       },
       {
         "horizon": "d3",
@@ -797,13 +803,13 @@
         "baselineAvgPct": 0.0764,
         "baselineWinRate": 0.4943,
         "samples": 5458,
-        "trades": 868,
-        "coverage": 0.159,
-        "winRate": 0.5184,
-        "avgRetPct": 0.5677,
-        "sdPct": 5.2915,
-        "sharpe": 0.1073,
-        "totalRetPct": 492.79
+        "trades": 1116,
+        "coverage": 0.2045,
+        "winRate": 0.4758,
+        "avgRetPct": -0.122,
+        "sdPct": 4.695,
+        "sharpe": -0.026,
+        "totalRetPct": -136.1
       }
     ],
     "w1": [
@@ -813,13 +819,13 @@
         "baselineAvgPct": 0.0979,
         "baselineWinRate": 0.48,
         "samples": 5458,
-        "trades": 2565,
-        "coverage": 0.47,
-        "winRate": 0.4702,
-        "avgRetPct": 0.047,
-        "sdPct": 6.05,
-        "sharpe": 0.0078,
-        "totalRetPct": 120.51
+        "trades": 2992,
+        "coverage": 0.5482,
+        "winRate": 0.5007,
+        "avgRetPct": 0.2913,
+        "sdPct": 5.7546,
+        "sharpe": 0.0506,
+        "totalRetPct": 871.52
       },
       {
         "horizon": "w1",
@@ -827,13 +833,13 @@
         "baselineAvgPct": 0.0979,
         "baselineWinRate": 0.48,
         "samples": 5458,
-        "trades": 2381,
-        "coverage": 0.4362,
-        "winRate": 0.4687,
-        "avgRetPct": 0.0828,
-        "sdPct": 6.0936,
-        "sharpe": 0.0136,
-        "totalRetPct": 197.22
+        "trades": 2798,
+        "coverage": 0.5126,
+        "winRate": 0.5014,
+        "avgRetPct": 0.3202,
+        "sdPct": 5.8204,
+        "sharpe": 0.055,
+        "totalRetPct": 895.98
       },
       {
         "horizon": "w1",
@@ -841,13 +847,13 @@
         "baselineAvgPct": 0.0979,
         "baselineWinRate": 0.48,
         "samples": 5458,
-        "trades": 2231,
-        "coverage": 0.4088,
-        "winRate": 0.4742,
-        "avgRetPct": 0.139,
-        "sdPct": 6.1612,
-        "sharpe": 0.0226,
-        "totalRetPct": 310.17
+        "trades": 2622,
+        "coverage": 0.4804,
+        "winRate": 0.5053,
+        "avgRetPct": 0.3319,
+        "sdPct": 5.9075,
+        "sharpe": 0.0562,
+        "totalRetPct": 870.18
       },
       {
         "horizon": "w1",
@@ -855,13 +861,13 @@
         "baselineAvgPct": 0.0979,
         "baselineWinRate": 0.48,
         "samples": 5458,
-        "trades": 2074,
-        "coverage": 0.38,
-        "winRate": 0.4749,
-        "avgRetPct": 0.1549,
-        "sdPct": 6.2815,
-        "sharpe": 0.0247,
-        "totalRetPct": 321.27
+        "trades": 2437,
+        "coverage": 0.4465,
+        "winRate": 0.5027,
+        "avgRetPct": 0.3592,
+        "sdPct": 6.0264,
+        "sharpe": 0.0596,
+        "totalRetPct": 875.25
       },
       {
         "horizon": "w1",
@@ -869,13 +875,13 @@
         "baselineAvgPct": 0.0979,
         "baselineWinRate": 0.48,
         "samples": 5458,
-        "trades": 1930,
-        "coverage": 0.3536,
-        "winRate": 0.4762,
-        "avgRetPct": 0.2041,
-        "sdPct": 6.3958,
-        "sharpe": 0.0319,
-        "totalRetPct": 393.99
+        "trades": 2282,
+        "coverage": 0.4181,
+        "winRate": 0.5009,
+        "avgRetPct": 0.3989,
+        "sdPct": 6.0991,
+        "sharpe": 0.0654,
+        "totalRetPct": 910.36
       },
       {
         "horizon": "w1",
@@ -883,13 +889,13 @@
         "baselineAvgPct": 0.0979,
         "baselineWinRate": 0.48,
         "samples": 5458,
-        "trades": 1784,
-        "coverage": 0.3269,
-        "winRate": 0.4798,
-        "avgRetPct": 0.2875,
-        "sdPct": 6.4768,
-        "sharpe": 0.0444,
-        "totalRetPct": 512.93
+        "trades": 2095,
+        "coverage": 0.3838,
+        "winRate": 0.5036,
+        "avgRetPct": 0.4146,
+        "sdPct": 6.1789,
+        "sharpe": 0.0671,
+        "totalRetPct": 868.49
       },
       {
         "horizon": "w1",
@@ -897,13 +903,13 @@
         "baselineAvgPct": 0.0979,
         "baselineWinRate": 0.48,
         "samples": 5458,
-        "trades": 1616,
-        "coverage": 0.2961,
-        "winRate": 0.4895,
-        "avgRetPct": 0.4608,
-        "sdPct": 6.6557,
-        "sharpe": 0.0692,
-        "totalRetPct": 744.6
+        "trades": 1875,
+        "coverage": 0.3435,
+        "winRate": 0.5088,
+        "avgRetPct": 0.5261,
+        "sdPct": 6.3736,
+        "sharpe": 0.0825,
+        "totalRetPct": 986.5
       },
       {
         "horizon": "w1",
@@ -911,13 +917,13 @@
         "baselineAvgPct": 0.0979,
         "baselineWinRate": 0.48,
         "samples": 5458,
-        "trades": 1447,
-        "coverage": 0.2651,
-        "winRate": 0.501,
-        "avgRetPct": 0.6362,
-        "sdPct": 6.7531,
-        "sharpe": 0.0942,
-        "totalRetPct": 920.58
+        "trades": 1677,
+        "coverage": 0.3073,
+        "winRate": 0.517,
+        "avgRetPct": 0.6757,
+        "sdPct": 6.5043,
+        "sharpe": 0.1039,
+        "totalRetPct": 1133.2
       }
     ],
     "m1": [
@@ -927,13 +933,13 @@
         "baselineAvgPct": 0.9342,
         "baselineWinRate": 0.4529,
         "samples": 5458,
-        "trades": 3099,
-        "coverage": 0.5678,
-        "winRate": 0.4224,
-        "avgRetPct": 0.4329,
-        "sdPct": 12.1422,
-        "sharpe": 0.0357,
-        "totalRetPct": 1341.64
+        "trades": 3981,
+        "coverage": 0.7294,
+        "winRate": 0.425,
+        "avgRetPct": 0.639,
+        "sdPct": 11.8881,
+        "sharpe": 0.0538,
+        "totalRetPct": 2543.88
       },
       {
         "horizon": "m1",
@@ -941,13 +947,13 @@
         "baselineAvgPct": 0.9342,
         "baselineWinRate": 0.4529,
         "samples": 5458,
-        "trades": 2627,
-        "coverage": 0.4813,
-        "winRate": 0.4347,
-        "avgRetPct": 0.7472,
-        "sdPct": 12.3537,
-        "sharpe": 0.0605,
-        "totalRetPct": 1962.86
+        "trades": 3840,
+        "coverage": 0.7036,
+        "winRate": 0.4247,
+        "avgRetPct": 0.6869,
+        "sdPct": 11.8958,
+        "sharpe": 0.0577,
+        "totalRetPct": 2637.88
       },
       {
         "horizon": "m1",
@@ -955,13 +961,13 @@
         "baselineAvgPct": 0.9342,
         "baselineWinRate": 0.4529,
         "samples": 5458,
-        "trades": 2136,
-        "coverage": 0.3914,
-        "winRate": 0.4434,
-        "avgRetPct": 1.0334,
-        "sdPct": 12.8241,
-        "sharpe": 0.0806,
-        "totalRetPct": 2207.39
+        "trades": 3667,
+        "coverage": 0.6719,
+        "winRate": 0.4249,
+        "avgRetPct": 0.7254,
+        "sdPct": 11.9366,
+        "sharpe": 0.0608,
+        "totalRetPct": 2660.17
       },
       {
         "horizon": "m1",
@@ -969,13 +975,13 @@
         "baselineAvgPct": 0.9342,
         "baselineWinRate": 0.4529,
         "samples": 5458,
-        "trades": 1723,
-        "coverage": 0.3157,
-        "winRate": 0.4521,
-        "avgRetPct": 1.3408,
-        "sdPct": 13.2724,
-        "sharpe": 0.101,
-        "totalRetPct": 2310.16
+        "trades": 3465,
+        "coverage": 0.6348,
+        "winRate": 0.4208,
+        "avgRetPct": 0.6068,
+        "sdPct": 11.888,
+        "sharpe": 0.051,
+        "totalRetPct": 2102.67
       },
       {
         "horizon": "m1",
@@ -983,13 +989,13 @@
         "baselineAvgPct": 0.9342,
         "baselineWinRate": 0.4529,
         "samples": 5458,
-        "trades": 1380,
-        "coverage": 0.2528,
-        "winRate": 0.4659,
-        "avgRetPct": 1.7536,
-        "sdPct": 13.5427,
-        "sharpe": 0.1295,
-        "totalRetPct": 2419.99
+        "trades": 3292,
+        "coverage": 0.6032,
+        "winRate": 0.4116,
+        "avgRetPct": 0.4302,
+        "sdPct": 11.8011,
+        "sharpe": 0.0365,
+        "totalRetPct": 1416.14
       },
       {
         "horizon": "m1",
@@ -997,13 +1003,13 @@
         "baselineAvgPct": 0.9342,
         "baselineWinRate": 0.4529,
         "samples": 5458,
-        "trades": 1065,
-        "coverage": 0.1951,
-        "winRate": 0.4808,
-        "avgRetPct": 1.9255,
-        "sdPct": 12.9674,
-        "sharpe": 0.1485,
-        "totalRetPct": 2050.64
+        "trades": 3094,
+        "coverage": 0.5669,
+        "winRate": 0.4008,
+        "avgRetPct": 0.2632,
+        "sdPct": 11.816,
+        "sharpe": 0.0223,
+        "totalRetPct": 814.37
       },
       {
         "horizon": "m1",
@@ -1011,13 +1017,13 @@
         "baselineAvgPct": 0.9342,
         "baselineWinRate": 0.4529,
         "samples": 5458,
-        "trades": 617,
-        "coverage": 0.113,
-        "winRate": 0.4846,
-        "avgRetPct": 2.1326,
-        "sdPct": 13.0472,
-        "sharpe": 0.1635,
-        "totalRetPct": 1315.82
+        "trades": 2875,
+        "coverage": 0.5267,
+        "winRate": 0.3906,
+        "avgRetPct": 0.035,
+        "sdPct": 11.7767,
+        "sharpe": 0.003,
+        "totalRetPct": 100.55
       },
       {
         "horizon": "m1",
@@ -1025,13 +1031,13 @@
         "baselineAvgPct": 0.9342,
         "baselineWinRate": 0.4529,
         "samples": 5458,
-        "trades": 194,
-        "coverage": 0.0355,
-        "winRate": 0.4639,
-        "avgRetPct": 2.4958,
-        "sdPct": 14.1587,
-        "sharpe": 0.1763,
-        "totalRetPct": 484.19
+        "trades": 2518,
+        "coverage": 0.4613,
+        "winRate": 0.3765,
+        "avgRetPct": -0.1189,
+        "sdPct": 12.0314,
+        "sharpe": -0.0099,
+        "totalRetPct": -299.45
       }
     ]
   },
@@ -1043,13 +1049,13 @@
         "baselineAvgPct": 0.0977,
         "baselineWinRate": 0.4915,
         "samples": 5546,
-        "trades": 2414,
-        "coverage": 0.4353,
-        "winRate": 0.5004,
-        "avgRetPct": 0.039,
-        "sdPct": 3.3194,
-        "sharpe": 0.0117,
-        "totalRetPct": 94.11
+        "trades": 2466,
+        "coverage": 0.4446,
+        "winRate": 0.5069,
+        "avgRetPct": 0.0675,
+        "sdPct": 3.3146,
+        "sharpe": 0.0204,
+        "totalRetPct": 166.43
       },
       {
         "horizon": "d1",
@@ -1057,13 +1063,13 @@
         "baselineAvgPct": 0.0977,
         "baselineWinRate": 0.4915,
         "samples": 5546,
-        "trades": 2311,
-        "coverage": 0.4167,
-        "winRate": 0.4998,
-        "avgRetPct": 0.0457,
-        "sdPct": 3.3613,
-        "sharpe": 0.0136,
-        "totalRetPct": 105.51
+        "trades": 2336,
+        "coverage": 0.4212,
+        "winRate": 0.506,
+        "avgRetPct": 0.0734,
+        "sdPct": 3.371,
+        "sharpe": 0.0218,
+        "totalRetPct": 171.53
       },
       {
         "horizon": "d1",
@@ -1071,13 +1077,13 @@
         "baselineAvgPct": 0.0977,
         "baselineWinRate": 0.4915,
         "samples": 5546,
-        "trades": 2193,
-        "coverage": 0.3954,
-        "winRate": 0.4993,
-        "avgRetPct": 0.0718,
-        "sdPct": 3.3665,
-        "sharpe": 0.0213,
-        "totalRetPct": 157.42
+        "trades": 2200,
+        "coverage": 0.3967,
+        "winRate": 0.5077,
+        "avgRetPct": 0.0763,
+        "sdPct": 3.4328,
+        "sharpe": 0.0222,
+        "totalRetPct": 167.85
       },
       {
         "horizon": "d1",
@@ -1085,13 +1091,13 @@
         "baselineAvgPct": 0.0977,
         "baselineWinRate": 0.4915,
         "samples": 5546,
-        "trades": 2072,
-        "coverage": 0.3736,
-        "winRate": 0.5019,
-        "avgRetPct": 0.0704,
-        "sdPct": 3.3887,
-        "sharpe": 0.0208,
-        "totalRetPct": 145.91
+        "trades": 2090,
+        "coverage": 0.3768,
+        "winRate": 0.5077,
+        "avgRetPct": 0.0908,
+        "sdPct": 3.4618,
+        "sharpe": 0.0262,
+        "totalRetPct": 189.7
       },
       {
         "horizon": "d1",
@@ -1099,13 +1105,13 @@
         "baselineAvgPct": 0.0977,
         "baselineWinRate": 0.4915,
         "samples": 5546,
-        "trades": 1952,
-        "coverage": 0.352,
-        "winRate": 0.5051,
-        "avgRetPct": 0.0783,
-        "sdPct": 3.4498,
-        "sharpe": 0.0227,
-        "totalRetPct": 152.82
+        "trades": 1958,
+        "coverage": 0.353,
+        "winRate": 0.5102,
+        "avgRetPct": 0.1053,
+        "sdPct": 3.5247,
+        "sharpe": 0.0299,
+        "totalRetPct": 206.25
       },
       {
         "horizon": "d1",
@@ -1113,13 +1119,13 @@
         "baselineAvgPct": 0.0977,
         "baselineWinRate": 0.4915,
         "samples": 5546,
-        "trades": 1861,
-        "coverage": 0.3356,
-        "winRate": 0.5067,
-        "avgRetPct": 0.1018,
-        "sdPct": 3.4822,
-        "sharpe": 0.0292,
-        "totalRetPct": 189.4
+        "trades": 1816,
+        "coverage": 0.3274,
+        "winRate": 0.5061,
+        "avgRetPct": 0.0956,
+        "sdPct": 3.5779,
+        "sharpe": 0.0267,
+        "totalRetPct": 173.64
       },
       {
         "horizon": "d1",
@@ -1127,13 +1133,13 @@
         "baselineAvgPct": 0.0977,
         "baselineWinRate": 0.4915,
         "samples": 5546,
-        "trades": 1674,
-        "coverage": 0.3018,
-        "winRate": 0.5119,
-        "avgRetPct": 0.1351,
-        "sdPct": 3.5424,
-        "sharpe": 0.0381,
-        "totalRetPct": 226.14
+        "trades": 1603,
+        "coverage": 0.289,
+        "winRate": 0.5109,
+        "avgRetPct": 0.1841,
+        "sdPct": 3.6499,
+        "sharpe": 0.0504,
+        "totalRetPct": 295.13
       },
       {
         "horizon": "d1",
@@ -1141,13 +1147,13 @@
         "baselineAvgPct": 0.0977,
         "baselineWinRate": 0.4915,
         "samples": 5546,
-        "trades": 1429,
-        "coverage": 0.2577,
-        "winRate": 0.508,
-        "avgRetPct": 0.1446,
-        "sdPct": 3.674,
-        "sharpe": 0.0394,
-        "totalRetPct": 206.65
+        "trades": 1365,
+        "coverage": 0.2461,
+        "winRate": 0.5172,
+        "avgRetPct": 0.2264,
+        "sdPct": 3.785,
+        "sharpe": 0.0598,
+        "totalRetPct": 309.03
       }
     ],
     "d3": [
@@ -1157,13 +1163,13 @@
         "baselineAvgPct": 0.2896,
         "baselineWinRate": 0.4974,
         "samples": 5452,
-        "trades": 3040,
-        "coverage": 0.5576,
-        "winRate": 0.5296,
-        "avgRetPct": 0.6439,
-        "sdPct": 6.0278,
-        "sharpe": 0.1068,
-        "totalRetPct": 1957.38
+        "trades": 3486,
+        "coverage": 0.6394,
+        "winRate": 0.5141,
+        "avgRetPct": 0.5689,
+        "sdPct": 5.7221,
+        "sharpe": 0.0994,
+        "totalRetPct": 1983.28
       },
       {
         "horizon": "d3",
@@ -1171,13 +1177,13 @@
         "baselineAvgPct": 0.2896,
         "baselineWinRate": 0.4974,
         "samples": 5452,
-        "trades": 2342,
-        "coverage": 0.4296,
-        "winRate": 0.5436,
-        "avgRetPct": 0.8007,
-        "sdPct": 6.2882,
-        "sharpe": 0.1273,
-        "totalRetPct": 1875.32
+        "trades": 2862,
+        "coverage": 0.5249,
+        "winRate": 0.5339,
+        "avgRetPct": 0.7792,
+        "sdPct": 6.0385,
+        "sharpe": 0.129,
+        "totalRetPct": 2230.07
       },
       {
         "horizon": "d3",
@@ -1185,13 +1191,13 @@
         "baselineAvgPct": 0.2896,
         "baselineWinRate": 0.4974,
         "samples": 5452,
-        "trades": 1541,
-        "coverage": 0.2826,
-        "winRate": 0.5574,
-        "avgRetPct": 0.9011,
-        "sdPct": 6.6148,
-        "sharpe": 0.1362,
-        "totalRetPct": 1388.59
+        "trades": 2271,
+        "coverage": 0.4165,
+        "winRate": 0.5641,
+        "avgRetPct": 1.0597,
+        "sdPct": 6.3521,
+        "sharpe": 0.1668,
+        "totalRetPct": 2406.66
       },
       {
         "horizon": "d3",
@@ -1199,13 +1205,13 @@
         "baselineAvgPct": 0.2896,
         "baselineWinRate": 0.4974,
         "samples": 5452,
-        "trades": 630,
-        "coverage": 0.1156,
-        "winRate": 0.554,
-        "avgRetPct": 0.8035,
-        "sdPct": 6.4469,
-        "sharpe": 0.1246,
-        "totalRetPct": 506.17
+        "trades": 1679,
+        "coverage": 0.308,
+        "winRate": 0.5825,
+        "avgRetPct": 1.2852,
+        "sdPct": 6.5644,
+        "sharpe": 0.1958,
+        "totalRetPct": 2157.91
       },
       {
         "horizon": "d3",
@@ -1213,13 +1219,13 @@
         "baselineAvgPct": 0.2896,
         "baselineWinRate": 0.4974,
         "samples": 5452,
-        "trades": 318,
-        "coverage": 0.0583,
-        "winRate": 0.566,
-        "avgRetPct": 0.5426,
-        "sdPct": 5.8026,
-        "sharpe": 0.0935,
-        "totalRetPct": 172.54
+        "trades": 980,
+        "coverage": 0.1798,
+        "winRate": 0.5827,
+        "avgRetPct": 1.1171,
+        "sdPct": 6.392,
+        "sharpe": 0.1748,
+        "totalRetPct": 1094.76
       },
       {
         "horizon": "d3",
@@ -1227,13 +1233,13 @@
         "baselineAvgPct": 0.2896,
         "baselineWinRate": 0.4974,
         "samples": 5452,
-        "trades": 206,
-        "coverage": 0.0378,
-        "winRate": 0.5728,
-        "avgRetPct": 0.748,
-        "sdPct": 5.9985,
-        "sharpe": 0.1247,
-        "totalRetPct": 154.09
+        "trades": 479,
+        "coverage": 0.0879,
+        "winRate": 0.5992,
+        "avgRetPct": 1.1757,
+        "sdPct": 6.0206,
+        "sharpe": 0.1953,
+        "totalRetPct": 563.18
       },
       {
         "horizon": "d3",
@@ -1241,13 +1247,13 @@
         "baselineAvgPct": 0.2896,
         "baselineWinRate": 0.4974,
         "samples": 5452,
-        "trades": 90,
-        "coverage": 0.0165,
-        "winRate": 0.6222,
-        "avgRetPct": 1.6274,
-        "sdPct": 5.7074,
-        "sharpe": 0.2851,
-        "totalRetPct": 146.46
+        "trades": 158,
+        "coverage": 0.029,
+        "winRate": 0.5886,
+        "avgRetPct": 0.8264,
+        "sdPct": 6.4514,
+        "sharpe": 0.1281,
+        "totalRetPct": 130.58
       },
       {
         "horizon": "d3",
@@ -1255,13 +1261,13 @@
         "baselineAvgPct": 0.2896,
         "baselineWinRate": 0.4974,
         "samples": 5452,
-        "trades": 53,
-        "coverage": 0.0097,
-        "winRate": 0.6226,
-        "avgRetPct": 1.8352,
-        "sdPct": 6.3965,
-        "sharpe": 0.2869,
-        "totalRetPct": 97.27
+        "trades": 87,
+        "coverage": 0.016,
+        "winRate": 0.6092,
+        "avgRetPct": 1.6702,
+        "sdPct": 5.6002,
+        "sharpe": 0.2982,
+        "totalRetPct": 145.31
       }
     ],
     "w1": [
@@ -1271,13 +1277,13 @@
         "baselineAvgPct": 0.5632,
         "baselineWinRate": 0.4935,
         "samples": 5358,
-        "trades": 2767,
-        "coverage": 0.5164,
-        "winRate": 0.5222,
-        "avgRetPct": 1.0512,
-        "sdPct": 8.035,
-        "sharpe": 0.1308,
-        "totalRetPct": 2908.79
+        "trades": 3419,
+        "coverage": 0.6381,
+        "winRate": 0.4975,
+        "avgRetPct": 0.8547,
+        "sdPct": 7.726,
+        "sharpe": 0.1106,
+        "totalRetPct": 2922.34
       },
       {
         "horizon": "w1",
@@ -1285,13 +1291,13 @@
         "baselineAvgPct": 0.5632,
         "baselineWinRate": 0.4935,
         "samples": 5358,
-        "trades": 1908,
-        "coverage": 0.3561,
-        "winRate": 0.5372,
-        "avgRetPct": 1.3918,
-        "sdPct": 8.5724,
-        "sharpe": 0.1624,
-        "totalRetPct": 2655.6
+        "trades": 2723,
+        "coverage": 0.5082,
+        "winRate": 0.5226,
+        "avgRetPct": 1.2192,
+        "sdPct": 8.1044,
+        "sharpe": 0.1504,
+        "totalRetPct": 3319.84
       },
       {
         "horizon": "w1",
@@ -1299,13 +1305,13 @@
         "baselineAvgPct": 0.5632,
         "baselineWinRate": 0.4935,
         "samples": 5358,
-        "trades": 1198,
-        "coverage": 0.2236,
-        "winRate": 0.5693,
-        "avgRetPct": 1.9996,
-        "sdPct": 9.2305,
-        "sharpe": 0.2166,
-        "totalRetPct": 2395.52
+        "trades": 2044,
+        "coverage": 0.3815,
+        "winRate": 0.5455,
+        "avgRetPct": 1.6451,
+        "sdPct": 8.4482,
+        "sharpe": 0.1947,
+        "totalRetPct": 3362.63
       },
       {
         "horizon": "w1",
@@ -1313,13 +1319,13 @@
         "baselineAvgPct": 0.5632,
         "baselineWinRate": 0.4935,
         "samples": 5358,
-        "trades": 481,
-        "coverage": 0.0898,
-        "winRate": 0.5904,
-        "avgRetPct": 2.8344,
-        "sdPct": 9.9275,
-        "sharpe": 0.2855,
-        "totalRetPct": 1363.32
+        "trades": 1372,
+        "coverage": 0.2561,
+        "winRate": 0.586,
+        "avgRetPct": 2.2422,
+        "sdPct": 8.7268,
+        "sharpe": 0.2569,
+        "totalRetPct": 3076.36
       },
       {
         "horizon": "w1",
@@ -1327,13 +1333,13 @@
         "baselineAvgPct": 0.5632,
         "baselineWinRate": 0.4935,
         "samples": 5358,
-        "trades": 41,
-        "coverage": 0.0077,
-        "winRate": 0.6098,
-        "avgRetPct": 2.1746,
-        "sdPct": 11.6569,
-        "sharpe": 0.1866,
-        "totalRetPct": 89.16
+        "trades": 678,
+        "coverage": 0.1265,
+        "winRate": 0.59,
+        "avgRetPct": 2.1553,
+        "sdPct": 9.2959,
+        "sharpe": 0.2318,
+        "totalRetPct": 1461.26
       },
       {
         "horizon": "w1",
@@ -1341,13 +1347,13 @@
         "baselineAvgPct": 0.5632,
         "baselineWinRate": 0.4935,
         "samples": 5358,
-        "trades": 0,
-        "coverage": 0,
-        "winRate": null,
-        "avgRetPct": null,
-        "sdPct": null,
-        "sharpe": null,
-        "totalRetPct": 0
+        "trades": 227,
+        "coverage": 0.0424,
+        "winRate": 0.6123,
+        "avgRetPct": 2.3891,
+        "sdPct": 8.618,
+        "sharpe": 0.2772,
+        "totalRetPct": 542.33
       },
       {
         "horizon": "w1",
@@ -1355,13 +1361,13 @@
         "baselineAvgPct": 0.5632,
         "baselineWinRate": 0.4935,
         "samples": 5358,
-        "trades": 0,
-        "coverage": 0,
-        "winRate": null,
-        "avgRetPct": null,
-        "sdPct": null,
-        "sharpe": null,
-        "totalRetPct": 0
+        "trades": 20,
+        "coverage": 0.0037,
+        "winRate": 0.6,
+        "avgRetPct": 3.1926,
+        "sdPct": 7.742,
+        "sharpe": 0.4124,
+        "totalRetPct": 63.85
       },
       {
         "horizon": "w1",
@@ -1369,13 +1375,13 @@
         "baselineAvgPct": 0.5632,
         "baselineWinRate": 0.4935,
         "samples": 5358,
-        "trades": 0,
-        "coverage": 0,
-        "winRate": null,
-        "avgRetPct": null,
-        "sdPct": null,
-        "sharpe": null,
-        "totalRetPct": 0
+        "trades": 5,
+        "coverage": 0.0009,
+        "winRate": 0.6,
+        "avgRetPct": -0.4122,
+        "sdPct": 5.8921,
+        "sharpe": -0.07,
+        "totalRetPct": -2.06
       }
     ],
     "m1": [
@@ -1385,13 +1391,13 @@
         "baselineAvgPct": 2.6853,
         "baselineWinRate": 0.5067,
         "samples": 4559,
-        "trades": 3114,
-        "coverage": 0.683,
-        "winRate": 0.5389,
-        "avgRetPct": 3.6644,
-        "sdPct": 18.8126,
-        "sharpe": 0.1948,
-        "totalRetPct": 11410.8
+        "trades": 3676,
+        "coverage": 0.8063,
+        "winRate": 0.519,
+        "avgRetPct": 3.246,
+        "sdPct": 17.964,
+        "sharpe": 0.1807,
+        "totalRetPct": 11932.31
       },
       {
         "horizon": "m1",
@@ -1399,13 +1405,13 @@
         "baselineAvgPct": 2.6853,
         "baselineWinRate": 0.5067,
         "samples": 4559,
-        "trades": 2880,
-        "coverage": 0.6317,
-        "winRate": 0.5545,
-        "avgRetPct": 4.0766,
-        "sdPct": 19.0372,
-        "sharpe": 0.2141,
-        "totalRetPct": 11740.61
+        "trades": 3589,
+        "coverage": 0.7872,
+        "winRate": 0.5224,
+        "avgRetPct": 3.3348,
+        "sdPct": 17.9533,
+        "sharpe": 0.1857,
+        "totalRetPct": 11968.47
       },
       {
         "horizon": "m1",
@@ -1413,13 +1419,13 @@
         "baselineAvgPct": 2.6853,
         "baselineWinRate": 0.5067,
         "samples": 4559,
-        "trades": 2662,
-        "coverage": 0.5839,
-        "winRate": 0.5627,
-        "avgRetPct": 4.3176,
-        "sdPct": 19.0572,
-        "sharpe": 0.2266,
-        "totalRetPct": 11493.56
+        "trades": 3498,
+        "coverage": 0.7673,
+        "winRate": 0.5243,
+        "avgRetPct": 3.4211,
+        "sdPct": 18.0466,
+        "sharpe": 0.1896,
+        "totalRetPct": 11967
       },
       {
         "horizon": "m1",
@@ -1427,13 +1433,13 @@
         "baselineAvgPct": 2.6853,
         "baselineWinRate": 0.5067,
         "samples": 4559,
-        "trades": 2362,
-        "coverage": 0.5181,
-        "winRate": 0.5821,
-        "avgRetPct": 4.905,
-        "sdPct": 18.9578,
-        "sharpe": 0.2587,
-        "totalRetPct": 11585.55
+        "trades": 3382,
+        "coverage": 0.7418,
+        "winRate": 0.5257,
+        "avgRetPct": 3.4983,
+        "sdPct": 18.1897,
+        "sharpe": 0.1923,
+        "totalRetPct": 11831.38
       },
       {
         "horizon": "m1",
@@ -1441,13 +1447,13 @@
         "baselineAvgPct": 2.6853,
         "baselineWinRate": 0.5067,
         "samples": 4559,
-        "trades": 2032,
-        "coverage": 0.4457,
-        "winRate": 0.6142,
-        "avgRetPct": 5.7284,
-        "sdPct": 18.7215,
-        "sharpe": 0.306,
-        "totalRetPct": 11640.02
+        "trades": 3240,
+        "coverage": 0.7107,
+        "winRate": 0.529,
+        "avgRetPct": 3.6577,
+        "sdPct": 18.2315,
+        "sharpe": 0.2006,
+        "totalRetPct": 11850.94
       },
       {
         "horizon": "m1",
@@ -1455,13 +1461,13 @@
         "baselineAvgPct": 2.6853,
         "baselineWinRate": 0.5067,
         "samples": 4559,
-        "trades": 1696,
-        "coverage": 0.372,
-        "winRate": 0.6338,
-        "avgRetPct": 6.0161,
-        "sdPct": 17.7451,
-        "sharpe": 0.339,
-        "totalRetPct": 10203.32
+        "trades": 3061,
+        "coverage": 0.6714,
+        "winRate": 0.5354,
+        "avgRetPct": 4.0141,
+        "sdPct": 18.4129,
+        "sharpe": 0.218,
+        "totalRetPct": 12287.22
       },
       {
         "horizon": "m1",
@@ -1469,13 +1475,13 @@
         "baselineAvgPct": 2.6853,
         "baselineWinRate": 0.5067,
         "samples": 4559,
-        "trades": 1245,
-        "coverage": 0.2731,
-        "winRate": 0.6691,
-        "avgRetPct": 6.5276,
-        "sdPct": 16.4095,
-        "sharpe": 0.3978,
-        "totalRetPct": 8126.82
+        "trades": 2726,
+        "coverage": 0.5979,
+        "winRate": 0.5539,
+        "avgRetPct": 4.645,
+        "sdPct": 18.7147,
+        "sharpe": 0.2482,
+        "totalRetPct": 12662.16
       },
       {
         "horizon": "m1",
@@ -1483,46 +1489,46 @@
         "baselineAvgPct": 2.6853,
         "baselineWinRate": 0.5067,
         "samples": 4559,
-        "trades": 910,
-        "coverage": 0.1996,
-        "winRate": 0.6989,
-        "avgRetPct": 6.9036,
-        "sdPct": 15.9993,
-        "sharpe": 0.4315,
-        "totalRetPct": 6282.26
+        "trades": 2287,
+        "coverage": 0.5016,
+        "winRate": 0.5833,
+        "avgRetPct": 5.6422,
+        "sdPct": 19.2402,
+        "sharpe": 0.2932,
+        "totalRetPct": 12903.6
       }
     ]
   },
   "chosenThreshold": {
-    "d1": 0.56,
-    "d3": 0.66,
+    "d1": 0.66,
+    "d3": 0.5,
     "w1": 0.66,
-    "m1": 0.66
+    "m1": 0.54
   },
   "liveThreshold": {
     "d1": {
       "threshold": 0.66,
-      "winRate": 0.482,
-      "avgRetPct": 0.1482,
-      "trades": 5270
+      "winRate": 0.4885,
+      "avgRetPct": 0.1774,
+      "trades": 5087
     },
     "d3": {
-      "threshold": 0.63,
-      "winRate": 0.5768,
-      "avgRetPct": 0.7873,
-      "trades": 671
+      "threshold": 0.66,
+      "winRate": 0.5668,
+      "avgRetPct": 0.7562,
+      "trades": 674
     },
     "w1": {
-      "threshold": 0.58,
-      "winRate": 0.5912,
-      "avgRetPct": 1.3389,
-      "trades": 888
+      "threshold": 0.66,
+      "winRate": 0.5757,
+      "avgRetPct": 1.0552,
+      "trades": 865
     },
     "m1": {
       "threshold": 0.66,
-      "winRate": 0.6109,
-      "avgRetPct": 6.6954,
-      "trades": 3518
+      "winRate": 0.5997,
+      "avgRetPct": 4.7467,
+      "trades": 7309
     }
   },
   "portfolio": {
@@ -1613,27 +1619,27 @@
           "execLag": 1,
           "execField": "open",
           "initialCapital": 500000,
-          "finalNav": 563188.84,
-          "totalReturnPct": 12.64,
-          "annualReturnPct": 13.03,
-          "maxDrawdownPct": 24.04,
-          "calmar": 0.542,
-          "sharpeDaily": 0.514,
-          "trades": 76,
-          "winRateTrade": 0.5132,
+          "finalNav": 538902.91,
+          "totalReturnPct": 7.78,
+          "annualReturnPct": 8.02,
+          "maxDrawdownPct": 26.12,
+          "calmar": 0.307,
+          "sharpeDaily": 0.362,
+          "trades": 77,
+          "winRateTrade": 0.4416,
           "avgHoldDays": 4.4,
-          "turnoverPct": 5341.6,
-          "exposurePct": 46.24,
+          "turnoverPct": 5336.8,
+          "exposurePct": 46.75,
           "tradingDays": 237,
           "effectiveN": 237,
           "avgTradeRetByReason": {
             "expire": {
               "n": 55,
-              "avgRetPct": 4.395
+              "avgRetPct": 4.302
             },
             "stop": {
-              "n": 21,
-              "avgRetPct": -8.401
+              "n": 22,
+              "avgRetPct": -8.386
             }
           },
           "timingMinProb": null,
@@ -1650,27 +1656,27 @@
           "execLag": 1,
           "execField": "open",
           "initialCapital": 500000,
-          "finalNav": 540963.93,
-          "totalReturnPct": 8.19,
-          "annualReturnPct": 8.44,
-          "maxDrawdownPct": 22.74,
-          "calmar": 0.371,
-          "sharpeDaily": 0.372,
-          "trades": 76,
-          "winRateTrade": 0.5132,
+          "finalNav": 493900.69,
+          "totalReturnPct": -1.22,
+          "annualReturnPct": -1.26,
+          "maxDrawdownPct": 24.67,
+          "calmar": -0.051,
+          "sharpeDaily": 0.086,
+          "trades": 77,
+          "winRateTrade": 0.4805,
           "avgHoldDays": 4.4,
-          "turnoverPct": 5227.6,
-          "exposurePct": 46.04,
+          "turnoverPct": 5209.8,
+          "exposurePct": 46.3,
           "tradingDays": 237,
           "effectiveN": 237,
           "avgTradeRetByReason": {
             "expire": {
-              "n": 54,
-              "avgRetPct": 4.589
+              "n": 55,
+              "avgRetPct": 4.127
             },
             "stop": {
               "n": 22,
-              "avgRetPct": -8.733
+              "avgRetPct": -8.983
             }
           },
           "timingMinProb": null,
@@ -1687,27 +1693,27 @@
           "execLag": 1,
           "execField": "open",
           "initialCapital": 500000,
-          "finalNav": 549557,
-          "totalReturnPct": 9.91,
-          "annualReturnPct": 10.22,
-          "maxDrawdownPct": 18.18,
-          "calmar": 0.562,
-          "sharpeDaily": 0.456,
-          "trades": 77,
-          "winRateTrade": 0.4935,
-          "avgHoldDays": 4.5,
-          "turnoverPct": 5438.2,
-          "exposurePct": 48.3,
+          "finalNav": 525246.01,
+          "totalReturnPct": 5.05,
+          "annualReturnPct": 5.2,
+          "maxDrawdownPct": 18.1,
+          "calmar": 0.287,
+          "sharpeDaily": 0.276,
+          "trades": 74,
+          "winRateTrade": 0.4595,
+          "avgHoldDays": 4.6,
+          "turnoverPct": 5203.5,
+          "exposurePct": 46.55,
           "tradingDays": 237,
           "effectiveN": 237,
           "avgTradeRetByReason": {
             "expire": {
-              "n": 62,
-              "avgRetPct": 3.016
+              "n": 58,
+              "avgRetPct": 3.107
             },
             "stop": {
-              "n": 15,
-              "avgRetPct": -8.501
+              "n": 16,
+              "avgRetPct": -8.479
             }
           },
           "timingMinProb": null,
@@ -1763,27 +1769,27 @@
           "execLag": 1,
           "execField": "open",
           "initialCapital": 500000,
-          "finalNav": 588394.02,
-          "totalReturnPct": 17.68,
-          "annualReturnPct": 39.62,
-          "maxDrawdownPct": 31.84,
-          "calmar": 1.245,
-          "sharpeDaily": 0.914,
-          "trades": 78,
-          "winRateTrade": 0.4615,
-          "avgHoldDays": 4.3,
-          "turnoverPct": 5550.4,
-          "exposurePct": 88.22,
+          "finalNav": 478433.48,
+          "totalReturnPct": -4.31,
+          "annualReturnPct": -8.64,
+          "maxDrawdownPct": 38.76,
+          "calmar": -0.223,
+          "sharpeDaily": 0.057,
+          "trades": 77,
+          "winRateTrade": 0.4416,
+          "avgHoldDays": 4.2,
+          "turnoverPct": 5397,
+          "exposurePct": 85.53,
           "tradingDays": 119,
           "effectiveN": 119,
           "avgTradeRetByReason": {
             "expire": {
-              "n": 57,
-              "avgRetPct": 5.121
+              "n": 54,
+              "avgRetPct": 4.521
             },
             "stop": {
-              "n": 21,
-              "avgRetPct": -8.459
+              "n": 23,
+              "avgRetPct": -8.445
             }
           },
           "timingMinProb": null,
@@ -1800,27 +1806,27 @@
           "execLag": 1,
           "execField": "open",
           "initialCapital": 500000,
-          "finalNav": 593946.03,
-          "totalReturnPct": 18.79,
-          "annualReturnPct": 42.34,
-          "maxDrawdownPct": 32.32,
-          "calmar": 1.31,
-          "sharpeDaily": 0.933,
-          "trades": 77,
-          "winRateTrade": 0.4675,
-          "avgHoldDays": 4.4,
-          "turnoverPct": 6194,
-          "exposurePct": 88.58,
+          "finalNav": 641063.85,
+          "totalReturnPct": 28.21,
+          "annualReturnPct": 66.46,
+          "maxDrawdownPct": 31.06,
+          "calmar": 2.14,
+          "sharpeDaily": 1.231,
+          "trades": 76,
+          "winRateTrade": 0.4868,
+          "avgHoldDays": 4.3,
+          "turnoverPct": 6526.8,
+          "exposurePct": 86.87,
           "tradingDays": 119,
           "effectiveN": 119,
           "avgTradeRetByReason": {
             "expire": {
-              "n": 54,
-              "avgRetPct": 5.897
+              "n": 55,
+              "avgRetPct": 5.853
             },
             "stop": {
-              "n": 23,
-              "avgRetPct": -8.342
+              "n": 21,
+              "avgRetPct": -8.327
             }
           },
           "timingMinProb": null,
@@ -1837,27 +1843,27 @@
           "execLag": 1,
           "execField": "open",
           "initialCapital": 500000,
-          "finalNav": 468120.72,
-          "totalReturnPct": -6.38,
-          "annualReturnPct": -12.64,
-          "maxDrawdownPct": 28.14,
-          "calmar": -0.449,
-          "sharpeDaily": -0.053,
-          "trades": 75,
-          "winRateTrade": 0.4533,
-          "avgHoldDays": 4.4,
-          "turnoverPct": 4783.3,
-          "exposurePct": 88.61,
+          "finalNav": 559017.39,
+          "totalReturnPct": 11.8,
+          "annualReturnPct": 25.71,
+          "maxDrawdownPct": 22.1,
+          "calmar": 1.163,
+          "sharpeDaily": 0.716,
+          "trades": 72,
+          "winRateTrade": 0.4444,
+          "avgHoldDays": 4.3,
+          "turnoverPct": 5125.1,
+          "exposurePct": 82.81,
           "tradingDays": 119,
           "effectiveN": 119,
           "avgTradeRetByReason": {
             "expire": {
-              "n": 54,
-              "avgRetPct": 3.703
+              "n": 49,
+              "avgRetPct": 5.382
             },
             "stop": {
-              "n": 21,
-              "avgRetPct": -8.282
+              "n": 23,
+              "avgRetPct": -8.153
             }
           },
           "timingMinProb": null,
@@ -1874,27 +1880,27 @@
           "execLag": 1,
           "execField": "open",
           "initialCapital": 500000,
-          "finalNav": 645355.31,
-          "totalReturnPct": 29.07,
-          "annualReturnPct": 68.75,
-          "maxDrawdownPct": 26,
-          "calmar": 2.645,
-          "sharpeDaily": 1.361,
-          "trades": 74,
-          "winRateTrade": 0.473,
-          "avgHoldDays": 4.5,
-          "turnoverPct": 5800.3,
-          "exposurePct": 89.04,
+          "finalNav": 620650.1,
+          "totalReturnPct": 24.13,
+          "annualReturnPct": 55.77,
+          "maxDrawdownPct": 23.33,
+          "calmar": 2.39,
+          "sharpeDaily": 1.141,
+          "trades": 72,
+          "winRateTrade": 0.5278,
+          "avgHoldDays": 4.6,
+          "turnoverPct": 5438,
+          "exposurePct": 89.54,
           "tradingDays": 119,
           "effectiveN": 119,
           "avgTradeRetByReason": {
             "expire": {
-              "n": 59,
-              "avgRetPct": 4.292
+              "n": 58,
+              "avgRetPct": 3.794
             },
             "stop": {
-              "n": 15,
-              "avgRetPct": -8.284
+              "n": 14,
+              "avgRetPct": -8.39
             }
           },
           "timingMinProb": null,
@@ -1978,27 +1984,27 @@
         "execLag": 1,
         "execField": "open",
         "initialCapital": 500000,
-        "finalNav": 549557,
-        "totalReturnPct": 9.91,
-        "annualReturnPct": 10.22,
-        "maxDrawdownPct": 18.18,
-        "calmar": 0.562,
-        "sharpeDaily": 0.456,
-        "trades": 77,
-        "winRateTrade": 0.4935,
-        "avgHoldDays": 4.5,
-        "turnoverPct": 5438.2,
-        "exposurePct": 48.3,
+        "finalNav": 525246.01,
+        "totalReturnPct": 5.05,
+        "annualReturnPct": 5.2,
+        "maxDrawdownPct": 18.1,
+        "calmar": 0.287,
+        "sharpeDaily": 0.276,
+        "trades": 74,
+        "winRateTrade": 0.4595,
+        "avgHoldDays": 4.6,
+        "turnoverPct": 5203.5,
+        "exposurePct": 46.55,
         "tradingDays": 237,
         "effectiveN": 237,
         "avgTradeRetByReason": {
           "expire": {
-            "n": 62,
-            "avgRetPct": 3.016
+            "n": 58,
+            "avgRetPct": 3.107
           },
           "stop": {
-            "n": 15,
-            "avgRetPct": -8.501
+            "n": 16,
+            "avgRetPct": -8.479
           }
         },
         "timingMinProb": null,
@@ -2011,27 +2017,27 @@
         "execLag": 1,
         "execField": "open",
         "initialCapital": 500000,
-        "finalNav": 645355.31,
-        "totalReturnPct": 29.07,
-        "annualReturnPct": 68.75,
-        "maxDrawdownPct": 26,
-        "calmar": 2.645,
-        "sharpeDaily": 1.361,
-        "trades": 74,
-        "winRateTrade": 0.473,
-        "avgHoldDays": 4.5,
-        "turnoverPct": 5800.3,
-        "exposurePct": 89.04,
+        "finalNav": 620650.1,
+        "totalReturnPct": 24.13,
+        "annualReturnPct": 55.77,
+        "maxDrawdownPct": 23.33,
+        "calmar": 2.39,
+        "sharpeDaily": 1.141,
+        "trades": 72,
+        "winRateTrade": 0.5278,
+        "avgHoldDays": 4.6,
+        "turnoverPct": 5438,
+        "exposurePct": 89.54,
         "tradingDays": 119,
         "effectiveN": 119,
         "avgTradeRetByReason": {
           "expire": {
-            "n": 59,
-            "avgRetPct": 4.292
+            "n": 58,
+            "avgRetPct": 3.794
           },
           "stop": {
-            "n": 15,
-            "avgRetPct": -8.284
+            "n": 14,
+            "avgRetPct": -8.39
           }
         },
         "timingMinProb": null,
@@ -2040,34 +2046,34 @@
       }
     },
     "chosen": {
-      "w": 0,
+      "w": 0.75,
       "valMetrics": {
         "horizon": "w1",
         "topK": 3,
         "execLag": 1,
         "execField": "open",
         "initialCapital": 500000,
-        "finalNav": 549557,
-        "totalReturnPct": 9.91,
-        "annualReturnPct": 10.22,
-        "maxDrawdownPct": 18.18,
-        "calmar": 0.562,
-        "sharpeDaily": 0.456,
-        "trades": 77,
-        "winRateTrade": 0.4935,
-        "avgHoldDays": 4.5,
-        "turnoverPct": 5438.2,
-        "exposurePct": 48.3,
+        "finalNav": 548989.12,
+        "totalReturnPct": 9.8,
+        "annualReturnPct": 10.1,
+        "maxDrawdownPct": 23.29,
+        "calmar": 0.434,
+        "sharpeDaily": 0.423,
+        "trades": 76,
+        "winRateTrade": 0.4342,
+        "avgHoldDays": 4.4,
+        "turnoverPct": 5174.6,
+        "exposurePct": 45.77,
         "tradingDays": 237,
         "effectiveN": 237,
         "avgTradeRetByReason": {
           "expire": {
-            "n": 62,
-            "avgRetPct": 3.016
+            "n": 54,
+            "avgRetPct": 4.574
           },
           "stop": {
-            "n": 15,
-            "avgRetPct": -8.501
+            "n": 22,
+            "avgRetPct": -8.589
           }
         },
         "timingMinProb": null,
@@ -2080,27 +2086,27 @@
         "execLag": 1,
         "execField": "open",
         "initialCapital": 500000,
-        "finalNav": 645355.31,
-        "totalReturnPct": 29.07,
-        "annualReturnPct": 68.75,
-        "maxDrawdownPct": 26,
-        "calmar": 2.645,
-        "sharpeDaily": 1.361,
-        "trades": 74,
-        "winRateTrade": 0.473,
-        "avgHoldDays": 4.5,
-        "turnoverPct": 5800.3,
-        "exposurePct": 89.04,
+        "finalNav": 478433.48,
+        "totalReturnPct": -4.31,
+        "annualReturnPct": -8.64,
+        "maxDrawdownPct": 38.76,
+        "calmar": -0.223,
+        "sharpeDaily": 0.057,
+        "trades": 77,
+        "winRateTrade": 0.4416,
+        "avgHoldDays": 4.2,
+        "turnoverPct": 5397,
+        "exposurePct": 85.53,
         "tradingDays": 119,
         "effectiveN": 119,
         "avgTradeRetByReason": {
           "expire": {
-            "n": 59,
-            "avgRetPct": 4.292
+            "n": 54,
+            "avgRetPct": 4.521
           },
           "stop": {
-            "n": 15,
-            "avgRetPct": -8.284
+            "n": 23,
+            "avgRetPct": -8.445
           }
         },
         "timingMinProb": null,
@@ -2118,27 +2124,27 @@
           "execLag": 0,
           "execField": "close",
           "initialCapital": 500000,
-          "finalNav": 518009.44,
-          "totalReturnPct": 3.6,
-          "annualReturnPct": 3.71,
-          "maxDrawdownPct": 18.55,
-          "calmar": 0.2,
-          "sharpeDaily": 0.278,
-          "trades": 76,
-          "winRateTrade": 0.4605,
-          "avgHoldDays": 4.5,
-          "turnoverPct": 5111.7,
-          "exposurePct": 47.09,
+          "finalNav": 572332.56,
+          "totalReturnPct": 14.47,
+          "annualReturnPct": 14.92,
+          "maxDrawdownPct": 19.66,
+          "calmar": 0.759,
+          "sharpeDaily": 0.608,
+          "trades": 79,
+          "winRateTrade": 0.4557,
+          "avgHoldDays": 4.3,
+          "turnoverPct": 5224.1,
+          "exposurePct": 46.24,
           "tradingDays": 237,
           "effectiveN": 237,
           "avgTradeRetByReason": {
             "expire": {
-              "n": 61,
-              "avgRetPct": 2.598
+              "n": 56,
+              "avgRetPct": 4.582
             },
             "stop": {
-              "n": 15,
-              "avgRetPct": -8.183
+              "n": 23,
+              "avgRetPct": -8.102
             }
           },
           "timingMinProb": null,
@@ -2151,27 +2157,27 @@
           "execLag": 0,
           "execField": "close",
           "initialCapital": 500000,
-          "finalNav": 757939.18,
-          "totalReturnPct": 51.59,
-          "annualReturnPct": 134.66,
-          "maxDrawdownPct": 19.2,
-          "calmar": 7.015,
-          "sharpeDaily": 1.915,
-          "trades": 72,
-          "winRateTrade": 0.4722,
-          "avgHoldDays": 4.6,
-          "turnoverPct": 6143,
-          "exposurePct": 89.39,
+          "finalNav": 522235.48,
+          "totalReturnPct": 4.45,
+          "annualReturnPct": 9.33,
+          "maxDrawdownPct": 39.39,
+          "calmar": 0.237,
+          "sharpeDaily": 0.431,
+          "trades": 77,
+          "winRateTrade": 0.4156,
+          "avgHoldDays": 4.3,
+          "turnoverPct": 5359.6,
+          "exposurePct": 86.36,
           "tradingDays": 119,
           "effectiveN": 119,
           "avgTradeRetByReason": {
             "stop": {
-              "n": 14,
-              "avgRetPct": -8.233
+              "n": 23,
+              "avgRetPct": -8.245
             },
             "expire": {
-              "n": 58,
-              "avgRetPct": 5.145
+              "n": 54,
+              "avgRetPct": 5.014
             }
           },
           "timingMinProb": null,
@@ -2188,27 +2194,27 @@
           "execLag": 1,
           "execField": "open",
           "initialCapital": 500000,
-          "finalNav": 549557,
-          "totalReturnPct": 9.91,
-          "annualReturnPct": 10.22,
-          "maxDrawdownPct": 18.18,
-          "calmar": 0.562,
-          "sharpeDaily": 0.456,
-          "trades": 77,
-          "winRateTrade": 0.4935,
-          "avgHoldDays": 4.5,
-          "turnoverPct": 5438.2,
-          "exposurePct": 48.3,
+          "finalNav": 548989.12,
+          "totalReturnPct": 9.8,
+          "annualReturnPct": 10.1,
+          "maxDrawdownPct": 23.29,
+          "calmar": 0.434,
+          "sharpeDaily": 0.423,
+          "trades": 76,
+          "winRateTrade": 0.4342,
+          "avgHoldDays": 4.4,
+          "turnoverPct": 5174.6,
+          "exposurePct": 45.77,
           "tradingDays": 237,
           "effectiveN": 237,
           "avgTradeRetByReason": {
             "expire": {
-              "n": 62,
-              "avgRetPct": 3.016
+              "n": 54,
+              "avgRetPct": 4.574
             },
             "stop": {
-              "n": 15,
-              "avgRetPct": -8.501
+              "n": 22,
+              "avgRetPct": -8.589
             }
           },
           "timingMinProb": null,
@@ -2221,27 +2227,27 @@
           "execLag": 1,
           "execField": "open",
           "initialCapital": 500000,
-          "finalNav": 645355.31,
-          "totalReturnPct": 29.07,
-          "annualReturnPct": 68.75,
-          "maxDrawdownPct": 26,
-          "calmar": 2.645,
-          "sharpeDaily": 1.361,
-          "trades": 74,
-          "winRateTrade": 0.473,
-          "avgHoldDays": 4.5,
-          "turnoverPct": 5800.3,
-          "exposurePct": 89.04,
+          "finalNav": 478433.48,
+          "totalReturnPct": -4.31,
+          "annualReturnPct": -8.64,
+          "maxDrawdownPct": 38.76,
+          "calmar": -0.223,
+          "sharpeDaily": 0.057,
+          "trades": 77,
+          "winRateTrade": 0.4416,
+          "avgHoldDays": 4.2,
+          "turnoverPct": 5397,
+          "exposurePct": 85.53,
           "tradingDays": 119,
           "effectiveN": 119,
           "avgTradeRetByReason": {
             "expire": {
-              "n": 59,
-              "avgRetPct": 4.292
+              "n": 54,
+              "avgRetPct": 4.521
             },
             "stop": {
-              "n": 15,
-              "avgRetPct": -8.284
+              "n": 23,
+              "avgRetPct": -8.445
             }
           },
           "timingMinProb": null,
@@ -2371,27 +2377,27 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 637399.11,
-            "totalReturnPct": 27.48,
-            "annualReturnPct": 28.4,
-            "maxDrawdownPct": 18.7,
-            "calmar": 1.519,
-            "sharpeDaily": 0.934,
-            "trades": 63,
-            "winRateTrade": 0.4444,
+            "finalNav": 588379.98,
+            "totalReturnPct": 17.68,
+            "annualReturnPct": 18.24,
+            "maxDrawdownPct": 26.25,
+            "calmar": 0.695,
+            "sharpeDaily": 0.671,
+            "trades": 67,
+            "winRateTrade": 0.4627,
             "avgHoldDays": 4.5,
-            "turnoverPct": 4517,
-            "exposurePct": 38.29,
+            "turnoverPct": 4630.1,
+            "exposurePct": 40.87,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
               "expire": {
-                "n": 45,
-                "avgRetPct": 5.553
+                "n": 49,
+                "avgRetPct": 4.462
               },
               "stop": {
                 "n": 18,
-                "avgRetPct": -8.195
+                "avgRetPct": -8.018
               }
             },
             "timingMinProb": 0.5,
@@ -2403,56 +2409,56 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 690979.16,
-            "totalReturnPct": 38.2,
-            "annualReturnPct": 94.12,
-            "maxDrawdownPct": 33.03,
-            "calmar": 2.85,
-            "sharpeDaily": 1.516,
-            "trades": 74,
-            "winRateTrade": 0.4459,
-            "avgHoldDays": 4.4,
-            "turnoverPct": 6065.9,
-            "exposurePct": 85.5,
+            "finalNav": 675072.28,
+            "totalReturnPct": 35.01,
+            "annualReturnPct": 85.07,
+            "maxDrawdownPct": 34.45,
+            "calmar": 2.47,
+            "sharpeDaily": 1.45,
+            "trades": 76,
+            "winRateTrade": 0.4605,
+            "avgHoldDays": 4.3,
+            "turnoverPct": 6472.9,
+            "exposurePct": 86.89,
             "tradingDays": 119,
             "effectiveN": 119,
             "avgTradeRetByReason": {
               "expire": {
                 "n": 55,
-                "avgRetPct": 5.705
+                "avgRetPct": 5.874
               },
               "stop": {
-                "n": 19,
-                "avgRetPct": -8.276
+                "n": 21,
+                "avgRetPct": -8.326
               }
             },
             "timingMinProb": 0.5,
             "sizing": "equal"
           },
-          "robust": 0.534,
+          "robust": 0.635,
           "valC": {
             "horizon": "w1",
             "topK": 3,
             "execLag": 0,
             "execField": "close",
             "initialCapital": 500000,
-            "finalNav": 598104.01,
-            "totalReturnPct": 19.62,
-            "annualReturnPct": 20.26,
-            "maxDrawdownPct": 20.9,
-            "calmar": 0.969,
-            "sharpeDaily": 0.762,
-            "trades": 69,
-            "winRateTrade": 0.4058,
-            "avgHoldDays": 4.3,
-            "turnoverPct": 4801.7,
-            "exposurePct": 39.79,
+            "finalNav": 540446.95,
+            "totalReturnPct": 8.09,
+            "annualReturnPct": 8.34,
+            "maxDrawdownPct": 26.2,
+            "calmar": 0.318,
+            "sharpeDaily": 0.422,
+            "trades": 70,
+            "winRateTrade": 0.4,
+            "avgHoldDays": 4.4,
+            "turnoverPct": 4694.5,
+            "exposurePct": 41.2,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
               "expire": {
-                "n": 49,
-                "avgRetPct": 5.068
+                "n": 50,
+                "avgRetPct": 4.328
               },
               "stop": {
                 "n": 20,
@@ -2476,27 +2482,27 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 587904.65,
-            "totalReturnPct": 17.58,
-            "annualReturnPct": 18.14,
-            "maxDrawdownPct": 19.49,
-            "calmar": 0.931,
-            "sharpeDaily": 0.659,
+            "finalNav": 576011.66,
+            "totalReturnPct": 15.2,
+            "annualReturnPct": 15.68,
+            "maxDrawdownPct": 26.1,
+            "calmar": 0.601,
+            "sharpeDaily": 0.596,
             "trades": 66,
             "winRateTrade": 0.4545,
-            "avgHoldDays": 4.3,
-            "turnoverPct": 4653.8,
-            "exposurePct": 38.86,
+            "avgHoldDays": 4.5,
+            "turnoverPct": 4565.3,
+            "exposurePct": 40.17,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
               "expire": {
-                "n": 43,
-                "avgRetPct": 6.071
+                "n": 47,
+                "avgRetPct": 4.658
               },
               "stop": {
-                "n": 23,
-                "avgRetPct": -8.153
+                "n": 19,
+                "avgRetPct": -8.017
               }
             },
             "timingMinProb": 0.55,
@@ -2508,60 +2514,60 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 731150.37,
-            "totalReturnPct": 46.23,
-            "annualReturnPct": 117.97,
-            "maxDrawdownPct": 20.04,
-            "calmar": 5.886,
-            "sharpeDaily": 1.784,
-            "trades": 58,
-            "winRateTrade": 0.5345,
-            "avgHoldDays": 4.3,
-            "turnoverPct": 5180,
-            "exposurePct": 68.34,
+            "finalNav": 843958.25,
+            "totalReturnPct": 68.79,
+            "annualReturnPct": 192.53,
+            "maxDrawdownPct": 27.09,
+            "calmar": 7.106,
+            "sharpeDaily": 2.187,
+            "trades": 68,
+            "winRateTrade": 0.5294,
+            "avgHoldDays": 4.5,
+            "turnoverPct": 6097.2,
+            "exposurePct": 80.58,
             "tradingDays": 119,
             "effectiveN": 119,
             "avgTradeRetByReason": {
               "expire": {
-                "n": 44,
-                "avgRetPct": 6.076
+                "n": 53,
+                "avgRetPct": 6.494
               },
               "stop": {
-                "n": 14,
-                "avgRetPct": -8.439
+                "n": 15,
+                "avgRetPct": -8.277
               }
             },
             "timingMinProb": 0.55,
             "sizing": "equal"
           },
-          "robust": 0.489,
+          "robust": 0.651,
           "valC": {
             "horizon": "w1",
             "topK": 3,
             "execLag": 0,
             "execField": "close",
             "initialCapital": 500000,
-            "finalNav": 590848.3,
-            "totalReturnPct": 18.17,
-            "annualReturnPct": 18.75,
-            "maxDrawdownPct": 18.9,
-            "calmar": 0.992,
-            "sharpeDaily": 0.729,
-            "trades": 68,
-            "winRateTrade": 0.3971,
-            "avgHoldDays": 4.2,
-            "turnoverPct": 4667,
-            "exposurePct": 38.82,
+            "finalNav": 581785.56,
+            "totalReturnPct": 16.36,
+            "annualReturnPct": 16.88,
+            "maxDrawdownPct": 20.58,
+            "calmar": 0.82,
+            "sharpeDaily": 0.675,
+            "trades": 69,
+            "winRateTrade": 0.4203,
+            "avgHoldDays": 4.3,
+            "turnoverPct": 4809.2,
+            "exposurePct": 40.46,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
               "expire": {
-                "n": 47,
-                "avgRetPct": 5.312
+                "n": 50,
+                "avgRetPct": 4.588
               },
               "stop": {
-                "n": 21,
-                "avgRetPct": -8.027
+                "n": 19,
+                "avgRetPct": -8.02
               }
             },
             "timingMinProb": 0.55,
@@ -2581,27 +2587,27 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 565606.51,
-            "totalReturnPct": 13.12,
-            "annualReturnPct": 13.53,
-            "maxDrawdownPct": 25.52,
-            "calmar": 0.53,
-            "sharpeDaily": 0.535,
-            "trades": 62,
-            "winRateTrade": 0.4355,
+            "finalNav": 596652.22,
+            "totalReturnPct": 19.33,
+            "annualReturnPct": 19.95,
+            "maxDrawdownPct": 19.45,
+            "calmar": 1.026,
+            "sharpeDaily": 0.728,
+            "trades": 65,
+            "winRateTrade": 0.4154,
             "avgHoldDays": 4.5,
-            "turnoverPct": 4282.4,
-            "exposurePct": 38,
+            "turnoverPct": 4458.7,
+            "exposurePct": 39.2,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
               "expire": {
-                "n": 44,
-                "avgRetPct": 4.648
+                "n": 48,
+                "avgRetPct": 4.741
               },
               "stop": {
-                "n": 18,
-                "avgRetPct": -8.002
+                "n": 17,
+                "avgRetPct": -8.466
               }
             },
             "timingMinProb": 0.6,
@@ -2613,51 +2619,60 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 500000,
-            "totalReturnPct": 0,
-            "annualReturnPct": 0,
-            "maxDrawdownPct": 0,
-            "calmar": null,
-            "sharpeDaily": null,
-            "trades": 0,
-            "winRateTrade": null,
-            "avgHoldDays": null,
-            "turnoverPct": 0,
-            "exposurePct": 0,
+            "finalNav": 746269.18,
+            "totalReturnPct": 49.25,
+            "annualReturnPct": 127.31,
+            "maxDrawdownPct": 17.78,
+            "calmar": 7.159,
+            "sharpeDaily": 2.132,
+            "trades": 45,
+            "winRateTrade": 0.5556,
+            "avgHoldDays": 4.7,
+            "turnoverPct": 3805.4,
+            "exposurePct": 56.03,
             "tradingDays": 119,
             "effectiveN": 119,
-            "avgTradeRetByReason": {},
+            "avgTradeRetByReason": {
+              "expire": {
+                "n": 36,
+                "avgRetPct": 6.24
+              },
+              "stop": {
+                "n": 9,
+                "avgRetPct": -8.048
+              }
+            },
             "timingMinProb": 0.6,
             "sizing": "equal"
           },
-          "robust": 0.546,
+          "robust": 0.396,
           "valC": {
             "horizon": "w1",
             "topK": 3,
             "execLag": 0,
             "execField": "close",
             "initialCapital": 500000,
-            "finalNav": 539918.08,
-            "totalReturnPct": 7.98,
-            "annualReturnPct": 8.23,
-            "maxDrawdownPct": 26.57,
-            "calmar": 0.31,
-            "sharpeDaily": 0.427,
-            "trades": 63,
-            "winRateTrade": 0.3968,
-            "avgHoldDays": 4.3,
-            "turnoverPct": 4158.7,
-            "exposurePct": 37,
+            "finalNav": 580673.87,
+            "totalReturnPct": 16.13,
+            "annualReturnPct": 16.65,
+            "maxDrawdownPct": 22.08,
+            "calmar": 0.754,
+            "sharpeDaily": 0.69,
+            "trades": 65,
+            "winRateTrade": 0.4154,
+            "avgHoldDays": 4.4,
+            "turnoverPct": 4484.6,
+            "exposurePct": 38.65,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
               "expire": {
-                "n": 45,
-                "avgRetPct": 4.314
+                "n": 47,
+                "avgRetPct": 4.745
               },
               "stop": {
                 "n": 18,
-                "avgRetPct": -8.021
+                "avgRetPct": -8.116
               }
             },
             "timingMinProb": 0.6,
@@ -2677,31 +2692,31 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 564232.55,
-            "totalReturnPct": 12.85,
-            "annualReturnPct": 13.25,
-            "maxDrawdownPct": 26.95,
-            "calmar": 0.492,
-            "sharpeDaily": 0.509,
-            "trades": 80,
-            "winRateTrade": 0.4625,
-            "avgHoldDays": 4.3,
-            "turnoverPct": 5495,
-            "exposurePct": 46.39,
+            "finalNav": 575874.99,
+            "totalReturnPct": 15.17,
+            "annualReturnPct": 15.66,
+            "maxDrawdownPct": 26.3,
+            "calmar": 0.595,
+            "sharpeDaily": 0.561,
+            "trades": 106,
+            "winRateTrade": 0.4434,
+            "avgHoldDays": 3.2,
+            "turnoverPct": 7397.8,
+            "exposurePct": 46.95,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
               "expire": {
-                "n": 51,
-                "avgRetPct": 5.155
+                "n": 46,
+                "avgRetPct": 5.204
               },
               "stop": {
-                "n": 24,
-                "avgRetPct": -8.226
+                "n": 23,
+                "avgRetPct": -8.062
               },
               "timing-exit": {
-                "n": 5,
-                "avgRetPct": -1.083
+                "n": 37,
+                "avgRetPct": 0.711
               }
             },
             "timingExitProb": 0.4,
@@ -2713,64 +2728,68 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 472750.62,
-            "totalReturnPct": -5.45,
-            "annualReturnPct": -10.85,
-            "maxDrawdownPct": 36.19,
-            "calmar": -0.3,
-            "sharpeDaily": 0.025,
-            "trades": 78,
-            "winRateTrade": 0.4615,
-            "avgHoldDays": 4.2,
-            "turnoverPct": 5204.7,
-            "exposurePct": 85.23,
+            "finalNav": 554717.98,
+            "totalReturnPct": 10.94,
+            "annualReturnPct": 23.73,
+            "maxDrawdownPct": 33.43,
+            "calmar": 0.71,
+            "sharpeDaily": 0.661,
+            "trades": 86,
+            "winRateTrade": 0.4535,
+            "avgHoldDays": 3.8,
+            "turnoverPct": 6477.3,
+            "exposurePct": 87.91,
             "tradingDays": 119,
             "effectiveN": 119,
             "avgTradeRetByReason": {
-              "expire": {
-                "n": 51,
-                "avgRetPct": 5.209
+              "timing-exit": {
+                "n": 12,
+                "avgRetPct": 3.282
               },
               "stop": {
                 "n": 27,
-                "avgRetPct": -8.342
+                "avgRetPct": -8.346
+              },
+              "expire": {
+                "n": 47,
+                "avgRetPct": 6
               }
             },
             "timingExitProb": 0.4,
             "sizing": "equal"
           },
-          "robust": 0.579,
+          "robust": 0.573,
           "valC": {
             "horizon": "w1",
             "topK": 3,
             "execLag": 0,
             "execField": "close",
             "initialCapital": 500000,
-            "finalNav": 524402.63,
-            "totalReturnPct": 4.88,
-            "annualReturnPct": 5.03,
-            "maxDrawdownPct": 21.98,
-            "calmar": 0.229,
-            "sharpeDaily": 0.318,
-            "trades": 85,
-            "winRateTrade": 0.4235,
-            "avgHoldDays": 4,
-            "turnoverPct": 5504.2,
-            "exposurePct": 46.45,
+            "finalNav": 512467.11,
+            "totalReturnPct": 2.49,
+            "annualReturnPct": 2.57,
+            "maxDrawdownPct": 20.76,
+            "calmar": 0.124,
+            "sharpeDaily": 0.244,
+            "trades": 106,
+            "winRateTrade": 0.4151,
+            "avgHoldDays": 3.3,
+            "turnoverPct": 7286,
+            "exposurePct": 47.45,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
               "expire": {
-                "n": 56,
-                "avgRetPct": 4.365
+                "n": 50,
+                "avgRetPct": 4.303
               },
               "stop": {
                 "n": 22,
-                "avgRetPct": -8.188
+                "avgRetPct": -8.23
               },
               "timing-exit": {
-                "n": 7,
-                "avgRetPct": -2.966
+                "n": 34,
+                "avgRetPct": 0.405
               }
             },
             "timingExitProb": 0.4,
@@ -2790,31 +2809,31 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 604629.4,
-            "totalReturnPct": 20.93,
-            "annualReturnPct": 21.61,
-            "maxDrawdownPct": 20.11,
-            "calmar": 1.074,
-            "sharpeDaily": 0.735,
-            "trades": 92,
-            "winRateTrade": 0.4457,
-            "avgHoldDays": 3.7,
-            "turnoverPct": 6815.3,
-            "exposurePct": 46.53,
+            "finalNav": 555193.55,
+            "totalReturnPct": 11.04,
+            "annualReturnPct": 11.38,
+            "maxDrawdownPct": 24.95,
+            "calmar": 0.456,
+            "sharpeDaily": 0.448,
+            "trades": 108,
+            "winRateTrade": 0.4074,
+            "avgHoldDays": 3.2,
+            "turnoverPct": 7689.2,
+            "exposurePct": 46.72,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
               "expire": {
-                "n": 44,
-                "avgRetPct": 5.641
+                "n": 45,
+                "avgRetPct": 4.958
               },
               "stop": {
-                "n": 19,
-                "avgRetPct": -8.571
+                "n": 18,
+                "avgRetPct": -8.425
               },
               "timing-exit": {
-                "n": 29,
-                "avgRetPct": 0.362
+                "n": 45,
+                "avgRetPct": -0.006
               }
             },
             "timingExitProb": 0.45,
@@ -2826,68 +2845,68 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 581116.11,
-            "totalReturnPct": 16.22,
-            "annualReturnPct": 36.11,
-            "maxDrawdownPct": 35.12,
-            "calmar": 1.028,
-            "sharpeDaily": 0.839,
-            "trades": 86,
-            "winRateTrade": 0.4767,
-            "avgHoldDays": 3.8,
-            "turnoverPct": 6498.1,
-            "exposurePct": 87.89,
+            "finalNav": 549759.85,
+            "totalReturnPct": 9.95,
+            "annualReturnPct": 21.47,
+            "maxDrawdownPct": 36.77,
+            "calmar": 0.584,
+            "sharpeDaily": 0.632,
+            "trades": 103,
+            "winRateTrade": 0.4757,
+            "avgHoldDays": 3.1,
+            "turnoverPct": 7632.2,
+            "exposurePct": 84.6,
             "tradingDays": 119,
             "effectiveN": 119,
             "avgTradeRetByReason": {
               "timing-exit": {
-                "n": 8,
-                "avgRetPct": 4.355
+                "n": 36,
+                "avgRetPct": 1.499
               },
               "stop": {
-                "n": 29,
-                "avgRetPct": -8.378
+                "n": 26,
+                "avgRetPct": -8.245
               },
               "expire": {
-                "n": 49,
-                "avgRetPct": 6.54
+                "n": 41,
+                "avgRetPct": 6.338
               }
             },
             "timingExitProb": 0.45,
             "sizing": "equal"
           },
-          "robust": -0.204,
+          "robust": -0.152,
           "valC": {
             "horizon": "w1",
             "topK": 3,
             "execLag": 0,
             "execField": "close",
             "initialCapital": 500000,
-            "finalNav": 575806.31,
-            "totalReturnPct": 15.16,
-            "annualReturnPct": 15.64,
-            "maxDrawdownPct": 20.1,
-            "calmar": 0.778,
-            "sharpeDaily": 0.617,
-            "trades": 96,
-            "winRateTrade": 0.4375,
-            "avgHoldDays": 3.6,
-            "turnoverPct": 6588.4,
-            "exposurePct": 46.78,
+            "finalNav": 473562.21,
+            "totalReturnPct": -5.29,
+            "annualReturnPct": -5.44,
+            "maxDrawdownPct": 25.28,
+            "calmar": -0.215,
+            "sharpeDaily": -0.002,
+            "trades": 113,
+            "winRateTrade": 0.3894,
+            "avgHoldDays": 3.1,
+            "turnoverPct": 7319.2,
+            "exposurePct": 47.57,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
               "expire": {
-                "n": 45,
-                "avgRetPct": 6.059
+                "n": 46,
+                "avgRetPct": 4.663
               },
               "stop": {
-                "n": 20,
-                "avgRetPct": -8.102
+                "n": 22,
+                "avgRetPct": -8.255
               },
               "timing-exit": {
-                "n": 31,
-                "avgRetPct": -0.718
+                "n": 45,
+                "avgRetPct": -0.207
               }
             },
             "timingExitProb": 0.45,
@@ -2908,31 +2927,31 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 649588.09,
-            "totalReturnPct": 29.92,
-            "annualReturnPct": 30.93,
-            "maxDrawdownPct": 19.13,
-            "calmar": 1.616,
-            "sharpeDaily": 0.996,
-            "trades": 66,
-            "winRateTrade": 0.5,
-            "avgHoldDays": 4.1,
-            "turnoverPct": 4843,
-            "exposurePct": 37.16,
+            "finalNav": 547405.94,
+            "totalReturnPct": 9.48,
+            "annualReturnPct": 9.77,
+            "maxDrawdownPct": 28.57,
+            "calmar": 0.342,
+            "sharpeDaily": 0.414,
+            "trades": 72,
+            "winRateTrade": 0.3611,
+            "avgHoldDays": 3.9,
+            "turnoverPct": 5036,
+            "exposurePct": 38.76,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
               "expire": {
-                "n": 37,
-                "avgRetPct": 7.722
+                "n": 40,
+                "avgRetPct": 6.419
               },
               "stop": {
-                "n": 20,
-                "avgRetPct": -8.061
+                "n": 23,
+                "avgRetPct": -8.08
               },
               "timing-exit": {
                 "n": 9,
-                "avgRetPct": -1.409
+                "avgRetPct": -1.48
               }
             },
             "timingMinProb": 0.55,
@@ -2945,69 +2964,69 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 571204.77,
-            "totalReturnPct": 14.24,
-            "annualReturnPct": 31.39,
-            "maxDrawdownPct": 20.51,
-            "calmar": 1.53,
-            "sharpeDaily": 0.81,
-            "trades": 59,
-            "winRateTrade": 0.4746,
-            "avgHoldDays": 4.2,
-            "turnoverPct": 4406.2,
-            "exposurePct": 64.81,
+            "finalNav": 702418.59,
+            "totalReturnPct": 40.48,
+            "annualReturnPct": 100.77,
+            "maxDrawdownPct": 22.31,
+            "calmar": 4.517,
+            "sharpeDaily": 1.524,
+            "trades": 80,
+            "winRateTrade": 0.5625,
+            "avgHoldDays": 3.9,
+            "turnoverPct": 6417.6,
+            "exposurePct": 82.3,
             "tradingDays": 119,
             "effectiveN": 119,
             "avgTradeRetByReason": {
               "timing-exit": {
-                "n": 8,
-                "avgRetPct": 4.153
+                "n": 19,
+                "avgRetPct": 2.582
               },
               "expire": {
-                "n": 37,
-                "avgRetPct": 4.502
+                "n": 47,
+                "avgRetPct": 4.923
               },
               "stop": {
                 "n": 14,
-                "avgRetPct": -8.093
+                "avgRetPct": -8.372
               }
             },
             "timingMinProb": 0.55,
             "timingExitProb": 0.45,
             "sizing": "equal"
           },
-          "robust": 0.431,
+          "robust": 0.188,
           "valC": {
             "horizon": "w1",
             "topK": 3,
             "execLag": 0,
             "execField": "close",
             "initialCapital": 500000,
-            "finalNav": 593159.12,
-            "totalReturnPct": 18.63,
-            "annualReturnPct": 19.23,
-            "maxDrawdownPct": 17.52,
-            "calmar": 1.097,
-            "sharpeDaily": 0.732,
-            "trades": 69,
-            "winRateTrade": 0.4203,
-            "avgHoldDays": 3.9,
-            "turnoverPct": 4722.7,
-            "exposurePct": 36.86,
+            "finalNav": 594920.79,
+            "totalReturnPct": 18.98,
+            "annualReturnPct": 19.6,
+            "maxDrawdownPct": 19.67,
+            "calmar": 0.996,
+            "sharpeDaily": 0.753,
+            "trades": 72,
+            "winRateTrade": 0.3889,
+            "avgHoldDays": 4,
+            "turnoverPct": 4812.8,
+            "exposurePct": 39.35,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
               "expire": {
-                "n": 37,
-                "avgRetPct": 7.477
+                "n": 44,
+                "avgRetPct": 5.601
               },
               "stop": {
-                "n": 19,
-                "avgRetPct": -8.12
+                "n": 15,
+                "avgRetPct": -8.038
               },
               "timing-exit": {
                 "n": 13,
-                "avgRetPct": -2.797
+                "avgRetPct": -2.941
               }
             },
             "timingMinProb": 0.55,
@@ -3026,27 +3045,27 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 580351.29,
-            "totalReturnPct": 16.07,
-            "annualReturnPct": 16.58,
-            "maxDrawdownPct": 25.76,
-            "calmar": 0.644,
-            "sharpeDaily": 0.604,
+            "finalNav": 613934.25,
+            "totalReturnPct": 22.79,
+            "annualReturnPct": 23.53,
+            "maxDrawdownPct": 21.18,
+            "calmar": 1.111,
+            "sharpeDaily": 0.778,
             "trades": 76,
-            "winRateTrade": 0.4737,
+            "winRateTrade": 0.5132,
             "avgHoldDays": 4.4,
-            "turnoverPct": 5289.1,
-            "exposurePct": 45.85,
+            "turnoverPct": 5264.3,
+            "exposurePct": 45.5,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
               "expire": {
-                "n": 52,
-                "avgRetPct": 5.185
+                "n": 53,
+                "avgRetPct": 5.236
               },
               "stop": {
-                "n": 24,
-                "avgRetPct": -8.32
+                "n": 23,
+                "avgRetPct": -8.407
               }
             },
             "timingMinProb": null,
@@ -3059,57 +3078,57 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 543600.93,
-            "totalReturnPct": 8.72,
-            "annualReturnPct": 18.7,
-            "maxDrawdownPct": 41.39,
-            "calmar": 0.452,
-            "sharpeDaily": 0.587,
-            "trades": 77,
-            "winRateTrade": 0.4675,
+            "finalNav": 685376.15,
+            "totalReturnPct": 37.08,
+            "annualReturnPct": 90.91,
+            "maxDrawdownPct": 26.67,
+            "calmar": 3.409,
+            "sharpeDaily": 1.477,
+            "trades": 76,
+            "winRateTrade": 0.4737,
             "avgHoldDays": 4.3,
-            "turnoverPct": 5917.6,
-            "exposurePct": 87.27,
+            "turnoverPct": 6024,
+            "exposurePct": 85.54,
             "tradingDays": 119,
             "effectiveN": 119,
             "avgTradeRetByReason": {
               "expire": {
                 "n": 56,
-                "avgRetPct": 4.641
+                "avgRetPct": 5.789
               },
               "stop": {
-                "n": 21,
-                "avgRetPct": -8.016
+                "n": 20,
+                "avgRetPct": -8.429
               }
             },
             "timingMinProb": null,
             "timingExitProb": null,
             "sizing": "prob"
           },
-          "robust": 0.188,
+          "robust": 0.365,
           "valC": {
             "horizon": "w1",
             "topK": 3,
             "execLag": 0,
             "execField": "close",
             "initialCapital": 500000,
-            "finalNav": 640401.72,
-            "totalReturnPct": 28.08,
-            "annualReturnPct": 29.02,
-            "maxDrawdownPct": 18.19,
-            "calmar": 1.595,
-            "sharpeDaily": 0.957,
+            "finalNav": 628907.52,
+            "totalReturnPct": 25.78,
+            "annualReturnPct": 26.64,
+            "maxDrawdownPct": 19.26,
+            "calmar": 1.383,
+            "sharpeDaily": 0.9,
             "trades": 80,
-            "winRateTrade": 0.5125,
+            "winRateTrade": 0.4875,
             "avgHoldDays": 4.2,
-            "turnoverPct": 5668.7,
-            "exposurePct": 45.8,
+            "turnoverPct": 5590.4,
+            "exposurePct": 45.88,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
               "expire": {
                 "n": 57,
-                "avgRetPct": 5.177
+                "avgRetPct": 5.047
               },
               "stop": {
                 "n": 23,
@@ -3240,27 +3259,27 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 540796.73,
-            "totalReturnPct": 8.16,
-            "annualReturnPct": 8.41,
-            "maxDrawdownPct": 25.66,
-            "calmar": 0.328,
-            "sharpeDaily": 0.368,
-            "trades": 20,
-            "winRateTrade": 0.4,
-            "avgHoldDays": 17.6,
-            "turnoverPct": 1495.1,
-            "exposurePct": 48.44,
+            "finalNav": 722378.7,
+            "totalReturnPct": 44.48,
+            "annualReturnPct": 46.05,
+            "maxDrawdownPct": 20.49,
+            "calmar": 2.248,
+            "sharpeDaily": 1.251,
+            "trades": 17,
+            "winRateTrade": 0.4706,
+            "avgHoldDays": 18.4,
+            "turnoverPct": 1332.6,
+            "exposurePct": 43.52,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
               "expire": {
-                "n": 13,
-                "avgRetPct": 7.233
+                "n": 11,
+                "avgRetPct": 15.833
               },
               "stop": {
-                "n": 7,
-                "avgRetPct": -8.578
+                "n": 6,
+                "avgRetPct": -8
               }
             },
             "timingMinProb": 0.5,
@@ -3272,60 +3291,60 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 629939.53,
-            "totalReturnPct": 25.99,
-            "annualReturnPct": 60.59,
-            "maxDrawdownPct": 29.25,
-            "calmar": 2.071,
-            "sharpeDaily": 1.078,
+            "finalNav": 645791.54,
+            "totalReturnPct": 29.16,
+            "annualReturnPct": 68.98,
+            "maxDrawdownPct": 28.04,
+            "calmar": 2.46,
+            "sharpeDaily": 1.186,
             "trades": 24,
             "winRateTrade": 0.375,
-            "avgHoldDays": 12.5,
-            "turnoverPct": 1794.9,
-            "exposurePct": 79.46,
+            "avgHoldDays": 12.4,
+            "turnoverPct": 1778.9,
+            "exposurePct": 79.04,
             "tradingDays": 119,
             "effectiveN": 119,
             "avgTradeRetByReason": {
               "stop": {
                 "n": 13,
-                "avgRetPct": -8.405
+                "avgRetPct": -8.432
               },
               "expire": {
                 "n": 11,
-                "avgRetPct": 21.628
+                "avgRetPct": 22.119
               }
             },
             "timingMinProb": 0.5,
             "sizing": "equal"
           },
-          "robust": 0.169,
+          "robust": 0.59,
           "valC": {
             "horizon": "m1",
             "topK": 3,
             "execLag": 0,
             "execField": "close",
             "initialCapital": 500000,
-            "finalNav": 614871.73,
-            "totalReturnPct": 22.97,
-            "annualReturnPct": 23.73,
-            "maxDrawdownPct": 25.39,
-            "calmar": 0.934,
-            "sharpeDaily": 0.821,
-            "trades": 21,
-            "winRateTrade": 0.3333,
-            "avgHoldDays": 17.3,
-            "turnoverPct": 1516.9,
-            "exposurePct": 49.27,
+            "finalNav": 694798.93,
+            "totalReturnPct": 38.96,
+            "annualReturnPct": 40.32,
+            "maxDrawdownPct": 20.51,
+            "calmar": 1.966,
+            "sharpeDaily": 1.202,
+            "trades": 17,
+            "winRateTrade": 0.4118,
+            "avgHoldDays": 19.2,
+            "turnoverPct": 1288.7,
+            "exposurePct": 44.09,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
               "expire": {
-                "n": 11,
-                "avgRetPct": 14.451
+                "n": 12,
+                "avgRetPct": 13.052
               },
               "stop": {
-                "n": 10,
-                "avgRetPct": -8.019
+                "n": 5,
+                "avgRetPct": -8.208
               }
             },
             "timingMinProb": 0.5,
@@ -3345,27 +3364,27 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 714721.57,
-            "totalReturnPct": 42.94,
-            "annualReturnPct": 44.46,
-            "maxDrawdownPct": 13.63,
-            "calmar": 3.263,
-            "sharpeDaily": 1.282,
+            "finalNav": 666157.44,
+            "totalReturnPct": 33.23,
+            "annualReturnPct": 34.37,
+            "maxDrawdownPct": 20.49,
+            "calmar": 1.677,
+            "sharpeDaily": 1.01,
             "trades": 20,
-            "winRateTrade": 0.35,
-            "avgHoldDays": 17.6,
-            "turnoverPct": 1578.9,
-            "exposurePct": 47.92,
+            "winRateTrade": 0.4,
+            "avgHoldDays": 16.4,
+            "turnoverPct": 1551.8,
+            "exposurePct": 45.58,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
-              "stop": {
-                "n": 7,
-                "avgRetPct": -8
-              },
               "expire": {
-                "n": 13,
-                "avgRetPct": 14.878
+                "n": 12,
+                "avgRetPct": 13.54
+              },
+              "stop": {
+                "n": 8,
+                "avgRetPct": -8
               }
             },
             "timingMinProb": 0.55,
@@ -3377,60 +3396,60 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 543523.58,
-            "totalReturnPct": 8.7,
-            "annualReturnPct": 18.67,
-            "maxDrawdownPct": 31.77,
-            "calmar": 0.588,
-            "sharpeDaily": 0.509,
-            "trades": 22,
-            "winRateTrade": 0.4545,
-            "avgHoldDays": 13.9,
-            "turnoverPct": 1535,
-            "exposurePct": 80.39,
+            "finalNav": 668462.72,
+            "totalReturnPct": 33.69,
+            "annualReturnPct": 81.37,
+            "maxDrawdownPct": 29.86,
+            "calmar": 2.725,
+            "sharpeDaily": 1.307,
+            "trades": 21,
+            "winRateTrade": 0.4286,
+            "avgHoldDays": 14.4,
+            "turnoverPct": 1688.5,
+            "exposurePct": 79.74,
             "tradingDays": 119,
             "effectiveN": 119,
             "avgTradeRetByReason": {
               "stop": {
-                "n": 10,
-                "avgRetPct": -8.224
+                "n": 9,
+                "avgRetPct": -8.028
               },
               "expire": {
                 "n": 12,
-                "avgRetPct": 12.527
+                "avgRetPct": 18.42
               }
             },
             "timingMinProb": 0.55,
             "sizing": "equal"
           },
-          "robust": 2.014,
+          "robust": -0.354,
           "valC": {
             "horizon": "m1",
             "topK": 3,
             "execLag": 0,
             "execField": "close",
             "initialCapital": 500000,
-            "finalNav": 666655.43,
-            "totalReturnPct": 33.33,
-            "annualReturnPct": 34.47,
-            "maxDrawdownPct": 19.73,
-            "calmar": 1.747,
-            "sharpeDaily": 1.075,
-            "trades": 25,
-            "winRateTrade": 0.28,
-            "avgHoldDays": 14.2,
-            "turnoverPct": 1856.9,
-            "exposurePct": 47.8,
+            "finalNav": 739846.07,
+            "totalReturnPct": 47.97,
+            "annualReturnPct": 49.69,
+            "maxDrawdownPct": 20.43,
+            "calmar": 2.432,
+            "sharpeDaily": 1.393,
+            "trades": 18,
+            "winRateTrade": 0.4444,
+            "avgHoldDays": 18.4,
+            "turnoverPct": 1399.5,
+            "exposurePct": 45.02,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
-              "stop": {
-                "n": 13,
-                "avgRetPct": -8.029
-              },
               "expire": {
-                "n": 12,
-                "avgRetPct": 17.179
+                "n": 13,
+                "avgRetPct": 13.457
+              },
+              "stop": {
+                "n": 5,
+                "avgRetPct": -8.066
               }
             },
             "timingMinProb": 0.55,
@@ -3450,27 +3469,27 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 652519.5,
-            "totalReturnPct": 30.5,
-            "annualReturnPct": 31.53,
-            "maxDrawdownPct": 20.12,
-            "calmar": 1.567,
-            "sharpeDaily": 1.045,
-            "trades": 17,
-            "winRateTrade": 0.5882,
-            "avgHoldDays": 19.1,
-            "turnoverPct": 1159.2,
-            "exposurePct": 44.56,
+            "finalNav": 563122.78,
+            "totalReturnPct": 12.62,
+            "annualReturnPct": 13.02,
+            "maxDrawdownPct": 23.4,
+            "calmar": 0.556,
+            "sharpeDaily": 0.501,
+            "trades": 18,
+            "winRateTrade": 0.3889,
+            "avgHoldDays": 17.1,
+            "turnoverPct": 1343.2,
+            "exposurePct": 42.84,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
-              "stop": {
-                "n": 4,
-                "avgRetPct": -8.511
-              },
               "expire": {
-                "n": 13,
-                "avgRetPct": 9.798
+                "n": 12,
+                "avgRetPct": 7.842
+              },
+              "stop": {
+                "n": 6,
+                "avgRetPct": -8
               }
             },
             "timingMinProb": 0.6,
@@ -3482,60 +3501,60 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 592968.06,
-            "totalReturnPct": 18.59,
-            "annualReturnPct": 41.86,
-            "maxDrawdownPct": 28.85,
-            "calmar": 1.451,
-            "sharpeDaily": 0.969,
-            "trades": 22,
-            "winRateTrade": 0.4545,
-            "avgHoldDays": 13.4,
-            "turnoverPct": 1638,
-            "exposurePct": 78.03,
+            "finalNav": 771850.06,
+            "totalReturnPct": 54.37,
+            "annualReturnPct": 143.58,
+            "maxDrawdownPct": 29.16,
+            "calmar": 4.924,
+            "sharpeDaily": 1.902,
+            "trades": 18,
+            "winRateTrade": 0.6111,
+            "avgHoldDays": 16.4,
+            "turnoverPct": 1604.3,
+            "exposurePct": 79.48,
             "tradingDays": 119,
             "effectiveN": 119,
             "avgTradeRetByReason": {
               "expire": {
                 "n": 12,
-                "avgRetPct": 14.572
+                "avgRetPct": 19.599
               },
               "stop": {
-                "n": 10,
-                "avgRetPct": -8.241
+                "n": 6,
+                "avgRetPct": -8.164
               }
             },
             "timingMinProb": 0.6,
             "sizing": "equal"
           },
-          "robust": 0.536,
+          "robust": 0.837,
           "valC": {
             "horizon": "m1",
             "topK": 3,
             "execLag": 0,
             "execField": "close",
             "initialCapital": 500000,
-            "finalNav": 583124.71,
-            "totalReturnPct": 16.62,
-            "annualReturnPct": 17.16,
-            "maxDrawdownPct": 20.97,
-            "calmar": 0.818,
-            "sharpeDaily": 0.703,
-            "trades": 18,
-            "winRateTrade": 0.3889,
-            "avgHoldDays": 17.7,
-            "turnoverPct": 1158.3,
-            "exposurePct": 43.45,
+            "finalNav": 621076.55,
+            "totalReturnPct": 24.22,
+            "annualReturnPct": 25.01,
+            "maxDrawdownPct": 23.2,
+            "calmar": 1.078,
+            "sharpeDaily": 0.857,
+            "trades": 19,
+            "winRateTrade": 0.3158,
+            "avgHoldDays": 15.4,
+            "turnoverPct": 1381.2,
+            "exposurePct": 40.71,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
-              "stop": {
-                "n": 5,
-                "avgRetPct": -8.242
-              },
               "expire": {
-                "n": 13,
-                "avgRetPct": 7.635
+                "n": 10,
+                "avgRetPct": 15.308
+              },
+              "stop": {
+                "n": 9,
+                "avgRetPct": -8.152
               }
             },
             "timingMinProb": 0.6,
@@ -3555,31 +3574,31 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 698976.07,
-            "totalReturnPct": 39.8,
-            "annualReturnPct": 41.19,
-            "maxDrawdownPct": 22.06,
-            "calmar": 1.867,
-            "sharpeDaily": 1.108,
-            "trades": 36,
-            "winRateTrade": 0.5833,
-            "avgHoldDays": 10.6,
-            "turnoverPct": 2934.4,
-            "exposurePct": 53.13,
+            "finalNav": 661739.37,
+            "totalReturnPct": 32.35,
+            "annualReturnPct": 33.45,
+            "maxDrawdownPct": 21.37,
+            "calmar": 1.565,
+            "sharpeDaily": 0.973,
+            "trades": 61,
+            "winRateTrade": 0.4098,
+            "avgHoldDays": 6.2,
+            "turnoverPct": 4970.4,
+            "exposurePct": 51.97,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
               "expire": {
-                "n": 12,
-                "avgRetPct": 10.637
+                "n": 11,
+                "avgRetPct": 8.819
               },
               "timing-exit": {
-                "n": 19,
-                "avgRetPct": 1.565
+                "n": 43,
+                "avgRetPct": 1.66
               },
               "stop": {
-                "n": 5,
-                "avgRetPct": -8.148
+                "n": 7,
+                "avgRetPct": -8.134
               }
             },
             "timingExitProb": 0.4,
@@ -3591,68 +3610,68 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 503504.7,
-            "totalReturnPct": 0.7,
-            "annualReturnPct": 1.44,
-            "maxDrawdownPct": 35.17,
-            "calmar": 0.041,
-            "sharpeDaily": 0.263,
-            "trades": 86,
-            "winRateTrade": 0.4884,
-            "avgHoldDays": 3.7,
-            "turnoverPct": 6230.1,
-            "exposurePct": 84.41,
+            "finalNav": 559014.4,
+            "totalReturnPct": 11.8,
+            "annualReturnPct": 25.7,
+            "maxDrawdownPct": 28.06,
+            "calmar": 0.916,
+            "sharpeDaily": 0.721,
+            "trades": 72,
+            "winRateTrade": 0.5139,
+            "avgHoldDays": 4.3,
+            "turnoverPct": 5403.1,
+            "exposurePct": 81.42,
             "tradingDays": 119,
             "effectiveN": 119,
             "avgTradeRetByReason": {
               "timing-exit": {
-                "n": 63,
-                "avgRetPct": 1.811
+                "n": 52,
+                "avgRetPct": 2.17
               },
               "stop": {
-                "n": 17,
-                "avgRetPct": -8.015
+                "n": 15,
+                "avgRetPct": -8.017
               },
               "expire": {
-                "n": 6,
-                "avgRetPct": 14.301
+                "n": 5,
+                "avgRetPct": 19.874
               }
             },
             "timingExitProb": 0.4,
             "sizing": "equal"
           },
-          "robust": 1.413,
+          "robust": 1.114,
           "valC": {
             "horizon": "m1",
             "topK": 3,
             "execLag": 0,
             "execField": "close",
             "initialCapital": 500000,
-            "finalNav": 565382.89,
-            "totalReturnPct": 13.08,
-            "annualReturnPct": 13.49,
-            "maxDrawdownPct": 22.46,
-            "calmar": 0.6,
-            "sharpeDaily": 0.541,
-            "trades": 37,
-            "winRateTrade": 0.4054,
-            "avgHoldDays": 10.2,
-            "turnoverPct": 2726,
-            "exposurePct": 52.67,
+            "finalNav": 647225.46,
+            "totalReturnPct": 29.45,
+            "annualReturnPct": 30.44,
+            "maxDrawdownPct": 21.9,
+            "calmar": 1.39,
+            "sharpeDaily": 0.942,
+            "trades": 61,
+            "winRateTrade": 0.3934,
+            "avgHoldDays": 6.3,
+            "turnoverPct": 4909.5,
+            "exposurePct": 53.13,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
               "expire": {
                 "n": 11,
-                "avgRetPct": 10.848
-              },
-              "stop": {
-                "n": 11,
-                "avgRetPct": -8.153
+                "avgRetPct": 8.752
               },
               "timing-exit": {
-                "n": 15,
-                "avgRetPct": 1.49
+                "n": 41,
+                "avgRetPct": 1.987
+              },
+              "stop": {
+                "n": 9,
+                "avgRetPct": -8.445
               }
             },
             "timingExitProb": 0.4,
@@ -3672,31 +3691,31 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 699878.64,
-            "totalReturnPct": 39.98,
-            "annualReturnPct": 41.37,
-            "maxDrawdownPct": 21.12,
-            "calmar": 1.959,
-            "sharpeDaily": 1.088,
-            "trades": 64,
-            "winRateTrade": 0.4531,
-            "avgHoldDays": 5.9,
-            "turnoverPct": 5298.4,
-            "exposurePct": 52.83,
+            "finalNav": 720136.16,
+            "totalReturnPct": 44.03,
+            "annualReturnPct": 45.59,
+            "maxDrawdownPct": 21.37,
+            "calmar": 2.134,
+            "sharpeDaily": 1.194,
+            "trades": 63,
+            "winRateTrade": 0.4127,
+            "avgHoldDays": 6.1,
+            "turnoverPct": 5371.9,
+            "exposurePct": 53,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
               "expire": {
-                "n": 8,
-                "avgRetPct": 18.295
+                "n": 10,
+                "avgRetPct": 10.126
               },
               "timing-exit": {
-                "n": 48,
-                "avgRetPct": 1.068
+                "n": 46,
+                "avgRetPct": 2.072
               },
               "stop": {
-                "n": 8,
-                "avgRetPct": -8.102
+                "n": 7,
+                "avgRetPct": -8.134
               }
             },
             "timingExitProb": 0.45,
@@ -3708,23 +3727,23 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 537185.21,
-            "totalReturnPct": 7.44,
-            "annualReturnPct": 15.85,
-            "maxDrawdownPct": 34,
-            "calmar": 0.466,
-            "sharpeDaily": 0.541,
-            "trades": 91,
-            "winRateTrade": 0.4945,
-            "avgHoldDays": 3.5,
-            "turnoverPct": 6844.3,
-            "exposurePct": 84.55,
+            "finalNav": 538876.65,
+            "totalReturnPct": 7.78,
+            "annualReturnPct": 16.59,
+            "maxDrawdownPct": 33.79,
+            "calmar": 0.491,
+            "sharpeDaily": 0.552,
+            "trades": 95,
+            "winRateTrade": 0.4947,
+            "avgHoldDays": 3.3,
+            "turnoverPct": 7233.3,
+            "exposurePct": 85.48,
             "tradingDays": 119,
             "effectiveN": 119,
             "avgTradeRetByReason": {
               "timing-exit": {
-                "n": 71,
-                "avgRetPct": 2.347
+                "n": 75,
+                "avgRetPct": 2.254
               },
               "stop": {
                 "n": 15,
@@ -3738,38 +3757,38 @@
             "timingExitProb": 0.45,
             "sizing": "equal"
           },
-          "robust": 1.969,
+          "robust": 1.158,
           "valC": {
             "horizon": "m1",
             "topK": 3,
             "execLag": 0,
             "execField": "close",
             "initialCapital": 500000,
-            "finalNav": 549867.6,
-            "totalReturnPct": 9.97,
-            "annualReturnPct": 10.28,
-            "maxDrawdownPct": 24.13,
-            "calmar": 0.426,
-            "sharpeDaily": 0.458,
-            "trades": 64,
-            "winRateTrade": 0.375,
-            "avgHoldDays": 5.7,
-            "turnoverPct": 4738.8,
-            "exposurePct": 50.52,
+            "finalNav": 636420.79,
+            "totalReturnPct": 27.28,
+            "annualReturnPct": 28.19,
+            "maxDrawdownPct": 21.99,
+            "calmar": 1.282,
+            "sharpeDaily": 0.905,
+            "trades": 65,
+            "winRateTrade": 0.4,
+            "avgHoldDays": 5.9,
+            "turnoverPct": 5197.2,
+            "exposurePct": 52.52,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
               "expire": {
-                "n": 7,
-                "avgRetPct": 20.045
+                "n": 10,
+                "avgRetPct": 10.027
               },
               "timing-exit": {
                 "n": 44,
-                "avgRetPct": 0.735
+                "avgRetPct": 2.027
               },
               "stop": {
-                "n": 13,
-                "avgRetPct": -8.69
+                "n": 11,
+                "avgRetPct": -8.364
               }
             },
             "timingExitProb": 0.45,
@@ -3790,31 +3809,31 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 542309.92,
-            "totalReturnPct": 8.46,
-            "annualReturnPct": 8.72,
-            "maxDrawdownPct": 25.2,
-            "calmar": 0.346,
-            "sharpeDaily": 0.389,
-            "trades": 41,
-            "winRateTrade": 0.2927,
-            "avgHoldDays": 7.4,
-            "turnoverPct": 3023.7,
-            "exposurePct": 42,
+            "finalNav": 639596.47,
+            "totalReturnPct": 27.92,
+            "annualReturnPct": 28.85,
+            "maxDrawdownPct": 12.49,
+            "calmar": 2.309,
+            "sharpeDaily": 0.946,
+            "trades": 20,
+            "winRateTrade": 0.4,
+            "avgHoldDays": 13.3,
+            "turnoverPct": 1636.8,
+            "exposurePct": 36.21,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
-              "stop": {
-                "n": 8,
-                "avgRetPct": -8.101
-              },
               "expire": {
-                "n": 4,
-                "avgRetPct": 32.551
+                "n": 9,
+                "avgRetPct": 12.344
               },
               "timing-exit": {
-                "n": 29,
-                "avgRetPct": -0.286
+                "n": 7,
+                "avgRetPct": 1.435
+              },
+              "stop": {
+                "n": 4,
+                "avgRetPct": -8
               }
             },
             "timingMinProb": 0.55,
@@ -3827,69 +3846,69 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 413676.77,
-            "totalReturnPct": -17.26,
-            "annualReturnPct": -32.2,
-            "maxDrawdownPct": 30.78,
-            "calmar": -1.046,
-            "sharpeDaily": -0.983,
+            "finalNav": 522101.32,
+            "totalReturnPct": 4.42,
+            "annualReturnPct": 9.27,
+            "maxDrawdownPct": 25.63,
+            "calmar": 0.362,
+            "sharpeDaily": 0.338,
             "trades": 43,
-            "winRateTrade": 0.3953,
-            "avgHoldDays": 7.8,
-            "turnoverPct": 2465.3,
-            "exposurePct": 88.76,
+            "winRateTrade": 0.4419,
+            "avgHoldDays": 6.8,
+            "turnoverPct": 2833.8,
+            "exposurePct": 77.52,
             "tradingDays": 119,
             "effectiveN": 119,
             "avgTradeRetByReason": {
               "timing-exit": {
-                "n": 14,
-                "avgRetPct": 4.948
+                "n": 18,
+                "avgRetPct": 8.542
               },
               "stop": {
-                "n": 20,
-                "avgRetPct": -8.07
+                "n": 19,
+                "avgRetPct": -8.209
               },
               "expire": {
-                "n": 9,
-                "avgRetPct": 7.831
+                "n": 6,
+                "avgRetPct": 10.414
               }
             },
             "timingMinProb": 0.55,
             "timingExitProb": 0.45,
             "sizing": "equal"
           },
-          "robust": 1.085,
+          "robust": -0.095,
           "valC": {
             "horizon": "m1",
             "topK": 3,
             "execLag": 0,
             "execField": "close",
             "initialCapital": 500000,
-            "finalNav": 609257.95,
-            "totalReturnPct": 21.85,
-            "annualReturnPct": 22.56,
-            "maxDrawdownPct": 20.7,
-            "calmar": 1.09,
-            "sharpeDaily": 0.814,
-            "trades": 41,
-            "winRateTrade": 0.2439,
-            "avgHoldDays": 7.3,
-            "turnoverPct": 3101.7,
-            "exposurePct": 40.42,
+            "finalNav": 658151.24,
+            "totalReturnPct": 31.63,
+            "annualReturnPct": 32.7,
+            "maxDrawdownPct": 12.14,
+            "calmar": 2.693,
+            "sharpeDaily": 1.09,
+            "trades": 22,
+            "winRateTrade": 0.3636,
+            "avgHoldDays": 12.2,
+            "turnoverPct": 1784.5,
+            "exposurePct": 36.55,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
-              "stop": {
-                "n": 9,
-                "avgRetPct": -8.206
-              },
               "expire": {
-                "n": 4,
-                "avgRetPct": 32.629
+                "n": 8,
+                "avgRetPct": 13.878
               },
               "timing-exit": {
-                "n": 28,
-                "avgRetPct": 1.086
+                "n": 7,
+                "avgRetPct": 6.184
+              },
+              "stop": {
+                "n": 7,
+                "avgRetPct": -8.442
               }
             },
             "timingMinProb": 0.55,
@@ -3908,27 +3927,27 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 740492.16,
-            "totalReturnPct": 48.1,
-            "annualReturnPct": 49.83,
-            "maxDrawdownPct": 23.67,
-            "calmar": 2.105,
-            "sharpeDaily": 1.32,
-            "trades": 21,
-            "winRateTrade": 0.4286,
-            "avgHoldDays": 17.4,
-            "turnoverPct": 1669.8,
-            "exposurePct": 50.31,
+            "finalNav": 768556.46,
+            "totalReturnPct": 53.71,
+            "annualReturnPct": 55.68,
+            "maxDrawdownPct": 22.58,
+            "calmar": 2.466,
+            "sharpeDaily": 1.416,
+            "trades": 22,
+            "winRateTrade": 0.5,
+            "avgHoldDays": 16.9,
+            "turnoverPct": 1783.8,
+            "exposurePct": 50.87,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
               "expire": {
                 "n": 14,
-                "avgRetPct": 14.299
+                "avgRetPct": 15.346
               },
               "stop": {
-                "n": 7,
-                "avgRetPct": -8.731
+                "n": 8,
+                "avgRetPct": -8.64
               }
             },
             "timingMinProb": null,
@@ -3941,61 +3960,61 @@
             "execLag": 1,
             "execField": "open",
             "initialCapital": 500000,
-            "finalNav": 638048.21,
-            "totalReturnPct": 27.61,
-            "annualReturnPct": 64.86,
-            "maxDrawdownPct": 28.95,
-            "calmar": 2.24,
-            "sharpeDaily": 1.237,
-            "trades": 22,
-            "winRateTrade": 0.4545,
-            "avgHoldDays": 13.5,
-            "turnoverPct": 1567.3,
-            "exposurePct": 77.04,
+            "finalNav": 576893.56,
+            "totalReturnPct": 15.38,
+            "annualReturnPct": 34.09,
+            "maxDrawdownPct": 33.09,
+            "calmar": 1.03,
+            "sharpeDaily": 0.813,
+            "trades": 26,
+            "winRateTrade": 0.3077,
+            "avgHoldDays": 11.4,
+            "turnoverPct": 1815.9,
+            "exposurePct": 75.86,
             "tradingDays": 119,
             "effectiveN": 119,
             "avgTradeRetByReason": {
               "stop": {
-                "n": 11,
-                "avgRetPct": -8.387
+                "n": 15,
+                "avgRetPct": -8.357
               },
               "expire": {
                 "n": 11,
-                "avgRetPct": 18.719
+                "avgRetPct": 20.389
               }
             },
             "timingMinProb": null,
             "timingExitProb": null,
             "sizing": "prob"
           },
-          "robust": 0.133,
+          "robust": 0.615,
           "valC": {
             "horizon": "m1",
             "topK": 3,
             "execLag": 0,
             "execField": "close",
             "initialCapital": 500000,
-            "finalNav": 517992.48,
-            "totalReturnPct": 3.6,
-            "annualReturnPct": 3.71,
-            "maxDrawdownPct": 26.28,
-            "calmar": 0.141,
-            "sharpeDaily": 0.282,
-            "trades": 24,
-            "winRateTrade": 0.2917,
-            "avgHoldDays": 15,
-            "turnoverPct": 1659.8,
-            "exposurePct": 49.44,
+            "finalNav": 565956.45,
+            "totalReturnPct": 13.19,
+            "annualReturnPct": 13.61,
+            "maxDrawdownPct": 22.46,
+            "calmar": 0.606,
+            "sharpeDaily": 0.543,
+            "trades": 21,
+            "winRateTrade": 0.2857,
+            "avgHoldDays": 17.7,
+            "turnoverPct": 1571.6,
+            "exposurePct": 51.15,
             "tradingDays": 237,
             "effectiveN": 237,
             "avgTradeRetByReason": {
               "expire": {
                 "n": 12,
-                "avgRetPct": 10.985
+                "avgRetPct": 10.479
               },
               "stop": {
-                "n": 12,
-                "avgRetPct": -8.226
+                "n": 9,
+                "avgRetPct": -8.047
               }
             },
             "timingMinProb": null,
@@ -4006,7 +4025,7 @@
       ],
       "chosen": "m1 动量+择时退出(<0.45)",
       "chosenSingle": "m1 动量+择时退出(<0.45)",
-      "chosenSingleTestCalmar": 0.466,
+      "chosenSingleTestCalmar": 0.491,
       "baseW1": {
         "name": "w1 纯动量（无择时）",
         "hz": "w1",
@@ -4228,34 +4247,34 @@
         "isBaseline": false,
         "strategy": "单周期阈值",
         "horizon": "d1",
-        "threshold": 0.56,
-        "trades": 434,
-        "coverage": 0.0795,
+        "threshold": 0.66,
+        "trades": 1609,
+        "coverage": 0.2948,
         "samples": 5458,
         "baselineAvgPct": 0.0375,
         "baselineWinRate": 0.4826,
-        "winRate": 0.5115,
-        "avgRetPct": 0.1786,
-        "sdPct": 3.1198,
-        "sharpe": 0.0572,
-        "totalRetPct": 77.51
+        "winRate": 0.5531,
+        "avgRetPct": 0.249,
+        "sdPct": 2.2218,
+        "sharpe": 0.1121,
+        "totalRetPct": 400.63
       },
       {
         "name": "单周期阈值(d3)",
         "isBaseline": false,
         "strategy": "单周期阈值",
         "horizon": "d3",
-        "threshold": 0.66,
-        "trades": 868,
-        "coverage": 0.159,
+        "threshold": 0.5,
+        "trades": 2884,
+        "coverage": 0.5284,
         "samples": 5458,
         "baselineAvgPct": 0.0764,
         "baselineWinRate": 0.4943,
-        "winRate": 0.5184,
-        "avgRetPct": 0.5677,
-        "sdPct": 5.2915,
-        "sharpe": 0.1073,
-        "totalRetPct": 492.79
+        "winRate": 0.4695,
+        "avgRetPct": 0.0545,
+        "sdPct": 4.297,
+        "sharpe": 0.0127,
+        "totalRetPct": 157.31
       },
       {
         "name": "单周期阈值(w1)",
@@ -4263,33 +4282,33 @@
         "strategy": "单周期阈值",
         "horizon": "w1",
         "threshold": 0.66,
-        "trades": 1447,
-        "coverage": 0.2651,
+        "trades": 1677,
+        "coverage": 0.3073,
         "samples": 5458,
         "baselineAvgPct": 0.0979,
         "baselineWinRate": 0.48,
-        "winRate": 0.501,
-        "avgRetPct": 0.6362,
-        "sdPct": 6.7531,
-        "sharpe": 0.0942,
-        "totalRetPct": 920.58
+        "winRate": 0.517,
+        "avgRetPct": 0.6757,
+        "sdPct": 6.5043,
+        "sharpe": 0.1039,
+        "totalRetPct": 1133.2
       },
       {
         "name": "单周期阈值(m1)",
         "isBaseline": false,
         "strategy": "单周期阈值",
         "horizon": "m1",
-        "threshold": 0.66,
-        "trades": 194,
-        "coverage": 0.0355,
+        "threshold": 0.54,
+        "trades": 3667,
+        "coverage": 0.6719,
         "samples": 5458,
         "baselineAvgPct": 0.9342,
         "baselineWinRate": 0.4529,
-        "winRate": 0.4639,
-        "avgRetPct": 2.4958,
-        "sdPct": 14.1587,
-        "sharpe": 0.1763,
-        "totalRetPct": 484.19
+        "winRate": 0.4249,
+        "avgRetPct": 0.7254,
+        "sdPct": 11.9366,
+        "sharpe": 0.0608,
+        "totalRetPct": 2660.17
       },
       {
         "name": "截面TopK(K=1,w1)",
@@ -4302,11 +4321,11 @@
         "samples": 5458,
         "baselineAvgPct": 0.0979,
         "baselineWinRate": 0.48,
-        "winRate": 0.5169,
-        "avgRetPct": 1.433,
-        "sdPct": 9.5703,
-        "sharpe": 0.1497,
-        "totalRetPct": 169.09
+        "winRate": 0.5254,
+        "avgRetPct": 1.4225,
+        "sdPct": 9.613,
+        "sharpe": 0.148,
+        "totalRetPct": 167.85
       },
       {
         "name": "截面TopK(K=1,m1)",
@@ -4319,11 +4338,11 @@
         "samples": 5458,
         "baselineAvgPct": 0.9342,
         "baselineWinRate": 0.4529,
-        "winRate": 0.4661,
-        "avgRetPct": 3.1387,
-        "sdPct": 16.6895,
-        "sharpe": 0.1881,
-        "totalRetPct": 370.36
+        "winRate": 0.4237,
+        "avgRetPct": 2.4223,
+        "sdPct": 16.348,
+        "sharpe": 0.1482,
+        "totalRetPct": 285.83
       },
       {
         "name": "截面TopK(K=3,w1)",
@@ -4337,10 +4356,10 @@
         "baselineAvgPct": 0.0979,
         "baselineWinRate": 0.48,
         "winRate": 0.5113,
-        "avgRetPct": 0.7149,
-        "sdPct": 7.9153,
-        "sharpe": 0.0903,
-        "totalRetPct": 253.06
+        "avgRetPct": 0.8423,
+        "sdPct": 7.9655,
+        "sharpe": 0.1057,
+        "totalRetPct": 298.16
       },
       {
         "name": "截面TopK(K=3,m1)",
@@ -4353,11 +4372,11 @@
         "samples": 5458,
         "baselineAvgPct": 0.9342,
         "baselineWinRate": 0.4529,
-        "winRate": 0.4831,
-        "avgRetPct": 2.5422,
-        "sdPct": 13.9439,
-        "sharpe": 0.1823,
-        "totalRetPct": 899.92
+        "winRate": 0.4887,
+        "avgRetPct": 2.6435,
+        "sdPct": 14.7774,
+        "sharpe": 0.1789,
+        "totalRetPct": 935.82
       },
       {
         "name": "截面TopK(K=5,w1)",
@@ -4370,11 +4389,11 @@
         "samples": 5458,
         "baselineAvgPct": 0.0979,
         "baselineWinRate": 0.48,
-        "winRate": 0.5085,
-        "avgRetPct": 0.4564,
-        "sdPct": 7.2369,
-        "sharpe": 0.0631,
-        "totalRetPct": 269.29
+        "winRate": 0.5068,
+        "avgRetPct": 0.4702,
+        "sdPct": 7.2922,
+        "sharpe": 0.0645,
+        "totalRetPct": 277.43
       },
       {
         "name": "截面TopK(K=5,m1)",
@@ -4387,11 +4406,11 @@
         "samples": 5458,
         "baselineAvgPct": 0.9342,
         "baselineWinRate": 0.4529,
-        "winRate": 0.4864,
-        "avgRetPct": 1.7711,
-        "sdPct": 12.9086,
-        "sharpe": 0.1372,
-        "totalRetPct": 1044.97
+        "winRate": 0.4661,
+        "avgRetPct": 1.612,
+        "sdPct": 13.345,
+        "sharpe": 0.1208,
+        "totalRetPct": 951.09
       },
       {
         "name": "截面TopK(K=10,w1)",
@@ -4404,11 +4423,11 @@
         "samples": 5458,
         "baselineAvgPct": 0.0979,
         "baselineWinRate": 0.48,
-        "winRate": 0.5017,
-        "avgRetPct": 0.2977,
-        "sdPct": 6.531,
-        "sharpe": 0.0456,
-        "totalRetPct": 351.27
+        "winRate": 0.5042,
+        "avgRetPct": 0.3022,
+        "sdPct": 6.5282,
+        "sharpe": 0.0463,
+        "totalRetPct": 356.55
       },
       {
         "name": "截面TopK(K=10,m1)",
@@ -4421,11 +4440,11 @@
         "samples": 5458,
         "baselineAvgPct": 0.9342,
         "baselineWinRate": 0.4529,
-        "winRate": 0.4686,
-        "avgRetPct": 1.6761,
-        "sdPct": 13.0573,
-        "sharpe": 0.1284,
-        "totalRetPct": 1977.84
+        "winRate": 0.4644,
+        "avgRetPct": 1.5213,
+        "sdPct": 13.6703,
+        "sharpe": 0.1113,
+        "totalRetPct": 1795.17
       },
       {
         "name": "【基准】纯动量TopK(K=1,w1)",
@@ -4608,11 +4627,11 @@
         "samples": 5458,
         "baselineAvgPct": 0.0979,
         "baselineWinRate": 0.48,
-        "winRate": 0.5169,
-        "avgRetPct": 0.9829,
-        "sdPct": 9.9848,
-        "sharpe": 0.0984,
-        "totalRetPct": 347.96
+        "winRate": 0.5085,
+        "avgRetPct": 0.9116,
+        "sdPct": 9.9473,
+        "sharpe": 0.0916,
+        "totalRetPct": 322.72
       },
       {
         "name": "动量+0.3×模型z(K=3,m1)",
@@ -4625,11 +4644,11 @@
         "samples": 5458,
         "baselineAvgPct": 0.9342,
         "baselineWinRate": 0.4529,
-        "winRate": 0.4463,
-        "avgRetPct": 3.3437,
-        "sdPct": 22.0996,
-        "sharpe": 0.1513,
-        "totalRetPct": 1183.67
+        "winRate": 0.435,
+        "avgRetPct": 3.1635,
+        "sdPct": 22.0909,
+        "sharpe": 0.1432,
+        "totalRetPct": 1119.89
       },
       {
         "name": "动量+1×模型z(K=3,w1)",
@@ -4642,11 +4661,11 @@
         "samples": 5458,
         "baselineAvgPct": 0.0979,
         "baselineWinRate": 0.48,
-        "winRate": 0.5113,
-        "avgRetPct": 0.8187,
-        "sdPct": 9.8264,
-        "sharpe": 0.0833,
-        "totalRetPct": 289.81
+        "winRate": 0.5056,
+        "avgRetPct": 0.8465,
+        "sdPct": 9.8391,
+        "sharpe": 0.086,
+        "totalRetPct": 299.67
       },
       {
         "name": "动量+1×模型z(K=3,m1)",
@@ -4660,10 +4679,10 @@
         "baselineAvgPct": 0.9342,
         "baselineWinRate": 0.4529,
         "winRate": 0.4576,
-        "avgRetPct": 3.9129,
-        "sdPct": 21.8496,
-        "sharpe": 0.1791,
-        "totalRetPct": 1385.18
+        "avgRetPct": 3.8474,
+        "sdPct": 22.0501,
+        "sharpe": 0.1745,
+        "totalRetPct": 1362
       },
       {
         "name": "动量+3×模型z(K=3,w1)",
@@ -4676,11 +4695,11 @@
         "samples": 5458,
         "baselineAvgPct": 0.0979,
         "baselineWinRate": 0.48,
-        "winRate": 0.5254,
-        "avgRetPct": 1.0952,
-        "sdPct": 9.5389,
-        "sharpe": 0.1148,
-        "totalRetPct": 387.7
+        "winRate": 0.5226,
+        "avgRetPct": 1.173,
+        "sdPct": 9.5455,
+        "sharpe": 0.1229,
+        "totalRetPct": 415.23
       },
       {
         "name": "动量+3×模型z(K=3,m1)",
@@ -4693,27 +4712,27 @@
         "samples": 5458,
         "baselineAvgPct": 0.9342,
         "baselineWinRate": 0.4529,
-        "winRate": 0.4689,
-        "avgRetPct": 3.9832,
-        "sdPct": 20.7819,
-        "sharpe": 0.1917,
-        "totalRetPct": 1410.05
+        "winRate": 0.4831,
+        "avgRetPct": 4.5135,
+        "sdPct": 21.3694,
+        "sharpe": 0.2112,
+        "totalRetPct": 1597.79
       },
       {
         "name": "多周期共振(d3+w1+m1)",
         "isBaseline": false,
         "strategy": "多周期共振",
         "need": "d3+w1+m1",
-        "trades": 189,
-        "coverage": 0.0346,
+        "trades": 1478,
+        "coverage": 0.2708,
         "samples": 5458,
         "baselineAvgPct": 0.0979,
         "baselineWinRate": 0.48,
-        "winRate": 0.5026,
-        "avgRetPct": 1.148,
-        "sdPct": 6.4146,
-        "sharpe": 0.179,
-        "totalRetPct": 216.97
+        "winRate": 0.5129,
+        "avgRetPct": 0.7421,
+        "sdPct": 6.5504,
+        "sharpe": 0.1133,
+        "totalRetPct": 1096.89
       },
       {
         "name": "TopK(3)+阈值(w1)",
@@ -4721,16 +4740,16 @@
         "strategy": "截面TopK+阈值",
         "topK": 3,
         "threshold": 0.66,
-        "trades": 252,
-        "coverage": 0.0462,
+        "trades": 266,
+        "coverage": 0.0487,
         "samples": 5458,
         "baselineAvgPct": 0.0979,
         "baselineWinRate": 0.48,
-        "winRate": 0.5,
-        "avgRetPct": 1.2108,
-        "sdPct": 8.5944,
-        "sharpe": 0.1409,
-        "totalRetPct": 305.11
+        "winRate": 0.5038,
+        "avgRetPct": 1.1556,
+        "sdPct": 8.4215,
+        "sharpe": 0.1372,
+        "totalRetPct": 307.4
       },
       {
         "name": "TopK(5)+阈值(w1)",
@@ -4738,16 +4757,16 @@
         "strategy": "截面TopK+阈值",
         "topK": 5,
         "threshold": 0.66,
-        "trades": 408,
-        "coverage": 0.0748,
+        "trades": 434,
+        "coverage": 0.0795,
         "samples": 5458,
         "baselineAvgPct": 0.0979,
         "baselineWinRate": 0.48,
-        "winRate": 0.4877,
-        "avgRetPct": 0.7607,
-        "sdPct": 7.9085,
-        "sharpe": 0.0962,
-        "totalRetPct": 310.37
+        "winRate": 0.4977,
+        "avgRetPct": 0.8136,
+        "sdPct": 7.712,
+        "sharpe": 0.1055,
+        "totalRetPct": 353.09
       }
     ],
     "test": [
@@ -4756,34 +4775,34 @@
         "isBaseline": false,
         "strategy": "单周期阈值",
         "horizon": "d1",
-        "threshold": 0.56,
-        "trades": 2072,
-        "coverage": 0.3736,
+        "threshold": 0.66,
+        "trades": 1365,
+        "coverage": 0.2461,
         "samples": 5546,
         "baselineAvgPct": 0.0977,
         "baselineWinRate": 0.4915,
-        "winRate": 0.5019,
-        "avgRetPct": 0.0704,
-        "sdPct": 3.3887,
-        "sharpe": 0.0208,
-        "totalRetPct": 145.91
+        "winRate": 0.5172,
+        "avgRetPct": 0.2264,
+        "sdPct": 3.785,
+        "sharpe": 0.0598,
+        "totalRetPct": 309.03
       },
       {
         "name": "单周期阈值(d3)",
         "isBaseline": false,
         "strategy": "单周期阈值",
         "horizon": "d3",
-        "threshold": 0.66,
-        "trades": 53,
-        "coverage": 0.0097,
+        "threshold": 0.5,
+        "trades": 3486,
+        "coverage": 0.6394,
         "samples": 5452,
         "baselineAvgPct": 0.2896,
         "baselineWinRate": 0.4974,
-        "winRate": 0.6226,
-        "avgRetPct": 1.8352,
-        "sdPct": 6.3965,
-        "sharpe": 0.2869,
-        "totalRetPct": 97.27
+        "winRate": 0.5141,
+        "avgRetPct": 0.5689,
+        "sdPct": 5.7221,
+        "sharpe": 0.0994,
+        "totalRetPct": 1983.28
       },
       {
         "name": "单周期阈值(w1)",
@@ -4791,33 +4810,33 @@
         "strategy": "单周期阈值",
         "horizon": "w1",
         "threshold": 0.66,
-        "trades": 0,
-        "coverage": 0,
+        "trades": 5,
+        "coverage": 0.0009,
         "samples": 5358,
         "baselineAvgPct": 0.5632,
         "baselineWinRate": 0.4935,
-        "winRate": null,
-        "avgRetPct": null,
-        "sdPct": null,
-        "sharpe": null,
-        "totalRetPct": 0
+        "winRate": 0.6,
+        "avgRetPct": -0.4122,
+        "sdPct": 5.8921,
+        "sharpe": -0.07,
+        "totalRetPct": -2.06
       },
       {
         "name": "单周期阈值(m1)",
         "isBaseline": false,
         "strategy": "单周期阈值",
         "horizon": "m1",
-        "threshold": 0.66,
-        "trades": 910,
-        "coverage": 0.1996,
+        "threshold": 0.54,
+        "trades": 3498,
+        "coverage": 0.7673,
         "samples": 4559,
         "baselineAvgPct": 2.6853,
         "baselineWinRate": 0.5067,
-        "winRate": 0.6989,
-        "avgRetPct": 6.9036,
-        "sdPct": 15.9993,
-        "sharpe": 0.4315,
-        "totalRetPct": 6282.26
+        "winRate": 0.5243,
+        "avgRetPct": 3.4211,
+        "sdPct": 18.0466,
+        "sharpe": 0.1896,
+        "totalRetPct": 11967
       },
       {
         "name": "截面TopK(K=1,w1)",
@@ -4830,11 +4849,11 @@
         "samples": 5358,
         "baselineAvgPct": 0.5632,
         "baselineWinRate": 0.4935,
-        "winRate": 0.4912,
-        "avgRetPct": 0.9241,
-        "sdPct": 10.2777,
-        "sharpe": 0.0899,
-        "totalRetPct": 105.35
+        "winRate": 0.5351,
+        "avgRetPct": 1.7491,
+        "sdPct": 9.3455,
+        "sharpe": 0.1872,
+        "totalRetPct": 199.4
       },
       {
         "name": "截面TopK(K=1,m1)",
@@ -4847,11 +4866,11 @@
         "samples": 4559,
         "baselineAvgPct": 2.6853,
         "baselineWinRate": 0.5067,
-        "winRate": 0.6186,
-        "avgRetPct": 2.3704,
-        "sdPct": 17.4679,
-        "sharpe": 0.1357,
-        "totalRetPct": 229.93
+        "winRate": 0.5979,
+        "avgRetPct": 1.3215,
+        "sdPct": 16.8624,
+        "sharpe": 0.0784,
+        "totalRetPct": 128.19
       },
       {
         "name": "截面TopK(K=3,w1)",
@@ -4864,11 +4883,11 @@
         "samples": 5358,
         "baselineAvgPct": 0.5632,
         "baselineWinRate": 0.4935,
-        "winRate": 0.4854,
-        "avgRetPct": 1.1409,
-        "sdPct": 9.1419,
-        "sharpe": 0.1248,
-        "totalRetPct": 390.18
+        "winRate": 0.5146,
+        "avgRetPct": 1.5185,
+        "sdPct": 9.142,
+        "sharpe": 0.1661,
+        "totalRetPct": 519.34
       },
       {
         "name": "截面TopK(K=3,m1)",
@@ -4881,11 +4900,11 @@
         "samples": 4559,
         "baselineAvgPct": 2.6853,
         "baselineWinRate": 0.5067,
-        "winRate": 0.5704,
-        "avgRetPct": 3.2185,
-        "sdPct": 16.6801,
-        "sharpe": 0.193,
-        "totalRetPct": 936.57
+        "winRate": 0.567,
+        "avgRetPct": 3.3211,
+        "sdPct": 16.9601,
+        "sharpe": 0.1958,
+        "totalRetPct": 966.44
       },
       {
         "name": "截面TopK(K=5,w1)",
@@ -4898,11 +4917,11 @@
         "samples": 5358,
         "baselineAvgPct": 0.5632,
         "baselineWinRate": 0.4935,
-        "winRate": 0.4912,
-        "avgRetPct": 1.1552,
-        "sdPct": 8.9741,
-        "sharpe": 0.1287,
-        "totalRetPct": 658.48
+        "winRate": 0.5105,
+        "avgRetPct": 1.3942,
+        "sdPct": 9.4814,
+        "sharpe": 0.147,
+        "totalRetPct": 794.71
       },
       {
         "name": "截面TopK(K=5,m1)",
@@ -4915,11 +4934,11 @@
         "samples": 4559,
         "baselineAvgPct": 2.6853,
         "baselineWinRate": 0.5067,
-        "winRate": 0.5505,
-        "avgRetPct": 4.1554,
-        "sdPct": 17.8866,
-        "sharpe": 0.2323,
-        "totalRetPct": 2015.37
+        "winRate": 0.5608,
+        "avgRetPct": 4.0531,
+        "sdPct": 17.1475,
+        "sharpe": 0.2364,
+        "totalRetPct": 1965.77
       },
       {
         "name": "截面TopK(K=10,w1)",
@@ -4933,10 +4952,10 @@
         "baselineAvgPct": 0.5632,
         "baselineWinRate": 0.4935,
         "winRate": 0.5307,
-        "avgRetPct": 1.2768,
-        "sdPct": 8.6933,
-        "sharpe": 0.1469,
-        "totalRetPct": 1455.58
+        "avgRetPct": 1.3638,
+        "sdPct": 8.8704,
+        "sharpe": 0.1537,
+        "totalRetPct": 1554.71
       },
       {
         "name": "截面TopK(K=10,m1)",
@@ -4949,11 +4968,11 @@
         "samples": 4559,
         "baselineAvgPct": 2.6853,
         "baselineWinRate": 0.5067,
-        "winRate": 0.5845,
-        "avgRetPct": 4.5985,
-        "sdPct": 17.8946,
-        "sharpe": 0.257,
-        "totalRetPct": 4460.53
+        "winRate": 0.5732,
+        "avgRetPct": 4.2046,
+        "sdPct": 17.9609,
+        "sharpe": 0.2341,
+        "totalRetPct": 4078.47
       },
       {
         "name": "【基准】纯动量TopK(K=1,w1)",
@@ -5136,11 +5155,11 @@
         "samples": 5358,
         "baselineAvgPct": 0.5632,
         "baselineWinRate": 0.4935,
-        "winRate": 0.5088,
-        "avgRetPct": 1.6798,
-        "sdPct": 11.7341,
-        "sharpe": 0.1432,
-        "totalRetPct": 574.5
+        "winRate": 0.5146,
+        "avgRetPct": 1.6903,
+        "sdPct": 11.7439,
+        "sharpe": 0.1439,
+        "totalRetPct": 578.07
       },
       {
         "name": "动量+0.3×模型z(K=3,m1)",
@@ -5154,10 +5173,10 @@
         "baselineAvgPct": 2.6853,
         "baselineWinRate": 0.5067,
         "winRate": 0.4948,
-        "avgRetPct": 3.6049,
-        "sdPct": 27.8483,
-        "sharpe": 0.1294,
-        "totalRetPct": 1049.01
+        "avgRetPct": 3.6488,
+        "sdPct": 27.8254,
+        "sharpe": 0.1311,
+        "totalRetPct": 1061.8
       },
       {
         "name": "动量+1×模型z(K=3,w1)",
@@ -5170,11 +5189,11 @@
         "samples": 5358,
         "baselineAvgPct": 0.5632,
         "baselineWinRate": 0.4935,
-        "winRate": 0.5322,
-        "avgRetPct": 1.5282,
-        "sdPct": 11.6485,
-        "sharpe": 0.1312,
-        "totalRetPct": 522.63
+        "winRate": 0.5351,
+        "avgRetPct": 1.5548,
+        "sdPct": 11.6996,
+        "sharpe": 0.1329,
+        "totalRetPct": 531.73
       },
       {
         "name": "动量+1×模型z(K=3,m1)",
@@ -5187,11 +5206,11 @@
         "samples": 4559,
         "baselineAvgPct": 2.6853,
         "baselineWinRate": 0.5067,
-        "winRate": 0.5739,
-        "avgRetPct": 3.2101,
-        "sdPct": 26.9608,
-        "sharpe": 0.1191,
-        "totalRetPct": 934.13
+        "winRate": 0.5773,
+        "avgRetPct": 3.2874,
+        "sdPct": 27.0438,
+        "sharpe": 0.1216,
+        "totalRetPct": 956.64
       },
       {
         "name": "动量+3×模型z(K=3,w1)",
@@ -5204,11 +5223,11 @@
         "samples": 5358,
         "baselineAvgPct": 0.5632,
         "baselineWinRate": 0.4935,
-        "winRate": 0.5117,
-        "avgRetPct": 1.1145,
-        "sdPct": 10.6974,
-        "sharpe": 0.1042,
-        "totalRetPct": 381.16
+        "winRate": 0.5292,
+        "avgRetPct": 1.8459,
+        "sdPct": 10.7537,
+        "sharpe": 0.1717,
+        "totalRetPct": 631.3
       },
       {
         "name": "动量+3×模型z(K=3,m1)",
@@ -5221,27 +5240,27 @@
         "samples": 4559,
         "baselineAvgPct": 2.6853,
         "baselineWinRate": 0.5067,
-        "winRate": 0.5773,
+        "winRate": 0.567,
         "avgRetPct": 2.917,
-        "sdPct": 22.1318,
-        "sharpe": 0.1318,
-        "totalRetPct": 848.83
+        "sdPct": 21.0303,
+        "sharpe": 0.1387,
+        "totalRetPct": 848.85
       },
       {
         "name": "多周期共振(d3+w1+m1)",
         "isBaseline": false,
         "strategy": "多周期共振",
         "need": "d3+w1+m1",
-        "trades": 0,
-        "coverage": 0,
+        "trades": 4,
+        "coverage": 0.0007,
         "samples": 5358,
         "baselineAvgPct": 0.5632,
         "baselineWinRate": 0.4935,
-        "winRate": null,
-        "avgRetPct": null,
-        "sdPct": null,
-        "sharpe": null,
-        "totalRetPct": 0
+        "winRate": 0.5,
+        "avgRetPct": -2.2293,
+        "sdPct": 4.9274,
+        "sharpe": -0.4524,
+        "totalRetPct": -8.92
       },
       {
         "name": "TopK(3)+阈值(w1)",
@@ -5249,16 +5268,16 @@
         "strategy": "截面TopK+阈值",
         "topK": 3,
         "threshold": 0.66,
-        "trades": 0,
-        "coverage": 0,
+        "trades": 5,
+        "coverage": 0.0009,
         "samples": 5358,
         "baselineAvgPct": 0.5632,
         "baselineWinRate": 0.4935,
-        "winRate": null,
-        "avgRetPct": null,
-        "sdPct": null,
-        "sharpe": null,
-        "totalRetPct": 0
+        "winRate": 0.6,
+        "avgRetPct": -0.4122,
+        "sdPct": 5.8921,
+        "sharpe": -0.07,
+        "totalRetPct": -2.06
       },
       {
         "name": "TopK(5)+阈值(w1)",
@@ -5266,23 +5285,23 @@
         "strategy": "截面TopK+阈值",
         "topK": 5,
         "threshold": 0.66,
-        "trades": 0,
-        "coverage": 0,
+        "trades": 5,
+        "coverage": 0.0009,
         "samples": 5358,
         "baselineAvgPct": 0.5632,
         "baselineWinRate": 0.4935,
-        "winRate": null,
-        "avgRetPct": null,
-        "sdPct": null,
-        "sharpe": null,
-        "totalRetPct": 0
+        "winRate": 0.6,
+        "avgRetPct": -0.4122,
+        "sdPct": 5.8921,
+        "sharpe": -0.07,
+        "totalRetPct": -2.06
       }
     ],
     "chosen": {
-      "name": "TopK(3)+阈值(w1)",
-      "valExpectancy": 1.2108,
-      "valWinRate": 0.5,
-      "valTrades": 252,
+      "name": "动量+3×模型z(K=3,w1)",
+      "valExpectancy": 1.173,
+      "valWinRate": 0.5226,
+      "valTrades": 354,
       "adopted": false,
       "rejectReason": "仅为评估记录，未接入实盘（实盘走 decided.thresholds + confluencePolicy）",
       "rule": "验证集交易数≥150 且胜率≥50%，取单笔期望最高"
@@ -5294,16 +5313,16 @@
         "m1"
       ],
       "thresholds": {
-        "d3": 0.66,
+        "d3": 0.5,
         "w1": 0.66,
-        "m1": 0.66
+        "m1": 0.54
       },
-      "valWinRate": 0.5026,
-      "valExpectancy": 1.148,
-      "valTrades": 189,
-      "testWinRate": null,
-      "testExpectancy": null,
-      "testTrades": 0
+      "valWinRate": 0.5129,
+      "valExpectancy": 0.7421,
+      "valTrades": 1478,
+      "testWinRate": 0.5,
+      "testExpectancy": -2.2293,
+      "testTrades": 4
     }
   },
   "tradingPolicy": {
@@ -5311,27 +5330,27 @@
       "thresholds": {
         "d1": {
           "threshold": 0.66,
-          "winRate": 0.482,
-          "avgRetPct": 0.1482,
-          "trades": 5270
+          "winRate": 0.4885,
+          "avgRetPct": 0.1774,
+          "trades": 5087
         },
         "d3": {
-          "threshold": 0.63,
-          "winRate": 0.5768,
-          "avgRetPct": 0.7873,
-          "trades": 671
+          "threshold": 0.66,
+          "winRate": 0.5668,
+          "avgRetPct": 0.7562,
+          "trades": 674
         },
         "w1": {
-          "threshold": 0.58,
-          "winRate": 0.5912,
-          "avgRetPct": 1.3389,
-          "trades": 888
+          "threshold": 0.66,
+          "winRate": 0.5757,
+          "avgRetPct": 1.0552,
+          "trades": 865
         },
         "m1": {
           "threshold": 0.66,
-          "winRate": 0.6109,
-          "avgRetPct": 6.6954,
-          "trades": 3518
+          "winRate": 0.5997,
+          "avgRetPct": 4.7467,
+          "trades": 7309
         }
       },
       "fees": {
@@ -5346,24 +5365,24 @@
           "m1"
         ],
         "thresholds": {
-          "d3": 0.66,
+          "d3": 0.5,
           "w1": 0.66,
-          "m1": 0.66
+          "m1": 0.54
         },
-        "valWinRate": 0.5026,
-        "valExpectancy": 1.148,
-        "valTrades": 189,
-        "testWinRate": null,
-        "testExpectancy": null,
-        "testTrades": 0
+        "valWinRate": 0.5129,
+        "valExpectancy": 0.7421,
+        "valTrades": 1478,
+        "testWinRate": 0.5,
+        "testExpectancy": -2.2293,
+        "testTrades": 4
       }
     },
     "evaluated": {
       "chosenStrategy": {
-        "name": "TopK(3)+阈值(w1)",
-        "valExpectancy": 1.2108,
-        "valWinRate": 0.5,
-        "valTrades": 252,
+        "name": "动量+3×模型z(K=3,w1)",
+        "valExpectancy": 1.173,
+        "valWinRate": 0.5226,
+        "valTrades": 354,
         "adopted": false,
         "rejectReason": "仅为评估记录，未接入实盘（实盘走 decided.thresholds + confluencePolicy）",
         "rule": "验证集交易数≥150 且胜率≥50%，取单笔期望最高"
@@ -5377,20 +5396,20 @@
           "exitProb": 0.45
         },
         "sizing": "equal",
-        "valCalmar": 1.959,
-        "valRobust": 1.969,
-        "testCalmar": 0.466,
-        "testReturn": 7.44,
-        "testTrades": 91,
+        "valCalmar": 2.134,
+        "valRobust": 1.158,
+        "testCalmar": 0.491,
+        "testReturn": 7.78,
+        "testTrades": 95,
         "basis": "验证集两半中更差的一半 Calmar 最高，且交易数≥40（稳健准则）"
       },
       "rotationWeight": {
         "adopted": false,
         "rejectReason": "验证集与测试集结论相反，w 不可靠估计",
-        "w": 0,
+        "w": 0.75,
         "basis": "验证集组合口径 Calmar 最高且交易数≥60；w=动量权重",
-        "valCalmar": 0.562,
-        "testCalmar": 2.645,
+        "valCalmar": 0.434,
+        "testCalmar": -0.223,
         "onlineCurrent": 0.5
       }
     },
@@ -5404,211 +5423,211 @@
   "leaderboard": {
     "d1": [
       {
-        "expert": "soxS",
-        "n": 21291,
-        "abstain": 21291,
-        "abstainRate": 1,
-        "hitRate": 0.5226,
-        "brier": 0.25,
-        "weight": 0.0148,
-        "priorWeight": 0.0926,
-        "trained": true
-      },
-      {
-        "expert": "soxMom",
-        "n": 21291,
-        "abstain": 21291,
-        "abstainRate": 1,
-        "hitRate": 0.5226,
-        "brier": 0.25,
-        "weight": 0.0148,
-        "priorWeight": 0.0093,
-        "trained": true
-      },
-      {
         "expert": "us10y",
-        "n": 21291,
-        "abstain": 21291,
-        "abstainRate": 1,
-        "hitRate": 0.5226,
-        "brier": 0.25,
-        "weight": 0.0148,
+        "n": 21284,
+        "abstain": 1145,
+        "abstainRate": 0.0538,
+        "hitRate": 0.5368,
+        "brier": 0.2491,
+        "weight": 0.0162,
         "priorWeight": 0.0093,
-        "trained": true
-      },
-      {
-        "expert": "spxS",
-        "n": 21291,
-        "abstain": 21291,
-        "abstainRate": 1,
-        "hitRate": 0.5226,
-        "brier": 0.25,
-        "weight": 0.0148,
-        "priorWeight": 0.0556,
         "trained": true
       },
       {
         "expert": "volS",
-        "n": 21291,
-        "abstain": 15576,
+        "n": 21284,
+        "abstain": 15572,
         "abstainRate": 0.7316,
         "hitRate": 0.5032,
         "brier": 0.275,
-        "weight": 0.0122,
+        "weight": 0.0121,
         "priorWeight": 0.1296,
         "trained": true
       },
       {
         "expert": "mfi",
-        "n": 21291,
-        "abstain": 9132,
+        "n": 21284,
+        "abstain": 9128,
         "abstainRate": 0.4289,
         "hitRate": 0.5172,
         "brier": 0.2877,
-        "weight": 0.0358,
+        "weight": 0.032,
         "priorWeight": 0.0093,
         "trained": true
       },
       {
         "expert": "rsiRev",
-        "n": 21291,
-        "abstain": 12055,
+        "n": 21284,
+        "abstain": 12050,
         "abstainRate": 0.5662,
-        "hitRate": 0.5136,
+        "hitRate": 0.5135,
         "brier": 0.3019,
-        "weight": 0.1469,
+        "weight": 0.1295,
         "priorWeight": 0.1111,
         "trained": true
       },
       {
+        "expert": "spxS",
+        "n": 21284,
+        "abstain": 778,
+        "abstainRate": 0.0366,
+        "hitRate": 0.5245,
+        "brier": 0.3063,
+        "weight": 0.0533,
+        "priorWeight": 0.0556,
+        "trained": true
+      },
+      {
         "expert": "rangePos",
-        "n": 21291,
+        "n": 21284,
         "abstain": 50,
         "abstainRate": 0.0023,
-        "hitRate": 0.4983,
+        "hitRate": 0.4984,
         "brier": 0.3077,
-        "weight": 0.0451,
+        "weight": 0.0404,
         "priorWeight": 0.0093,
         "trained": true
       },
       {
         "expert": "idxMom",
-        "n": 21291,
+        "n": 21284,
         "abstain": 0,
         "abstainRate": 0,
-        "hitRate": 0.5066,
+        "hitRate": 0.5065,
         "brier": 0.3106,
-        "weight": 0.0744,
+        "weight": 0.0666,
         "priorWeight": 0.0556,
         "trained": true
       },
       {
         "expert": "boll",
-        "n": 21291,
+        "n": 21284,
         "abstain": 2,
         "abstainRate": 0.0001,
-        "hitRate": 0.4996,
+        "hitRate": 0.4995,
         "brier": 0.3459,
-        "weight": 0.0244,
+        "weight": 0.0215,
         "priorWeight": 0.037,
         "trained": true
       },
       {
         "expert": "kdj",
-        "n": 21291,
+        "n": 21284,
         "abstain": 0,
         "abstainRate": 0,
         "hitRate": 0.5162,
-        "brier": 0.354,
+        "brier": 0.3539,
         "weight": 0.012,
         "priorWeight": 0.0463,
         "trained": true
       },
       {
+        "expert": "soxMom",
+        "n": 21284,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5071,
+        "brier": 0.3609,
+        "weight": 0.0694,
+        "priorWeight": 0.0093,
+        "trained": true
+      },
+      {
+        "expert": "soxS",
+        "n": 21284,
+        "abstain": 778,
+        "abstainRate": 0.0366,
+        "hitRate": 0.5071,
+        "brier": 0.3679,
+        "weight": 0.012,
+        "priorWeight": 0.0926,
+        "trained": true
+      },
+      {
         "expert": "closePos",
-        "n": 21291,
+        "n": 21284,
         "abstain": 477,
         "abstainRate": 0.0224,
-        "hitRate": 0.4716,
+        "hitRate": 0.4715,
         "brier": 0.3684,
-        "weight": 0.0129,
+        "weight": 0.0128,
         "priorWeight": 0.0741,
         "trained": true
       },
       {
         "expert": "rel",
-        "n": 21291,
+        "n": 21284,
         "abstain": 0,
         "abstainRate": 0,
         "hitRate": 0.4981,
         "brier": 0.374,
-        "weight": 0.0433,
+        "weight": 0.0387,
         "priorWeight": 0.0093,
         "trained": true
       },
       {
         "expert": "mom5",
-        "n": 21291,
+        "n": 21284,
         "abstain": 240,
         "abstainRate": 0.0113,
         "hitRate": 0.4959,
         "brier": 0.3754,
-        "weight": 0.0898,
+        "weight": 0.0803,
         "priorWeight": 0.1389,
         "trained": true
       },
       {
         "expert": "obv",
-        "n": 21291,
+        "n": 21284,
         "abstain": 0,
         "abstainRate": 0,
         "hitRate": 0.4985,
         "brier": 0.3811,
-        "weight": 0.0384,
+        "weight": 0.0343,
         "priorWeight": 0.0093,
         "trained": true
       },
       {
         "expert": "mom",
-        "n": 21291,
+        "n": 21284,
         "abstain": 2,
         "abstainRate": 0.0001,
         "hitRate": 0.5023,
         "brier": 0.4033,
-        "weight": 0.0623,
+        "weight": 0.0557,
         "priorWeight": 0.0463,
         "trained": true
       },
       {
         "expert": "trend",
-        "n": 21291,
+        "n": 21284,
         "abstain": 0,
         "abstainRate": 0,
-        "hitRate": 0.5038,
+        "hitRate": 0.5039,
         "brier": 0.4081,
-        "weight": 0.0936,
+        "weight": 0.0838,
         "priorWeight": 0.0093,
         "trained": true
       },
       {
         "expert": "indexS",
-        "n": 21291,
-        "abstain": 24,
-        "abstainRate": 0.0011,
-        "hitRate": 0.5048,
+        "n": 21284,
+        "abstain": 22,
+        "abstainRate": 0.001,
+        "hitRate": 0.5047,
         "brier": 0.4949,
-        "weight": 0.0799,
+        "weight": 0.0715,
         "priorWeight": 0.0741,
         "trained": true
       },
       {
         "expert": "macdDir",
-        "n": 21291,
+        "n": 21284,
         "abstain": 0,
         "abstainRate": 0,
         "hitRate": 0.4988,
         "brier": 0.5012,
-        "weight": 0.1144,
+        "weight": 0.1023,
         "priorWeight": 0.0185,
         "trained": true
       },
@@ -5637,211 +5656,211 @@
     ],
     "d3": [
       {
-        "expert": "soxS",
-        "n": 21291,
-        "abstain": 21291,
-        "abstainRate": 1,
-        "hitRate": 0.5303,
-        "brier": 0.25,
-        "weight": 0.0581,
-        "priorWeight": 0.0755,
-        "trained": true
-      },
-      {
-        "expert": "soxMom",
-        "n": 21291,
-        "abstain": 21291,
-        "abstainRate": 1,
-        "hitRate": 0.5303,
-        "brier": 0.25,
-        "weight": 0.0581,
-        "priorWeight": 0.0377,
-        "trained": true
-      },
-      {
         "expert": "us10y",
-        "n": 21291,
-        "abstain": 21291,
-        "abstainRate": 1,
-        "hitRate": 0.5303,
-        "brier": 0.25,
-        "weight": 0.0581,
+        "n": 21284,
+        "abstain": 1145,
+        "abstainRate": 0.0538,
+        "hitRate": 0.5126,
+        "brier": 0.2496,
+        "weight": 0.0716,
         "priorWeight": 0.0094,
         "trained": true
       },
       {
-        "expert": "spxS",
-        "n": 21291,
-        "abstain": 21291,
-        "abstainRate": 1,
-        "hitRate": 0.5303,
-        "brier": 0.25,
-        "weight": 0.0581,
-        "priorWeight": 0.0189,
-        "trained": true
-      },
-      {
         "expert": "volS",
-        "n": 21291,
-        "abstain": 15576,
+        "n": 21284,
+        "abstain": 15572,
         "abstainRate": 0.7316,
         "hitRate": 0.5159,
-        "brier": 0.2707,
-        "weight": 0.0129,
+        "brier": 0.2708,
+        "weight": 0.0131,
         "priorWeight": 0.1132,
         "trained": true
       },
       {
         "expert": "mfi",
-        "n": 21291,
-        "abstain": 9132,
+        "n": 21284,
+        "abstain": 9128,
         "abstainRate": 0.4289,
         "hitRate": 0.5291,
         "brier": 0.2832,
-        "weight": 0.0316,
+        "weight": 0.0343,
         "priorWeight": 0.0189,
         "trained": true
       },
       {
         "expert": "rangePos",
-        "n": 21291,
+        "n": 21284,
         "abstain": 50,
         "abstainRate": 0.0023,
         "hitRate": 0.4993,
         "brier": 0.3051,
-        "weight": 0.0256,
+        "weight": 0.0277,
         "priorWeight": 0.0094,
         "trained": true
       },
       {
         "expert": "rsiRev",
-        "n": 21291,
-        "abstain": 12055,
+        "n": 21284,
+        "abstain": 12050,
         "abstainRate": 0.5662,
         "hitRate": 0.5119,
-        "brier": 0.3054,
-        "weight": 0.4539,
+        "brier": 0.3053,
+        "weight": 0.5394,
         "priorWeight": 0.0094,
         "trained": true
       },
       {
         "expert": "idxMom",
-        "n": 21291,
+        "n": 21284,
         "abstain": 0,
         "abstainRate": 0,
-        "hitRate": 0.5023,
-        "brier": 0.3079,
-        "weight": 0.026,
+        "hitRate": 0.5022,
+        "brier": 0.308,
+        "weight": 0.0282,
         "priorWeight": 0.0377,
         "trained": true
       },
       {
+        "expert": "spxS",
+        "n": 21284,
+        "abstain": 778,
+        "abstainRate": 0.0366,
+        "hitRate": 0.5024,
+        "brier": 0.3105,
+        "weight": 0.0227,
+        "priorWeight": 0.0189,
+        "trained": true
+      },
+      {
         "expert": "boll",
-        "n": 21291,
+        "n": 21284,
         "abstain": 2,
         "abstainRate": 0.0001,
         "hitRate": 0.5002,
-        "brier": 0.3495,
-        "weight": 0.0227,
+        "brier": 0.3494,
+        "weight": 0.027,
         "priorWeight": 0.0094,
         "trained": true
       },
       {
         "expert": "kdj",
-        "n": 21291,
+        "n": 21284,
         "abstain": 0,
         "abstainRate": 0,
-        "hitRate": 0.51,
-        "brier": 0.3537,
+        "hitRate": 0.5101,
+        "brier": 0.3536,
         "weight": 0.012,
         "priorWeight": 0.0472,
         "trained": true
       },
       {
         "expert": "closePos",
-        "n": 21291,
+        "n": 21284,
         "abstain": 477,
         "abstainRate": 0.0224,
-        "hitRate": 0.489,
-        "brier": 0.3576,
-        "weight": 0.0135,
+        "hitRate": 0.4889,
+        "brier": 0.3577,
+        "weight": 0.0136,
         "priorWeight": 0.0189,
         "trained": true
       },
       {
-        "expert": "rel",
-        "n": 21291,
+        "expert": "soxMom",
+        "n": 21284,
         "abstain": 0,
         "abstainRate": 0,
-        "hitRate": 0.5057,
+        "hitRate": 0.518,
+        "brier": 0.3589,
+        "weight": 0.0268,
+        "priorWeight": 0.0377,
+        "trained": true
+      },
+      {
+        "expert": "soxS",
+        "n": 21284,
+        "abstain": 778,
+        "abstainRate": 0.0366,
+        "hitRate": 0.502,
+        "brier": 0.3667,
+        "weight": 0.012,
+        "priorWeight": 0.0755,
+        "trained": true
+      },
+      {
+        "expert": "rel",
+        "n": 21284,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5056,
         "brier": 0.3685,
-        "weight": 0.0195,
+        "weight": 0.0199,
         "priorWeight": 0.0472,
         "trained": true
       },
       {
         "expert": "mom5",
-        "n": 21291,
+        "n": 21284,
         "abstain": 240,
         "abstainRate": 0.0113,
         "hitRate": 0.4911,
-        "brier": 0.3772,
-        "weight": 0.0242,
+        "brier": 0.3773,
+        "weight": 0.0246,
         "priorWeight": 0.0566,
         "trained": true
       },
       {
         "expert": "obv",
-        "n": 21291,
+        "n": 21284,
         "abstain": 0,
         "abstainRate": 0,
         "hitRate": 0.4977,
         "brier": 0.3798,
-        "weight": 0.0186,
+        "weight": 0.0189,
         "priorWeight": 0.0377,
         "trained": true
       },
       {
         "expert": "mom",
-        "n": 21291,
+        "n": 21284,
         "abstain": 2,
         "abstainRate": 0.0001,
-        "hitRate": 0.509,
+        "hitRate": 0.5089,
         "brier": 0.3983,
-        "weight": 0.0195,
+        "weight": 0.0198,
         "priorWeight": 0.1509,
         "trained": true
       },
       {
         "expert": "trend",
-        "n": 21291,
+        "n": 21284,
         "abstain": 0,
         "abstainRate": 0,
-        "hitRate": 0.5036,
+        "hitRate": 0.5037,
         "brier": 0.4081,
-        "weight": 0.0229,
+        "weight": 0.0232,
         "priorWeight": 0.1226,
         "trained": true
       },
       {
         "expert": "indexS",
-        "n": 21291,
-        "abstain": 24,
-        "abstainRate": 0.0011,
-        "hitRate": 0.5069,
-        "brier": 0.4929,
-        "weight": 0.0205,
+        "n": 21284,
+        "abstain": 22,
+        "abstainRate": 0.001,
+        "hitRate": 0.5068,
+        "brier": 0.4931,
+        "weight": 0.0207,
         "priorWeight": 0.0755,
         "trained": true
       },
       {
         "expert": "macdDir",
-        "n": 21291,
+        "n": 21284,
         "abstain": 0,
         "abstainRate": 0,
-        "hitRate": 0.4981,
-        "brier": 0.5019,
-        "weight": 0.0251,
+        "hitRate": 0.498,
+        "brier": 0.502,
+        "weight": 0.0255,
         "priorWeight": 0.0849,
         "trained": true
       },
@@ -5870,211 +5889,211 @@
     ],
     "w1": [
       {
-        "expert": "soxS",
-        "n": 21291,
-        "abstain": 21291,
-        "abstainRate": 1,
-        "hitRate": 0.5238,
-        "brier": 0.25,
-        "weight": 0.1239,
-        "priorWeight": 0.0094,
-        "trained": true
-      },
-      {
-        "expert": "soxMom",
-        "n": 21291,
-        "abstain": 21291,
-        "abstainRate": 1,
-        "hitRate": 0.5238,
-        "brier": 0.25,
-        "weight": 0.1239,
-        "priorWeight": 0.066,
-        "trained": true
-      },
-      {
         "expert": "us10y",
-        "n": 21291,
-        "abstain": 21291,
-        "abstainRate": 1,
-        "hitRate": 0.5238,
-        "brier": 0.25,
-        "weight": 0.1239,
+        "n": 21284,
+        "abstain": 1145,
+        "abstainRate": 0.0538,
+        "hitRate": 0.5082,
+        "brier": 0.2501,
+        "weight": 0.1716,
         "priorWeight": 0.0849,
         "trained": true
       },
       {
-        "expert": "spxS",
-        "n": 21291,
-        "abstain": 21291,
-        "abstainRate": 1,
-        "hitRate": 0.5238,
-        "brier": 0.25,
-        "weight": 0.1239,
-        "priorWeight": 0.0094,
-        "trained": true
-      },
-      {
         "expert": "volS",
-        "n": 21291,
-        "abstain": 15576,
+        "n": 21284,
+        "abstain": 15572,
         "abstainRate": 0.7316,
-        "hitRate": 0.5121,
+        "hitRate": 0.512,
         "brier": 0.2713,
-        "weight": 0.017,
+        "weight": 0.0272,
         "priorWeight": 0.0283,
         "trained": true
       },
       {
         "expert": "mfi",
-        "n": 21291,
-        "abstain": 9132,
+        "n": 21284,
+        "abstain": 9128,
         "abstainRate": 0.4289,
         "hitRate": 0.5277,
         "brier": 0.2819,
-        "weight": 0.018,
+        "weight": 0.0358,
         "priorWeight": 0.0566,
         "trained": true
       },
       {
         "expert": "rangePos",
-        "n": 21291,
+        "n": 21284,
         "abstain": 50,
         "abstainRate": 0.0023,
-        "hitRate": 0.5094,
+        "hitRate": 0.5093,
         "brier": 0.3008,
-        "weight": 0.0233,
+        "weight": 0.0383,
         "priorWeight": 0.0094,
         "trained": true
       },
       {
         "expert": "idxMom",
-        "n": 21291,
+        "n": 21284,
         "abstain": 0,
         "abstainRate": 0,
-        "hitRate": 0.5026,
+        "hitRate": 0.5025,
         "brier": 0.305,
-        "weight": 0.0233,
+        "weight": 0.0353,
         "priorWeight": 0.0566,
         "trained": true
       },
       {
         "expert": "rsiRev",
-        "n": 21291,
-        "abstain": 12055,
+        "n": 21284,
+        "abstain": 12050,
         "abstainRate": 0.5662,
         "hitRate": 0.5066,
         "brier": 0.3062,
-        "weight": 0.1858,
+        "weight": 0.3699,
+        "priorWeight": 0.0094,
+        "trained": true
+      },
+      {
+        "expert": "spxS",
+        "n": 21284,
+        "abstain": 778,
+        "abstainRate": 0.0366,
+        "hitRate": 0.5042,
+        "brier": 0.31,
+        "weight": 0.0199,
         "priorWeight": 0.0094,
         "trained": true
       },
       {
         "expert": "closePos",
-        "n": 21291,
+        "n": 21284,
         "abstain": 477,
         "abstainRate": 0.0224,
-        "hitRate": 0.4995,
-        "brier": 0.3506,
-        "weight": 0.0132,
+        "hitRate": 0.4993,
+        "brier": 0.3507,
+        "weight": 0.0138,
         "priorWeight": 0.0094,
         "trained": true
       },
       {
-        "expert": "kdj",
-        "n": 21291,
+        "expert": "soxMom",
+        "n": 21284,
         "abstain": 0,
         "abstainRate": 0,
-        "hitRate": 0.5104,
+        "hitRate": 0.5217,
+        "brier": 0.3514,
+        "weight": 0.0359,
+        "priorWeight": 0.066,
+        "trained": true
+      },
+      {
+        "expert": "kdj",
+        "n": 21284,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5105,
         "brier": 0.3523,
-        "weight": 0.0137,
+        "weight": 0.0177,
         "priorWeight": 0.0094,
         "trained": true
       },
       {
         "expert": "boll",
-        "n": 21291,
+        "n": 21284,
         "abstain": 2,
         "abstainRate": 0.0001,
         "hitRate": 0.4942,
         "brier": 0.3525,
-        "weight": 0.012,
+        "weight": 0.0202,
         "priorWeight": 0.0094,
         "trained": true
       },
       {
         "expert": "rel",
-        "n": 21291,
+        "n": 21284,
         "abstain": 0,
         "abstainRate": 0,
         "hitRate": 0.5107,
         "brier": 0.3654,
-        "weight": 0.0137,
+        "weight": 0.0141,
         "priorWeight": 0.0755,
         "trained": true
       },
       {
+        "expert": "soxS",
+        "n": 21284,
+        "abstain": 778,
+        "abstainRate": 0.0366,
+        "hitRate": 0.5079,
+        "brier": 0.3655,
+        "weight": 0.0125,
+        "priorWeight": 0.0094,
+        "trained": true
+      },
+      {
         "expert": "mom5",
-        "n": 21291,
+        "n": 21284,
         "abstain": 240,
         "abstainRate": 0.0113,
-        "hitRate": 0.5,
-        "brier": 0.3714,
-        "weight": 0.0135,
+        "hitRate": 0.4999,
+        "brier": 0.3715,
+        "weight": 0.0138,
         "priorWeight": 0.0094,
         "trained": true
       },
       {
         "expert": "obv",
-        "n": 21291,
+        "n": 21284,
         "abstain": 0,
         "abstainRate": 0,
         "hitRate": 0.5036,
         "brier": 0.3736,
-        "weight": 0.0129,
+        "weight": 0.0151,
         "priorWeight": 0.0755,
         "trained": true
       },
       {
         "expert": "mom",
-        "n": 21291,
+        "n": 21284,
         "abstain": 2,
         "abstainRate": 0.0001,
         "hitRate": 0.5069,
-        "brier": 0.4003,
-        "weight": 0.0135,
+        "brier": 0.4004,
+        "weight": 0.0138,
         "priorWeight": 0.1226,
         "trained": true
       },
       {
         "expert": "trend",
-        "n": 21291,
+        "n": 21284,
         "abstain": 0,
         "abstainRate": 0,
         "hitRate": 0.5063,
         "brier": 0.4039,
-        "weight": 0.0135,
+        "weight": 0.0138,
         "priorWeight": 0.1604,
         "trained": true
       },
       {
         "expert": "macdDir",
-        "n": 21291,
+        "n": 21284,
         "abstain": 0,
         "abstainRate": 0,
-        "hitRate": 0.5074,
-        "brier": 0.4926,
-        "weight": 0.0135,
+        "hitRate": 0.5073,
+        "brier": 0.4927,
+        "weight": 0.0138,
         "priorWeight": 0.0189,
         "trained": true
       },
       {
         "expert": "indexS",
-        "n": 21291,
-        "abstain": 24,
-        "abstainRate": 0.0011,
-        "hitRate": 0.5044,
-        "brier": 0.4954,
-        "weight": 0.0135,
+        "n": 21284,
+        "abstain": 22,
+        "abstainRate": 0.001,
+        "hitRate": 0.5043,
+        "brier": 0.4955,
+        "weight": 0.0138,
         "priorWeight": 0.0755,
         "trained": true
       },
@@ -6103,55 +6122,22 @@
     ],
     "m1": [
       {
-        "expert": "soxS",
-        "n": 21291,
-        "abstain": 21291,
-        "abstainRate": 1,
-        "hitRate": 0.5472,
-        "brier": 0.25,
-        "weight": 0.0117,
-        "priorWeight": 0.0097,
-        "trained": true
-      },
-      {
-        "expert": "soxMom",
-        "n": 21291,
-        "abstain": 21291,
-        "abstainRate": 1,
-        "hitRate": 0.5472,
-        "brier": 0.25,
-        "weight": 0.0117,
-        "priorWeight": 0.0485,
-        "trained": true
-      },
-      {
         "expert": "us10y",
-        "n": 21291,
-        "abstain": 21291,
-        "abstainRate": 1,
-        "hitRate": 0.5472,
-        "brier": 0.25,
+        "n": 21284,
+        "abstain": 1145,
+        "abstainRate": 0.0538,
+        "hitRate": 0.4919,
+        "brier": 0.2506,
         "weight": 0.0117,
         "priorWeight": 0.0971,
         "trained": true
       },
       {
-        "expert": "spxS",
-        "n": 21291,
-        "abstain": 21291,
-        "abstainRate": 1,
-        "hitRate": 0.5472,
-        "brier": 0.25,
-        "weight": 0.0117,
-        "priorWeight": 0.0097,
-        "trained": true
-      },
-      {
         "expert": "volS",
-        "n": 21291,
-        "abstain": 15576,
+        "n": 21284,
+        "abstain": 15572,
         "abstainRate": 0.7316,
-        "hitRate": 0.5329,
+        "hitRate": 0.5328,
         "brier": 0.2669,
         "weight": 0.0117,
         "priorWeight": 0.0097,
@@ -6159,10 +6145,10 @@
       },
       {
         "expert": "mfi",
-        "n": 21291,
-        "abstain": 9132,
+        "n": 21284,
+        "abstain": 9128,
         "abstainRate": 0.4289,
-        "hitRate": 0.5255,
+        "hitRate": 0.5256,
         "brier": 0.288,
         "weight": 0.0117,
         "priorWeight": 0.0485,
@@ -6170,7 +6156,7 @@
       },
       {
         "expert": "rangePos",
-        "n": 21291,
+        "n": 21284,
         "abstain": 50,
         "abstainRate": 0.0023,
         "hitRate": 0.5274,
@@ -6181,40 +6167,62 @@
       },
       {
         "expert": "idxMom",
-        "n": 21291,
+        "n": 21284,
         "abstain": 0,
         "abstainRate": 0,
-        "hitRate": 0.5043,
+        "hitRate": 0.5042,
         "brier": 0.2955,
         "weight": 0.0117,
         "priorWeight": 0.1165,
         "trained": true
       },
       {
-        "expert": "rsiRev",
-        "n": 21291,
-        "abstain": 12055,
-        "abstainRate": 0.5662,
-        "hitRate": 0.4997,
-        "brier": 0.3172,
-        "weight": 0.0783,
+        "expert": "spxS",
+        "n": 21284,
+        "abstain": 778,
+        "abstainRate": 0.0366,
+        "hitRate": 0.5045,
+        "brier": 0.3053,
+        "weight": 0.0117,
         "priorWeight": 0.0097,
         "trained": true
       },
       {
+        "expert": "rsiRev",
+        "n": 21284,
+        "abstain": 12050,
+        "abstainRate": 0.5662,
+        "hitRate": 0.4996,
+        "brier": 0.3172,
+        "weight": 0.0773,
+        "priorWeight": 0.0097,
+        "trained": true
+      },
+      {
+        "expert": "soxMom",
+        "n": 21284,
+        "abstain": 0,
+        "abstainRate": 0,
+        "hitRate": 0.5574,
+        "brier": 0.3268,
+        "weight": 0.0117,
+        "priorWeight": 0.0485,
+        "trained": true
+      },
+      {
         "expert": "closePos",
-        "n": 21291,
+        "n": 21284,
         "abstain": 477,
         "abstainRate": 0.0224,
-        "hitRate": 0.5021,
-        "brier": 0.3476,
-        "weight": 0.012,
+        "hitRate": 0.502,
+        "brier": 0.3477,
+        "weight": 0.0117,
         "priorWeight": 0.0097,
         "trained": true
       },
       {
         "expert": "obv",
-        "n": 21291,
+        "n": 21284,
         "abstain": 0,
         "abstainRate": 0,
         "hitRate": 0.5267,
@@ -6225,7 +6233,7 @@
       },
       {
         "expert": "mom5",
-        "n": 21291,
+        "n": 21284,
         "abstain": 240,
         "abstainRate": 0.0113,
         "hitRate": 0.518,
@@ -6235,30 +6243,41 @@
         "trained": true
       },
       {
+        "expert": "soxS",
+        "n": 21284,
+        "abstain": 778,
+        "abstainRate": 0.0366,
+        "hitRate": 0.5284,
+        "brier": 0.3603,
+        "weight": 0.0217,
+        "priorWeight": 0.0097,
+        "trained": true
+      },
+      {
         "expert": "boll",
-        "n": 21291,
+        "n": 21284,
         "abstain": 2,
         "abstainRate": 0.0001,
         "hitRate": 0.4734,
         "brier": 0.3663,
-        "weight": 0.6159,
+        "weight": 0.6076,
         "priorWeight": 0.0097,
         "trained": true
       },
       {
         "expert": "kdj",
-        "n": 21291,
+        "n": 21284,
         "abstain": 0,
         "abstainRate": 0,
-        "hitRate": 0.4912,
-        "brier": 0.37,
+        "hitRate": 0.4913,
+        "brier": 0.3699,
         "weight": 0.0117,
         "priorWeight": 0.0097,
         "trained": true
       },
       {
         "expert": "rel",
-        "n": 21291,
+        "n": 21284,
         "abstain": 0,
         "abstainRate": 0,
         "hitRate": 0.4971,
@@ -6269,7 +6288,7 @@
       },
       {
         "expert": "trend",
-        "n": 21291,
+        "n": 21284,
         "abstain": 0,
         "abstainRate": 0,
         "hitRate": 0.5169,
@@ -6280,10 +6299,10 @@
       },
       {
         "expert": "mom",
-        "n": 21291,
+        "n": 21284,
         "abstain": 2,
         "abstainRate": 0.0001,
-        "hitRate": 0.4831,
+        "hitRate": 0.483,
         "brier": 0.4223,
         "weight": 0.0117,
         "priorWeight": 0.0777,
@@ -6291,7 +6310,7 @@
       },
       {
         "expert": "macdDir",
-        "n": 21291,
+        "n": 21284,
         "abstain": 0,
         "abstainRate": 0,
         "hitRate": 0.5568,
@@ -6302,11 +6321,11 @@
       },
       {
         "expert": "indexS",
-        "n": 21291,
-        "abstain": 24,
-        "abstainRate": 0.0011,
-        "hitRate": 0.4809,
-        "brier": 0.5185,
+        "n": 21284,
+        "abstain": 22,
+        "abstainRate": 0.001,
+        "hitRate": 0.4808,
+        "brier": 0.5186,
         "weight": 0.0117,
         "priorWeight": 0.0777,
         "trained": true
@@ -6336,8 +6355,8 @@
     ]
   },
   "summary": {
-    "rounds": 85164,
-    "updatedAt": "2026-09-15T07:29:32.317Z",
+    "rounds": 85136,
+    "updatedAt": "2026-09-15T09:03:30.901Z",
     "trainedFrom": {
       "version": 2,
       "universeSize": 47,
@@ -6392,49 +6411,55 @@
       ],
       "bars": 640,
       "avgBars": 632,
-      "yahoo": [],
+      "yahoo": [
+        "sox",
+        "us10y",
+        "spx"
+      ],
       "yahooRange": "3y",
       "trainCut": "2025-09-23",
       "testCut": "2026-03-26",
-      "trainSamples": 63332,
+      "trainSamples": 63304,
       "valSamples": 21832,
       "testSamples": 20915,
       "eta": 0.25,
       "gamma": 1,
       "lossType": "brier",
       "experts": 21,
-      "at": "2026-09-15T07:29:26.516Z"
+      "historySource": "cache@2026-09-14T08:15:18.756Z",
+      "degraded": false,
+      "at": "2026-09-15T09:03:24.899Z"
     },
     "horizons": {
       "d1": {
         "label": "未来1天",
         "n": 800,
-        "hitRate": 0.7025,
-        "brier": 0.2082,
-        "skillScore": 0.1532,
-        "reliability": 0.0164,
-        "resolution": 0.0533,
+        "hitRate": 0.6925,
+        "brier": 0.2035,
+        "skillScore": 0.1726,
+        "reliability": 0.0099,
+        "resolution": 0.0514,
         "uncertainty": 0.2459,
         "topExperts": [
           {
             "expert": "rsiRev",
-            "weight": 0.147
+            "weight": 0.13
           },
           {
             "expert": "macdDir",
-            "weight": 0.114
+            "weight": 0.102
           },
           {
             "expert": "trend",
-            "weight": 0.094
+            "weight": 0.084
           },
           {
             "expert": "mom5",
-            "weight": 0.09
+            "weight": 0.08
           }
         ],
         "calibration": {
-          "a": 1.7587,
+          "a": 1.6131,
           "b": 0,
           "n": 800,
           "fitted": true,
@@ -6445,32 +6470,32 @@
       "d3": {
         "label": "未来3天",
         "n": 800,
-        "hitRate": 0.6837,
-        "brier": 0.2139,
-        "skillScore": 0.1309,
-        "reliability": 0.0093,
-        "resolution": 0.0391,
+        "hitRate": 0.6687,
+        "brier": 0.2144,
+        "skillScore": 0.1287,
+        "reliability": 0.0056,
+        "resolution": 0.0357,
         "uncertainty": 0.2461,
         "topExperts": [
           {
             "expert": "rsiRev",
-            "weight": 0.454
-          },
-          {
-            "expert": "soxS",
-            "weight": 0.058
-          },
-          {
-            "expert": "soxMom",
-            "weight": 0.058
+            "weight": 0.539
           },
           {
             "expert": "us10y",
-            "weight": 0.058
+            "weight": 0.072
+          },
+          {
+            "expert": "mfi",
+            "weight": 0.034
+          },
+          {
+            "expert": "idxMom",
+            "weight": 0.028
           }
         ],
         "calibration": {
-          "a": 1.1381,
+          "a": 1.0951,
           "b": 0,
           "n": 800,
           "fitted": true,
@@ -6481,32 +6506,32 @@
       "w1": {
         "label": "未来1周",
         "n": 800,
-        "hitRate": 0.71,
-        "brier": 0.1951,
-        "skillScore": 0.1423,
-        "reliability": 0.0127,
-        "resolution": 0.0436,
+        "hitRate": 0.6737,
+        "brier": 0.2079,
+        "skillScore": 0.0862,
+        "reliability": 0.0044,
+        "resolution": 0.0234,
         "uncertainty": 0.2275,
         "topExperts": [
           {
             "expert": "rsiRev",
-            "weight": 0.186
-          },
-          {
-            "expert": "soxS",
-            "weight": 0.124
-          },
-          {
-            "expert": "soxMom",
-            "weight": 0.124
+            "weight": 0.37
           },
           {
             "expert": "us10y",
-            "weight": 0.124
+            "weight": 0.172
+          },
+          {
+            "expert": "fund",
+            "weight": 0.075
+          },
+          {
+            "expert": "rangePos",
+            "weight": 0.038
           }
         ],
         "calibration": {
-          "a": 1.2013,
+          "a": 0.9704,
           "b": 0,
           "n": 800,
           "fitted": true,
@@ -6517,16 +6542,16 @@
       "m1": {
         "label": "未来1月",
         "n": 800,
-        "hitRate": 0.65,
-        "brier": 0.21,
-        "skillScore": 0.1557,
-        "reliability": 0.0038,
-        "resolution": 0.0407,
+        "hitRate": 0.6563,
+        "brier": 0.2067,
+        "skillScore": 0.169,
+        "reliability": 0.0032,
+        "resolution": 0.0435,
         "uncertainty": 0.2488,
         "topExperts": [
           {
             "expert": "boll",
-            "weight": 0.616
+            "weight": 0.608
           },
           {
             "expert": "fund",
@@ -6534,15 +6559,15 @@
           },
           {
             "expert": "rsiRev",
-            "weight": 0.078
+            "weight": 0.077
           },
           {
-            "expert": "closePos",
-            "weight": 0.012
+            "expert": "soxS",
+            "weight": 0.022
           }
         ],
         "calibration": {
-          "a": 1.3072,
+          "a": 1.1857,
           "b": 0,
           "n": 800,
           "fitted": true,
