@@ -143,27 +143,48 @@
           "pathLow": 0.632
         },
         {
-          "pending": true,
           "horizon": "d3",
-          "needBars": 1
+          "horizonLabel": "未来3天",
+          "source": "model",
+          "fromDate": "2026-09-10",
+          "toDate": "2026-09-15",
+          "anchorPrice": 0.666,
+          "endClose": 0.67,
+          "actualPct": 0.6,
+          "actualDir": "看涨",
+          "predictedDir": "看跌",
+          "predictedRange": [
+            0.609,
+            0.723
+          ],
+          "rangeWidthPct": 17.12,
+          "moveAbsPct": 7.21,
+          "dirHit": false,
+          "brier": 0.6084,
+          "reward": -0.2168,
+          "upProb": 22,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 0.68,
+          "pathLow": 0.632
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 20
+          "needBars": 19
         }
       ],
       "scores": {
-        "n": 1,
+        "n": 2,
         "hits": 0,
         "hitRate": 0,
-        "brier": 0.1681,
-        "reward": 0.6638,
+        "brier": 0.3883,
+        "reward": 0.2235,
         "rangeHitRate": 1,
         "byHorizon": {
           "d1": {
@@ -171,6 +192,12 @@
             "hits": 0,
             "hitRate": 0,
             "brier": 0.1681
+          },
+          "d3": {
+            "n": 1,
+            "hits": 0,
+            "hitRate": 0,
+            "brier": 0.6084
           }
         }
       },
@@ -335,27 +362,48 @@
           "pathLow": 1.736
         },
         {
-          "pending": true,
           "horizon": "d3",
-          "needBars": 1
+          "horizonLabel": "未来3天",
+          "source": "model",
+          "fromDate": "2026-09-10",
+          "toDate": "2026-09-15",
+          "anchorPrice": 1.769,
+          "endClose": 1.787,
+          "actualPct": 1.02,
+          "actualDir": "看涨",
+          "predictedDir": "看涨",
+          "predictedRange": [
+            1.698,
+            1.84
+          ],
+          "rangeWidthPct": 8.03,
+          "moveAbsPct": 4.52,
+          "dirHit": true,
+          "brier": 0.04,
+          "reward": 0.92,
+          "upProb": 80,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 1.816,
+          "pathLow": 1.736
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 20
+          "needBars": 19
         }
       ],
       "scores": {
-        "n": 1,
-        "hits": 0,
-        "hitRate": 0,
-        "brier": 0.2601,
-        "reward": 0.4798,
+        "n": 2,
+        "hits": 1,
+        "hitRate": 0.5,
+        "brier": 0.15,
+        "reward": 0.6999,
         "rangeHitRate": 1,
         "byHorizon": {
           "d1": {
@@ -363,6 +411,12 @@
             "hits": 0,
             "hitRate": 0,
             "brier": 0.2601
+          },
+          "d3": {
+            "n": 1,
+            "hits": 1,
+            "hitRate": 1,
+            "brier": 0.04
           }
         }
       },
@@ -521,27 +575,48 @@
           "pathLow": 1.144
         },
         {
-          "pending": true,
           "horizon": "d3",
-          "needBars": 1
+          "horizonLabel": "未来3天",
+          "source": "model",
+          "fromDate": "2026-09-10",
+          "toDate": "2026-09-15",
+          "anchorPrice": 1.18,
+          "endClose": 1.139,
+          "actualPct": -3.47,
+          "actualDir": "看跌",
+          "predictedDir": "看涨",
+          "predictedRange": [
+            1.136,
+            1.224
+          ],
+          "rangeWidthPct": 7.46,
+          "moveAbsPct": 3.14,
+          "dirHit": false,
+          "brier": 0.49,
+          "reward": 0.02,
+          "upProb": 70,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 1.174,
+          "pathLow": 1.137
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 20
+          "needBars": 19
         }
       ],
       "scores": {
-        "n": 1,
+        "n": 2,
         "hits": 1,
-        "hitRate": 1,
-        "brier": 0.1521,
-        "reward": 0.6958,
+        "hitRate": 0.5,
+        "brier": 0.3211,
+        "reward": 0.3579,
         "rangeHitRate": 1,
         "byHorizon": {
           "d1": {
@@ -549,6 +624,12 @@
             "hits": 1,
             "hitRate": 1,
             "brier": 0.1521
+          },
+          "d3": {
+            "n": 1,
+            "hits": 0,
+            "hitRate": 0,
+            "brier": 0.49
           }
         }
       },
@@ -707,34 +788,61 @@
           "pathLow": 1.708
         },
         {
-          "pending": true,
           "horizon": "d3",
-          "needBars": 1
+          "horizonLabel": "未来3天",
+          "source": "model",
+          "fromDate": "2026-09-10",
+          "toDate": "2026-09-15",
+          "anchorPrice": 1.828,
+          "endClose": 1.73,
+          "actualPct": -5.36,
+          "actualDir": "看跌",
+          "predictedDir": "震荡",
+          "predictedRange": [
+            1.729,
+            1.927
+          ],
+          "rangeWidthPct": 10.83,
+          "moveAbsPct": 3.28,
+          "dirHit": false,
+          "brier": 0.1681,
+          "reward": 0.6638,
+          "upProb": 41,
+          "rangeHitClose": true,
+          "rangeHitPath": false,
+          "pathHigh": 1.768,
+          "pathLow": 1.708
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 20
+          "needBars": 19
         }
       ],
       "scores": {
-        "n": 1,
+        "n": 2,
         "hits": 0,
         "hitRate": 0,
-        "brier": 0.2601,
-        "reward": 0.4798,
-        "rangeHitRate": 0,
+        "brier": 0.2141,
+        "reward": 0.5718,
+        "rangeHitRate": 0.5,
         "byHorizon": {
           "d1": {
             "n": 1,
             "hits": 0,
             "hitRate": 0,
             "brier": 0.2601
+          },
+          "d3": {
+            "n": 1,
+            "hits": 0,
+            "hitRate": 0,
+            "brier": 0.1681
           }
         }
       },
@@ -912,27 +1020,48 @@
           "pathLow": 25.16
         },
         {
-          "pending": true,
           "horizon": "d3",
-          "needBars": 1
+          "horizonLabel": "未来3天",
+          "source": "model",
+          "fromDate": "2026-09-10",
+          "toDate": "2026-09-15",
+          "anchorPrice": 26.42,
+          "endClose": 26.54,
+          "actualPct": 0.45,
+          "actualDir": "看涨",
+          "predictedDir": "看跌",
+          "predictedRange": [
+            22.959,
+            29.881
+          ],
+          "rangeWidthPct": 26.2,
+          "moveAbsPct": 7.61,
+          "dirHit": false,
+          "brier": 0.6724,
+          "reward": -0.3448,
+          "upProb": 18,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 26.98,
+          "pathLow": 24.97
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 20
+          "needBars": 19
         }
       ],
       "scores": {
-        "n": 1,
+        "n": 2,
         "hits": 0,
         "hitRate": 0,
-        "brier": 0.1936,
-        "reward": 0.6128,
+        "brier": 0.433,
+        "reward": 0.134,
         "rangeHitRate": 1,
         "byHorizon": {
           "d1": {
@@ -940,6 +1069,12 @@
             "hits": 0,
             "hitRate": 0,
             "brier": 0.1936
+          },
+          "d3": {
+            "n": 1,
+            "hits": 0,
+            "hitRate": 0,
+            "brier": 0.6724
           }
         }
       },
@@ -1190,27 +1325,27 @@
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 2
+          "needBars": 1
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 4
+          "needBars": 3
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 2
+          "needBars": 1
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 4
+          "needBars": 3
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 21
+          "needBars": 20
         }
       ],
       "scores": {
@@ -1387,17 +1522,17 @@
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 2
+          "needBars": 1
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 4
+          "needBars": 3
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 21
+          "needBars": 20
         }
       ],
       "scores": {
@@ -1541,8 +1676,8 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-14",
           "anchorPrice": 0.653,
-          "endClose": 0.65,
-          "actualPct": -0.46,
+          "endClose": 0.648,
+          "actualPct": -0.77,
           "actualDir": "看跌",
           "predictedDir": "震荡",
           "predictedRange": [
@@ -1550,15 +1685,15 @@
             0.67
           ],
           "rangeWidthPct": 5.21,
-          "moveAbsPct": 3.06,
+          "moveAbsPct": 2.91,
           "dirHit": false,
           "brier": 0.2025,
           "reward": 0.595,
           "upProb": 45,
           "rangeHitClose": true,
           "rangeHitPath": true,
-          "pathHigh": 0.66,
-          "pathLow": 0.64
+          "pathHigh": 0.655,
+          "pathLow": 0.636
         }
       ],
       "scores": {
@@ -1578,7 +1713,7 @@
         }
       },
       "status": "resolved",
-      "resolvedAt": "2026-09-14T08:27:14.129Z",
+      "resolvedAt": "2026-09-15T07:30:57.490Z",
       "lessons": "该结论**以 C+D+E 级依据为主**（周末只能靠新闻），是本次台账中证据等级最弱的一类。明日收盘后必须回看，验证\"高开冲高回落\"是否成立。",
       "confidenceCeiling": 0.656,
       "ceilingReason": "平均依据可信度 63%（A3 B1 C2 D1 E1）",
@@ -1733,7 +1868,7 @@
         }
       },
       "status": "resolved",
-      "resolvedAt": "2026-09-14T08:27:14.131Z",
+      "resolvedAt": "2026-09-15T07:30:57.491Z",
       "lessons": "本条再次出现\"人工判断与系统模型方向相反\"（模型偏多、人工偏空）。这是第二个对照样本，与金正大一起构成\"人工覆写是否有效\"的检验集。",
       "confidenceCeiling": 0.645,
       "ceilingReason": "平均依据可信度 61%（A3 B0 C2 D1 E1）",
@@ -1867,7 +2002,7 @@
         }
       },
       "status": "resolved",
-      "resolvedAt": "2026-09-14T08:27:14.131Z",
+      "resolvedAt": "2026-09-15T07:30:57.491Z",
       "lessons": "",
       "confidenceCeiling": 0.608,
       "ceilingReason": "平均依据可信度 55%（A1 B1 C0 D1 E1）",
@@ -2217,8 +2352,8 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-14",
           "anchorPrice": 0.653,
-          "endClose": 0.65,
-          "actualPct": -0.46,
+          "endClose": 0.648,
+          "actualPct": -0.77,
           "actualDir": "看跌",
           "predictedDir": "看跌",
           "predictedRange": [
@@ -2226,30 +2361,30 @@
             0.687
           ],
           "rangeWidthPct": 10.41,
-          "moveAbsPct": 3.06,
+          "moveAbsPct": 2.91,
           "dirHit": true,
           "brier": 0.1849,
           "reward": 0.6302,
           "upProb": 43,
           "rangeHitClose": true,
           "rangeHitPath": true,
-          "pathHigh": 0.66,
-          "pathLow": 0.64
+          "pathHigh": 0.655,
+          "pathLow": 0.636
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 2
+          "needBars": 1
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 4
+          "needBars": 3
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 21
+          "needBars": 20
         }
       ],
       "scores": {
@@ -2446,8 +2581,8 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-14",
           "anchorPrice": 0.365,
-          "endClose": 0.37,
-          "actualPct": 1.37,
+          "endClose": 0.372,
+          "actualPct": 1.92,
           "actualDir": "看涨",
           "predictedDir": "看跌",
           "predictedRange": [
@@ -2455,30 +2590,30 @@
             0.373
           ],
           "rangeWidthPct": 4.38,
-          "moveAbsPct": 2.74,
+          "moveAbsPct": 3.01,
           "dirHit": false,
           "brier": 0.3136,
           "reward": 0.3728,
           "upProb": 44,
           "rangeHitClose": true,
           "rangeHitPath": true,
-          "pathHigh": 0.37,
-          "pathLow": 0.36
+          "pathHigh": 0.373,
+          "pathLow": 0.362
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 2
+          "needBars": 1
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 4
+          "needBars": 3
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 21
+          "needBars": 20
         }
       ],
       "scores": {
@@ -2675,8 +2810,8 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-14",
           "anchorPrice": 1.754,
-          "endClose": 1.74,
-          "actualPct": -0.8,
+          "endClose": 1.739,
+          "actualPct": -0.86,
           "actualDir": "看跌",
           "predictedDir": "看跌",
           "predictedRange": [
@@ -2684,30 +2819,30 @@
             1.817
           ],
           "rangeWidthPct": 7.18,
-          "moveAbsPct": 2.28,
+          "moveAbsPct": 1.88,
           "dirHit": true,
           "brier": 0.1521,
           "reward": 0.6958,
           "upProb": 39,
           "rangeHitClose": true,
           "rangeHitPath": true,
-          "pathHigh": 1.76,
-          "pathLow": 1.72
+          "pathHigh": 1.755,
+          "pathLow": 1.722
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 2
+          "needBars": 1
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 4
+          "needBars": 3
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 21
+          "needBars": 20
         }
       ],
       "scores": {
@@ -2926,17 +3061,17 @@
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 2
+          "needBars": 1
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 4
+          "needBars": 3
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 21
+          "needBars": 20
         }
       ],
       "scores": {
@@ -3155,17 +3290,17 @@
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 2
+          "needBars": 1
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 4
+          "needBars": 3
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 21
+          "needBars": 20
         }
       ],
       "scores": {
@@ -3384,17 +3519,17 @@
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 2
+          "needBars": 1
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 4
+          "needBars": 3
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 21
+          "needBars": 20
         }
       ],
       "scores": {
@@ -3613,17 +3748,17 @@
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 2
+          "needBars": 1
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 4
+          "needBars": 3
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 21
+          "needBars": 20
         }
       ],
       "scores": {
@@ -3842,17 +3977,17 @@
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 2
+          "needBars": 1
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 4
+          "needBars": 3
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 21
+          "needBars": 20
         }
       ],
       "scores": {
@@ -4071,17 +4206,17 @@
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 2
+          "needBars": 1
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 4
+          "needBars": 3
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 21
+          "needBars": 20
         }
       ],
       "scores": {
@@ -4300,17 +4435,17 @@
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 2
+          "needBars": 1
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 4
+          "needBars": 3
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 21
+          "needBars": 20
         }
       ],
       "scores": {
@@ -4529,17 +4664,17 @@
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 2
+          "needBars": 1
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 4
+          "needBars": 3
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 21
+          "needBars": 20
         }
       ],
       "scores": {
@@ -4758,17 +4893,17 @@
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 2
+          "needBars": 1
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 4
+          "needBars": 3
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 21
+          "needBars": 20
         }
       ],
       "scores": {
@@ -4987,17 +5122,17 @@
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 2
+          "needBars": 1
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 4
+          "needBars": 3
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 21
+          "needBars": 20
         }
       ],
       "scores": {
@@ -5188,30 +5323,64 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "live-model",
+          "fromDate": "2026-09-14",
+          "toDate": "2026-09-15",
+          "anchorPrice": 0.65,
+          "endClose": 0.67,
+          "actualPct": 3.08,
+          "actualDir": "看涨",
+          "predictedDir": "看跌",
+          "predictedRange": [
+            0.617,
+            0.683
+          ],
+          "rangeWidthPct": 10.15,
+          "moveAbsPct": 6.15,
+          "dirHit": false,
+          "brier": 0.3136,
+          "reward": 0.3728,
+          "upProb": 44,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 0.68,
+          "pathLow": 0.64
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 0,
+        "hitRate": 0,
+        "brier": 0.3136,
+        "reward": 0.3728,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 0,
+            "hitRate": 0,
+            "brier": 0.3136
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "",
       "confidenceCeiling": 0.705,
@@ -5383,30 +5552,64 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "live-model",
+          "fromDate": "2026-09-14",
+          "toDate": "2026-09-15",
+          "anchorPrice": 0.37,
+          "endClose": 0.37,
+          "actualPct": 0,
+          "actualDir": "震荡",
+          "predictedDir": "震荡",
+          "predictedRange": [
+            0.362,
+            0.378
+          ],
+          "rangeWidthPct": 4.32,
+          "moveAbsPct": 0,
+          "dirHit": true,
+          "brier": 0.2209,
+          "reward": 0.5582,
+          "upProb": 47,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 0.37,
+          "pathLow": 0.37
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 1,
+        "hitRate": 1,
+        "brier": 0.2209,
+        "reward": 0.5582,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 1,
+            "hitRate": 1,
+            "brier": 0.2209
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "",
       "confidenceCeiling": 0.705,
@@ -5578,30 +5781,64 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "live-model",
+          "fromDate": "2026-09-14",
+          "toDate": "2026-09-15",
+          "anchorPrice": 1.74,
+          "endClose": 1.73,
+          "actualPct": -0.57,
+          "actualDir": "看跌",
+          "predictedDir": "看跌",
+          "predictedRange": [
+            1.679,
+            1.801
+          ],
+          "rangeWidthPct": 7.01,
+          "moveAbsPct": 1.72,
+          "dirHit": true,
+          "brier": 0.2025,
+          "reward": 0.595,
+          "upProb": 45,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 1.75,
+          "pathLow": 1.72
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 1,
+        "hitRate": 1,
+        "brier": 0.2025,
+        "reward": 0.595,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 1,
+            "hitRate": 1,
+            "brier": 0.2025
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "",
       "confidenceCeiling": 0.705,
@@ -5773,30 +6010,64 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "live-model",
+          "fromDate": "2026-09-14",
+          "toDate": "2026-09-15",
+          "anchorPrice": 1.149,
+          "endClose": 1.139,
+          "actualPct": -0.87,
+          "actualDir": "看跌",
+          "predictedDir": "震荡",
+          "predictedRange": [
+            1.123,
+            1.175
+          ],
+          "rangeWidthPct": 4.53,
+          "moveAbsPct": 1.39,
+          "dirHit": false,
+          "brier": 0.2209,
+          "reward": 0.5582,
+          "upProb": 47,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 1.153,
+          "pathLow": 1.137
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 0,
+        "hitRate": 0,
+        "brier": 0.2209,
+        "reward": 0.5582,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 0,
+            "hitRate": 0,
+            "brier": 0.2209
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "",
       "confidenceCeiling": 0.705,
@@ -5968,30 +6239,64 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "live-model",
+          "fromDate": "2026-09-14",
+          "toDate": "2026-09-15",
+          "anchorPrice": 114.07,
+          "endClose": 114.86,
+          "actualPct": 0.69,
+          "actualDir": "看涨",
+          "predictedDir": "震荡",
+          "predictedRange": [
+            109.255,
+            118.885
+          ],
+          "rangeWidthPct": 8.44,
+          "moveAbsPct": 3.3,
+          "dirHit": false,
+          "brier": 0.2916,
+          "reward": 0.4168,
+          "upProb": 46,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 117.37,
+          "pathLow": 113.6
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 0,
+        "hitRate": 0,
+        "brier": 0.2916,
+        "reward": 0.4168,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 0,
+            "hitRate": 0,
+            "brier": 0.2916
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "",
       "confidenceCeiling": 0.705,
@@ -6163,30 +6468,64 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "live-model",
+          "fromDate": "2026-09-14",
+          "toDate": "2026-09-15",
+          "anchorPrice": 324.64,
+          "endClose": 330.6,
+          "actualPct": 1.84,
+          "actualDir": "看涨",
+          "predictedDir": "看跌",
+          "predictedRange": [
+            307.81,
+            341.47
+          ],
+          "rangeWidthPct": 10.37,
+          "moveAbsPct": 4.82,
+          "dirHit": false,
+          "brier": 0.3481,
+          "reward": 0.3038,
+          "upProb": 41,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 337.8,
+          "pathLow": 322.16
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 0,
+        "hitRate": 0,
+        "brier": 0.3481,
+        "reward": 0.3038,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 0,
+            "hitRate": 0,
+            "brier": 0.3481
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "",
       "confidenceCeiling": 0.705,
@@ -6358,30 +6697,64 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "live-model",
+          "fromDate": "2026-09-14",
+          "toDate": "2026-09-15",
+          "anchorPrice": 626,
+          "endClose": 638.16,
+          "actualPct": 1.94,
+          "actualDir": "看涨",
+          "predictedDir": "看跌",
+          "predictedRange": [
+            595.814,
+            656.186
+          ],
+          "rangeWidthPct": 9.64,
+          "moveAbsPct": 5.03,
+          "dirHit": false,
+          "brier": 0.3136,
+          "reward": 0.3728,
+          "upProb": 44,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 654,
+          "pathLow": 622.5
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 0,
+        "hitRate": 0,
+        "brier": 0.3136,
+        "reward": 0.3728,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 0,
+            "hitRate": 0,
+            "brier": 0.3136
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "",
       "confidenceCeiling": 0.705,
@@ -6553,30 +6926,64 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "live-model",
+          "fromDate": "2026-09-14",
+          "toDate": "2026-09-15",
+          "anchorPrice": 1040,
+          "endClose": 1075.79,
+          "actualPct": 3.44,
+          "actualDir": "看涨",
+          "predictedDir": "看跌",
+          "predictedRange": [
+            980.56,
+            1099.44
+          ],
+          "rangeWidthPct": 11.43,
+          "moveAbsPct": 6.73,
+          "dirHit": false,
+          "brier": 0.3249,
+          "reward": 0.3502,
+          "upProb": 43,
+          "rangeHitClose": true,
+          "rangeHitPath": false,
+          "pathHigh": 1109.99,
+          "pathLow": 1040.02
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 0,
+        "hitRate": 0,
+        "brier": 0.3249,
+        "reward": 0.3502,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 0,
+            "hitRate": 0,
+            "brier": 0.3249
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "",
       "confidenceCeiling": 0.705,
@@ -6748,30 +7155,64 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "live-model",
+          "fromDate": "2026-09-14",
+          "toDate": "2026-09-15",
+          "anchorPrice": 223.69,
+          "endClose": 224.6,
+          "actualPct": 0.41,
+          "actualDir": "看涨",
+          "predictedDir": "震荡",
+          "predictedRange": [
+            211.485,
+            235.895
+          ],
+          "rangeWidthPct": 10.91,
+          "moveAbsPct": 3.98,
+          "dirHit": false,
+          "brier": 0.2601,
+          "reward": 0.4798,
+          "upProb": 49,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 231.5,
+          "pathLow": 222.6
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 0,
+        "hitRate": 0,
+        "brier": 0.2601,
+        "reward": 0.4798,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 0,
+            "hitRate": 0,
+            "brier": 0.2601
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "",
       "confidenceCeiling": 0.705,
@@ -6943,30 +7384,64 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "live-model",
+          "fromDate": "2026-09-14",
+          "toDate": "2026-09-15",
+          "anchorPrice": 356.88,
+          "endClose": 363.11,
+          "actualPct": 1.75,
+          "actualDir": "看涨",
+          "predictedDir": "震荡",
+          "predictedRange": [
+            335.512,
+            378.248
+          ],
+          "rangeWidthPct": 11.97,
+          "moveAbsPct": 4.39,
+          "dirHit": false,
+          "brier": 0.2704,
+          "reward": 0.4592,
+          "upProb": 48,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 371.66,
+          "pathLow": 356
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 0,
+        "hitRate": 0,
+        "brier": 0.2704,
+        "reward": 0.4592,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 0,
+            "hitRate": 0,
+            "brier": 0.2704
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "",
       "confidenceCeiling": 0.705,
@@ -7138,30 +7613,64 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "live-model",
+          "fromDate": "2026-09-14",
+          "toDate": "2026-09-15",
+          "anchorPrice": 184.65,
+          "endClose": 187.83,
+          "actualPct": 1.72,
+          "actualDir": "看涨",
+          "predictedDir": "看跌",
+          "predictedRange": [
+            173.52,
+            195.78
+          ],
+          "rangeWidthPct": 12.06,
+          "moveAbsPct": 4.54,
+          "dirHit": false,
+          "brier": 0.3481,
+          "reward": 0.3038,
+          "upProb": 41,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 191.6,
+          "pathLow": 183.21
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 0,
+        "hitRate": 0,
+        "brier": 0.3481,
+        "reward": 0.3038,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 0,
+            "hitRate": 0,
+            "brier": 0.3481
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "",
       "confidenceCeiling": 0.705,
@@ -7333,30 +7842,64 @@
       ],
       "outcomes": [
         {
-          "pending": true,
           "horizon": "d1",
-          "needBars": 1
+          "horizonLabel": "未来1天",
+          "source": "live-model",
+          "fromDate": "2026-09-14",
+          "toDate": "2026-09-15",
+          "anchorPrice": 26.23,
+          "endClose": 26.54,
+          "actualPct": 1.18,
+          "actualDir": "看涨",
+          "predictedDir": "震荡",
+          "predictedRange": [
+            24.264,
+            28.196
+          ],
+          "rangeWidthPct": 14.99,
+          "moveAbsPct": 4.5,
+          "dirHit": false,
+          "brier": 0.2916,
+          "reward": 0.4168,
+          "upProb": 46,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 26.98,
+          "pathLow": 25.8
         },
         {
           "pending": true,
           "horizon": "d3",
-          "needBars": 3
+          "needBars": 2
         },
         {
           "pending": true,
           "horizon": "w1",
-          "needBars": 5
+          "needBars": 4
         },
         {
           "pending": true,
           "horizon": "m1",
-          "needBars": 22
+          "needBars": 21
         }
       ],
       "scores": {
-        "n": 0
+        "n": 1,
+        "hits": 0,
+        "hitRate": 0,
+        "brier": 0.2916,
+        "reward": 0.4168,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 0,
+            "hitRate": 0,
+            "brier": 0.2916
+          }
+        }
       },
-      "status": "open",
+      "status": "partial",
       "resolvedAt": null,
       "lessons": "",
       "confidenceCeiling": 0.705,
@@ -7528,6 +8071,223 @@
       ],
       "outcomes": [
         {
+          "horizon": "d1",
+          "horizonLabel": "未来1天",
+          "source": "live-model",
+          "fromDate": "2026-09-14",
+          "toDate": "2026-09-15",
+          "anchorPrice": 161.38,
+          "endClose": 161.67,
+          "actualPct": 0.18,
+          "actualDir": "震荡",
+          "predictedDir": "震荡",
+          "predictedRange": [
+            149.945,
+            172.815
+          ],
+          "rangeWidthPct": 14.17,
+          "moveAbsPct": 2.88,
+          "dirHit": true,
+          "brier": 0.2809,
+          "reward": 0.4382,
+          "upProb": 47,
+          "rangeHitClose": true,
+          "rangeHitPath": true,
+          "pathHigh": 164.68,
+          "pathLow": 160.03
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 2
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 4
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 21
+        }
+      ],
+      "scores": {
+        "n": 1,
+        "hits": 1,
+        "hitRate": 1,
+        "brier": 0.2809,
+        "reward": 0.4382,
+        "rangeHitRate": 1,
+        "byHorizon": {
+          "d1": {
+            "n": 1,
+            "hits": 1,
+            "hitRate": 1,
+            "brier": 0.2809
+          }
+        }
+      },
+      "status": "partial",
+      "resolvedAt": null,
+      "lessons": "",
+      "confidenceCeiling": 0.705,
+      "ceilingReason": "平均依据可信度 70%（A4 B1 C0 D1 E1）；硬数据(A级)占多数，支撑较扎实",
+      "evidenceMix": {
+        "counts": {
+          "A": 4,
+          "B": 1,
+          "C": 0,
+          "D": 1,
+          "E": 1
+        },
+        "pct": {
+          "A": 57,
+          "B": 14,
+          "C": 0,
+          "D": 14,
+          "E": 14
+        },
+        "total": 7
+      },
+      "overconfidence": false
+    },
+    {
+      "id": "20260915-159516-01",
+      "askedAt": "2026-09-15T07:13:51.213Z",
+      "code": "159516",
+      "name": "半导体设备",
+      "kind": "etf",
+      "question": "【自动入账】每日模型预测快照（全池覆盖，消除选择性偏差）",
+      "stance": "bearish",
+      "confidence": 0.4,
+      "verdict": "看跌（未来1周可信上涨概率 30%，原始 24%）。信号 avoid（阈值 0.63）。市场状态 bear-lowvol。主要贡献：大盘环境（沪深300 vs MA60）(-10.356)、趋势（均线结构）(-3.189)、20日高低点位置(-2.953)、大盘动量（沪深300 20日）(-2.938)",
+      "horizon": "w1",
+      "anchorDate": "2026-09-15",
+      "anchorPrice": 0.67,
+      "predictions": [
+        {
+          "horizon": "d1",
+          "dir": "震荡",
+          "upProb": 47,
+          "rangePct": 4.9,
+          "expectedChg": -0.25,
+          "priceLow": 0.637,
+          "priceHigh": 0.703,
+          "source": "live-model"
+        },
+        {
+          "horizon": "d3",
+          "dir": "看跌",
+          "upProb": 45,
+          "rangePct": 8.4,
+          "expectedChg": -0.85,
+          "priceLow": 0.614,
+          "priceHigh": 0.726,
+          "source": "live-model"
+        },
+        {
+          "horizon": "w1",
+          "dir": "看跌",
+          "upProb": 30,
+          "rangePct": 12.8,
+          "expectedChg": -5.18,
+          "priceLow": 0.584,
+          "priceHigh": 0.756,
+          "source": "live-model"
+        },
+        {
+          "horizon": "m1",
+          "dir": "震荡",
+          "upProb": 52,
+          "rangePct": 22.7,
+          "expectedChg": 0.8,
+          "priceLow": 0.518,
+          "priceHigh": 0.822,
+          "source": "live-model"
+        }
+      ],
+      "keyLevels": {
+        "stopLoss": 0.616,
+        "note": "置信区间 d1 0.637~0.703；w1 0.584~0.756"
+      },
+      "plan": "自动快照，无操作建议。仅用于评价模型在全池上的真实水平。",
+      "evidence": [
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "腾讯财经日K（前复权）",
+          "claim": "锚定 2026-09-15 收盘 0.67"
+        },
+        {
+          "grade": "B",
+          "type": "derived",
+          "source": "lib/indicators",
+          "claim": "MA/RSI/MACD/KDJ/ATR/OBV/MFI/布林（ATR 4.93%）"
+        },
+        {
+          "grade": "D",
+          "type": "model",
+          "source": "Hedge 学习器（21 专家加权）",
+          "claim": "regime=bear-lowvol，专家权重由 47 个标的样本外验证得出"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "沪深300日K",
+          "claim": "大盘趋势与动量"
+        },
+        {
+          "grade": "E",
+          "type": "narrative",
+          "source": "自动生成",
+          "claim": "本条为模型自动快照，不含人工判断"
+        }
+      ],
+      "claims": [
+        {
+          "expert": "indexS",
+          "vote": -1,
+          "weight": 0.2071,
+          "contribution": -10.356
+        },
+        {
+          "expert": "trend",
+          "vote": -1,
+          "weight": 0.0638,
+          "contribution": -3.189
+        },
+        {
+          "expert": "rangePos",
+          "vote": -0.386,
+          "weight": 0.1529,
+          "contribution": -2.953
+        },
+        {
+          "expert": "idxMom",
+          "vote": -0.729,
+          "weight": 0.0806,
+          "contribution": -2.938
+        },
+        {
+          "expert": "rel",
+          "vote": -1,
+          "weight": 0.0501,
+          "contribution": -2.506
+        },
+        {
+          "expert": "obv",
+          "vote": -1,
+          "weight": 0.026,
+          "contribution": -1.302
+        }
+      ],
+      "tags": [
+        "自动入账",
+        "模型快照"
+      ],
+      "outcomes": [
+        {
           "pending": true,
           "horizon": "d1",
           "needBars": 1
@@ -7554,29 +8314,2225 @@
       "status": "open",
       "resolvedAt": null,
       "lessons": "",
-      "confidenceCeiling": 0.705,
-      "ceilingReason": "平均依据可信度 70%（A4 B1 C0 D1 E1）；硬数据(A级)占多数，支撑较扎实",
+      "confidenceCeiling": 0.653,
+      "ceilingReason": "平均依据可信度 62%（A2 B1 C0 D1 E1）",
       "evidenceMix": {
         "counts": {
-          "A": 4,
+          "A": 2,
           "B": 1,
           "C": 0,
           "D": 1,
           "E": 1
         },
         "pct": {
-          "A": 57,
-          "B": 14,
+          "A": 40,
+          "B": 20,
           "C": 0,
-          "D": 14,
-          "E": 14
+          "D": 20,
+          "E": 20
         },
-        "total": 7
+        "total": 5
+      },
+      "overconfidence": false
+    },
+    {
+      "id": "20260915-512010-01",
+      "askedAt": "2026-09-15T07:13:51.394Z",
+      "code": "512010",
+      "name": "医药",
+      "kind": "etf",
+      "question": "【自动入账】每日模型预测快照（全池覆盖，消除选择性偏差）",
+      "stance": "bearish",
+      "confidence": 0.4,
+      "verdict": "看跌（未来1周可信上涨概率 30%，原始 25%）。信号 avoid（阈值 0.63）。市场状态 bear-lowvol。主要贡献：大盘环境（沪深300 vs MA60）(-10.356)、20日高低点位置(-3.988)、趋势（均线结构）(-3.189)、大盘动量（沪深300 20日）(-2.938)",
+      "horizon": "w1",
+      "anchorDate": "2026-09-15",
+      "anchorPrice": 0.37,
+      "predictions": [
+        {
+          "horizon": "d1",
+          "dir": "震荡",
+          "upProb": 48,
+          "rangePct": 2.1,
+          "expectedChg": -0.1,
+          "priceLow": 0.362,
+          "priceHigh": 0.378,
+          "source": "live-model"
+        },
+        {
+          "horizon": "d3",
+          "dir": "看跌",
+          "upProb": 45,
+          "rangePct": 3.6,
+          "expectedChg": -0.36,
+          "priceLow": 0.357,
+          "priceHigh": 0.383,
+          "source": "live-model"
+        },
+        {
+          "horizon": "w1",
+          "dir": "看跌",
+          "upProb": 30,
+          "rangePct": 5.5,
+          "expectedChg": -2.16,
+          "priceLow": 0.35,
+          "priceHigh": 0.39,
+          "source": "live-model"
+        },
+        {
+          "horizon": "m1",
+          "dir": "震荡",
+          "upProb": 53,
+          "rangePct": 9.7,
+          "expectedChg": 0.49,
+          "priceLow": 0.334,
+          "priceHigh": 0.406,
+          "source": "live-model"
+        }
+      ],
+      "keyLevels": {
+        "stopLoss": 0.34,
+        "note": "置信区间 d1 0.362~0.378；w1 0.35~0.39"
+      },
+      "plan": "自动快照，无操作建议。仅用于评价模型在全池上的真实水平。",
+      "evidence": [
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "腾讯财经日K（前复权）",
+          "claim": "锚定 2026-09-15 收盘 0.37"
+        },
+        {
+          "grade": "B",
+          "type": "derived",
+          "source": "lib/indicators",
+          "claim": "MA/RSI/MACD/KDJ/ATR/OBV/MFI/布林（ATR 2.1%）"
+        },
+        {
+          "grade": "D",
+          "type": "model",
+          "source": "Hedge 学习器（21 专家加权）",
+          "claim": "regime=bear-lowvol，专家权重由 47 个标的样本外验证得出"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "沪深300日K",
+          "claim": "大盘趋势与动量"
+        },
+        {
+          "grade": "E",
+          "type": "narrative",
+          "source": "自动生成",
+          "claim": "本条为模型自动快照，不含人工判断"
+        }
+      ],
+      "claims": [
+        {
+          "expert": "indexS",
+          "vote": -1,
+          "weight": 0.2071,
+          "contribution": -10.356
+        },
+        {
+          "expert": "rangePos",
+          "vote": -0.522,
+          "weight": 0.1529,
+          "contribution": -3.988
+        },
+        {
+          "expert": "trend",
+          "vote": -1,
+          "weight": 0.0638,
+          "contribution": -3.189
+        },
+        {
+          "expert": "idxMom",
+          "vote": -0.729,
+          "weight": 0.0806,
+          "contribution": -2.938
+        },
+        {
+          "expert": "boll",
+          "vote": 0.58,
+          "weight": 0.0305,
+          "contribution": 0.883
+        },
+        {
+          "expert": "rel",
+          "vote": -0.316,
+          "weight": 0.0501,
+          "contribution": -0.792
+        }
+      ],
+      "tags": [
+        "自动入账",
+        "模型快照"
+      ],
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
+      "status": "open",
+      "resolvedAt": null,
+      "lessons": "",
+      "confidenceCeiling": 0.653,
+      "ceilingReason": "平均依据可信度 62%（A2 B1 C0 D1 E1）",
+      "evidenceMix": {
+        "counts": {
+          "A": 2,
+          "B": 1,
+          "C": 0,
+          "D": 1,
+          "E": 1
+        },
+        "pct": {
+          "A": 40,
+          "B": 20,
+          "C": 0,
+          "D": 20,
+          "E": 20
+        },
+        "total": 5
+      },
+      "overconfidence": false
+    },
+    {
+      "id": "20260915-512400-01",
+      "askedAt": "2026-09-15T07:13:51.576Z",
+      "code": "512400",
+      "name": "有色",
+      "kind": "etf",
+      "question": "【自动入账】每日模型预测快照（全池覆盖，消除选择性偏差）",
+      "stance": "bearish",
+      "confidence": 0.4,
+      "verdict": "看跌（未来1周可信上涨概率 30%，原始 24%）。信号 avoid（阈值 0.63）。市场状态 bear-lowvol。主要贡献：大盘环境（沪深300 vs MA60）(-10.356)、20日高低点位置(-4.776)、趋势（均线结构）(-3.189)、大盘动量（沪深300 20日）(-2.938)",
+      "horizon": "w1",
+      "anchorDate": "2026-09-15",
+      "anchorPrice": 1.73,
+      "predictions": [
+        {
+          "horizon": "d1",
+          "dir": "震荡",
+          "upProb": 50,
+          "rangePct": 3.4,
+          "expectedChg": -0.02,
+          "priceLow": 1.671,
+          "priceHigh": 1.789,
+          "source": "live-model"
+        },
+        {
+          "horizon": "d3",
+          "dir": "震荡",
+          "upProb": 49,
+          "rangePct": 5.8,
+          "expectedChg": -0.12,
+          "priceLow": 1.63,
+          "priceHigh": 1.83,
+          "source": "live-model"
+        },
+        {
+          "horizon": "w1",
+          "dir": "看跌",
+          "upProb": 30,
+          "rangePct": 8.8,
+          "expectedChg": -3.61,
+          "priceLow": 1.578,
+          "priceHigh": 1.882,
+          "source": "live-model"
+        },
+        {
+          "horizon": "m1",
+          "dir": "看涨",
+          "upProb": 61,
+          "rangePct": 15.6,
+          "expectedChg": 3.57,
+          "priceLow": 1.461,
+          "priceHigh": 1.999,
+          "source": "live-model"
+        }
+      ],
+      "keyLevels": {
+        "stopLoss": 1.592,
+        "note": "置信区间 d1 1.671~1.789；w1 1.578~1.882"
+      },
+      "plan": "自动快照，无操作建议。仅用于评价模型在全池上的真实水平。",
+      "evidence": [
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "腾讯财经日K（前复权）",
+          "claim": "锚定 2026-09-15 收盘 1.73"
+        },
+        {
+          "grade": "B",
+          "type": "derived",
+          "source": "lib/indicators",
+          "claim": "MA/RSI/MACD/KDJ/ATR/OBV/MFI/布林（ATR 3.38%）"
+        },
+        {
+          "grade": "D",
+          "type": "model",
+          "source": "Hedge 学习器（21 专家加权）",
+          "claim": "regime=bear-lowvol，专家权重由 47 个标的样本外验证得出"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "沪深300日K",
+          "claim": "大盘趋势与动量"
+        },
+        {
+          "grade": "E",
+          "type": "narrative",
+          "source": "自动生成",
+          "claim": "本条为模型自动快照，不含人工判断"
+        }
+      ],
+      "claims": [
+        {
+          "expert": "indexS",
+          "vote": -1,
+          "weight": 0.2071,
+          "contribution": -10.356
+        },
+        {
+          "expert": "rangePos",
+          "vote": -0.625,
+          "weight": 0.1529,
+          "contribution": -4.776
+        },
+        {
+          "expert": "trend",
+          "vote": -1,
+          "weight": 0.0638,
+          "contribution": -3.189
+        },
+        {
+          "expert": "idxMom",
+          "vote": -0.729,
+          "weight": 0.0806,
+          "contribution": -2.938
+        },
+        {
+          "expert": "boll",
+          "vote": 0.996,
+          "weight": 0.0305,
+          "contribution": 1.517
+        },
+        {
+          "expert": "obv",
+          "vote": -1,
+          "weight": 0.026,
+          "contribution": -1.302
+        }
+      ],
+      "tags": [
+        "自动入账",
+        "模型快照"
+      ],
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
+      "status": "open",
+      "resolvedAt": null,
+      "lessons": "",
+      "confidenceCeiling": 0.653,
+      "ceilingReason": "平均依据可信度 62%（A2 B1 C0 D1 E1）",
+      "evidenceMix": {
+        "counts": {
+          "A": 2,
+          "B": 1,
+          "C": 0,
+          "D": 1,
+          "E": 1
+        },
+        "pct": {
+          "A": 40,
+          "B": 20,
+          "C": 0,
+          "D": 20,
+          "E": 20
+        },
+        "total": 5
+      },
+      "overconfidence": false
+    },
+    {
+      "id": "20260915-512660-01",
+      "askedAt": "2026-09-15T07:13:51.760Z",
+      "code": "512660",
+      "name": "军工",
+      "kind": "etf",
+      "question": "【自动入账】每日模型预测快照（全池覆盖，消除选择性偏差）",
+      "stance": "bearish",
+      "confidence": 0.12,
+      "verdict": "看跌（未来1周可信上涨概率 44%，原始 42%）。信号 neutral（阈值 0.63）。市场状态 bear-lowvol。主要贡献：大盘环境（沪深300 vs MA60）(-10.356)、大盘动量（沪深300 20日）(-2.938)、趋势（均线结构）(+1.771)、相对强度（超额收益）(+1.365)",
+      "horizon": "w1",
+      "anchorDate": "2026-09-15",
+      "anchorPrice": 1.139,
+      "predictions": [
+        {
+          "horizon": "d1",
+          "dir": "震荡",
+          "upProb": 51,
+          "rangePct": 2.2,
+          "expectedChg": 0.02,
+          "priceLow": 1.114,
+          "priceHigh": 1.164,
+          "source": "live-model"
+        },
+        {
+          "horizon": "d3",
+          "dir": "震荡",
+          "upProb": 49,
+          "rangePct": 3.8,
+          "expectedChg": -0.06,
+          "priceLow": 1.096,
+          "priceHigh": 1.182,
+          "source": "live-model"
+        },
+        {
+          "horizon": "w1",
+          "dir": "看跌",
+          "upProb": 44,
+          "rangePct": 5.8,
+          "expectedChg": -0.73,
+          "priceLow": 1.073,
+          "priceHigh": 1.205,
+          "source": "live-model"
+        },
+        {
+          "horizon": "m1",
+          "dir": "震荡",
+          "upProb": 49,
+          "rangePct": 10.2,
+          "expectedChg": -0.11,
+          "priceLow": 1.023,
+          "priceHigh": 1.255,
+          "source": "live-model"
+        }
+      ],
+      "keyLevels": {
+        "stopLoss": 1.048,
+        "note": "置信区间 d1 1.114~1.164；w1 1.073~1.205"
+      },
+      "plan": "自动快照，无操作建议。仅用于评价模型在全池上的真实水平。",
+      "evidence": [
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "腾讯财经日K（前复权）",
+          "claim": "锚定 2026-09-15 收盘 1.139"
+        },
+        {
+          "grade": "B",
+          "type": "derived",
+          "source": "lib/indicators",
+          "claim": "MA/RSI/MACD/KDJ/ATR/OBV/MFI/布林（ATR 2.22%）"
+        },
+        {
+          "grade": "D",
+          "type": "model",
+          "source": "Hedge 学习器（21 专家加权）",
+          "claim": "regime=bear-lowvol，专家权重由 47 个标的样本外验证得出"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "沪深300日K",
+          "claim": "大盘趋势与动量"
+        },
+        {
+          "grade": "E",
+          "type": "narrative",
+          "source": "自动生成",
+          "claim": "本条为模型自动快照，不含人工判断"
+        }
+      ],
+      "claims": [
+        {
+          "expert": "indexS",
+          "vote": -1,
+          "weight": 0.2071,
+          "contribution": -10.356
+        },
+        {
+          "expert": "idxMom",
+          "vote": -0.729,
+          "weight": 0.0806,
+          "contribution": -2.938
+        },
+        {
+          "expert": "trend",
+          "vote": 0.556,
+          "weight": 0.0638,
+          "contribution": 1.771
+        },
+        {
+          "expert": "rel",
+          "vote": 0.545,
+          "weight": 0.0501,
+          "contribution": 1.365
+        },
+        {
+          "expert": "kdj",
+          "vote": 0.8,
+          "weight": 0.0327,
+          "contribution": 1.307
+        },
+        {
+          "expert": "obv",
+          "vote": 0.719,
+          "weight": 0.026,
+          "contribution": 0.936
+        }
+      ],
+      "tags": [
+        "自动入账",
+        "模型快照"
+      ],
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
+      "status": "open",
+      "resolvedAt": null,
+      "lessons": "",
+      "confidenceCeiling": 0.653,
+      "ceilingReason": "平均依据可信度 62%（A2 B1 C0 D1 E1）",
+      "evidenceMix": {
+        "counts": {
+          "A": 2,
+          "B": 1,
+          "C": 0,
+          "D": 1,
+          "E": 1
+        },
+        "pct": {
+          "A": 40,
+          "B": 20,
+          "C": 0,
+          "D": 20,
+          "E": 20
+        },
+        "total": 5
+      },
+      "overconfidence": false
+    },
+    {
+      "id": "20260915-688981-01",
+      "askedAt": "2026-09-15T07:13:51.948Z",
+      "code": "688981",
+      "name": "中芯国际",
+      "kind": "stock",
+      "question": "【自动入账】每日模型预测快照（全池覆盖，消除选择性偏差）",
+      "stance": "bearish",
+      "confidence": 0.42,
+      "verdict": "看跌（未来1周可信上涨概率 29%，原始 23%）。信号 avoid（阈值 0.63）。市场状态 bear-lowvol。主要贡献：大盘环境（沪深300 vs MA60）(-10.356)、20日高低点位置(-5.257)、趋势（均线结构）(-3.189)、大盘动量（沪深300 20日）(-2.938)",
+      "horizon": "w1",
+      "anchorDate": "2026-09-15",
+      "anchorPrice": 114.86,
+      "predictions": [
+        {
+          "horizon": "d1",
+          "dir": "震荡",
+          "upProb": 51,
+          "rangePct": 4.1,
+          "expectedChg": 0.08,
+          "priceLow": 110.12,
+          "priceHigh": 119.6,
+          "source": "live-model"
+        },
+        {
+          "horizon": "d3",
+          "dir": "震荡",
+          "upProb": 50,
+          "rangePct": 7,
+          "expectedChg": -0.07,
+          "priceLow": 106.802,
+          "priceHigh": 122.918,
+          "source": "live-model"
+        },
+        {
+          "horizon": "w1",
+          "dir": "看跌",
+          "upProb": 29,
+          "rangePct": 10.7,
+          "expectedChg": -4.59,
+          "priceLow": 102.536,
+          "priceHigh": 127.184,
+          "source": "live-model"
+        },
+        {
+          "horizon": "m1",
+          "dir": "看涨",
+          "upProb": 62,
+          "rangePct": 19,
+          "expectedChg": 4.45,
+          "priceLow": 93.056,
+          "priceHigh": 136.664,
+          "source": "live-model"
+        }
+      ],
+      "keyLevels": {
+        "stopLoss": 105.671,
+        "note": "置信区间 d1 110.12~119.6；w1 102.536~127.184"
+      },
+      "plan": "自动快照，无操作建议。仅用于评价模型在全池上的真实水平。",
+      "evidence": [
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "腾讯财经日K（前复权）",
+          "claim": "锚定 2026-09-15 收盘 114.86"
+        },
+        {
+          "grade": "B",
+          "type": "derived",
+          "source": "lib/indicators",
+          "claim": "MA/RSI/MACD/KDJ/ATR/OBV/MFI/布林（ATR 4.13%）"
+        },
+        {
+          "grade": "D",
+          "type": "model",
+          "source": "Hedge 学习器（21 专家加权）",
+          "claim": "regime=bear-lowvol，专家权重由 47 个标的样本外验证得出"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "沪深300日K",
+          "claim": "大盘趋势与动量"
+        },
+        {
+          "grade": "E",
+          "type": "narrative",
+          "source": "自动生成",
+          "claim": "本条为模型自动快照，不含人工判断"
+        }
+      ],
+      "claims": [
+        {
+          "expert": "indexS",
+          "vote": -1,
+          "weight": 0.2071,
+          "contribution": -10.356
+        },
+        {
+          "expert": "rangePos",
+          "vote": -0.688,
+          "weight": 0.1529,
+          "contribution": -5.257
+        },
+        {
+          "expert": "trend",
+          "vote": -1,
+          "weight": 0.0638,
+          "contribution": -3.189
+        },
+        {
+          "expert": "idxMom",
+          "vote": -0.729,
+          "weight": 0.0806,
+          "contribution": -2.938
+        },
+        {
+          "expert": "rel",
+          "vote": -1,
+          "weight": 0.0501,
+          "contribution": -2.506
+        },
+        {
+          "expert": "boll",
+          "vote": 0.962,
+          "weight": 0.0305,
+          "contribution": 1.465
+        }
+      ],
+      "tags": [
+        "自动入账",
+        "模型快照"
+      ],
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
+      "status": "open",
+      "resolvedAt": null,
+      "lessons": "",
+      "confidenceCeiling": 0.653,
+      "ceilingReason": "平均依据可信度 62%（A2 B1 C0 D1 E1）",
+      "evidenceMix": {
+        "counts": {
+          "A": 2,
+          "B": 1,
+          "C": 0,
+          "D": 1,
+          "E": 1
+        },
+        "pct": {
+          "A": 40,
+          "B": 20,
+          "C": 0,
+          "D": 20,
+          "E": 20
+        },
+        "total": 5
+      },
+      "overconfidence": false
+    },
+    {
+      "id": "20260915-688012-01",
+      "askedAt": "2026-09-15T07:13:52.160Z",
+      "code": "688012",
+      "name": "中微公司",
+      "kind": "stock",
+      "question": "【自动入账】每日模型预测快照（全池覆盖，消除选择性偏差）",
+      "stance": "bearish",
+      "confidence": 0.42,
+      "verdict": "看跌（未来1周可信上涨概率 29%，原始 23%）。信号 avoid（阈值 0.63）。市场状态 bear-lowvol。主要贡献：大盘环境（沪深300 vs MA60）(-10.356)、20日高低点位置(-4.504)、趋势（均线结构）(-3.189)、大盘动量（沪深300 20日）(-2.938)",
+      "horizon": "w1",
+      "anchorDate": "2026-09-15",
+      "anchorPrice": 330.6,
+      "predictions": [
+        {
+          "horizon": "d1",
+          "dir": "震荡",
+          "upProb": 49,
+          "rangePct": 5.1,
+          "expectedChg": -0.12,
+          "priceLow": 313.855,
+          "priceHigh": 347.345,
+          "source": "live-model"
+        },
+        {
+          "horizon": "d3",
+          "dir": "看跌",
+          "upProb": 45,
+          "rangePct": 8.6,
+          "expectedChg": -0.8,
+          "priceLow": 302.133,
+          "priceHigh": 359.067,
+          "source": "live-model"
+        },
+        {
+          "horizon": "w1",
+          "dir": "看跌",
+          "upProb": 29,
+          "rangePct": 13.2,
+          "expectedChg": -5.54,
+          "priceLow": 287.062,
+          "priceHigh": 374.138,
+          "source": "live-model"
+        },
+        {
+          "horizon": "m1",
+          "dir": "震荡",
+          "upProb": 54,
+          "rangePct": 23.3,
+          "expectedChg": 1.67,
+          "priceLow": 253.572,
+          "priceHigh": 407.628,
+          "source": "live-model"
+        }
+      ],
+      "keyLevels": {
+        "stopLoss": 304.152,
+        "note": "置信区间 d1 313.855~347.345；w1 287.062~374.138"
+      },
+      "plan": "自动快照，无操作建议。仅用于评价模型在全池上的真实水平。",
+      "evidence": [
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "腾讯财经日K（前复权）",
+          "claim": "锚定 2026-09-15 收盘 330.6"
+        },
+        {
+          "grade": "B",
+          "type": "derived",
+          "source": "lib/indicators",
+          "claim": "MA/RSI/MACD/KDJ/ATR/OBV/MFI/布林（ATR 5.07%）"
+        },
+        {
+          "grade": "D",
+          "type": "model",
+          "source": "Hedge 学习器（21 专家加权）",
+          "claim": "regime=bear-lowvol，专家权重由 47 个标的样本外验证得出"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "沪深300日K",
+          "claim": "大盘趋势与动量"
+        },
+        {
+          "grade": "E",
+          "type": "narrative",
+          "source": "自动生成",
+          "claim": "本条为模型自动快照，不含人工判断"
+        }
+      ],
+      "claims": [
+        {
+          "expert": "indexS",
+          "vote": -1,
+          "weight": 0.2071,
+          "contribution": -10.356
+        },
+        {
+          "expert": "rangePos",
+          "vote": -0.589,
+          "weight": 0.1529,
+          "contribution": -4.504
+        },
+        {
+          "expert": "trend",
+          "vote": -1,
+          "weight": 0.0638,
+          "contribution": -3.189
+        },
+        {
+          "expert": "idxMom",
+          "vote": -0.729,
+          "weight": 0.0806,
+          "contribution": -2.938
+        },
+        {
+          "expert": "rel",
+          "vote": -1,
+          "weight": 0.0501,
+          "contribution": -2.506
+        },
+        {
+          "expert": "kdj",
+          "vote": 1,
+          "weight": 0.0327,
+          "contribution": 1.633
+        }
+      ],
+      "tags": [
+        "自动入账",
+        "模型快照"
+      ],
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
+      "status": "open",
+      "resolvedAt": null,
+      "lessons": "",
+      "confidenceCeiling": 0.653,
+      "ceilingReason": "平均依据可信度 62%（A2 B1 C0 D1 E1）",
+      "evidenceMix": {
+        "counts": {
+          "A": 2,
+          "B": 1,
+          "C": 0,
+          "D": 1,
+          "E": 1
+        },
+        "pct": {
+          "A": 40,
+          "B": 20,
+          "C": 0,
+          "D": 20,
+          "E": 20
+        },
+        "total": 5
+      },
+      "overconfidence": false
+    },
+    {
+      "id": "20260915-002371-01",
+      "askedAt": "2026-09-15T07:13:52.365Z",
+      "code": "002371",
+      "name": "北方华创",
+      "kind": "stock",
+      "question": "【自动入账】每日模型预测快照（全池覆盖，消除选择性偏差）",
+      "stance": "bearish",
+      "confidence": 0.44,
+      "verdict": "看跌（未来1周可信上涨概率 28%，原始 22%）。信号 avoid（阈值 0.63）。市场状态 bear-lowvol。主要贡献：大盘环境（沪深300 vs MA60）(-10.356)、20日高低点位置(-4.037)、趋势（均线结构）(-3.189)、大盘动量（沪深300 20日）(-2.938)",
+      "horizon": "w1",
+      "anchorDate": "2026-09-15",
+      "anchorPrice": 638.16,
+      "predictions": [
+        {
+          "horizon": "d1",
+          "dir": "震荡",
+          "upProb": 47,
+          "rangePct": 4.7,
+          "expectedChg": -0.27,
+          "priceLow": 607.88,
+          "priceHigh": 668.44,
+          "source": "live-model"
+        },
+        {
+          "horizon": "d3",
+          "dir": "看跌",
+          "upProb": 45,
+          "rangePct": 8.1,
+          "expectedChg": -0.88,
+          "priceLow": 586.684,
+          "priceHigh": 689.636,
+          "source": "live-model"
+        },
+        {
+          "horizon": "w1",
+          "dir": "看跌",
+          "upProb": 28,
+          "rangePct": 12.3,
+          "expectedChg": -5.37,
+          "priceLow": 559.433,
+          "priceHigh": 716.887,
+          "source": "live-model"
+        },
+        {
+          "horizon": "m1",
+          "dir": "震荡",
+          "upProb": 53,
+          "rangePct": 21.8,
+          "expectedChg": 1.16,
+          "priceLow": 498.873,
+          "priceHigh": 777.447,
+          "source": "live-model"
+        }
+      ],
+      "keyLevels": {
+        "stopLoss": 587.107,
+        "note": "置信区间 d1 607.88~668.44；w1 559.433~716.887"
+      },
+      "plan": "自动快照，无操作建议。仅用于评价模型在全池上的真实水平。",
+      "evidence": [
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "腾讯财经日K（前复权）",
+          "claim": "锚定 2026-09-15 收盘 638.16"
+        },
+        {
+          "grade": "B",
+          "type": "derived",
+          "source": "lib/indicators",
+          "claim": "MA/RSI/MACD/KDJ/ATR/OBV/MFI/布林（ATR 4.74%）"
+        },
+        {
+          "grade": "D",
+          "type": "model",
+          "source": "Hedge 学习器（21 专家加权）",
+          "claim": "regime=bear-lowvol，专家权重由 47 个标的样本外验证得出"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "沪深300日K",
+          "claim": "大盘趋势与动量"
+        },
+        {
+          "grade": "E",
+          "type": "narrative",
+          "source": "自动生成",
+          "claim": "本条为模型自动快照，不含人工判断"
+        }
+      ],
+      "claims": [
+        {
+          "expert": "indexS",
+          "vote": -1,
+          "weight": 0.2071,
+          "contribution": -10.356
+        },
+        {
+          "expert": "rangePos",
+          "vote": -0.528,
+          "weight": 0.1529,
+          "contribution": -4.037
+        },
+        {
+          "expert": "trend",
+          "vote": -1,
+          "weight": 0.0638,
+          "contribution": -3.189
+        },
+        {
+          "expert": "idxMom",
+          "vote": -0.729,
+          "weight": 0.0806,
+          "contribution": -2.938
+        },
+        {
+          "expert": "rel",
+          "vote": -1,
+          "weight": 0.0501,
+          "contribution": -2.506
+        },
+        {
+          "expert": "obv",
+          "vote": -1,
+          "weight": 0.026,
+          "contribution": -1.302
+        }
+      ],
+      "tags": [
+        "自动入账",
+        "模型快照"
+      ],
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
+      "status": "open",
+      "resolvedAt": null,
+      "lessons": "",
+      "confidenceCeiling": 0.653,
+      "ceilingReason": "平均依据可信度 62%（A2 B1 C0 D1 E1）",
+      "evidenceMix": {
+        "counts": {
+          "A": 2,
+          "B": 1,
+          "C": 0,
+          "D": 1,
+          "E": 1
+        },
+        "pct": {
+          "A": 40,
+          "B": 20,
+          "C": 0,
+          "D": 20,
+          "E": 20
+        },
+        "total": 5
+      },
+      "overconfidence": false
+    },
+    {
+      "id": "20260915-688256-01",
+      "askedAt": "2026-09-15T07:13:52.561Z",
+      "code": "688256",
+      "name": "寒武纪",
+      "kind": "stock",
+      "question": "【自动入账】每日模型预测快照（全池覆盖，消除选择性偏差）",
+      "stance": "bearish",
+      "confidence": 0.2,
+      "verdict": "看跌（未来1周可信上涨概率 40%，原始 36%）。信号 neutral（阈值 0.63）。市场状态 bear-lowvol。主要贡献：大盘环境（沪深300 vs MA60）(-10.356)、大盘动量（沪深300 20日）(-2.938)、20日高低点位置(+1.941)、KDJ 交叉与极值(+1.633)",
+      "horizon": "w1",
+      "anchorDate": "2026-09-15",
+      "anchorPrice": 1075.79,
+      "predictions": [
+        {
+          "horizon": "d1",
+          "dir": "震荡",
+          "upProb": 49,
+          "rangePct": 5.6,
+          "expectedChg": -0.17,
+          "priceLow": 1015.596,
+          "priceHigh": 1135.984,
+          "source": "live-model"
+        },
+        {
+          "horizon": "d3",
+          "dir": "震荡",
+          "upProb": 48,
+          "rangePct": 9.5,
+          "expectedChg": -0.45,
+          "priceLow": 973.461,
+          "priceHigh": 1178.119,
+          "source": "live-model"
+        },
+        {
+          "horizon": "w1",
+          "dir": "看跌",
+          "upProb": 40,
+          "rangePct": 14.5,
+          "expectedChg": -3.02,
+          "priceLow": 919.286,
+          "priceHigh": 1232.294,
+          "source": "live-model"
+        },
+        {
+          "horizon": "m1",
+          "dir": "震荡",
+          "upProb": 47,
+          "rangePct": 25.7,
+          "expectedChg": -1.38,
+          "priceLow": 798.898,
+          "priceHigh": 1352.682,
+          "source": "live-model"
+        }
+      ],
+      "keyLevels": {
+        "stopLoss": 989.727,
+        "note": "置信区间 d1 1015.596~1135.984；w1 919.286~1232.294"
+      },
+      "plan": "自动快照，无操作建议。仅用于评价模型在全池上的真实水平。",
+      "evidence": [
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "腾讯财经日K（前复权）",
+          "claim": "锚定 2026-09-15 收盘 1075.79"
+        },
+        {
+          "grade": "B",
+          "type": "derived",
+          "source": "lib/indicators",
+          "claim": "MA/RSI/MACD/KDJ/ATR/OBV/MFI/布林（ATR 5.6%）"
+        },
+        {
+          "grade": "D",
+          "type": "model",
+          "source": "Hedge 学习器（21 专家加权）",
+          "claim": "regime=bear-lowvol，专家权重由 47 个标的样本外验证得出"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "沪深300日K",
+          "claim": "大盘趋势与动量"
+        },
+        {
+          "grade": "E",
+          "type": "narrative",
+          "source": "自动生成",
+          "claim": "本条为模型自动快照，不含人工判断"
+        }
+      ],
+      "claims": [
+        {
+          "expert": "indexS",
+          "vote": -1,
+          "weight": 0.2071,
+          "contribution": -10.356
+        },
+        {
+          "expert": "idxMom",
+          "vote": -0.729,
+          "weight": 0.0806,
+          "contribution": -2.938
+        },
+        {
+          "expert": "rangePos",
+          "vote": 0.254,
+          "weight": 0.1529,
+          "contribution": 1.941
+        },
+        {
+          "expert": "kdj",
+          "vote": 1,
+          "weight": 0.0327,
+          "contribution": 1.633
+        },
+        {
+          "expert": "obv",
+          "vote": -1,
+          "weight": 0.026,
+          "contribution": -1.302
+        },
+        {
+          "expert": "macdDir",
+          "vote": 1,
+          "weight": 0.0154,
+          "contribution": 0.771
+        }
+      ],
+      "tags": [
+        "自动入账",
+        "模型快照"
+      ],
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
+      "status": "open",
+      "resolvedAt": null,
+      "lessons": "",
+      "confidenceCeiling": 0.653,
+      "ceilingReason": "平均依据可信度 62%（A2 B1 C0 D1 E1）",
+      "evidenceMix": {
+        "counts": {
+          "A": 2,
+          "B": 1,
+          "C": 0,
+          "D": 1,
+          "E": 1
+        },
+        "pct": {
+          "A": 40,
+          "B": 20,
+          "C": 0,
+          "D": 20,
+          "E": 20
+        },
+        "total": 5
+      },
+      "overconfidence": false
+    },
+    {
+      "id": "20260915-688041-01",
+      "askedAt": "2026-09-15T07:13:52.762Z",
+      "code": "688041",
+      "name": "海光信息",
+      "kind": "stock",
+      "question": "【自动入账】每日模型预测快照（全池覆盖，消除选择性偏差）",
+      "stance": "bearish",
+      "confidence": 0.38,
+      "verdict": "看跌（未来1周可信上涨概率 31%，原始 25%）。信号 avoid（阈值 0.63）。市场状态 bear-lowvol。主要贡献：大盘环境（沪深300 vs MA60）(-10.356)、20日高低点位置(-5.226)、趋势（均线结构）(-3.189)、大盘动量（沪深300 20日）(-2.938)",
+      "horizon": "w1",
+      "anchorDate": "2026-09-15",
+      "anchorPrice": 224.6,
+      "predictions": [
+        {
+          "horizon": "d1",
+          "dir": "震荡",
+          "upProb": 54,
+          "rangePct": 5.3,
+          "expectedChg": 0.37,
+          "priceLow": 212.631,
+          "priceHigh": 236.569,
+          "source": "live-model"
+        },
+        {
+          "horizon": "d3",
+          "dir": "震荡",
+          "upProb": 53,
+          "rangePct": 9.1,
+          "expectedChg": 0.51,
+          "priceLow": 204.252,
+          "priceHigh": 244.948,
+          "source": "live-model"
+        },
+        {
+          "horizon": "w1",
+          "dir": "看跌",
+          "upProb": 31,
+          "rangePct": 13.9,
+          "expectedChg": -5.39,
+          "priceLow": 193.48,
+          "priceHigh": 255.72,
+          "source": "live-model"
+        },
+        {
+          "horizon": "m1",
+          "dir": "看涨",
+          "upProb": 66,
+          "rangePct": 24.5,
+          "expectedChg": 7.65,
+          "priceLow": 169.541,
+          "priceHigh": 279.659,
+          "source": "live-model"
+        }
+      ],
+      "keyLevels": {
+        "stopLoss": 206.632,
+        "note": "置信区间 d1 212.631~236.569；w1 193.48~255.72"
+      },
+      "plan": "自动快照，无操作建议。仅用于评价模型在全池上的真实水平。",
+      "evidence": [
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "腾讯财经日K（前复权）",
+          "claim": "锚定 2026-09-15 收盘 224.6"
+        },
+        {
+          "grade": "B",
+          "type": "derived",
+          "source": "lib/indicators",
+          "claim": "MA/RSI/MACD/KDJ/ATR/OBV/MFI/布林（ATR 5.33%）"
+        },
+        {
+          "grade": "D",
+          "type": "model",
+          "source": "Hedge 学习器（21 专家加权）",
+          "claim": "regime=bear-lowvol，专家权重由 47 个标的样本外验证得出"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "沪深300日K",
+          "claim": "大盘趋势与动量"
+        },
+        {
+          "grade": "E",
+          "type": "narrative",
+          "source": "自动生成",
+          "claim": "本条为模型自动快照，不含人工判断"
+        }
+      ],
+      "claims": [
+        {
+          "expert": "indexS",
+          "vote": -1,
+          "weight": 0.2071,
+          "contribution": -10.356
+        },
+        {
+          "expert": "rangePos",
+          "vote": -0.684,
+          "weight": 0.1529,
+          "contribution": -5.226
+        },
+        {
+          "expert": "trend",
+          "vote": -1,
+          "weight": 0.0638,
+          "contribution": -3.189
+        },
+        {
+          "expert": "idxMom",
+          "vote": -0.729,
+          "weight": 0.0806,
+          "contribution": -2.938
+        },
+        {
+          "expert": "rel",
+          "vote": -1,
+          "weight": 0.0501,
+          "contribution": -2.506
+        },
+        {
+          "expert": "rsiRev",
+          "vote": 1,
+          "weight": 0.0385,
+          "contribution": 1.925
+        }
+      ],
+      "tags": [
+        "自动入账",
+        "模型快照"
+      ],
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
+      "status": "open",
+      "resolvedAt": null,
+      "lessons": "",
+      "confidenceCeiling": 0.653,
+      "ceilingReason": "平均依据可信度 62%（A2 B1 C0 D1 E1）",
+      "evidenceMix": {
+        "counts": {
+          "A": 2,
+          "B": 1,
+          "C": 0,
+          "D": 1,
+          "E": 1
+        },
+        "pct": {
+          "A": 40,
+          "B": 20,
+          "C": 0,
+          "D": 20,
+          "E": 20
+        },
+        "total": 5
+      },
+      "overconfidence": false
+    },
+    {
+      "id": "20260915-603986-01",
+      "askedAt": "2026-09-15T07:13:52.970Z",
+      "code": "603986",
+      "name": "兆易创新",
+      "kind": "stock",
+      "question": "【自动入账】每日模型预测快照（全池覆盖，消除选择性偏差）",
+      "stance": "bearish",
+      "confidence": 0.4,
+      "verdict": "看跌（未来1周可信上涨概率 30%，原始 25%）。信号 avoid（阈值 0.63）。市场状态 bear-lowvol。主要贡献：大盘环境（沪深300 vs MA60）(-10.356)、20日高低点位置(-4.68)、趋势（均线结构）(-3.189)、大盘动量（沪深300 20日）(-2.938)",
+      "horizon": "w1",
+      "anchorDate": "2026-09-15",
+      "anchorPrice": 363.11,
+      "predictions": [
+        {
+          "horizon": "d1",
+          "dir": "震荡",
+          "upProb": 52,
+          "rangePct": 5.8,
+          "expectedChg": 0.27,
+          "priceLow": 342.15,
+          "priceHigh": 384.07,
+          "source": "live-model"
+        },
+        {
+          "horizon": "d3",
+          "dir": "震荡",
+          "upProb": 50,
+          "rangePct": 9.8,
+          "expectedChg": -0.01,
+          "priceLow": 327.478,
+          "priceHigh": 398.742,
+          "source": "live-model"
+        },
+        {
+          "horizon": "w1",
+          "dir": "看跌",
+          "upProb": 30,
+          "rangePct": 15,
+          "expectedChg": -5.88,
+          "priceLow": 308.613,
+          "priceHigh": 417.607,
+          "source": "live-model"
+        },
+        {
+          "horizon": "m1",
+          "dir": "看涨",
+          "upProb": 62,
+          "rangePct": 26.6,
+          "expectedChg": 6.14,
+          "priceLow": 266.693,
+          "priceHigh": 459.527,
+          "source": "live-model"
+        }
+      ],
+      "keyLevels": {
+        "stopLoss": 334.061,
+        "note": "置信区间 d1 342.15~384.07；w1 308.613~417.607"
+      },
+      "plan": "自动快照，无操作建议。仅用于评价模型在全池上的真实水平。",
+      "evidence": [
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "腾讯财经日K（前复权）",
+          "claim": "锚定 2026-09-15 收盘 363.11"
+        },
+        {
+          "grade": "B",
+          "type": "derived",
+          "source": "lib/indicators",
+          "claim": "MA/RSI/MACD/KDJ/ATR/OBV/MFI/布林（ATR 5.77%）"
+        },
+        {
+          "grade": "D",
+          "type": "model",
+          "source": "Hedge 学习器（21 专家加权）",
+          "claim": "regime=bear-lowvol，专家权重由 47 个标的样本外验证得出"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "沪深300日K",
+          "claim": "大盘趋势与动量"
+        },
+        {
+          "grade": "E",
+          "type": "narrative",
+          "source": "自动生成",
+          "claim": "本条为模型自动快照，不含人工判断"
+        }
+      ],
+      "claims": [
+        {
+          "expert": "indexS",
+          "vote": -1,
+          "weight": 0.2071,
+          "contribution": -10.356
+        },
+        {
+          "expert": "rangePos",
+          "vote": -0.612,
+          "weight": 0.1529,
+          "contribution": -4.68
+        },
+        {
+          "expert": "trend",
+          "vote": -1,
+          "weight": 0.0638,
+          "contribution": -3.189
+        },
+        {
+          "expert": "idxMom",
+          "vote": -0.729,
+          "weight": 0.0806,
+          "contribution": -2.938
+        },
+        {
+          "expert": "rel",
+          "vote": -1,
+          "weight": 0.0501,
+          "contribution": -2.506
+        },
+        {
+          "expert": "kdj",
+          "vote": 0.8,
+          "weight": 0.0327,
+          "contribution": 1.307
+        }
+      ],
+      "tags": [
+        "自动入账",
+        "模型快照"
+      ],
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
+      "status": "open",
+      "resolvedAt": null,
+      "lessons": "",
+      "confidenceCeiling": 0.653,
+      "ceilingReason": "平均依据可信度 62%（A2 B1 C0 D1 E1）",
+      "evidenceMix": {
+        "counts": {
+          "A": 2,
+          "B": 1,
+          "C": 0,
+          "D": 1,
+          "E": 1
+        },
+        "pct": {
+          "A": 40,
+          "B": 20,
+          "C": 0,
+          "D": 20,
+          "E": 20
+        },
+        "total": 5
+      },
+      "overconfidence": false
+    },
+    {
+      "id": "20260915-688008-01",
+      "askedAt": "2026-09-15T07:13:53.178Z",
+      "code": "688008",
+      "name": "澜起科技",
+      "kind": "stock",
+      "question": "【自动入账】每日模型预测快照（全池覆盖，消除选择性偏差）",
+      "stance": "bearish",
+      "confidence": 0.48,
+      "verdict": "看跌（未来1周可信上涨概率 26%，原始 20%）。信号 avoid（阈值 0.63）。市场状态 bear-lowvol。主要贡献：大盘环境（沪深300 vs MA60）(-10.356)、20日高低点位置(-4.657)、趋势（均线结构）(-3.189)、大盘动量（沪深300 20日）(-2.938)",
+      "horizon": "w1",
+      "anchorDate": "2026-09-15",
+      "anchorPrice": 187.83,
+      "predictions": [
+        {
+          "horizon": "d1",
+          "dir": "看跌",
+          "upProb": 45,
+          "rangePct": 5.8,
+          "expectedChg": -0.58,
+          "priceLow": 176.896,
+          "priceHigh": 198.764,
+          "source": "live-model"
+        },
+        {
+          "horizon": "d3",
+          "dir": "看跌",
+          "upProb": 43,
+          "rangePct": 9.9,
+          "expectedChg": -1.3,
+          "priceLow": 169.242,
+          "priceHigh": 206.418,
+          "source": "live-model"
+        },
+        {
+          "horizon": "w1",
+          "dir": "看跌",
+          "upProb": 26,
+          "rangePct": 15.1,
+          "expectedChg": -7.28,
+          "priceLow": 159.401,
+          "priceHigh": 216.259,
+          "source": "live-model"
+        },
+        {
+          "horizon": "m1",
+          "dir": "震荡",
+          "upProb": 51,
+          "rangePct": 26.8,
+          "expectedChg": 0.74,
+          "priceLow": 137.532,
+          "priceHigh": 238.128,
+          "source": "live-model"
+        }
+      ],
+      "keyLevels": {
+        "stopLoss": 172.804,
+        "note": "置信区间 d1 176.896~198.764；w1 159.401~216.259"
+      },
+      "plan": "自动快照，无操作建议。仅用于评价模型在全池上的真实水平。",
+      "evidence": [
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "腾讯财经日K（前复权）",
+          "claim": "锚定 2026-09-15 收盘 187.83"
+        },
+        {
+          "grade": "B",
+          "type": "derived",
+          "source": "lib/indicators",
+          "claim": "MA/RSI/MACD/KDJ/ATR/OBV/MFI/布林（ATR 5.82%）"
+        },
+        {
+          "grade": "D",
+          "type": "model",
+          "source": "Hedge 学习器（21 专家加权）",
+          "claim": "regime=bear-lowvol，专家权重由 47 个标的样本外验证得出"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "沪深300日K",
+          "claim": "大盘趋势与动量"
+        },
+        {
+          "grade": "E",
+          "type": "narrative",
+          "source": "自动生成",
+          "claim": "本条为模型自动快照，不含人工判断"
+        }
+      ],
+      "claims": [
+        {
+          "expert": "indexS",
+          "vote": -1,
+          "weight": 0.2071,
+          "contribution": -10.356
+        },
+        {
+          "expert": "rangePos",
+          "vote": -0.609,
+          "weight": 0.1529,
+          "contribution": -4.657
+        },
+        {
+          "expert": "trend",
+          "vote": -1,
+          "weight": 0.0638,
+          "contribution": -3.189
+        },
+        {
+          "expert": "idxMom",
+          "vote": -0.729,
+          "weight": 0.0806,
+          "contribution": -2.938
+        },
+        {
+          "expert": "rel",
+          "vote": -1,
+          "weight": 0.0501,
+          "contribution": -2.506
+        },
+        {
+          "expert": "obv",
+          "vote": -1,
+          "weight": 0.026,
+          "contribution": -1.302
+        }
+      ],
+      "tags": [
+        "自动入账",
+        "模型快照"
+      ],
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
+      "status": "open",
+      "resolvedAt": null,
+      "lessons": "",
+      "confidenceCeiling": 0.653,
+      "ceilingReason": "平均依据可信度 62%（A2 B1 C0 D1 E1）",
+      "evidenceMix": {
+        "counts": {
+          "A": 2,
+          "B": 1,
+          "C": 0,
+          "D": 1,
+          "E": 1
+        },
+        "pct": {
+          "A": 40,
+          "B": 20,
+          "C": 0,
+          "D": 20,
+          "E": 20
+        },
+        "total": 5
+      },
+      "overconfidence": false
+    },
+    {
+      "id": "20260915-688783-01",
+      "askedAt": "2026-09-15T07:13:53.348Z",
+      "code": "688783",
+      "name": "西安奕材-U",
+      "kind": "stock",
+      "question": "【自动入账】每日模型预测快照（全池覆盖，消除选择性偏差）",
+      "stance": "bearish",
+      "confidence": 0.44,
+      "verdict": "看跌（未来1周可信上涨概率 28%，原始 22%）。信号 avoid（阈值 0.63）。市场状态 bear-lowvol。主要贡献：大盘环境（沪深300 vs MA60）(-10.356)、20日高低点位置(-4.562)、趋势（均线结构）(-3.189)、大盘动量（沪深300 20日）(-2.938)",
+      "horizon": "w1",
+      "anchorDate": "2026-09-15",
+      "anchorPrice": 26.54,
+      "predictions": [
+        {
+          "horizon": "d1",
+          "dir": "震荡",
+          "upProb": 49,
+          "rangePct": 7.2,
+          "expectedChg": -0.14,
+          "priceLow": 24.63,
+          "priceHigh": 28.45,
+          "source": "live-model"
+        },
+        {
+          "horizon": "d3",
+          "dir": "震荡",
+          "upProb": 49,
+          "rangePct": 12.2,
+          "expectedChg": -0.34,
+          "priceLow": 23.294,
+          "priceHigh": 29.786,
+          "source": "live-model"
+        },
+        {
+          "horizon": "w1",
+          "dir": "看跌",
+          "upProb": 28,
+          "rangePct": 18.7,
+          "expectedChg": -8.12,
+          "priceLow": 21.575,
+          "priceHigh": 31.505,
+          "source": "live-model"
+        },
+        {
+          "horizon": "m1",
+          "dir": "看涨",
+          "upProb": 58,
+          "rangePct": 33.1,
+          "expectedChg": 5.38,
+          "priceLow": 17.756,
+          "priceHigh": 35.324,
+          "source": "live-model"
+        }
+      ],
+      "keyLevels": {
+        "stopLoss": 24.417,
+        "note": "置信区间 d1 24.63~28.45；w1 21.575~31.505"
+      },
+      "plan": "自动快照，无操作建议。仅用于评价模型在全池上的真实水平。",
+      "evidence": [
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "腾讯财经日K（前复权）",
+          "claim": "锚定 2026-09-15 收盘 26.54"
+        },
+        {
+          "grade": "B",
+          "type": "derived",
+          "source": "lib/indicators",
+          "claim": "MA/RSI/MACD/KDJ/ATR/OBV/MFI/布林（ATR 7.2%）"
+        },
+        {
+          "grade": "D",
+          "type": "model",
+          "source": "Hedge 学习器（21 专家加权）",
+          "claim": "regime=bear-lowvol，专家权重由 47 个标的样本外验证得出"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "沪深300日K",
+          "claim": "大盘趋势与动量"
+        },
+        {
+          "grade": "E",
+          "type": "narrative",
+          "source": "自动生成",
+          "claim": "本条为模型自动快照，不含人工判断"
+        }
+      ],
+      "claims": [
+        {
+          "expert": "indexS",
+          "vote": -1,
+          "weight": 0.2071,
+          "contribution": -10.356
+        },
+        {
+          "expert": "rangePos",
+          "vote": -0.597,
+          "weight": 0.1529,
+          "contribution": -4.562
+        },
+        {
+          "expert": "trend",
+          "vote": -1,
+          "weight": 0.0638,
+          "contribution": -3.189
+        },
+        {
+          "expert": "idxMom",
+          "vote": -0.729,
+          "weight": 0.0806,
+          "contribution": -2.938
+        },
+        {
+          "expert": "rel",
+          "vote": -1,
+          "weight": 0.0501,
+          "contribution": -2.506
+        },
+        {
+          "expert": "obv",
+          "vote": -1,
+          "weight": 0.026,
+          "contribution": -1.302
+        }
+      ],
+      "tags": [
+        "自动入账",
+        "模型快照"
+      ],
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
+      "status": "open",
+      "resolvedAt": null,
+      "lessons": "",
+      "confidenceCeiling": 0.653,
+      "ceilingReason": "平均依据可信度 62%（A2 B1 C0 D1 E1）",
+      "evidenceMix": {
+        "counts": {
+          "A": 2,
+          "B": 1,
+          "C": 0,
+          "D": 1,
+          "E": 1
+        },
+        "pct": {
+          "A": 40,
+          "B": 20,
+          "C": 0,
+          "D": 20,
+          "E": 20
+        },
+        "total": 5
+      },
+      "overconfidence": false
+    },
+    {
+      "id": "20260915-300475-01",
+      "askedAt": "2026-09-15T07:13:53.549Z",
+      "code": "300475",
+      "name": "香农芯创",
+      "kind": "stock",
+      "question": "【自动入账】每日模型预测快照（全池覆盖，消除选择性偏差）",
+      "stance": "bearish",
+      "confidence": 0.28,
+      "verdict": "看跌（未来1周可信上涨概率 36%，原始 32%）。信号 avoid（阈值 0.63）。市场状态 bear-lowvol。主要贡献：大盘环境（沪深300 vs MA60）(-10.356)、大盘动量（沪深300 20日）(-2.938)、20日高低点位置(-1.726)、KDJ 交叉与极值(+1.307)",
+      "horizon": "w1",
+      "anchorDate": "2026-09-15",
+      "anchorPrice": 161.67,
+      "predictions": [
+        {
+          "horizon": "d1",
+          "dir": "震荡",
+          "upProb": 49,
+          "rangePct": 6.8,
+          "expectedChg": -0.1,
+          "priceLow": 150.72,
+          "priceHigh": 172.62,
+          "source": "live-model"
+        },
+        {
+          "horizon": "d3",
+          "dir": "震荡",
+          "upProb": 47,
+          "rangePct": 11.5,
+          "expectedChg": -0.67,
+          "priceLow": 143.054,
+          "priceHigh": 180.286,
+          "source": "live-model"
+        },
+        {
+          "horizon": "w1",
+          "dir": "看跌",
+          "upProb": 36,
+          "rangePct": 17.6,
+          "expectedChg": -4.8,
+          "priceLow": 133.199,
+          "priceHigh": 190.141,
+          "source": "live-model"
+        },
+        {
+          "horizon": "m1",
+          "dir": "震荡",
+          "upProb": 51,
+          "rangePct": 31.2,
+          "expectedChg": 0.68,
+          "priceLow": 111.298,
+          "priceHigh": 212.042,
+          "source": "live-model"
+        }
+      ],
+      "keyLevels": {
+        "stopLoss": 148.736,
+        "note": "置信区间 d1 150.72~172.62；w1 133.199~190.141"
+      },
+      "plan": "自动快照，无操作建议。仅用于评价模型在全池上的真实水平。",
+      "evidence": [
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "腾讯财经日K（前复权）",
+          "claim": "锚定 2026-09-15 收盘 161.67"
+        },
+        {
+          "grade": "B",
+          "type": "derived",
+          "source": "lib/indicators",
+          "claim": "MA/RSI/MACD/KDJ/ATR/OBV/MFI/布林（ATR 6.77%）"
+        },
+        {
+          "grade": "D",
+          "type": "model",
+          "source": "Hedge 学习器（21 专家加权）",
+          "claim": "regime=bear-lowvol，专家权重由 47 个标的样本外验证得出"
+        },
+        {
+          "grade": "A",
+          "type": "data",
+          "source": "沪深300日K",
+          "claim": "大盘趋势与动量"
+        },
+        {
+          "grade": "E",
+          "type": "narrative",
+          "source": "自动生成",
+          "claim": "本条为模型自动快照，不含人工判断"
+        }
+      ],
+      "claims": [
+        {
+          "expert": "indexS",
+          "vote": -1,
+          "weight": 0.2071,
+          "contribution": -10.356
+        },
+        {
+          "expert": "idxMom",
+          "vote": -0.729,
+          "weight": 0.0806,
+          "contribution": -2.938
+        },
+        {
+          "expert": "rangePos",
+          "vote": -0.226,
+          "weight": 0.1529,
+          "contribution": -1.726
+        },
+        {
+          "expert": "kdj",
+          "vote": 0.8,
+          "weight": 0.0327,
+          "contribution": 1.307
+        },
+        {
+          "expert": "mom5",
+          "vote": -1,
+          "weight": 0.0221,
+          "contribution": -1.106
+        },
+        {
+          "expert": "macdDir",
+          "vote": 1,
+          "weight": 0.0154,
+          "contribution": 0.771
+        }
+      ],
+      "tags": [
+        "自动入账",
+        "模型快照"
+      ],
+      "outcomes": [
+        {
+          "pending": true,
+          "horizon": "d1",
+          "needBars": 1
+        },
+        {
+          "pending": true,
+          "horizon": "d3",
+          "needBars": 3
+        },
+        {
+          "pending": true,
+          "horizon": "w1",
+          "needBars": 5
+        },
+        {
+          "pending": true,
+          "horizon": "m1",
+          "needBars": 22
+        }
+      ],
+      "scores": {
+        "n": 0
+      },
+      "status": "open",
+      "resolvedAt": null,
+      "lessons": "",
+      "confidenceCeiling": 0.653,
+      "ceilingReason": "平均依据可信度 62%（A2 B1 C0 D1 E1）",
+      "evidenceMix": {
+        "counts": {
+          "A": 2,
+          "B": 1,
+          "C": 0,
+          "D": 1,
+          "E": 1
+        },
+        "pct": {
+          "A": 40,
+          "B": 20,
+          "C": 0,
+          "D": 20,
+          "E": 20
+        },
+        "total": 5
       },
       "overconfidence": false
     }
   ],
   "_source": "/Users/liuyang/Desktop/PythonProject/半导体设备ETF交易模拟系统/data/research-ledger.json",
   "sanitized": true,
-  "sanitizedAt": "2026-09-14T08:27:14.182Z"
+  "sanitizedAt": "2026-09-15T07:30:57.546Z"
 }

@@ -294,9 +294,15 @@
         probHtml += '<div class="s muted">（手工模型另给 ' + x.upProbRawModel + '%）</div>';
       }
       let sigHtml = '';
-      if (x.signal) {
+      if (x.decisionGrade === 'reference') {
+        // P4：d1 方向 51.3% < 朴素基准 51.6%，无边际 → 只作参考，不给买卖信号
+        sigHtml = '<div class="s flat">📎 参考（1天周期无边际：51.3% vs 朴素 51.6%），不用于决策</div>';
+      } else if (x.signal) {
         const sc = x.signal === 'buy' ? 'bull' : x.signal === 'avoid' ? 'bear' : 'flat';
         sigHtml = '<div class="s ' + sc + '">' + (sigLabel[x.signal] || x.signal) + '（阈值 ' + x.threshold + '，样本外胜率 ' + (x.thresholdWinRate == null ? '--' : (x.thresholdWinRate * 100).toFixed(0) + '%') + '）</div>';
+      }
+      if (x.smoothWindow > 1 && x.upProbUnsmooth != null && x.upProbUnsmooth !== x.upProb) {
+        sigHtml += '<div class="s muted">已用 EMA' + x.smoothWindow + ' 平滑：未平滑 ' + x.upProbUnsmooth + '% → ' + x.upProb + '%</div>';
       }
       return '<div class="pr-card"><div class="n">' + nm[k] + '</div>' +
         '<div class="v ' + cls + '">' + arrow(x.dir) + ' ' + x.dir + '</div>' +
@@ -868,6 +874,63 @@
     }, true);
   }
 
+  // ---------- 今日行动卡（池级合成结论）----------
+  var actionData = null;
+
+  async function loadActionCard() {
+    const el = $('#actionCard');
+    if (!el) return;
+    try {
+      const r = await api('/api/action');
+      actionData = r;
+      renderActionCard();
+    } catch (e) {
+      el.innerHTML = '<span style="color:#c0392b">行动卡加载失败：' + e.message + '</span>';
+    }
+  }
+
+  function renderActionCard() {
+    const el = $('#actionCard');
+    if (!el || !actionData || !actionData.ok) return;
+    const a = actionData;
+    const vc = a.verdict === '建仓' ? 'bull' : (a.verdict === '减仓' ? 'bear' : 'flat');
+    const icon = a.verdict === '建仓' ? '🟢' : a.verdict === '减仓' ? '🔴' : (a.verdict === '持有' ? '🔵' : '⏸');
+    let h = '';
+    // 一行结论
+    h += '<div class="ac-verdict ' + vc + '">' + icon + ' <b>' + a.verdict + '</b>' +
+         '<span class="ac-reason">' + (a.reason || '') + '</span></div>';
+    // 关键三问
+    h += '<div class="ac-meta">' +
+      '<span>操作频率 <b>' + ({ monthly: '月度', weekly: '周度', daily: '日度' }[a.operatingMode] || a.operatingMode) + '</b></span>' +
+      '<span>信号平滑 <b>EMA' + a.smoothWindow + '</b></span>' +
+      '<span>下次复查 <b>' + a.nextReviewDate + '</b></span>' +
+      '</div>';
+    // 门禁
+    h += '<div class="ac-checks">' + (a.checks || []).map((c) =>
+      '<span class="' + (c.pass ? 'ok' : 'bad') + '">' + (c.pass ? '✅' : '❌') + ' ' + c.item + '：' + c.detail + '</span>').join('') + '</div>';
+    // 持仓
+    if (a.positions && a.positions.length) {
+      h += '<table class="data-table compact"><thead><tr><th>持仓</th><th>份额</th><th>成本</th><th>现价</th><th>浮动</th></tr></thead><tbody>';
+      a.positions.forEach((p) => {
+        h += '<tr><td>' + p.name + '</td><td>' + p.shares + '</td><td>' + p.avgCost + '</td><td>' + p.price + '</td><td class="' + (p.pnlPct >= 0 ? 'bull' : 'bear') + '">' + (p.pnlPct >= 0 ? '+' : '') + p.pnlPct + '%</td></tr>';
+      });
+      h += '</tbody></table>';
+    } else {
+      h += '<div class="muted">当前空仓</div>';
+    }
+    // 候选表
+    h += '<table class="data-table compact"><thead><tr><th>动量排名</th><th>标的</th><th>20日动量</th><th>1周可信</th><th>1月可信</th><th>共振+门槛</th><th>信号</th></tr></thead><tbody>';
+    (a.candidates || []).slice(0, 8).forEach((c) => {
+      const g = c.gatePass === true ? '✅ 通过' : (c.gatePass === false ? '✗ 未过' : '--');
+      h += '<tr' + (c.gatePass ? ' class="ac-hit"' : '') + '><td>' + c.momRank + '</td><td>' + c.name + (c.held ? ' <span class="muted">(持仓)</span>' : '') + '</td><td>' + (c.mom20 >= 0 ? '+' : '') + c.mom20 + '%</td><td>' + c.pW1 + '%</td><td>' + c.pM1 + '%</td><td>' + g + '</td><td>' + (c.w1Signal === 'buy' ? '✅买入' : c.w1Signal === 'avoid' ? '⛔回避' : '⏸观望') + '</td></tr>';
+    });
+    h += '</tbody></table>';
+    h += '<div class="warn-box">⚠️ 证据等级：' + a.evidenceLevel + '<br/>' +
+         '阈值：3天 ' + (a.thresholds.d3 || '--') + ' · 1周 ' + (a.thresholds.w1 || '--') + ' · 1月 ' + (a.thresholds.m1 || '--') +
+         '　｜　<b>1天周期已降级为「参考」</b>（方向 51.3% 低于朴素基准 51.6%，无边际）</div>';
+    el.innerHTML = h;
+  }
+
   // ---------- 研究台账 ----------
   var ledgerData = null, rlData = null;
 
@@ -921,6 +984,29 @@
       keys.map((g) => '<tr><td><span class="grade-badge" style="background:' + gradeColor[g] + '">' + gradeName[g] + '</span></td><td>' + bg[g].entries + '</td><td>' + bg[g].n + '</td><td>' + pct(bg[g].hitRate) + '</td><td>' + (bg[g].brier == null ? '--' : bg[g].brier) + '</td></tr>').join('') +
       '</tbody></table><div class="muted">这张表回答：<b>靠新闻(C级)得出的结论，是不是比靠数据(A/B级)得出的结论更不准？</b>样本积累后会用真实结果说话。</div>'
       : '<div class="muted">样本不足</div>';
+
+    // 策略采纳状态（P1：明确区分"生效"与"评估未采纳"）
+    if (rlData && rlData.meta && rlData.meta.tradingPolicy) {
+      const tp = rlData.meta.tradingPolicy;
+      let ph = '<div class="rl-title">策略采纳状态 <span class="muted">唯一生效来源是「已生效」；其余为评估记录，不接入实盘</span></div>';
+      ph += '<table class="data-table compact"><thead><tr><th>策略</th><th>是否生效</th><th>验证表现</th><th>测试表现</th><th>未采纳原因</th></tr></thead><tbody>';
+      const d = tp.decided || {};
+      const ths = d.thresholds || {};
+      ph += '<tr><td><b>阈值策略</b>（d3/w1/m1：' + ['d3', 'w1', 'm1'].map((k) => ths[k] ? ths[k].threshold : '--').join(' / ') + '）</td>' +
+        '<td><b style="color:#1a7f37">✅ 已生效</b></td><td>' + (d.basis || '--') + '</td><td>--</td><td>--</td></tr>';
+      const ev = tp.evaluated || {};
+      Object.keys(ev).forEach((k) => {
+        const e = ev[k];
+        const nm = { timingPolicy: '择时退出', rotationWeight: '轮动权重 w', chosenStrategy: '选优策略' }[k] || k;
+        const v = e.valCalmar != null ? ('Calmar ' + e.valCalmar) : (e.valExpectancy != null ? ('期望 ' + e.valExpectancy + '%') : '--');
+        const t = e.testCalmar != null ? ('Calmar ' + e.testCalmar) : (e.testReturn != null ? ('收益 ' + e.testReturn + '%') : '--');
+        ph += '<tr><td>' + nm + (e.name ? '<span class="muted"> ' + e.name + '</span>' : '') + '</td>' +
+          '<td style="color:#b91c1c">❌ 未采纳</td><td>' + v + '</td><td>' + t + '</td><td class="muted">' + (e.rejectReason || '--') + '</td></tr>';
+      });
+      ph += '</tbody></table>';
+      ph += '<div class="muted">操作频率 <b>' + (tp.operatingMode || '--') + '</b>　信号平滑 <b>EMA' + (tp.signalSmoothing || 1) + '</b></div>';
+      $('#rlPanel').insertAdjacentHTML('afterbegin', ph);
+    }
 
     // RL 权重
     if (rlData && rlData.horizons) {
@@ -1079,7 +1165,7 @@
       $('#tab-' + b.dataset.tab).classList.add('active');
       if (b.dataset.tab === 'review') loadReviews();
       if (b.dataset.tab === 'ledger') loadLedger();
-      if (b.dataset.tab === 'predict') { if (predictData) renderPredictChart(); }
+      if (b.dataset.tab === 'predict') { if (predictData) renderPredictChart(); loadActionCard(); }
       if (b.dataset.tab === 'analysis') {
         // 重新渲染图表：修复标签页隐藏时初始化为 0 尺寸导致分时/K线不显示
         setTimeout(() => { renderChart(); if (App.charts.mini) App.charts.mini.resize(); }, 60);

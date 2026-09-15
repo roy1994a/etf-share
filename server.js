@@ -196,7 +196,8 @@ async function fetchEastmoneyDaily(limit) {
 
 // ---------- 简单内存缓存 ----------
 const cache = new Map();
-const predictCache = new Map(); // 前瞻预测结果缓存（5分钟）
+const predictCache = new Map();
+const actionCache = new Map();   // /api/action 池级行动卡（5 分钟）
 const searchCache = new Map(); // 搜索缓存（5分钟，加速重复搜索）
 let globalExtrasCache = { t: 0, v: null }; // 预测用全局数据缓存（10分钟）
 // ------------------------------------------------------------------ RL 学习状态（带 mtime 失效，训练完无需重启即可生效）
@@ -544,6 +545,105 @@ const server = http.createServer(async (req, res) => {
       }
     }
 
+    // 池级「今日行动卡」：把前瞻指引合成一个可直接执行的结论
+    //
+    // 为什么需要：/api/predict 是单标的的，用户要看全池 13 只要逐个点开 ——
+    // 那是数据不是指引。这里给出"今天动不动 / 动哪只 / 下次何时看"。
+    if (p === '/api/action') {
+      const hit = actionCache.get('action');
+      if (hit && Date.now() - hit.t < 300000) return sendJSON(res, 200, hit.v);
+      try {
+        const state = getRlState();
+        const tp = state.tradingPolicy || {};
+        const decided = tp.decided || tp;
+        const smooth = q.smooth != null ? parseInt(q.smooth, 10) : (tp.signalSmoothing || 1);
+        const mode = q.mode || tp.operatingMode || 'monthly';
+        const pool = loadPool();
+        const extras = await getGlobalExtras();
+        const hist = await fetchGlobalHistory({ bars: 640 });
+        const liveVotes = buildLiveVotes(extras);
+        const account = (() => { try { return JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'account.json'), 'utf8')); } catch (e) { return { positions: {}, cash: 0 }; } })();
+        const positions = account.positions || {};
+        const th = decided.thresholds || {};
+        const conf = decided.confluencePolicy || state.confluencePolicy || null;
+
+        // 并发拉全池 K 线并预测（与 monitor.js 的 pool.map 同一模式）
+        const rows = (await Promise.all(pool.map(async (e) => {
+          try {
+            const { klines: raw, quote } = await fetchTencentKline('day', 320, e.code);
+            const klines = calibrateKlines(raw, quote, 'day');
+            if (!klines || klines.length < 61) return null;
+            const live = LivePredict.predictLive(klines, {
+              indexKlines: hist.indexKlines, soxSeries: hist.soxSeries,
+              us10ySeries: hist.us10ySeries, spxSeries: hist.spxSeries,
+            }, state, { liveVotes, smooth });
+            if (!live.ok) return null;
+            const closes = klines.map((k) => k.close);
+            const n = closes.length;
+            const mom20 = n > 20 ? (closes[n - 1] / closes[n - 21] - 1) * 100 : null;
+            return {
+              code: e.code, name: e.name || e.code, price: live.price,
+              mom20: mom20 == null ? null : +mom20.toFixed(2),
+              pW1: live.horizons.w1.upProb, pM1: live.horizons.m1.upProb, pD3: live.horizons.d3.upProb,
+              w1Signal: live.horizons.w1.signal, m1Signal: live.horizons.m1.signal,
+              gatePass: conf && conf.need ? conf.need.every((h) => live.horizons[h].upProb / 100 >= ((conf.thresholds && conf.thresholds[h]) || 0.55)) : null,
+              regime: live.regime,
+              positions: positions[e.code] ? { shares: positions[e.code].shares, avgCost: positions[e.code].avgCost } : null,
+            };
+          } catch (err) { return null; }
+        }))).filter(Boolean);
+
+        // 动量排名
+        const ranked = rows.slice().filter((r) => r.mom20 != null).sort((a, b) => b.mom20 - a.mom20);
+        ranked.forEach((r, i) => { r.momRank = i + 1; });
+
+        // 门禁检查
+        const idx = extras && extras.index;
+        const bear = !!(idx && idx.ma60 && idx.price < idx.ma60);
+        const checks = [
+          { item: '大盘（沪深300 vs MA60）', pass: !bear, detail: bear ? '熊市 → 建议观望' : '多头' },
+          { item: '情绪（赚钱效应）', pass: !(extras && extras.hhxg && extras.hhxg.sentimentIndex >= 85), detail: extras && extras.hhxg && extras.hhxg.sentimentIndex != null ? String(extras.hhxg.sentimentIndex) : '--' },
+          { item: '美债10Y', pass: !(extras && extras.macro && extras.macro.us10y && extras.macro.us10y.price > 4.5), detail: extras && extras.macro && extras.macro.us10y && extras.macro.us10y.price != null ? extras.macro.us10y.price + '%' : '--' },
+        ];
+
+        const held = rows.filter((r) => r.positions);
+        const gateCand = ranked.filter((r) => r.gatePass);
+        let verdict = '观望', reason = '';
+        if (bear && held.length) { verdict = '减仓'; reason = '大盘转熊，按纪律降低仓位'; }
+        else if (bear) { verdict = '观望'; reason = '大盘熊市（沪深300<MA60）'; }
+        else if (!gateCand.length) { verdict = '观望'; reason = '无标的通过「多周期共振 + 入场门槛」'; }
+        else if (held.length) { verdict = '持有'; reason = `${held.map((h) => h.name).join('、')} 仍满足条件`; }
+        else { verdict = '建仓'; reason = `候选：${gateCand.slice(0, 3).map((c) => c.name).join('、')}`; }
+
+        // 下次复查日
+        const nowD = new Date();
+        const nextReview = (() => {
+          const d = new Date(nowD.getTime());
+          if (mode === 'monthly') { d.setMonth(d.getMonth() + 1, 1); while (d.getDay() === 0 || d.getDay() === 6) d.setDate(d.getDate() + 1); }
+          else if (mode === 'weekly') { d.setDate(d.getDate() + ((8 - d.getDay()) % 7 || 7)); }
+          else d.setDate(d.getDate() + 1);
+          const pp = (x) => String(x).padStart(2, '0');
+          return `${d.getFullYear()}-${pp(d.getMonth() + 1)}-${pp(d.getDate())}`;
+        })();
+
+        const out = {
+          ok: true,
+          asOf: new Date().toISOString(),
+          operatingMode: mode, smoothWindow: smooth, nextReviewDate: nextReview,
+          verdict, reason,
+          evidenceLevel: '入场门槛为 post-hoc 观察，未经前向验证（见 node ledger.js gate）',
+          checks,
+          positions: held.map((h) => ({ code: h.code, name: h.name, shares: h.positions.shares, avgCost: h.positions.avgCost, price: h.price, pnlPct: +(((h.price - h.positions.avgCost) / h.positions.avgCost) * 100).toFixed(2) })),
+          candidates: ranked.map((r) => ({ code: r.code, name: r.name, mom20: r.mom20, momRank: r.momRank, pW1: r.pW1, pM1: r.pM1, gatePass: r.gatePass, w1Signal: r.w1Signal, held: !!r.positions })),
+          thresholds: { d3: (conf && conf.thresholds && conf.thresholds.d3) || null, w1: th.w1 ? th.w1.threshold : null, m1: th.m1 ? th.m1.threshold : null },
+        };
+        actionCache.set('action', { t: Date.now(), v: out });
+        return sendJSON(res, 200, out);
+      } catch (e) {
+        return sendJSON(res, 500, { ok: false, error: e.message });
+      }
+    }
+
     // 研究台账：结论留痕 + 到期结算 + 准确率（回答"你到底准不准"）
     if (p === '/api/ledger') {
       try {
@@ -604,6 +704,7 @@ const server = http.createServer(async (req, res) => {
             eta: state.eta, discount: state.discount, floor: state.floor,
             rounds: state.rounds, updatedAt: state.updatedAt, trainedFrom: state.trainedFrom,
             ledgerFeedback: state.ledgerFeedback || null,
+            tradingPolicy: state.tradingPolicy || null,
           },
           horizons,
           report,

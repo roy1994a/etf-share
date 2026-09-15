@@ -281,3 +281,16 @@ td.sell { color: var(--green); font-weight: 600; }
 .ledger-q { font-size: 12.5px; color: #475569; margin-bottom: 6px; }
 .ledger-v { font-size: 13px; line-height: 1.7; margin-bottom: 6px; }
 .ledger-lesson { margin-top: 8px; padding: 8px 10px; background: #f0f9ff; border-left: 3px solid #38bdf8; border-radius: 6px; font-size: 12.5px; line-height: 1.65; color: #0c4a6e; }
+
+/* ============ 今日行动卡 ============ */
+.ac-verdict { font-size: 20px; font-weight: 700; padding: 10px 14px; border-radius: 10px; background: var(--bg2); border: 1px solid var(--border); margin-bottom: 10px; }
+.ac-verdict.bull { color: #d92b2b; border-color: #f3b6b6; background: #fff5f5; }
+.ac-verdict.bear { color: #16a34a; border-color: #b6e3c4; background: #f2fbf5; }
+.ac-verdict.flat { color: #64748b; }
+.ac-reason { font-size: 13px; font-weight: 400; color: #64748b; margin-left: 10px; }
+.ac-meta { display: flex; gap: 18px; flex-wrap: wrap; font-size: 12.5px; color: #64748b; margin-bottom: 8px; }
+.ac-meta b { color: var(--text); }
+.ac-checks { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12.5px; margin-bottom: 10px; }
+.ac-checks .ok { color: #1a7f37; }
+.ac-checks .bad { color: #b91c1c; }
+tr.ac-hit { background: #f0fdf4; font-weight: 600; }

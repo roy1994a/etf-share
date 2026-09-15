@@ -580,8 +580,18 @@ async function main() {
       ? { threshold: pick.threshold, winRate: pick.winRate, avgRetPct: pick.avgRetPct, trades: pick.trades }
       : { threshold: 0.55, winRate: null, avgRetPct: null, trades: 0 };
   }
-  state.tradingPolicy = { thresholds: liveThreshold, fees: FEE_ROUND_TRIP_PCT, basis: '拟合集(train+val)含费期望最优，交易数≥200' };
-  // rotationWeight 在 9c) 组合回测后写入（见下）
+  // 唯一生效来源：decided。其它候选一律放 evaluated 并标 adopted:false（P1）
+  state.tradingPolicy = Object.assign(rl.defaultTradingPolicy(), {
+    decided: {
+      thresholds: liveThreshold,
+      fees: FEE_ROUND_TRIP_PCT,
+      basis: '拟合集(train+val)含费期望最优，交易数≥200',
+      confluencePolicy: null,   // 稍后写入
+    },
+    operatingMode: state.tradingPolicy && state.tradingPolicy.operatingMode ? state.tradingPolicy.operatingMode : 'monthly',
+    signalSmoothing: state.tradingPolicy && state.tradingPolicy.signalSmoothing ? state.tradingPolicy.signalSmoothing : 5,
+    evaluated: {},
+  });
 
   // 9b) 策略对比（4 种交易构造方式）：验证集选最优，测试集复核
   const STRATEGIES = [];
@@ -651,8 +661,10 @@ async function main() {
     }
   }
   const bestStratTest = bestStrat ? stratTest.find((r) => r.name === bestStrat.name) : null;
-  state.chosenStrategy = bestStrat
+  // 选优策略只作评估记录（adopted:false）—— 它没有被接入实盘
+  const chosenStrategyRec = bestStrat
     ? { name: bestStrat.name, valExpectancy: bestStrat.avgRetPct, valWinRate: bestStrat.winRate, valTrades: bestStrat.trades,
+        adopted: false, rejectReason: '仅为评估记录，未接入实盘（实盘走 decided.thresholds + confluencePolicy）',
         rule: `验证集交易数≥${MIN_TRADES_STRAT} 且胜率≥${(MIN_WINRATE_STRAT * 100).toFixed(0)}%，取单笔期望最高` }
     : null;
   // 多周期共振单独存一份，实盘直接可用（它在测试集上胜率最高且逻辑最稳）
@@ -664,6 +676,8 @@ async function main() {
     valWinRate: confVal.winRate, valExpectancy: confVal.avgRetPct, valTrades: confVal.trades,
     testWinRate: confTest ? confTest.winRate : null, testExpectancy: confTest ? confTest.avgRetPct : null, testTrades: confTest ? confTest.trades : null,
   } : null;
+  state.tradingPolicy.decided.confluencePolicy = state.confluencePolicy;
+  state.tradingPolicy.evaluated.chosenStrategy = chosenStrategyRec || { adopted: false, rejectReason: '无可选配置' };
 
   // 9c) 组合级净值回测（P0）+ 轮动权重消融（P2）
   //
@@ -804,12 +818,12 @@ async function main() {
     console.log(`[P4 择时] 按两半稳健准则选 → ${bestT ? bestT.name : '无'}（验证两半最差 ${bestT ? bestT.robust : '--'}，测试 Calmar ${bestT ? bestT.test.calmar : '--'}）`);
     const baseV = GRID.find((g) => g.name === 'w1 纯动量（无择时）');
     const baseM = GRID.find((g) => g.name === 'm1 纯动量（无择时）');
-    state.tradingPolicy.timingPolicy = bestT
-      ? { name: bestT.name, hz: bestT.hz, timing: bestT.timing, sizing: bestT.sizing,
+    state.tradingPolicy.evaluated.timingPolicy = bestT
+      ? Object.assign({ adopted: false, rejectReason: '测试集 Calmar 低于同周期纯动量基准（择时退出族测试集 0/4 全败）' }, { name: bestT.name, hz: bestT.hz, timing: bestT.timing, sizing: bestT.sizing,
           valCalmar: bestT.val.calmar, valRobust: bestT.robust, testCalmar: bestT.test.calmar,
           testReturn: bestT.test.totalReturnPct, testTrades: bestT.test.trades,
-          basis: '验证集两半中更差的一半 Calmar 最高，且交易数≥40（稳健准则）' }
-      : null;
+          basis: '验证集两半中更差的一半 Calmar 最高，且交易数≥40（稳健准则）' })
+      : { adopted: false, rejectReason: '无可选配置' };
 
     portfolio = {
       topK: args.topK, horizon: 'w1', execLag,
@@ -822,7 +836,8 @@ async function main() {
                 chosenSingleTestCalmar: bestSingle ? bestSingle.test.calmar : null,
                 baseW1: baseV, baseM1: baseM },
     };
-    state.tradingPolicy.rotationWeight = {
+    state.tradingPolicy.evaluated.rotationWeight = {
+      adopted: false, rejectReason: '验证集与测试集结论相反，w 不可靠估计',
       w: bestW.w,
       basis: '验证集组合口径 Calmar 最高且交易数≥60；w=动量权重',
       valCalmar: bestW.m.calmar, testCalmar: (TESTP.find((x) => x.w === bestW.w) || {}).m ? TESTP.find((x) => x.w === bestW.w).m.calmar : null,
@@ -906,7 +921,7 @@ async function main() {
   }
   lines.push('');
   if (bestStrat) {
-    lines.push(`> **选择规则**：${state.chosenStrategy ? state.chosenStrategy.rule : '--'}。`);
+    lines.push(`> **选择规则**：${chosenStrategyRec ? chosenStrategyRec.rule : '--'}。`);
     lines.push('');
     lines.push(`> 验证集选出的最优策略：**${bestStrat.name}**（验证期望 ${bestStrat.avgRetPct}%/笔，胜率 ${P(bestStrat.winRate)}，${bestStrat.trades} 笔）。` +
       (bestStratTest ? `测试集复核：胜率 ${P(bestStratTest.winRate)}，期望 ${F(bestStratTest.avgRetPct)}%/笔，共 ${bestStratTest.trades} 笔。` : ''));
@@ -1170,7 +1185,7 @@ async function main() {
     priorTest, learnedTest, priorFit, learnedFit, naiveTest,
     grid, walkForward: wf, tradingVal, tradingTest, chosenThreshold, liveThreshold,
     portfolio,
-    strategies: { val: stratVal, test: stratTest, chosen: state.chosenStrategy, confluence: state.confluencePolicy },
+    strategies: { val: stratVal, test: stratTest, chosen: chosenStrategyRec, confluence: state.confluencePolicy },
     tradingPolicy: state.tradingPolicy,
     feeAssumption: FEE_ROUND_TRIP_PCT,
     leaderboard: Object.fromEntries(rl.HORIZONS.map((h) => [h, rl.expertLeaderboard(state, h)])),

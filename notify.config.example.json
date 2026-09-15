@@ -5,6 +5,10 @@
   "pushPolicy": {
     "mode": "actionable"
   },
+  "operatingMode": "monthly",
+  "signalSmoothing": 5,
+  "_operatingMode说明": "实盘操作频率。monthly（默认）：每月首个交易日调仓，行动卡给出下次复查日；weekly：每周一；daily：每日。频率越低换手越小 —— 实测周频 topK=3 的组合换手约 5000-5900%、回撤 23-37%，对 50 万本金过高。",
+  "_signalSmoothing说明": "模型概率的 EMA 平滑窗口。1=不平滑（精确复现旧行为）；默认 5。实测（测试集 w1）：不平滑日动作翻转 18.3%、横截面超额 +1.519%/周（t=2.66）；EMA5 翻转降至 6.8%、超额 +1.435%（t=2.40）—— 用约 6% 的边际换 63% 的换手下降。但过度平滑动有害：EMA20 超额掉到 +0.869%、t 降到 1.36（不再显著）。",
   "_pushPolicy说明": "推送策略 —— 只推「可执行动作」，不推常规播报。mode='actionable'（默认）：建仓条件 / 成交 / 轮动切换 / 止损 / 止盈；mode='trades'（更严格）：仅建仓条件 / 成交 / 止损 / 止盈；mode='all'（旧行为）：额外包含 开盘策略 / 盘中快照(每30分钟) / 评分异动 / 收盘复盘。allowKinds 为自定义白名单，给了它就覆盖 mode。也可临时用命令行覆盖：node monitor.js --push=all",
   "risk": 1,
   "stopPct": 5,
