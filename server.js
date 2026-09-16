@@ -13,7 +13,7 @@ const path = require('path');
 const url = require('url');
 const zlib = require('zlib');
 const { spawn } = require('child_process');
-const { fetchUs10y, fetchCn10y, fetchSox, fetchFundFlow, fetchMarketBreadth, fetchHhxgSnapshot, fetchIndexKline, calibrateKlines, fetchGlobalHistory } = require('./lib/market.js'); // 宏观/科技/资金/情绪数据
+const { fetchUs10y, fetchCn10y, fetchSox, fetchFundFlow, fetchMarketBreadth, fetchHhxgSnapshot, fetchIndexKline, fetchIndexKlineAuto, calibrateKlines, fetchGlobalHistory } = require('./lib/market.js'); // 宏观/科技/资金/情绪数据
 const Indicators = require('./public/static/indicators.js');
 const RL = require('./lib/rl.js');
 const LivePredict = require('./lib/live-predict.js');
@@ -244,9 +244,21 @@ function buildLiveVotes(extras) { // 已迁移到 lib/auto-ledger.js 的 liveVot
 async function getGlobalExtras() {
   if (globalExtrasCache.v && Date.now() - globalExtrasCache.t < 600000) return globalExtrasCache.v;
   const [fundR, brR, hxgR, idxR, usR, cnR, soxR, relR] = await Promise.allSettled([
-    fetchFundFlow(10), fetchMarketBreadth(), fetchHhxgSnapshot(), fetchIndexKline('1.000300', 80),
+    fetchFundFlow(10), fetchMarketBreadth(), fetchHhxgSnapshot(),
+    // extras.index 的消费者（engine.js / 行动卡）需要的是 { price, ma60 }，
+    // 而这里以前直接塞了**原始K线数组** → idx.price/idx.ma60 恒为 undefined，
+    // 导致大盘环境信号（indexS）与熊市门禁长期失效。现改为计算好的形状。
+    fetchIndexKlineAuto('1.000300', 80).then((r) => {
+      const kl = r.klines || [];
+      const closes = kl.map((x) => x.close);
+      if (!closes.length) return null;
+      const n = closes.length;
+      const ma = (len) => (n >= len ? closes.slice(n - len).reduce((a, b) => a + b, 0) / len : null);
+      return { price: closes[n - 1], ma20: ma(20), ma60: ma(60), date: kl[n - 1].date, source: r.source };
+    }),
     fetchUs10y(), fetchCn10y(), fetchSox(),
-    Promise.all([fetchIndexKline('1.000688', 30), fetchIndexKline('1.000300', 30)]).then(([kc, hs]) => {
+    Promise.all([fetchIndexKlineAuto('1.000688', 30), fetchIndexKlineAuto('1.000300', 30)]).then(([a, b]) => {
+      const kc = a.klines, hs = b.klines;
       const kc0 = kc[kc.length - 1].close, kc20 = kc[kc.length - 21].close;
       const hs0 = hs[hs.length - 1].close, hs20 = hs[hs.length - 21].close;
       return ((kc0 / kc20 - 1) - (hs0 / hs20 - 1)) * 100;
@@ -599,16 +611,25 @@ const server = http.createServer(async (req, res) => {
 
         // 门禁检查
         const idx = extras && extras.index;
-        const bear = !!(idx && idx.ma60 && idx.price < idx.ma60);
+        // fail-safe：拿不到大盘数据按熊市处理（保守），并标记为未知
+        const idxKnown = !!(idx && idx.ma60 && idx.price != null);
+        const bear = idxKnown ? (idx.price < idx.ma60) : true;
+        // 门禁：**取不到数据时标记为 unknown，不能默认通过**（曾因静默通过而掩盖数据缺失）
+        const sentiV = extras && extras.hhxg ? extras.hhxg.sentimentIndex : null;
+        const us10yV = (extras && extras.macro && extras.macro.us10y) ? extras.macro.us10y.price : null;
         const checks = [
-          { item: '大盘（沪深300 vs MA60）', pass: !bear, detail: bear ? '熊市 → 建议观望' : '多头' },
-          { item: '情绪（赚钱效应）', pass: !(extras && extras.hhxg && extras.hhxg.sentimentIndex >= 85), detail: extras && extras.hhxg && extras.hhxg.sentimentIndex != null ? String(extras.hhxg.sentimentIndex) : '--' },
-          { item: '美债10Y', pass: !(extras && extras.macro && extras.macro.us10y && extras.macro.us10y.price > 4.5), detail: extras && extras.macro && extras.macro.us10y && extras.macro.us10y.price != null ? extras.macro.us10y.price + '%' : '--' },
+          { item: '大盘（沪深300 vs MA60）', pass: idxKnown ? !bear : null, known: idxKnown,
+            detail: idxKnown ? ((idx.price >= idx.ma60 ? '多头 ' : '熊市 ') + '（' + idx.price.toFixed(0) + ' vs MA60 ' + idx.ma60.toFixed(0) + '，' + ((idx.price / idx.ma60 - 1) * 100).toFixed(2) + '%）')
+              : '数据缺失 → 保守按熊市处理' },
+          { item: '情绪（赚钱效应）', pass: sentiV == null ? null : !(sentiV >= 85), known: sentiV != null, detail: sentiV == null ? '数据缺失（不作为通过）' : String(sentiV) },
+          { item: '美债10Y', pass: us10yV == null ? null : !(us10yV > 4.5), known: us10yV != null, detail: us10yV == null ? '数据缺失（不作为通过）' : us10yV + '%' + (hist.us10yStaleDays ? '（滞后' + hist.us10yStaleDays + '天）' : '') },
         ];
+        const unknownGates = checks.filter((c) => !c.known).map((c) => c.item);
 
         const held = rows.filter((r) => r.positions);
         const gateCand = ranked.filter((r) => r.gatePass);
         let verdict = '观望', reason = '';
+        if (unknownGates.length) { reason = '⚠️ 门禁数据缺失（' + unknownGates.join('、') + '），结论仅供参考；'; }
         if (bear && held.length) { verdict = '减仓'; reason = '大盘转熊，按纪律降低仓位'; }
         else if (bear) { verdict = '观望'; reason = '大盘熊市（沪深300<MA60）'; }
         else if (!gateCand.length) { verdict = '观望'; reason = '无标的通过「多周期共振 + 入场门槛」'; }
@@ -634,7 +655,12 @@ const server = http.createServer(async (req, res) => {
           evidenceLevel: '入场门槛为 post-hoc 观察，未经前向验证（见 node ledger.js gate）',
           checks,
           positions: held.map((h) => ({ code: h.code, name: h.name, shares: h.positions.shares, avgCost: h.positions.avgCost, price: h.price, pnlPct: +(((h.price - h.positions.avgCost) / h.positions.avgCost) * 100).toFixed(2) })),
-          candidates: ranked.map((r) => ({ code: r.code, name: r.name, mom20: r.mom20, momRank: r.momRank, pW1: r.pW1, pM1: r.pM1, gatePass: r.gatePass, w1Signal: r.w1Signal, held: !!r.positions })),
+          candidates: ranked.map((r) => ({ code: r.code, name: r.name, price: r.price, mom20: r.mom20, momRank: r.momRank, pD3: r.pD3, pW1: r.pW1, pM1: r.pM1, gatePass: r.gatePass, w1Signal: r.w1Signal, regime: r.regime, held: !!r.positions })),
+          dataQuality: {
+            overseasSources: hist.sources || null,
+            us10yStaleDays: hist.us10yStaleDays == null ? null : hist.us10yStaleDays,
+            note: '海外数据来自 Yahoo→磁盘缓存→新浪 的多源回退；美债10Y 无实时源，滞后天数见上',
+          },
           thresholds: { d3: (conf && conf.thresholds && conf.thresholds.d3) || null, w1: th.w1 ? th.w1.threshold : null, m1: th.m1 ? th.m1.threshold : null },
         };
         actionCache.set('action', { t: Date.now(), v: out });

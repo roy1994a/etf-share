@@ -33,7 +33,7 @@ const path = require('path');
 
 const Indicators = require('./public/static/indicators.js');
 const Engine = require('./public/static/engine.js');
-const { fetchTencentKline, calibrateKlines, httpGet, httpPostJson, httpPostForm, fetchFundFlow, fetchMarketBreadth, fetchNewsSentiment, fetchIndexKline, fetchHhxgSnapshot, fetchUs10y, fetchCn10y, fetchSox, fetchFundNav, fetchChemFutures, estimatePremium, NAME, CODE } = require('./lib/market.js');
+const { fetchTencentKline, calibrateKlines, httpGet, httpPostJson, httpPostForm, fetchFundFlow, fetchMarketBreadth, fetchNewsSentiment, fetchIndexKline, fetchIndexKlineAuto, fetchHhxgSnapshot, fetchUs10y, fetchCn10y, fetchSox, fetchFundNav, fetchChemFutures, estimatePremium, NAME, CODE } = require('./lib/market.js');
 const { loadAccount: loadRotationAccount, saveAccount: saveRotationAccount, syncRotation, totalValue } = require('./lib/rotation-account.js');
 const RL = require('./lib/rl.js');
 const LP = require('./lib/live-predict.js');
@@ -417,7 +417,11 @@ async function getNews() {
 async function getIndex() {
   if (extrasCache.idx && Date.now() - extrasCache.idx.t < 1800000) return extrasCache.idx.v;
   try {
-    const kl = await fetchIndexKline('1.000300', 80);
+    // ⚠️ 必须用自动选源（东财不可达时回退腾讯）。此前只用东财，
+    // 失败后 getIndex 抛错 → index=null → bearMarket 恒为 false，
+    // 导致"大盘熊市则空仓"这条最重要的风控**从未生效**。
+    const r = await fetchIndexKlineAuto('1.000300', 80);
+    const kl = r.klines;
     const closes = kl.map((k) => k.close);
     let ma60 = null;
     if (closes.length >= 60) { let s = 0; for (let i = closes.length - 60; i < closes.length; i++) s += closes[i]; ma60 = s / 60; }
@@ -479,7 +483,8 @@ async function getSox() {
 async function getRelStrength() {
   if (extrasCache.rel && Date.now() - extrasCache.rel.t < 1800000) return extrasCache.rel.v;
   try {
-    const [kc, hs] = await Promise.all([fetchIndexKline('1.000688', 30), fetchIndexKline('1.000300', 30)]);
+    const [kcR, hsR] = await Promise.all([fetchIndexKlineAuto('1.000688', 30), fetchIndexKlineAuto('1.000300', 30)]);
+    const kc = kcR.klines, hs = hsR.klines;
     const kc0 = kc[kc.length - 1].close, kc20 = kc[kc.length - 21].close;
     const hs0 = hs[hs.length - 1].close, hs20 = hs[hs.length - 21].close;
     const v = ((kc0 / kc20 - 1) - (hs0 / hs20 - 1)) * 100;
