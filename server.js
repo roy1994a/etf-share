@@ -21,6 +21,24 @@ const Engine = require('./public/static/engine.js');
 
 const PORT = process.env.PORT || 8899;
 const HOST = process.env.HOST || '0.0.0.0'; // 公共部署监听所有网卡；本地可用 HOST=127.0.0.1
+
+// 构建指纹：用于确认"公网跑的是不是我刚推的那版代码"。
+// 之前每次验证部署只能靠"某个新功能像不像上线了"间接推断，容易误判。
+// Render 会注入 RENDER_GIT_COMMIT；本地镜像里没有 .git（.dockerignore 已排除），故降级读 .git/HEAD。
+const BUILD = (function buildFingerprint() {
+  let commit = process.env.RENDER_GIT_COMMIT || process.env.GIT_COMMIT || null;
+  if (!commit) {
+    try {
+      const head = fs.readFileSync(path.join(__dirname, '.git', 'HEAD'), 'utf8').trim();
+      commit = head.startsWith('ref:') ? fs.readFileSync(path.join(__dirname, '.git', head.slice(5).trim()), 'utf8').trim() : head;
+    } catch (e) { /* 非 git 检出，忽略 */ }
+  }
+  return {
+    commit: commit ? commit.slice(0, 7) : null,
+    provider: process.env.RENDER ? 'render' : 'local',
+    startedAt: new Date().toISOString(),
+  };
+})();
 const PUBLIC_DIR = path.join(__dirname, 'public');
 const DATA_DIR = path.join(__dirname, 'data');
 const STATE_FILE = path.join(DATA_DIR, 'account.json');
@@ -572,11 +590,12 @@ const server = http.createServer(async (req, res) => {
             items: jobs.map((j, i) => ({
               name: j[0],
               ok: res[i].status === 'fulfilled',
-              error: res[i].status === 'rejected' ? String(res[i].reason && res[i].reason.message).slice(0, 120) : null,
+              // 用 mk.errText：网络错误常只有 code 没有 message，直接取 .message 会得到空串
+              error: res[i].status === 'rejected' ? mk.errText(res[i].reason).slice(0, 120) : null,
             })),
           };
         }
-        return sendJSON(res, 200, { ok: true, health: mk.healthSnapshot(), probe });
+        return sendJSON(res, 200, { ok: true, build: BUILD, health: mk.healthSnapshot(), probe });
       } catch (e) {
         return sendJSON(res, 500, { ok: false, error: e.message });
       }

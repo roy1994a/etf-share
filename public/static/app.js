@@ -892,6 +892,13 @@
     if (!el) return;
     const st = { ok: ['✅', '#1a7f37', '正常'], degraded: ['⚠️', '#bf8700', '降级'], down: ['❌', '#b91c1c', '不可用'], unknown: ['❔', '#64748b', '未测'] };
     let h = '';
+    if (r.build) {
+      // 构建指纹：用来确认公网跑的是不是最新那版代码（以前只能靠"新功能像不像上线"间接推断）
+      const b = r.build;
+      h += '<div class="muted" style="margin-bottom:8px">运行版本 <b>' + (b.commit || '未知') + '</b>' +
+        ' · ' + (b.provider || '-') +
+        ' · 启动于 ' + (b.startedAt ? new Date(b.startedAt).toLocaleString('zh-CN') : '-') + '</div>';
+    }
     if (r.probe && r.probe.items) {
       h += '<div class="rl-title">主动探测结果 <span class="muted">耗时 ' + r.probe.ms + ' ms</span></div>';
       h += '<table class="data-table compact"><thead><tr><th>数据源</th><th>结果</th><th>错误</th></tr></thead><tbody>';
