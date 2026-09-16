@@ -5,7 +5,9 @@
   'use strict';
 
   const RED = '#dc2626', GREEN = '#16a34a', MUTED = '#64748b', ACCENT = '#2563eb', PURPLE = '#7c3aed', AMBER = '#d97706';
-  const CODE = '159516';
+  // 仅用于首屏引导（池加载前必须先请求一个标的）；加载后一律以 App.code 为准。
+  // 不要再拿它当"当前标的"用 —— 这正是池内第一格显示错标的行情的根因。
+  const DEFAULT_CODE = '159516';
 
   const App = {
     state: null,
@@ -18,9 +20,9 @@
     settings: Engine.DEFAULT_SETTINGS ? Object.assign({}, Engine.DEFAULT_SETTINGS) : { risk: 1, stopPct: 5, takePct: 8, lots: 10, maxPosition: 100 },
     period: 'day',
     side: 'buy',
-    code: '159516',       // 当前分析的 ETF（可搜索切换）
+    code: DEFAULT_CODE,   // 当前分析的标的（可搜索/点击池内卡片切换）
     codeName: '半导体设备',
-    tradeCode: '159516',
+    tradeCode: DEFAULT_CODE,
     otherQuotes: {},
     readOnly: false,
     etfPool: [
@@ -119,12 +121,32 @@
     }
   }
 
+  // 标的显示名：池内多为简称（"半导体设备"/"医药"），ETF 补后缀，股票不加。
+  // 名称里已含 "ETF" 时不再叠加，避免出现 "半导体设备ETF国泰ETF"。
+  function displayName(e) {
+    const n = (e && (e.name || e.code)) || '';
+    if (/ETF/i.test(n)) return n;
+    return n + ((e && e.type === 'stock') ? '' : 'ETF');
+  }
+
+  // 统一切换当前分析标的：下拉框 / 搜索 / 池内卡片 / 行动卡候选 共用同一入口，
+  // 避免各处自己拼 App.code 造成口径不一致。
+  function selectInstrument(code, name) {
+    if (!code) return;
+    App.code = String(code);
+    App.codeName = name || App.code;
+    App.tradeCode = App.code;
+    const tc = $('#tradeCode'); if (tc) tc.value = App.code;
+    loadAll();
+    if (typeof renderPoolList === 'function') renderPoolList(); // 同步高亮
+  }
+
   // 交易标的选择器：按轮动池动态生成（ETF + 股票）
   function buildTradeCodeOptions() {
     const sel = $('#tradeCode');
     if (!sel) return;
     const cur = sel.value;
-    sel.innerHTML = App.etfPool.map((e) => '<option value="' + e.code + '">' + e.name + (e.type === 'stock' ? '' : 'ETF') + ' (' + e.code + ')</option>').join('');
+    sel.innerHTML = App.etfPool.map((e) => '<option value="' + e.code + '">' + displayName(e) + ' (' + e.code + ')</option>').join('');
     sel.value = App.etfPool.some((e) => e.code === cur) ? cur : App.etfPool[0].code;
     App.tradeCode = sel.value;
   }
@@ -134,8 +156,9 @@
     const el = $('#poolList');
     if (!el) return;
     el.innerHTML = App.etfPool.map((x) =>
-      '<div class="pool-item"><span>' + x.name + (x.type === 'etf' ? 'ETF' : '') + ' <span class="c">' + x.code + '</span></span>' +
-      '<button class="pool-del" data-code="' + x.code + '">×</button></div>'
+      '<div class="pool-item' + (x.code === App.code ? ' active' : '') + '" data-code="' + x.code + '" data-name="' + (x.name || x.code) + '" title="点击切换查看 ' + (x.name || x.code) + '">' +
+      '<span>' + displayName(x) + ' <span class="c">' + x.code + '</span></span>' +
+      '<button class="pool-del" data-code="' + x.code + '" title="从池中移除">×</button></div>'
     ).join('');
   }
   async function refreshPool() {
@@ -188,8 +211,32 @@
     });
     mgr.addEventListener('click', (e) => {
       const del = e.target.closest('.pool-del');
-      if (del && del.dataset.code) poolRemove(del.dataset.code);
+      if (del && del.dataset.code) { poolRemove(del.dataset.code); return; }
+      // 点击池内标的 → 切换当前查看标的（放在删除判定之后，避免误触删除）
+      const item = e.target.closest('.pool-item');
+      if (item && item.dataset.code) {
+        selectInstrument(item.dataset.code, item.dataset.name);
+        toast('已切换到 ' + (item.dataset.name || item.dataset.code), 'ok');
+      }
     });
+  }
+
+  // 轮动池行情条 / 行动卡候选表：点击直接切换当前查看标的
+  function bindPoolClickSwitch() {
+    const strip = $('#etfQuoteStrip');
+    if (strip) {
+      strip.addEventListener('click', (e) => {
+        const card = e.target.closest('.etf-quote-card');
+        if (card && card.dataset.code) selectInstrument(card.dataset.code, card.dataset.name);
+      });
+    }
+    const ac = $('#actionCard');
+    if (ac) {
+      ac.addEventListener('click', (e) => {
+        const row = e.target.closest('tr[data-code]');
+        if (row && row.dataset.code) selectInstrument(row.dataset.code, row.dataset.name);
+      });
+    }
   }
 
   // 多 ETF 实时行情：抓取并渲染
@@ -199,7 +246,11 @@
     try {
       const qs = await Promise.all(App.etfPool.map(async (e) => {
         try {
-          const r = e.code === CODE ? { quote: App.quote } : await api('/api/quote?code=' + e.code);
+          // 复用已拉取的行情，但必须比较 App.code（当前选中标的）而非写死的 CODE：
+          // 原来写死 CODE='159516'，用户一旦切到别的标的，
+          // 池内第一格「半导体设备 159516」就会显示成别的标的的价格和涨跌幅。
+          const reuse = (e.code === App.code && App.quote) ? App.quote : null;
+          const r = reuse ? { quote: reuse } : await api('/api/quote?code=' + e.code);
           return { name: e.name, code: e.code, quote: r.quote || null };
         } catch (err) { return { name: e.name, code: e.code, quote: null }; }
       }));
@@ -208,7 +259,7 @@
         const price = q ? q.price : null;
         const pct = q ? q.pctChange : null;
         const cls = (pct == null) ? 'flat' : (pct > 0 ? 'up' : (pct < 0 ? 'down' : 'flat'));
-        return '<div class="etf-quote-card">' +
+        return '<div class="etf-quote-card clickable' + (x.code === App.code ? ' active' : '') + '" data-code="' + x.code + '" data-name="' + x.name + '" title="点击切换查看 ' + x.name + '">' +
           '<div class="n">' + x.name + ' <span class="c">' + x.code + '</span></div>' +
           '<div class="p">' + (price != null ? fmtPrice(price) : '--') + '</div>' +
           '<div class="chg ' + cls + '">' + (pct != null ? signed(pct, 2) + '%' : '--') + '</div>' +
@@ -655,7 +706,7 @@
     } else {
       let totalMv = 0, totalUnreal = 0;
       for (const [code, pos] of entries) {
-        const q = code === CODE ? App.quote : App.otherQuotes[code];
+        const q = code === App.code ? App.quote : App.otherQuotes[code];
         const curPrice = q ? q.price : null;
         const mv = curPrice != null ? pos.shares * curPrice : null;
         const unreal = mv != null ? mv - pos.avgCost * pos.shares : null;
@@ -680,7 +731,7 @@
       tb.innerHTML = '<tr><td colspan="7" style="color:#8b98a9;text-align:center">暂无交易记录</td></tr>';
     } else {
       tb.innerHTML = s.trades.slice().reverse().slice(0, 50).map((t) =>
-        '<tr><td>' + new Date(t.time).toLocaleString('zh-CN') + '</td><td class="' + t.side + '">' + (t.side === 'buy' ? '买入' : '卖出') + '</td><td>' + (t.name || t.code || CODE) + '</td><td>' + fmtPrice(t.price) + '</td><td>' + fmt(t.shares, 0) + '</td><td>' + fmt(t.amount, 0) + '</td><td>' + fmt(t.fee, 2) + '</td></tr>'
+        '<tr><td>' + new Date(t.time).toLocaleString('zh-CN') + '</td><td class="' + t.side + '">' + (t.side === 'buy' ? '买入' : '卖出') + '</td><td>' + (t.name || t.code || '--') + '</td><td>' + fmtPrice(t.price) + '</td><td>' + fmt(t.shares, 0) + '</td><td>' + fmt(t.amount, 0) + '</td><td>' + fmt(t.fee, 2) + '</td></tr>'
       ).join('');
     }
 
@@ -780,7 +831,7 @@
         { type: 'slider', xAxisIndex: [0, 1, 2, 3], top: '93%', height: 16, borderColor: '#e2e8f0', backgroundColor: '#ffffff', fillerColor: 'rgba(59,130,246,.15)', textStyle: { color: MUTED, fontSize: 10 } },
       ],
       series: [
-        { name: CODE, type: 'candlestick', data: ohlc, xAxisIndex: 0, yAxisIndex: 0, itemStyle: { color: RED, color0: GREEN, borderColor: RED, borderColor0: GREEN } },
+        { name: (App.codeName || App.code), type: 'candlestick', data: ohlc, xAxisIndex: 0, yAxisIndex: 0, itemStyle: { color: RED, color0: GREEN, borderColor: RED, borderColor0: GREEN } },
         maLine(ind.ma5, '#f59e0b', 'MA5'),
         maLine(ind.ma10, '#3b82f6', 'MA10'),
         maLine(ind.ma20, '#a855f7', 'MA20'),
@@ -986,7 +1037,7 @@
         ? ' <span class="ac-sus" title="' + (c.suspendFrom || '') + '→' + (c.suspendTo || '') + ' 停牌，模型按相邻交易日处理，指标失真">⚠️停牌' + c.suspendDays + '日' +
           (c.mom20cal != null && c.mom20 != null ? '，真实20日 ' + (c.mom20cal >= 0 ? '+' : '') + c.mom20cal + '%' : '') + '</span>'
         : '';
-      h += '<tr' + (c.gatePass ? ' class="ac-hit"' : '') + '><td>' + c.momRank + '</td><td>' + c.name + (c.held ? ' <span class="muted">(持仓)</span>' : '') + sus + '</td><td>' + (c.mom20 >= 0 ? '+' : '') + c.mom20 + '%</td><td>' + c.pW1 + '%</td><td>' + c.pM1 + '%</td><td>' + g + '</td><td>' + (c.w1Signal === 'buy' ? '✅买入' : c.w1Signal === 'avoid' ? '⛔回避' : '⏸观望') + '</td></tr>';
+      h += '<tr' + (c.gatePass ? ' class="ac-hit"' : '') + ' data-code="' + c.code + '" data-name="' + (c.name || c.code) + '" title="点击切换查看 ' + (c.name || c.code) + '" style="cursor:pointer"><td>' + c.momRank + '</td><td>' + c.name + (c.held ? ' <span class="muted">(持仓)</span>' : '') + sus + '</td><td>' + (c.mom20 >= 0 ? '+' : '') + c.mom20 + '%</td><td>' + c.pW1 + '%</td><td>' + c.pM1 + '%</td><td>' + g + '</td><td>' + (c.w1Signal === 'buy' ? '✅买入' : c.w1Signal === 'avoid' ? '⛔回避' : '⏸观望') + '</td></tr>';
     });
     h += '</tbody></table>';
     h += '<div class="warn-box">⚠️ 证据等级：' + a.evidenceLevel + '<br/>' +
@@ -1221,6 +1272,8 @@
     bindEtfSearch();
     // 轮动池管理
     bindPoolManager();
+    // 池内标的点击切换
+    bindPoolClickSwitch();
     // 数据源健康：重新探测
     const pb = $('#probeBtn');
     if (pb) pb.addEventListener('click', () => loadHealth(true));
