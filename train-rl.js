@@ -493,9 +493,11 @@ async function main() {
   const span = records.map((r) => r.klines.length);
   const avgBars = +(span.reduce((a, b) => a + b, 0) / span.length).toFixed(0);
   console.log(`[行情] 平均 ${avgBars} 根/标的（最少 ${Math.min(...span)}，最多 ${Math.max(...span)}）`);
-  const audit = auditKlines(records);
-  console.log(`[体检] 标的 ${audit.summary.instruments} 个 · 无效价格 ${audit.summary.badPrice} · 超涨跌停 ${audit.summary.overLimit} · 日期缺口 ${audit.summary.gap} · 重复日期 ${audit.summary.dup}`);
-  for (const f of audit.flags) console.log(`         ⚠ ${f.code}: 超限${f.overLimit} 缺口${f.gap} 重复${f.dup} 最大间隔${f.maxGapDays}天`);
+  // 传入真实交易日历（沪深300）：停牌检测靠「中间少了几个交易日」，与长假无关。
+  // 早期只按「自然日间隔>20」判断，会漏掉 10 个交易日左右的停牌（如有研硅 2026-08/09）。
+  const audit = auditKlines(records, indexKlines.map((k) => k.date));
+  console.log(`[体检] 标的 ${audit.summary.instruments} 个 · 无效价格 ${audit.summary.badPrice} · 超涨跌停 ${audit.summary.overLimit} · 日期缺口 ${audit.summary.gap} · 重复日期 ${audit.summary.dup} · 停牌段 ${audit.summary.suspend}`);
+  for (const f of audit.flags) console.log(`         ⚠ ${f.code}: 超限${f.overLimit} 缺口${f.gap} 停牌${f.suspend}段(最长缺${f.maxMissingDays}个交易日) 重复${f.dup} 最大间隔${f.maxGapDays}天`);
 
   // 4) 事件流
   const events = buildEvents(records);

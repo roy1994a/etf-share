@@ -16,6 +16,7 @@ const { spawn } = require('child_process');
 const { fetchUs10y, fetchCn10y, fetchSox, fetchFundFlow, fetchMarketBreadth, fetchHhxgSnapshot, fetchIndexKline, fetchIndexKlineAuto, calibrateKlines, fetchGlobalHistory, fetchTencentKline: fetchKlineLib, healthSnapshot } = require('./lib/market.js'); // 宏观/科技/资金/情绪数据
 const Indicators = require('./public/static/indicators.js');
 const RL = require('./lib/rl.js');
+const { suspensionGaps } = require('./lib/dataset.js'); // 停牌缺口扫描（与训练前体检同一套判定）
 const LivePredict = require('./lib/live-predict.js');
 const Engine = require('./public/static/engine.js');
 
@@ -420,6 +421,7 @@ function loadPool() {
     { code: '688008', name: '澜起科技', type: 'stock' },
     { code: '688783', name: '西安奕材-U', type: 'stock' },
     { code: '300475', name: '香农芯创', type: 'stock' },
+    { code: '688432', name: '有研硅', type: 'stock' },
   ];
 }
 
@@ -624,6 +626,7 @@ const server = http.createServer(async (req, res) => {
         const conf = decided.confluencePolicy || state.confluencePolicy || null;
 
         // 并发拉全池 K 线并预测（与 monitor.js 的 pool.map 同一模式）
+        const calDates = (hist.indexKlines || []).map((k) => k.date);
         const rows = (await Promise.all(pool.map(async (e) => {
           try {
             const { klines: raw, quote } = await fetchTencentKline('day', 320, e.code);
@@ -637,9 +640,30 @@ const server = http.createServer(async (req, res) => {
             const closes = klines.map((k) => k.close);
             const n = closes.length;
             const mom20 = n > 20 ? (closes[n - 1] / closes[n - 21] - 1) * 100 : null;
+            // 停牌体检：模型把所有K线当成相邻交易日，停牌 10 天会让「20日动量」实际横跨 40+ 天。
+            // 实例：有研硅 2026-08-28->09-14 停牌 10 个交易日，mom20 被算成 +63.97%（真实 +12.55%）。
+            const sg = suspensionGaps(klines.slice(-60), calDates);
+            // 真实 20 交易日动量：用交易日历回推，停牌日不计入。
+            // 注意用二分而非 indexOf：指数日历可能是 T-1（末位不等于个股末位日期），
+            // indexOf 会返回 -1 从而静默变成 null（已踩过）。
+            let mom20cal = null;
+            if (calDates.length) {
+              const lastD = klines[n - 1].date;
+              let li = -1, lo = 0, hi = calDates.length - 1;
+              while (lo <= hi) { const mi = (lo + hi) >> 1; if (calDates[mi] <= lastD) { li = mi; lo = mi + 1; } else hi = mi - 1; }
+              if (li >= 20) {
+                const target = calDates[li - 20];
+                for (let i = n - 1; i >= 0; i--) {
+                  if (klines[i].date <= target && closes[i] > 0) { mom20cal = (closes[n - 1] / closes[i] - 1) * 100; break; }
+                }
+              }
+            }
             return {
               code: e.code, name: e.name || e.code, price: live.price,
               mom20: mom20 == null ? null : +mom20.toFixed(2),
+              mom20cal: mom20cal == null ? null : +mom20cal.toFixed(2),
+              suspendDays: sg.maxMissing, suspendFrom: sg.segments.length ? sg.segments[0].from : null,
+              suspendTo: sg.segments.length ? sg.segments[0].to : null,
               pW1: live.horizons.w1.upProb, pM1: live.horizons.m1.upProb, pD3: live.horizons.d3.upProb,
               w1Signal: live.horizons.w1.signal, m1Signal: live.horizons.m1.signal,
               gatePass: conf && conf.need ? conf.need.every((h) => live.horizons[h].upProb / 100 >= ((conf.thresholds && conf.thresholds[h]) || 0.55)) : null,
@@ -699,7 +723,7 @@ const server = http.createServer(async (req, res) => {
           evidenceLevel: '入场门槛为 post-hoc 观察，未经前向验证（见 node ledger.js gate）',
           checks,
           positions: held.map((h) => ({ code: h.code, name: h.name, shares: h.positions.shares, avgCost: h.positions.avgCost, price: h.price, pnlPct: +(((h.price - h.positions.avgCost) / h.positions.avgCost) * 100).toFixed(2) })),
-          candidates: ranked.map((r) => ({ code: r.code, name: r.name, price: r.price, mom20: r.mom20, momRank: r.momRank, pD3: r.pD3, pW1: r.pW1, pM1: r.pM1, gatePass: r.gatePass, w1Signal: r.w1Signal, regime: r.regime, held: !!r.positions })),
+          candidates: ranked.map((r) => ({ code: r.code, name: r.name, price: r.price, mom20: r.mom20, mom20cal: r.mom20cal, momRank: r.momRank, pD3: r.pD3, pW1: r.pW1, pM1: r.pM1, gatePass: r.gatePass, w1Signal: r.w1Signal, regime: r.regime, held: !!r.positions, suspendDays: r.suspendDays, suspendFrom: r.suspendFrom, suspendTo: r.suspendTo })),
           dataQuality: {
             overseasSources: hist.sources || null,
             us10yStaleDays: hist.us10yStaleDays == null ? null : hist.us10yStaleDays,

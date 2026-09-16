@@ -980,7 +980,13 @@
     h += '<table class="data-table compact"><thead><tr><th>动量排名</th><th>标的</th><th>20日动量</th><th>1周可信</th><th>1月可信</th><th>共振+门槛</th><th>信号</th></tr></thead><tbody>';
     (a.candidates || []).slice(0, 8).forEach((c) => {
       const g = c.gatePass === true ? '✅ 通过' : (c.gatePass === false ? '✗ 未过' : '--');
-      h += '<tr' + (c.gatePass ? ' class="ac-hit"' : '') + '><td>' + c.momRank + '</td><td>' + c.name + (c.held ? ' <span class="muted">(持仓)</span>' : '') + '</td><td>' + (c.mom20 >= 0 ? '+' : '') + c.mom20 + '%</td><td>' + c.pW1 + '%</td><td>' + c.pM1 + '%</td><td>' + g + '</td><td>' + (c.w1Signal === 'buy' ? '✅买入' : c.w1Signal === 'avoid' ? '⛔回避' : '⏸观望') + '</td></tr>';
+      // 停牌提示：模型的「20日动量」是按K线根数算的，停牌期间无K线，
+      // 会把 40+ 个自然日的涨幅压缩成「20日」，读数被严重放大（有研硅 +63.97% vs 真实 +12.55%）。
+      const sus = c.suspendDays
+        ? ' <span class="ac-sus" title="' + (c.suspendFrom || '') + '→' + (c.suspendTo || '') + ' 停牌，模型按相邻交易日处理，指标失真">⚠️停牌' + c.suspendDays + '日' +
+          (c.mom20cal != null && c.mom20 != null ? '，真实20日 ' + (c.mom20cal >= 0 ? '+' : '') + c.mom20cal + '%' : '') + '</span>'
+        : '';
+      h += '<tr' + (c.gatePass ? ' class="ac-hit"' : '') + '><td>' + c.momRank + '</td><td>' + c.name + (c.held ? ' <span class="muted">(持仓)</span>' : '') + sus + '</td><td>' + (c.mom20 >= 0 ? '+' : '') + c.mom20 + '%</td><td>' + c.pW1 + '%</td><td>' + c.pM1 + '%</td><td>' + g + '</td><td>' + (c.w1Signal === 'buy' ? '✅买入' : c.w1Signal === 'avoid' ? '⛔回避' : '⏸观望') + '</td></tr>';
     });
     h += '</tbody></table>';
     h += '<div class="warn-box">⚠️ 证据等级：' + a.evidenceLevel + '<br/>' +
