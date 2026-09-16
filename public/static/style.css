@@ -294,3 +294,6 @@ td.sell { color: var(--green); font-weight: 600; }
 .ac-checks .ok { color: #1a7f37; }
 .ac-checks .bad { color: #b91c1c; }
 tr.ac-hit { background: #f0fdf4; font-weight: 600; }
+
+.btn-mini { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 3px 10px; font-size: 12px; cursor: pointer; color: var(--text); }
+.btn-mini:hover { background: #eef2f7; }

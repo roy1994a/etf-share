@@ -874,6 +874,57 @@
     }, true);
   }
 
+  // ---------- 数据源健康 ----------
+  async function loadHealth(probe) {
+    const el = $('#healthPanel');
+    if (!el) return;
+    if (probe) el.innerHTML = '正在探测全部数据源（约 3~6 秒）…';
+    try {
+      const r = await api('/api/health' + (probe ? '?probe=1' : ''));
+      renderHealth(r);
+    } catch (e) {
+      el.innerHTML = '<span style="color:#c0392b">健康检查失败：' + e.message + '</span>';
+    }
+  }
+
+  function renderHealth(r) {
+    const el = $('#healthPanel');
+    if (!el) return;
+    const st = { ok: ['✅', '#1a7f37', '正常'], degraded: ['⚠️', '#bf8700', '降级'], down: ['❌', '#b91c1c', '不可用'], unknown: ['❔', '#64748b', '未测'] };
+    let h = '';
+    if (r.probe && r.probe.items) {
+      h += '<div class="rl-title">主动探测结果 <span class="muted">耗时 ' + r.probe.ms + ' ms</span></div>';
+      h += '<table class="data-table compact"><thead><tr><th>数据源</th><th>结果</th><th>错误</th></tr></thead><tbody>';
+      r.probe.items.forEach((x) => {
+        h += '<tr><td>' + x.name + '</td><td>' + (x.ok ? '<span style="color:#1a7f37">✅ 可用</span>' : '<span style="color:#b91c1c">❌ 失败</span>') + '</td><td class="muted">' + (x.error || '') + '</td></tr>';
+      });
+      h += '</tbody></table>';
+    }
+    const keys = Object.keys(r.health || {});
+    if (keys.length) {
+      h += '<div class="rl-title" style="margin-top:10px">本次运行累计 <span class="muted">（进程内统计，重启清零）</span></div>';
+      h += '<table class="data-table compact"><thead><tr><th>数据源</th><th>状态</th><th>成功/失败</th><th>成功率</th><th>最近错误</th></tr></thead><tbody>';
+      const order = { down: 0, degraded: 1, unknown: 2, ok: 3 };
+      keys.sort((a, b) => (order[r.health[a].status] - order[r.health[b].status]));
+      keys.forEach((k) => {
+        const x = r.health[k];
+        const m = st[x.status] || st.unknown;
+        h += '<tr><td>' + (x.note ? x.name + ' <span class="muted">(' + x.note + ')</span>' : x.name) + '</td>' +
+          '<td><span style="color:' + m[1] + '">' + m[0] + ' ' + m[2] + '</span></td>' +
+          '<td>' + x.ok + ' / ' + x.fail + '</td>' +
+          '<td>' + (x.successRate == null ? '--' : (x.successRate * 100).toFixed(0) + '%') + '</td>' +
+          '<td class="muted">' + ((x.lastErr || '').slice(0, 60)) + '</td></tr>';
+      });
+      h += '</tbody></table>';
+    }
+    const down = keys.filter((k) => r.health[k].status === 'down');
+    if (down.length) {
+      h += '<div class="warn-box">⚠️ <b>' + down.length + ' 个数据源不可用</b>：' + down.map((k) => r.health[k].name).join('、') +
+        '<br/>系统已自动回退到备用源（见上方"备用"标注）。回退期间数据口径可能不同（如不复权、T-1），结论可信度相应下降。</div>';
+    }
+    el.innerHTML = h;
+  }
+
   // ---------- 今日行动卡（池级合成结论）----------
   var actionData = null;
 
@@ -1157,6 +1208,9 @@
     bindEtfSearch();
     // 轮动池管理
     bindPoolManager();
+    // 数据源健康：重新探测
+    const pb = $('#probeBtn');
+    if (pb) pb.addEventListener('click', () => loadHealth(true));
     // 标签页
     document.querySelectorAll('.tab').forEach((b) => b.addEventListener('click', () => {
       document.querySelectorAll('.tab').forEach((x) => x.classList.remove('active'));
@@ -1164,7 +1218,7 @@
       b.classList.add('active');
       $('#tab-' + b.dataset.tab).classList.add('active');
       if (b.dataset.tab === 'review') loadReviews();
-      if (b.dataset.tab === 'ledger') loadLedger();
+      if (b.dataset.tab === 'ledger') { loadLedger(); loadHealth(false); }
       if (b.dataset.tab === 'predict') { if (predictData) renderPredictChart(); loadActionCard(); }
       if (b.dataset.tab === 'analysis') {
         // 重新渲染图表：修复标签页隐藏时初始化为 0 尺寸导致分时/K线不显示

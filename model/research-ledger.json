@@ -1329,8 +1329,8 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-16",
           "anchorPrice": 2.3,
-          "endClose": 2.07,
-          "actualPct": -10,
+          "endClose": 2.08,
+          "actualPct": -9.57,
           "actualDir": "看跌",
           "predictedDir": "看跌",
           "predictedRange": [
@@ -1360,8 +1360,8 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-16",
           "anchorPrice": 2.3,
-          "endClose": 2.07,
-          "actualPct": -10,
+          "endClose": 2.08,
+          "actualPct": -9.57,
           "actualDir": "看跌",
           "predictedDir": "看涨",
           "predictedRange": [
@@ -1574,9 +1574,9 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-16",
           "anchorPrice": 58,
-          "endClose": 58.15,
-          "actualPct": 0.26,
-          "actualDir": "震荡",
+          "endClose": 58.39,
+          "actualPct": 0.67,
+          "actualDir": "看涨",
           "predictedDir": "看跌",
           "predictedRange": [
             53.65,
@@ -1788,7 +1788,7 @@
         }
       },
       "status": "resolved",
-      "resolvedAt": "2026-09-16T02:39:53.965Z",
+      "resolvedAt": "2026-09-16T02:53:37.075Z",
       "lessons": "该结论**以 C+D+E 级依据为主**（周末只能靠新闻），是本次台账中证据等级最弱的一类。明日收盘后必须回看，验证\"高开冲高回落\"是否成立。",
       "confidenceCeiling": 0.656,
       "ceilingReason": "平均依据可信度 63%（A3 B1 C2 D1 E1）",
@@ -1943,7 +1943,7 @@
         }
       },
       "status": "resolved",
-      "resolvedAt": "2026-09-16T02:39:53.968Z",
+      "resolvedAt": "2026-09-16T02:53:37.075Z",
       "lessons": "本条再次出现\"人工判断与系统模型方向相反\"（模型偏多、人工偏空）。这是第二个对照样本，与金正大一起构成\"人工覆写是否有效\"的检验集。",
       "confidenceCeiling": 0.645,
       "ceilingReason": "平均依据可信度 61%（A3 B0 C2 D1 E1）",
@@ -2077,7 +2077,7 @@
         }
       },
       "status": "resolved",
-      "resolvedAt": "2026-09-16T02:39:53.968Z",
+      "resolvedAt": "2026-09-16T02:53:37.075Z",
       "lessons": "",
       "confidenceCeiling": 0.608,
       "ceilingReason": "平均依据可信度 55%（A1 B1 C0 D1 E1）",
@@ -2453,8 +2453,8 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-16",
           "anchorPrice": 0.653,
-          "endClose": 0.69,
-          "actualPct": 5.67,
+          "endClose": 0.7,
+          "actualPct": 7.2,
           "actualDir": "看涨",
           "predictedDir": "看跌",
           "predictedRange": [
@@ -2965,8 +2965,8 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-16",
           "anchorPrice": 1.754,
-          "endClose": 1.73,
-          "actualPct": -1.37,
+          "endClose": 1.74,
+          "actualPct": -0.8,
           "actualDir": "看跌",
           "predictedDir": "看跌",
           "predictedRange": [
@@ -3477,23 +3477,23 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-16",
           "anchorPrice": 117.41,
-          "endClose": 117.42,
-          "actualPct": 0.01,
-          "actualDir": "震荡",
+          "endClose": 117.89,
+          "actualPct": 0.41,
+          "actualDir": "看涨",
           "predictedDir": "看跌",
           "predictedRange": [
             109.047,
             125.773
           ],
           "rangeWidthPct": 14.25,
-          "moveAbsPct": 3.65,
+          "moveAbsPct": 3.76,
           "dirHit": false,
           "brier": 0.3364,
           "reward": 0.3272,
           "upProb": 42,
           "rangeHitClose": true,
           "rangeHitPath": true,
-          "pathHigh": 117.88,
+          "pathHigh": 118.02,
           "pathLow": 113.6
         },
         {
@@ -3733,8 +3733,8 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-16",
           "anchorPrice": 333.59,
-          "endClose": 343.78,
-          "actualPct": 3.05,
+          "endClose": 343.83,
+          "actualPct": 3.07,
           "actualDir": "看涨",
           "predictedDir": "看跌",
           "predictedRange": [
@@ -3989,8 +3989,8 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-16",
           "anchorPrice": 634,
-          "endClose": 653.17,
-          "actualPct": 3.02,
+          "endClose": 657.72,
+          "actualPct": 3.74,
           "actualDir": "看涨",
           "predictedDir": "看跌",
           "predictedRange": [
@@ -3998,14 +3998,14 @@
             687.434
           ],
           "rangeWidthPct": 16.86,
-          "moveAbsPct": 5.55,
+          "moveAbsPct": 6.1,
           "dirHit": false,
           "brier": 0.3364,
           "reward": 0.3272,
           "upProb": 42,
           "rangeHitClose": true,
           "rangeHitPath": true,
-          "pathHigh": 655.2,
+          "pathHigh": 658.66,
           "pathLow": 620.01
         },
         {
@@ -4245,8 +4245,8 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-16",
           "anchorPrice": 1040,
-          "endClose": 1133.43,
-          "actualPct": 8.98,
+          "endClose": 1133.5,
+          "actualPct": 8.99,
           "actualDir": "看涨",
           "predictedDir": "看跌",
           "predictedRange": [
@@ -4501,8 +4501,8 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-16",
           "anchorPrice": 230.89,
-          "endClose": 231.75,
-          "actualPct": 0.37,
+          "endClose": 232.3,
+          "actualPct": 0.61,
           "actualDir": "看涨",
           "predictedDir": "看跌",
           "predictedRange": [
@@ -4510,14 +4510,14 @@
             251.912
           ],
           "rangeWidthPct": 18.21,
-          "moveAbsPct": 5.22,
+          "moveAbsPct": 5.24,
           "dirHit": false,
           "brier": 0.3249,
           "reward": 0.3502,
           "upProb": 43,
           "rangeHitClose": true,
           "rangeHitPath": true,
-          "pathHigh": 232.82,
+          "pathHigh": 232.87,
           "pathLow": 220.77
         },
         {
@@ -4757,8 +4757,8 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-16",
           "anchorPrice": 371.32,
-          "endClose": 365.75,
-          "actualPct": -1.5,
+          "endClose": 366.86,
+          "actualPct": -1.2,
           "actualDir": "看跌",
           "predictedDir": "看跌",
           "predictedRange": [
@@ -5013,23 +5013,23 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-16",
           "anchorPrice": 191.96,
-          "endClose": 191.02,
-          "actualPct": -0.49,
-          "actualDir": "看跌",
+          "endClose": 192.57,
+          "actualPct": 0.32,
+          "actualDir": "看涨",
           "predictedDir": "看跌",
           "predictedRange": [
             172.624,
             211.296
           ],
           "rangeWidthPct": 20.15,
-          "moveAbsPct": 4.58,
-          "dirHit": true,
-          "brier": 0.16,
-          "reward": 0.68,
+          "moveAbsPct": 5.02,
+          "dirHit": false,
+          "brier": 0.36,
+          "reward": 0.28,
           "upProb": 40,
           "rangeHitClose": true,
           "rangeHitPath": true,
-          "pathHigh": 192,
+          "pathHigh": 192.85,
           "pathLow": 183.21
         },
         {
@@ -5045,10 +5045,10 @@
       ],
       "scores": {
         "n": 2,
-        "hits": 2,
-        "hitRate": 1,
-        "brier": 0.1682,
-        "reward": 0.6636,
+        "hits": 1,
+        "hitRate": 0.5,
+        "brier": 0.2682,
+        "reward": 0.4636,
         "rangeHitRate": 1,
         "byHorizon": {
           "d1": {
@@ -5059,9 +5059,9 @@
           },
           "d3": {
             "n": 1,
-            "hits": 1,
-            "hitRate": 1,
-            "brier": 0.16
+            "hits": 0,
+            "hitRate": 0,
+            "brier": 0.36
           }
         }
       },
@@ -5269,8 +5269,8 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-16",
           "anchorPrice": 25.9,
-          "endClose": 27.73,
-          "actualPct": 7.07,
+          "endClose": 28.03,
+          "actualPct": 8.22,
           "actualDir": "看涨",
           "predictedDir": "看跌",
           "predictedRange": [
@@ -5278,14 +5278,14 @@
             29.259
           ],
           "rangeWidthPct": 25.94,
-          "moveAbsPct": 11.43,
+          "moveAbsPct": 12.78,
           "dirHit": false,
           "brier": 0.3136,
           "reward": 0.3728,
           "upProb": 44,
           "rangeHitClose": true,
           "rangeHitPath": true,
-          "pathHigh": 27.93,
+          "pathHigh": 28.28,
           "pathLow": 24.97
         },
         {
@@ -5525,8 +5525,8 @@
           "fromDate": "2026-09-11",
           "toDate": "2026-09-16",
           "anchorPrice": 167.65,
-          "endClose": 163,
-          "actualPct": -2.77,
+          "endClose": 163.92,
+          "actualPct": -2.22,
           "actualDir": "看跌",
           "predictedDir": "看跌",
           "predictedRange": [
@@ -8720,8 +8720,8 @@
           "fromDate": "2026-09-15",
           "toDate": "2026-09-16",
           "anchorPrice": 0.67,
-          "endClose": 0.69,
-          "actualPct": 2.99,
+          "endClose": 0.7,
+          "actualPct": 4.48,
           "actualDir": "看涨",
           "predictedDir": "震荡",
           "predictedRange": [
@@ -9154,23 +9154,23 @@
           "fromDate": "2026-09-15",
           "toDate": "2026-09-16",
           "anchorPrice": 1.73,
-          "endClose": 1.73,
-          "actualPct": 0,
-          "actualDir": "震荡",
+          "endClose": 1.74,
+          "actualPct": 0.58,
+          "actualDir": "看涨",
           "predictedDir": "震荡",
           "predictedRange": [
             1.671,
             1.789
           ],
           "rangeWidthPct": 6.82,
-          "moveAbsPct": 1.73,
-          "dirHit": true,
+          "moveAbsPct": 2.31,
+          "dirHit": false,
           "brier": 0.25,
           "reward": 0.5,
           "upProb": 50,
           "rangeHitClose": true,
           "rangeHitPath": true,
-          "pathHigh": 1.73,
+          "pathHigh": 1.74,
           "pathLow": 1.7
         },
         {
@@ -9191,16 +9191,16 @@
       ],
       "scores": {
         "n": 1,
-        "hits": 1,
-        "hitRate": 1,
+        "hits": 0,
+        "hitRate": 0,
         "brier": 0.25,
         "reward": 0.5,
         "rangeHitRate": 1,
         "byHorizon": {
           "d1": {
             "n": 1,
-            "hits": 1,
-            "hitRate": 1,
+            "hits": 0,
+            "hitRate": 0,
             "brier": 0.25
           }
         }
@@ -9588,8 +9588,8 @@
           "fromDate": "2026-09-15",
           "toDate": "2026-09-16",
           "anchorPrice": 114.86,
-          "endClose": 117.42,
-          "actualPct": 2.23,
+          "endClose": 117.89,
+          "actualPct": 2.64,
           "actualDir": "看涨",
           "predictedDir": "震荡",
           "predictedRange": [
@@ -9597,14 +9597,14 @@
             119.6
           ],
           "rangeWidthPct": 8.25,
-          "moveAbsPct": 2.86,
+          "moveAbsPct": 2.98,
           "dirHit": false,
           "brier": 0.2401,
           "reward": 0.5198,
           "upProb": 51,
           "rangeHitClose": true,
           "rangeHitPath": true,
-          "pathHigh": 117.88,
+          "pathHigh": 118.02,
           "pathLow": 114.6
         },
         {
@@ -9805,8 +9805,8 @@
           "fromDate": "2026-09-15",
           "toDate": "2026-09-16",
           "anchorPrice": 330.6,
-          "endClose": 343.78,
-          "actualPct": 3.99,
+          "endClose": 343.83,
+          "actualPct": 4,
           "actualDir": "看涨",
           "predictedDir": "震荡",
           "predictedRange": [
@@ -10022,8 +10022,8 @@
           "fromDate": "2026-09-15",
           "toDate": "2026-09-16",
           "anchorPrice": 638.16,
-          "endClose": 653.17,
-          "actualPct": 2.35,
+          "endClose": 657.72,
+          "actualPct": 3.07,
           "actualDir": "看涨",
           "predictedDir": "震荡",
           "predictedRange": [
@@ -10031,14 +10031,14 @@
             668.44
           ],
           "rangeWidthPct": 9.49,
-          "moveAbsPct": 3.16,
+          "moveAbsPct": 3.71,
           "dirHit": false,
           "brier": 0.2809,
           "reward": 0.4382,
           "upProb": 47,
           "rangeHitClose": true,
           "rangeHitPath": true,
-          "pathHigh": 655.2,
+          "pathHigh": 658.66,
           "pathLow": 635.01
         },
         {
@@ -10239,7 +10239,7 @@
           "fromDate": "2026-09-15",
           "toDate": "2026-09-16",
           "anchorPrice": 1075.79,
-          "endClose": 1133.43,
+          "endClose": 1133.5,
           "actualPct": 5.36,
           "actualDir": "看涨",
           "predictedDir": "震荡",
@@ -10456,8 +10456,8 @@
           "fromDate": "2026-09-15",
           "toDate": "2026-09-16",
           "anchorPrice": 224.6,
-          "endClose": 231.75,
-          "actualPct": 3.18,
+          "endClose": 232.3,
+          "actualPct": 3.43,
           "actualDir": "看涨",
           "predictedDir": "震荡",
           "predictedRange": [
@@ -10465,14 +10465,14 @@
             236.569
           ],
           "rangeWidthPct": 10.66,
-          "moveAbsPct": 3.93,
+          "moveAbsPct": 3.95,
           "dirHit": false,
           "brier": 0.2116,
           "reward": 0.5768,
           "upProb": 54,
           "rangeHitClose": true,
           "rangeHitPath": true,
-          "pathHigh": 232.82,
+          "pathHigh": 232.87,
           "pathLow": 224
         },
         {
@@ -10673,8 +10673,8 @@
           "fromDate": "2026-09-15",
           "toDate": "2026-09-16",
           "anchorPrice": 363.11,
-          "endClose": 365.75,
-          "actualPct": 0.73,
+          "endClose": 366.86,
+          "actualPct": 1.03,
           "actualDir": "看涨",
           "predictedDir": "震荡",
           "predictedRange": [
@@ -10890,8 +10890,8 @@
           "fromDate": "2026-09-15",
           "toDate": "2026-09-16",
           "anchorPrice": 187.83,
-          "endClose": 191.02,
-          "actualPct": 1.7,
+          "endClose": 192.57,
+          "actualPct": 2.52,
           "actualDir": "看涨",
           "predictedDir": "看跌",
           "predictedRange": [
@@ -10899,14 +10899,14 @@
             198.764
           ],
           "rangeWidthPct": 11.64,
-          "moveAbsPct": 2.46,
+          "moveAbsPct": 2.91,
           "dirHit": false,
           "brier": 0.3025,
           "reward": 0.395,
           "upProb": 45,
           "rangeHitClose": true,
           "rangeHitPath": true,
-          "pathHigh": 192,
+          "pathHigh": 192.85,
           "pathLow": 187.38
         },
         {
@@ -11107,8 +11107,8 @@
           "fromDate": "2026-09-15",
           "toDate": "2026-09-16",
           "anchorPrice": 26.54,
-          "endClose": 27.73,
-          "actualPct": 4.48,
+          "endClose": 28.03,
+          "actualPct": 5.61,
           "actualDir": "看涨",
           "predictedDir": "震荡",
           "predictedRange": [
@@ -11116,14 +11116,14 @@
             28.45
           ],
           "rangeWidthPct": 14.39,
-          "moveAbsPct": 6.52,
+          "moveAbsPct": 7.84,
           "dirHit": false,
           "brier": 0.2601,
           "reward": 0.4798,
           "upProb": 49,
           "rangeHitClose": true,
           "rangeHitPath": true,
-          "pathHigh": 27.93,
+          "pathHigh": 28.28,
           "pathLow": 26.2
         },
         {
@@ -11324,8 +11324,8 @@
           "fromDate": "2026-09-15",
           "toDate": "2026-09-16",
           "anchorPrice": 161.67,
-          "endClose": 163,
-          "actualPct": 0.82,
+          "endClose": 163.92,
+          "actualPct": 1.39,
           "actualDir": "看涨",
           "predictedDir": "震荡",
           "predictedRange": [
@@ -11333,14 +11333,14 @@
             172.62
           ],
           "rangeWidthPct": 13.55,
-          "moveAbsPct": 2.76,
+          "moveAbsPct": 3.25,
           "dirHit": false,
           "brier": 0.2601,
           "reward": 0.4798,
           "upProb": 49,
           "rangeHitClose": true,
           "rangeHitPath": true,
-          "pathHigh": 163.66,
+          "pathHigh": 164.46,
           "pathLow": 159.2
         },
         {
@@ -11402,5 +11402,5 @@
   ],
   "_source": "/Users/liuyang/Desktop/PythonProject/半导体设备ETF交易模拟系统/data/research-ledger.json",
   "sanitized": true,
-  "sanitizedAt": "2026-09-16T02:39:54.024Z"
+  "sanitizedAt": "2026-09-16T02:53:37.133Z"
 }

@@ -13,7 +13,7 @@ const path = require('path');
 const url = require('url');
 const zlib = require('zlib');
 const { spawn } = require('child_process');
-const { fetchUs10y, fetchCn10y, fetchSox, fetchFundFlow, fetchMarketBreadth, fetchHhxgSnapshot, fetchIndexKline, fetchIndexKlineAuto, calibrateKlines, fetchGlobalHistory } = require('./lib/market.js'); // 宏观/科技/资金/情绪数据
+const { fetchUs10y, fetchCn10y, fetchSox, fetchFundFlow, fetchMarketBreadth, fetchHhxgSnapshot, fetchIndexKline, fetchIndexKlineAuto, calibrateKlines, fetchGlobalHistory, fetchTencentKline: fetchKlineLib, healthSnapshot } = require('./lib/market.js'); // 宏观/科技/资金/情绪数据
 const Indicators = require('./public/static/indicators.js');
 const RL = require('./lib/rl.js');
 const LivePredict = require('./lib/live-predict.js');
@@ -103,29 +103,12 @@ function marketCode(code) {
   const c0 = code[0];
   return (c0 === '6' || c0 === '5' || c0 === '9' ? 'sh' : 'sz') + code;
 }
+// ⚠️ 这里原来有一份**独立的**腾讯K线实现，直接打被 WAF 拦截的 fqkline 路径，
+// 且没有任何回退 —— 它遮蔽了 lib/market.js 里的多源回退，导致服务端所有路由
+// 在腾讯被拦后全部 500。现在统一委托给 lib/market.js，只此一份实现。
 async function fetchTencentKline(period, limit, code) {
-  const tc = marketCode(code);
-  const p = { day: 'day', week: 'week', month: 'month' }[period] || 'day';
-  const u = `https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=${tc},${p},,,${limit},qfq`;
-  const { text } = await httpGet(u);
-  const json = JSON.parse(text);
-  const node = json && json.data && json.data[tc];
-  if (!node) throw new Error('腾讯K线返回结构异常: ' + tc);
-  const key = 'qfq' + p;
-  const arr = node[key] || node[p] || [];
-  // 每根 K： [date, open, close, high, low, volume]
-  const klines = arr.map((r) => ({
-    date: r[0],
-    open: parseFloat(r[1]),
-    close: parseFloat(r[2]),
-    high: parseFloat(r[3]),
-    low: parseFloat(r[4]),
-    volume: parseFloat(r[5]) || 0,
-  }));
-  // 实时行情（qt 为 {sz159516: [...]} 嵌套结构）
-  let quote = null;
-  if (node.qt && Array.isArray(node.qt[tc])) quote = parseTencentQuote(node.qt[tc]);
-  return { klines, quote };
+  const r = await fetchKlineLib(period, limit, code);
+  return { klines: r.klines, quote: r.quote, source: r.source, adjusted: r.adjusted, degraded: r.degraded, degradedReason: r.degradedReason };
 }
 
 // 解析腾讯 qt 数组 → 干净对象
@@ -552,6 +535,48 @@ const server = http.createServer(async (req, res) => {
         const out = { ok: true, code, name: quote ? quote.name : code, price: analysis.price, score: analysis.score, status: analysis.status, prediction, live };
         predictCache.set(ck, { t: Date.now(), v: out });
         return sendJSON(res, 200, out);
+      } catch (e) {
+        return sendJSON(res, 500, { ok: false, error: e.message });
+      }
+    }
+
+    // 数据源健康：让"静默降级"变成"可见降级"
+    //   GET /api/health          读缓存（本次进程内累计的成功/失败）
+    //   GET /api/health?probe=1  主动探测全部数据源（约 3~6 秒）
+    if (p === '/api/health') {
+      try {
+        const mk = require('./lib/market.js');
+        let probe = null;
+        if (q.probe === '1') {
+          const t0 = Date.now();
+          const jobs = [
+            ['腾讯日K（主源·前复权）', () => mk.fetchTencentKlineQfq(mk.tencentCode('159516'), 'day', 20)],
+            ['腾讯日K（备用1·不复权）', () => mk.fetchTencentKlineNoAdj(mk.tencentCode('159516'), 'day', 20)],
+            ['新浪日K（备用2）', () => mk.fetchSinaKline('159516', 20)],
+            ['指数（东财）', () => mk.fetchIndexKline('1.000300', 20)],
+            ['指数（腾讯）', () => mk.fetchIndexKlineTencent('sh000300', 20)],
+            ['指数（新浪·兜底）', () => mk.fetchSinaKline('sh000300', 20)],
+            ['Yahoo 历史（费半）', () => mk.fetchYahooHistory('^SOX', '3y')],
+            ['新浪美股（费半）', () => mk.fetchSinaUSQuote('gb_$sox')],
+            ['美债10Y（Yahoo）', () => mk.fetchUs10y()],
+            ['中债10Y', () => mk.fetchCn10y()],
+            ['主力资金流（东财）', () => mk.fetchFundFlow(5)],
+            ['市场宽度（东财）', () => mk.fetchMarketBreadth()],
+            ['情绪（hhxg）', () => mk.fetchHhxgSnapshot()],
+            ['基金净值（天天基金）', () => mk.fetchFundNav('159981')],
+            ['化工期货篮子（新浪）', () => mk.fetchChemFutures()],
+          ];
+          const res = await Promise.allSettled(jobs.map((j) => j[1]()));
+          probe = {
+            ms: Date.now() - t0,
+            items: jobs.map((j, i) => ({
+              name: j[0],
+              ok: res[i].status === 'fulfilled',
+              error: res[i].status === 'rejected' ? String(res[i].reason && res[i].reason.message).slice(0, 120) : null,
+            })),
+          };
+        }
+        return sendJSON(res, 200, { ok: true, health: mk.healthSnapshot(), probe });
       } catch (e) {
         return sendJSON(res, 500, { ok: false, error: e.message });
       }
