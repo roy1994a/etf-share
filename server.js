@@ -422,6 +422,8 @@ function loadPool() {
     { code: '688783', name: '西安奕材-U', type: 'stock' },
     { code: '300475', name: '香农芯创', type: 'stock' },
     { code: '688432', name: '有研硅', type: 'stock' },
+    { code: '002156', name: '通富微电', type: 'stock' },
+    { code: '000977', name: '浪潮信息', type: 'stock' },
   ];
 }
 
