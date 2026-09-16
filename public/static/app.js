@@ -161,22 +161,30 @@
       '<button class="pool-del" data-code="' + x.code + '" title="从池中移除">×</button></div>'
     ).join('');
   }
-  async function refreshPool() {
+  // 池子变化后，所有"按池派生"的视图都要跟着变：
+  // 行情条 / 下拉 / 池列表（本函数）+ 行动卡（预测模块）+ 研究台账（覆盖率与明细）。
+  // 后端同时会作废行动卡缓存，所以这里重新拉一定能拿到新池结论。
+  async function refreshPool(alsoDerived) {
     try {
       const r = await api('/api/pool');
       if (r.pool && r.pool.length) { App.etfPool = r.pool; buildTradeCodeOptions(); renderPoolList(); refreshEtfQuotes(); }
     } catch (e) {}
+    if (alsoDerived) {
+      try { await loadActionCard(); } catch (e) {}
+      try { await loadLedger(); } catch (e) {}
+    }
   }
   async function poolAdd(code, name) {
     try {
-      await api('/api/pool', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'add', code, name }) });
-      toast('已添加 ' + name, 'ok'); await refreshPool();
+      const r = await api('/api/pool', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'add', code, name }) });
+      toast('已添加 ' + name + (r && r.ledgerSyncing ? '（台账正在补录…）' : ''), 'ok');
+      await refreshPool(true);
     } catch (e) { toast('添加失败：' + e.message, 'err'); }
   }
   async function poolRemove(code) {
     try {
       await api('/api/pool', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'remove', code }) });
-      toast('已移除 ' + code, 'ok'); await refreshPool();
+      toast('已移除 ' + code, 'ok'); await refreshPool(true);
     } catch (e) { toast('移除失败：' + e.message, 'err'); }
   }
   function bindPoolManager() {
@@ -1091,6 +1099,36 @@
     }
     html += '<div class="muted">' + (st.baselineNote || '') + '</div>';
     $('#ledgerSummary').innerHTML = html;
+
+    // 池覆盖度：台账跟着自选资金池自动更新 —— 直接回答"池内每只入账了没"
+    const cov = ledgerData.coverageSummary;
+    const covEl = $('#ledgerCoverage');
+    if (covEl) {
+      if (!cov) {
+        covEl.innerHTML = '';
+      } else {
+        const list = ledgerData.poolCoverage || [];
+        let ch = '<div class="rl-title">池覆盖度 <span class="muted">台账随自选资金池自动更新（当前池 ' + cov.poolSize + ' 只，已入账 ' + cov.covered + ' 只）</span></div>';
+        if (cov.missing && cov.missing.length) {
+          ch += '<div class="warn-box">⚠️ 以下 ' + cov.missing.length + ' 只池内标的<b>尚无台账记录</b>：' +
+            cov.missing.map((x) => x.name + '(' + x.code + ')').join('、') +
+            '<br/>它们会在下一个交易日收盘后自动入账；刚通过"管理标的"加入的会立即补录。</div>';
+        } else {
+          ch += '<div class="muted" style="margin-bottom:6px">✅ 池内全部标的均已入账。</div>';
+        }
+        ch += '<table class="data-table compact"><thead><tr><th>标的</th><th>类型</th><th>台账条目</th><th>已结算</th><th>待结算</th><th>首个锚定日</th><th>最新锚定日</th></tr></thead><tbody>';
+        list.forEach((x) => {
+          ch += '<tr><td>' + x.name + ' <span class="muted">' + x.code + '</span></td>' +
+            '<td>' + (x.type === 'etf' ? 'ETF' : '股票') + '</td>' +
+            '<td>' + (x.covered ? x.entries : '<span style="color:#b45309">0</span>') + '</td>' +
+            '<td>' + x.resolved + '</td><td>' + x.pending + '</td>' +
+            '<td class="muted">' + (x.firstDate || '--') + '</td>' +
+            '<td class="muted">' + (x.lastDate || '--') + '</td></tr>';
+        });
+        ch += '</tbody></table>';
+        covEl.innerHTML = ch;
+      }
+    }
 
     // 证据分层
     const bg = st.byGrade || {};

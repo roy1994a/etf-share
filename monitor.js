@@ -522,12 +522,11 @@ async function evaluate(cfg, account, ms, now) {
 // ---------- 多 ETF 动量轮动 ----------
 // 每次评估前从 notify.config.json 重载轮动池（支持 GUI 在线增删）
 function reloadPool(cfg) {
+  // 统一走 lib/pool.js（唯一事实来源）。以前这里自己读 notify.config.json，
+  // 而 defaultConfig() 里还留着一份含韦尔股份的旧名单，改池子时容易各走各的。
   try {
-    const f = path.join(__dirname, 'notify.config.json');
-    if (fs.existsSync(f)) {
-      const c = JSON.parse(fs.readFileSync(f, 'utf8'));
-      if (c.etfPool && c.etfPool.length) cfg.etfPool = c.etfPool;
-    }
+    const p = require('./lib/pool.js').loadPool({ fresh: true });
+    if (p && p.length) cfg.etfPool = p;
   } catch (e) {}
   return cfg.etfPool;
 }
@@ -773,7 +772,7 @@ function detectRotationEvents(rotation, ms, now, cfg) {
       ms.autoLedgerDate = dateStr;
       try {
         AutoLedger.autolog({}).then((x) => {
-          log(`[台账] 自动入账完成：新增 ${x.added} 条，跳过 ${x.skipped} 条，失败 ${x.failed} 条`);
+          log(`[台账] 自动入账完成：新增 ${x.added} 条，跳过 ${x.skipped} 条，失败 ${x.failed} 条` + (x.intraday ? `，盘中跳过 ${x.intraday} 条` : ''));
         }).catch((e) => log('[台账] 自动入账失败：' + e.message));
       } catch (e) { log('[台账] 无法加载 auto-ledger：' + e.message); }
     }

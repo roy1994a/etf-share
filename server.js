@@ -16,6 +16,7 @@ const { spawn } = require('child_process');
 const { fetchUs10y, fetchCn10y, fetchSox, fetchFundFlow, fetchMarketBreadth, fetchHhxgSnapshot, fetchIndexKline, fetchIndexKlineAuto, calibrateKlines, fetchGlobalHistory, fetchTencentKline: fetchKlineLib, healthSnapshot } = require('./lib/market.js'); // 宏观/科技/资金/情绪数据
 const Indicators = require('./public/static/indicators.js');
 const RL = require('./lib/rl.js');
+const Pool = require('./lib/pool.js'); // 自选资金池唯一事实来源
 const { suspensionGaps } = require('./lib/dataset.js'); // 停牌缺口扫描（与训练前体检同一套判定）
 const LivePredict = require('./lib/live-predict.js');
 const Engine = require('./public/static/engine.js');
@@ -398,33 +399,9 @@ function getLanIp() {
   return null;
 }
 
-// 轮动池（ETF + 科技板块股票，与 monitor 一致；从 notify.config.json 读取）
+// 轮动池：统一走 lib/pool.js（唯一事实来源，与 monitor / auto-ledger 同源）
 function loadPool() {
-  try {
-    const f = path.join(__dirname, 'notify.config.json');
-    if (fs.existsSync(f)) {
-      const cfg = JSON.parse(fs.readFileSync(f, 'utf8'));
-      if (cfg.etfPool && cfg.etfPool.length) return cfg.etfPool;
-    }
-  } catch (e) {}
-  return [
-    { code: '159516', name: '半导体设备', type: 'etf' },
-    { code: '512010', name: '医药', type: 'etf' },
-    { code: '512400', name: '有色', type: 'etf' },
-    { code: '512660', name: '军工', type: 'etf' },
-    { code: '688981', name: '中芯国际', type: 'stock' },
-    { code: '688012', name: '中微公司', type: 'stock' },
-    { code: '002371', name: '北方华创', type: 'stock' },
-    { code: '688256', name: '寒武纪', type: 'stock' },
-    { code: '688041', name: '海光信息', type: 'stock' },
-    { code: '603986', name: '兆易创新', type: 'stock' },
-    { code: '688008', name: '澜起科技', type: 'stock' },
-    { code: '688783', name: '西安奕材-U', type: 'stock' },
-    { code: '300475', name: '香农芯创', type: 'stock' },
-    { code: '688432', name: '有研硅', type: 'stock' },
-    { code: '002156', name: '通富微电', type: 'stock' },
-    { code: '000977', name: '浪潮信息', type: 'stock' },
-  ];
+  return Pool.loadPool();
 }
 
 // ---------- 路由 ----------
@@ -768,7 +745,30 @@ const server = http.createServer(async (req, res) => {
           })),
           lessons: e.lessons,
         }));
-        return sendJSON(res, 200, { ok: true, stats: st, entries: slim, grades: Ledger.EVIDENCE_GRADES });
+        // 池覆盖度：台账必须跟着自选资金池走 —— 否则"新加了标的但台账里没有"
+        // 会让人误以为模型没在它上面出过预测。这里直接回答"池内每只入账了没"。
+        const pool = loadPool();
+        const autoEntries = (db.entries || []).filter((e) => (e.tags || []).indexOf('自动入账') >= 0);
+        const poolCoverage = pool.map((x) => {
+          const mine = autoEntries.filter((e) => e.code === x.code);
+          const dates = mine.map((e) => e.anchorDate).filter(Boolean).sort();
+          const resolved = mine.filter((e) => e.resolvedAt || e.outcome || e.status === 'resolved').length;
+          return {
+            code: x.code, name: x.name, type: x.type,
+            entries: mine.length,
+            resolved,
+            pending: mine.length - resolved,
+            firstDate: dates[0] || null,
+            lastDate: dates[dates.length - 1] || null,
+            covered: mine.length > 0,
+          };
+        });
+        const coverageSummary = {
+          poolSize: pool.length,
+          covered: poolCoverage.filter((x) => x.covered).length,
+          missing: poolCoverage.filter((x) => !x.covered).map((x) => ({ code: x.code, name: x.name })),
+        };
+        return sendJSON(res, 200, { ok: true, stats: st, entries: slim, grades: Ledger.EVIDENCE_GRADES, poolCoverage, coverageSummary });
       } catch (e) {
         return sendJSON(res, 500, { ok: false, error: e.message });
       }
@@ -811,26 +811,48 @@ const server = http.createServer(async (req, res) => {
     }
 
     // 轮动池管理：GET 获取；POST 增删（写回 notify.config.json）
+    //
+    // 池子一变，所有"按池派生"的东西都必须跟着变，否则就会出现
+    // "网页上加了标的，但行动卡/台账还是旧池"的割裂：
+    //   1) 清掉行动卡 5 分钟缓存 → 下次请求即按新池重算
+    //   2) 让新标的立刻进研究台账（后台跑，不阻塞响应）
     if (p === '/api/pool') {
-      const cfgFile = path.join(__dirname, 'notify.config.json');
       if (req.method === 'POST') {
         const body = await readBody(req);
-        let pool = loadPool();
-        if (body.action === 'add' && body.code) {
-          const code = String(body.code);
-          if (!pool.some((x) => x.code === code)) {
-            const c0 = code[0];
-            pool.push({ code, name: body.name || code, type: (c0 === '5' || c0 === '1') ? 'etf' : 'stock' });
-          }
-        } else if (body.action === 'remove' && body.code) {
-          pool = pool.filter((x) => x.code !== body.code);
-        }
+        const before = loadPool();
+        let pool;
         try {
-          const cfg = fs.existsSync(cfgFile) ? JSON.parse(fs.readFileSync(cfgFile, 'utf8')) : {};
-          cfg.etfPool = pool;
-          fs.writeFileSync(cfgFile, JSON.stringify(cfg, null, 2));
-        } catch (e) { return sendJSON(res, 500, { ok: false, error: '保存失败: ' + e.message }); }
-        return sendJSON(res, 200, { ok: true, pool });
+          if (body.action === 'add') {
+            pool = Pool.addToPool({ code: body.code, name: body.name });
+            pool = pool.pool;
+          } else if (body.action === 'remove') {
+            if (before.length <= 1) return sendJSON(res, 400, { ok: false, error: '池内至少保留一个标的' });
+            pool = Pool.removeFromPool(body.code);
+          } else {
+            return sendJSON(res, 400, { ok: false, error: '未知 action：' + body.action });
+          }
+        } catch (e) { return sendJSON(res, 400, { ok: false, error: e.message }); }
+
+        // 1) 预测模块：作废行动卡缓存（否则最长 5 分钟内仍显示旧池结论）
+        actionCache.clear();
+        // /api/predict 等按代码请求的接口本就实时，无需处理
+
+        // 2) 研究台账：只给"新增且尚无台账记录"的标的补快照，后台执行
+        const beforeCodes = new Set(before.map((x) => x.code));
+        const added = pool.filter((x) => !beforeCodes.has(x.code)).map((x) => x.code);
+        const removed = before.filter((x) => !pool.some((y) => y.code === x.code)).map((x) => x.code);
+        if (added.length) {
+          setImmediate(() => {
+            try {
+              const AutoLedger = require('./lib/auto-ledger.js');
+              AutoLedger.autolog({ codes: added })
+                .then((r) => console.log(`[台账] 池内新增 ${added.join(',')} → 自动入账 新增${r.added} 跳过${r.skipped} 失败${r.failed}`))
+                .catch((e) => console.error('[台账] 新增标的入账失败：' + e.message));
+            } catch (e) { console.error('[台账] 无法加载 auto-ledger：' + e.message); }
+          });
+        }
+
+        return sendJSON(res, 200, { ok: true, pool, added, removed, ledgerSyncing: added.length > 0 });
       }
       return sendJSON(res, 200, { ok: true, pool: loadPool() });
     }

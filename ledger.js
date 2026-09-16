@@ -252,8 +252,13 @@ function showEntry(db, key) {
       codes: flag('codes') ? flag('codes').split(',') : null,
       limit: flag('limit') ? parseInt(flag('limit'), 10) : null,
       dryRun: has('dry-run'),
+      allowIntraday: has('allow-intraday'),
     });
     console.log(`\n新增 ${r.added} 条，跳过（已存在）${r.skipped} 条，失败 ${r.failed} 条，共 ${r.total} 个标的`);
+    if (r.intraday) {
+      console.log(`⏸ ${r.intraday} 个标的因**盘中未收盘**跳过：锚定价必须是收盘价，用半日盘中价当基准会污染结算。`);
+      console.log(`   收盘后（15:05 之后）自动入账，或加 --allow-intraday 强制写入（不建议）。`);
+    }
     if (r.dryRun) console.log('（--dry-run：未写入）');
     for (const x of r.results.slice(0, 20)) console.log(`  ${x.code} ${x.name} ${x.anchorDate} ${x.dir} 1周上涨概率 ${x.upProb}%`);
     db = L.loadLedger(ledgerPath);
